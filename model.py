@@ -5,28 +5,43 @@ from flask_sqlalchemy import SQLAlchemy;
 db = SQLAlchemy()
 
 class User(db.Model):
-    pass
+    """A user."""
+    
+    __tablename__ = "users"
 
 
 class StravaUser(db.Model):
-    pass
+    """A user connected to their Strava account."""
+    
+    __tablename__ = "strava_users"
+
 
 
 class StravaActvity(db.Model):
-    pass
+    """An activity imported from Strava."""
+    
+    __tablename__ = "strava_activities"
 
 
 class ActivityLog(db.Model):
-    pass
+    """An activity manually added by the user."""
+    
+    __tablename__ = "activity_logs"
 
 
 class MenseLog(db.Model):
-    pass
+    """A log added by the user related to their menstrual cycle."""
+    
+    __tablename__ = "mense_logs"
 
 
 class SymptomLog(db.Model):
-    pass
+    """A menstrual-related symptom added by the user."""
+    
+    __tablename__ = "sx_logs"
 
 
 class SleepLog(db.Model):
-    pass
+    """A log added by the user related to their sleep."""
+   
+    __tablename__ = "sleep_logs"
