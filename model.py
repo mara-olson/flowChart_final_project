@@ -88,10 +88,10 @@ class MenseLog(db.Model):
     
     flow_volume = db.Column(db.String) #Could be a string (light, medium, heavy) or could be an integer, based on that. For plotting on a graph maybe it makes sense to have an integer?
     
-    mood = db.Column(db.Boolean)
-    fatigue = db.Column(db.Boolean)
-    bloating = db.Column(db.Boolean)
-    cramps = db.Column(db.Boolean)
+    mood = db.Column(db.Boolean, default=False)
+    fatigue = db.Column(db.Boolean, default=False)
+    bloating = db.Column(db.Boolean, default=False)
+    cramps = db.Column(db.Boolean, default=False)
 
     mense_notes = db.Column(db.Text)
 
