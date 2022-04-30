@@ -25,11 +25,13 @@ class StravaUser(db.Model):
     
     __tablename__ = "strava_users"
 
-    strava_user_id = user_id = db.Column(db.Integer, autoincrement=True, primaryKey=True)
+    strava_user_id = db.Column(db.Integer, autoincrement=True, primaryKey=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
     team_name = db.Column(db.String)
     created_at = db.Column(db.DateTime)
     deactivated_at = db.Column(db.DateTime)
+
+
 
 
 
@@ -50,6 +52,7 @@ class StravaActvity(db.Model):
     workout_type = db.Column(db.Integer) #workout_type (integer from Strava, will need to convert)
     suffer_score = db.Column(db.Integer) #suffer_score (total of 9 increments, I'm assuming 1-10)
     description = db.Column(db.Text) #description
+
 
 
 
