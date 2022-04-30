@@ -27,7 +27,10 @@ class StravaUser(db.Model):
 
     strava_user_id = db.Column(db.Integer, autoincrement=True, primaryKey=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
+    
+    strava_email = db.Column(db.String, db.ForeignKey("users.user_id"), nullable=False)
     team_name = db.Column(db.String)
+    
     created_at = db.Column(db.DateTime)
     deactivated_at = db.Column(db.DateTime)
 
