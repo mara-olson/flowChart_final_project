@@ -26,7 +26,7 @@ class StravaUser(db.Model):
     __tablename__ = "strava_users"
 
     strava_user_id = user_id = db.Column(db.Integer, autoincrement=True, primaryKey=True)
-    user_id = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
     team_name = db.Column(db.String)
     created_at = db.Column(db.DateTime)
     deactivated_at = db.Column(db.DateTime)
@@ -41,7 +41,7 @@ class StravaActvity(db.Model):
     __tablename__ = "strava_activities"
 
     strava_activity_id = db.Column(db.Integer, primaryKey=True) #id
-    strava_user_id = db.Column(db.Integer, nullable=False) #athlete.id
+    strava_user_id = db.Column(db.Integer, db.ForeignKey("strava_users.strava_user_id"), nullable=False) #athlete.id
     activity_name = db.Column(db.String) #name
     activity_type = db.Column(db.String) #type
     activity_date = db.Column(db.DateTime, nullable=False) #start_date
@@ -59,7 +59,7 @@ class ActivityLog(db.Model):
     __tablename__ = "activity_logs"
 
     activity_id = db.Column(db.Integer, primaryKey=True, autoincrement=True)
-    user_id = db.Column(db.Integer, nullable=False) 
+    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False) 
     activity_name = db.Column(db.String, default="Activity") 
     activity_type = db.Column(db.String, default="Run") 
     activity_date = db.Column(db.DateTime, nullable=False) 
@@ -78,25 +78,49 @@ class MenseLog(db.Model):
     __tablename__ = "mense_logs"
 
     mense_id = db.Column(db.Integer, primaryKey=True, autoincrement=True)
-    user_id = db.Column(db.Integer, nullable=False)
-    mense_date = db.Column(db.DateTime)
-    flow_volume = db.Column(db.String)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
+    
+    flow_volume = db.Column(db.String) #Could be a string (light, medium, heavy) or could be an integer, based on that. For plotting on a graph maybe it makes sense to have an integer?
+    
+    mood = db.Column(db.Boolean)
+    fatigue = db.Column(db.Boolean)
+    bloating = db.Column(db.Boolean)
+    cramps = db.Column(db.Boolean)
+
     mense_notes = db.Column(db.Text)
+
     created_at = db.Column(db.DateTime)
     deleted_at = db.Column(db.DateTime)
 
 
+# I think I want to actually include sx data in the period log
 class SymptomLog(db.Model):
     """A menstrual-related symptom added by the user."""
     
     __tablename__ = "sx_logs"
 
     sx_id = db.Column(db.Integer, primaryKey=True, autoincrement=True)
-    created_at = db.Column(db.
-    deleted_at = db.Column(db.
+    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
+    
+    mood = db.Column(db.Boolean)
+    fatigue = db.Column(db.Boolean)
+    bloating = db.Column(db.Boolean)
+    cramps = db.Column(db.Boolean)
+    sx_notes = db.Column(db.Text)
+
+    created_at = db.Column(db.DateTime)
+    deleted_at = db.Column(db.DateTime)
 
 
 class SleepLog(db.Model):
     """A log added by the user related to their sleep."""
    
     __tablename__ = "sleep_logs"
+
+    sleep_log_id = db.Column(db.Integer, primaryKey=True, autoincrement=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
+    sleep_duration = db.Column(db.Integer)
+    sleep_quality = db.Column(db.Integer)
+    sleep_notes = db.Column(db.Text)
+    created_at = db.Column(db.DateTime)
+    deleted_at = db.Column(db.DateTime)
