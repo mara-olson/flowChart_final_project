@@ -1,0 +1,38 @@
+[
+  {
+    "first_name": "Ron",
+    "last_name": "Weasley",
+    "team_name": null,
+    "email": "ron@gmail.com",
+    "password": "1234abc",
+    "created_at": "01/01/2022",
+    "notifications": false
+  },
+  {
+    "first_name": "Harry",
+    "last_name": "Potter",
+    "team_name": "Rabbit",
+    "email": "harry@hogwarts.edu",
+    "password": "1abc2345",
+    "created_at": "02/15/2022",
+    "notifications": true
+  },
+  {
+    "first_name": "Hermione",
+    "last_name": "Granger",
+    "team_name": "Tracksmith",
+    "email": "herm123@gmail.com",
+    "password": "HelloThere!",
+    "created_at": "03/03/2022",
+    "notifications": false
+  },
+  {
+    "first_name": "Draco",
+    "last_name": "Malfoy",
+    "team_name": null,
+    "email": "badboy4@gmail.com",
+    "password": "snape4life",
+    "created_at": "03/20/2022",
+    "notifications": false
+  }
+]

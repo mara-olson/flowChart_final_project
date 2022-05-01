@@ -1,0 +1,97 @@
+[
+  {
+    "mense_id": 1,
+    "user_id": 1,
+    "flow_volume": "heavy",
+    "mood": true,
+    "fatigue": false,
+    "bloating": false,
+    "cramps": true,
+    "created_at": "02/12/2022"
+  },
+  {
+    "mense_id": 2,
+    "user_id": 2,
+    "mood": true,
+    "fatigue": false,
+    "bloating": false,
+    "cramps": false,
+    "created_at": "03/12/2022"
+  },
+  {
+    "mense_id": 3,
+    "user_id": 1,
+    "flow_volume": "light",
+    "mood": true,
+    "fatigue": true,
+    "bloating": false,
+    "cramps": false,
+    "mense_notes": "Feeling horrible today! So grumpy.",
+    "created_at": "02/12/2022"
+  },
+  {
+    "mense_id": 4,
+    "user_id": 3,
+    "flow_volume": "heavy",
+    "mood": false,
+    "fatigue": false,
+    "bloating": false,
+    "cramps": false,
+    "mense_notes": "Blergh",
+    "created_at": "01/20/2022"
+  },
+  {
+    "mense_id": 5,
+    "user_id": 3,
+    "flow_volume": "medium",
+    "mood": false,
+    "fatigue": false,
+    "bloating": false,
+    "cramps": true,
+    "created_at": "03/11/2022"
+  },
+  {
+    "mense_id": 6,
+    "user_id": 4,
+    "flow_volume": "heavy",
+    "mood": false,
+    "fatigue": false,
+    "bloating": false,
+    "cramps": false,
+    "mense_notes": "Day 1 of period.",
+    "created_at": "04/01/2022"
+  },
+  {
+    "mense_id": 7,
+    "user_id": 4,
+    "flow_volume": "medium",
+    "mood": false,
+    "fatigue": false,
+    "bloating": true,
+    "cramps": false,
+    "mense_notes": "Day 2 of period.",
+    "created_at": "04/02/2022"
+  },
+  {
+    "mense_id": 8,
+    "user_id": 4,
+    "flow_volume": "medium",
+    "mood": false,
+    "fatigue": false,
+    "bloating": false,
+    "cramps": false,
+    "mense_notes": "Day 3 of period.",
+    "created_at": "04/03/2022"
+  },
+  {
+    "mense_id": 9,
+    "user_id": 4,
+    "flow_volume": "light",
+    "mood": false,
+    "fatigue": false,
+    "bloating": false,
+    "cramps": false,
+    "mense_notes": "Day 4 of period.",
+    "created_at": "04/04/2022"
+  }
+]

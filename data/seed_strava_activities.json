@@ -1,0 +1,98 @@
+[
+  {
+    "strava_activity_id": 12001,
+    "strava_user_id": 73,
+    "activity_name": "Morning Jog",
+    "activity_type": "Run",
+    "activity_date": "12/12/2021",
+    "distance": 3.4,
+    "duration": 43,
+    "workout_type": null,
+    "suffer_score": 4,
+    "description": "Feeling fast!"
+  },
+  {
+    "strava_activity_id": 32001,
+    "strava_user_id": 73,
+    "activity_name": "Morning Cycle",
+    "activity_type": "Cycle",
+    "activity_date": "01/16/2022",
+    "distance": 20.2,
+    "duration": 144,
+    "workout_type": "Interval",
+    "suffer_score": 7,
+    "description": "Mountain climbs in Marin"
+  },
+  {
+    "strava_activity_id": 445512,
+    "strava_user_id": 212,
+    "activity_name": "Morning Jog",
+    "activity_type": "Run",
+    "activity_date": "04/04/2022",
+    "distance": 7,
+    "duration": 66,
+    "workout_type": "Standard",
+    "suffer_score": 3,
+    "description": "Normal day"
+  },
+  {
+    "strava_activity_id": 768863,
+    "strava_user_id": 212,
+    "activity_name": "10k",
+    "activity_type": "Run",
+    "activity_date": "03/12/2022",
+    "distance": 6.2,
+    "duration": 31,
+    "workout_type": "Race",
+    "suffer_score": 9,
+    "description": "For the win!"
+  },
+  {
+    "strava_activity_id": 948863,
+    "strava_user_id": 212,
+    "activity_name": "5k",
+    "activity_type": "Run",
+    "activity_date": "03/12/2022",
+    "distance": 6.2,
+    "duration": 31,
+    "workout_type": "Race",
+    "suffer_score": 9,
+    "description": "Runner up"
+  },
+  {
+    "strava_activity_id": 88863,
+    "strava_user_id": 212,
+    "activity_name": null,
+    "activity_type": "Run",
+    "activity_date": "04/12/2022",
+    "distance": 12,
+    "duration": 95,
+    "workout_type": "Long Run",
+    "suffer_score": 3,
+    "description": null
+  },
+  {
+    "strava_activity_id": 33225,
+    "strava_user_id": 101,
+    "activity_name": null,
+    "activity_type": "Hike",
+    "activity_date": "04/20/2022",
+    "distance": 1.5,
+    "duration": 40,
+    "workout_type": null,
+    "suffer_score": null,
+    "description": "Beautiful"
+  },
+  {
+    "strava_activity_id": 128863,
+    "strava_user_id": 212,
+    "activity_name": "Hike",
+    "activity_type": "Hike",
+    "activity_date": "04/12/2022",
+    "distance": 3.5,
+    "duration": 78,
+    "workout_type": "Standard",
+    "suffer_score": 3,
+    "description": null
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "strava_user_id": 101,
+    "user_id": 1,
+    "strava_email": "ron@gmail.com",
+    "team_name": null,
+    "created_at": "07/01/2020",
+    "deactivated_at": null
+  },
+  {
+    "strava_user_id": 212,
+    "user_id": 3,
+    "strava_email": "harry@yahoo.com",
+    "team_name": "Rabbit",
+    "created_at": "10/15/2021",
+    "deactivated_at": null
+  },
+  {
+    "strava_user_id": 73,
+    "user_id": 4,
+    "strava_email": "herm123@gmail.com",
+    "team_name": "Tracksmith",
+    "created_at": "06/09/2018",
+    "deactivated_at": "05/04/2021"
+  }
+]
