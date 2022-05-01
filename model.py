@@ -55,7 +55,7 @@ class StravaActivity(db.Model):
     activity_date = db.Column(db.DateTime, nullable=False) #start_date
     distance = db.Column(db.Integer) #distance
     duration = db.Column(db.Integer) #elapsed_time or moving_time in minutes
-    workout_type = db.Column(db.Integer) #workout_type (integer from Strava, will need to convert)
+    workout_type = db.Column(db.String) #workout_type (integer from Strava, will need to convert)
     suffer_score = db.Column(db.Integer) #suffer_score (total of 9 increments, I'm assuming 1-10)
     description = db.Column(db.Text) #description
 
