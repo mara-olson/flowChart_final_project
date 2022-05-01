@@ -1,0 +1,50 @@
+[
+  {
+    "user_id": 1,
+    "sleep_duration": 8,
+    "sleep_quality": 2,
+    "sleep_notes": null,
+    "created_at": "04/11/2022",
+    "deleted_at": null
+  },
+  {
+    "user_id": 3,
+    "sleep_duration": 7,
+    "sleep_quality": 7,
+    "sleep_notes": "slept well",
+    "created_at": "03/11/2022",
+    "deleted_at": "04/10/2022"
+  },
+  {
+    "user_id": 3,
+    "sleep_duration": 6.5,
+    "sleep_quality": 8,
+    "sleep_notes": "stuffy nose kept me up",
+    "created_at": "02/11/2022",
+    "deleted_at": null
+  },
+  {
+    "user_id": 2,
+    "sleep_duration": 9,
+    "sleep_quality": 9,
+    "sleep_notes": "I love Saturdays & sleeping in!",
+    "created_at": "01/07/2022",
+    "deleted_at": null
+  },
+  {
+    "user_id": 4,
+    "sleep_duration": 6,
+    "sleep_quality": 2,
+    "sleep_notes": "Sick",
+    "created_at": "04/17/2022",
+    "deleted_at": null
+  },
+  {
+    "user_id": 4,
+    "sleep_duration": 6,
+    "sleep_quality": 2,
+    "sleep_notes": null,
+    "created_at": "04/18/2022",
+    "deleted_at": null
+  }
+]
