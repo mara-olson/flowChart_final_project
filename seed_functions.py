@@ -143,26 +143,62 @@ db.session.commit()
 
 
 ############ MENSES ##########
-# def create_mense_log(user_id, flow_volume, mood, fatigue, bloating, cramps, mense_notes, created_at, deleted_at):
+def create_mense_log(user_id, flow_volume, mood, fatigue, bloating, cramps, mense_notes, created_at, deleted_at):
 
-#     mense_log = MenseLog(user_id=user_id, flow_volume=flow_volume, mood=mood, fatigue=fatigue, bloating=bloating, cramps=cramps, mense_notes=mense_notes, created_at=created_at, deleted_at=deleted_at)
+    mense_log = MenseLog(user_id=user_id, flow_volume=flow_volume, mood=mood, fatigue=fatigue, bloating=bloating, cramps=cramps, mense_notes=mense_notes, created_at=created_at, deleted_at=deleted_at)
 
-#     return mense_log
+    return mense_log
 
+with open('data/seed_mense_data.json') as md:
+    mense_data = json.loads(md.read())
 
-# db.session.add_all(mense_logs_in_db)
-# db.session.commit()
+mense_logs_in_db = []
+for mense_log in mense_data:
+    user_id, flow_volume, mood, fatigue, bloating, cramps, mense_notes, created_at, deleted_at  = (
+        mense_log["user_id"],
+        mense_log["flow_volume"],
+        mense_log["mood"],
+        mense_log["fatigue"],
+        mense_log["bloating"],
+        mense_log["cramps"],
+        mense_log["mense_notes"],
+        mense_log["created_at"],
+        mense_log["deleted_at"]
+    )
+    new_mense_log = create_mense_log(user_id, flow_volume, mood, fatigue, bloating, cramps, mense_notes, created_at, deleted_at)
+
+    mense_logs_in_db.append(new_mense_log)
+
+db.session.add_all(mense_logs_in_db)
+db.session.commit()
 
 
 ############ SLEEP ##########
-# def create_sleep_log(user_id, sleep_duration, sleep_quality, sleep_notes, created_at, deleted_at):
+def create_sleep_log(user_id, sleep_duration, sleep_quality, sleep_notes, created_at, deleted_at):
     
-#     sleep_log = SleepLog(user_id=user_id, sleep_duration=sleep_duration, sleep_quality=sleep_quality, sleep_notes=sleep_notes, created_at=created_at, deleted_at=deleted_at)
+    sleep_log = SleepLog(user_id=user_id, sleep_duration=sleep_duration, sleep_quality=sleep_quality, sleep_notes=sleep_notes, created_at=created_at, deleted_at=deleted_at)
 
-#     return sleep_log
+    return sleep_log
 
-# db.session.add_all(sleep_logs_in_db)
-# db.session.commit()
+with open('data/seed_sleep_data.json') as sd:
+    sleep_data = json.loads(sd.read())
+
+sleep_logs_in_db = []
+for sleep_log in sleep_data:
+    user_id, sleep_duration, sleep_quality, sleep_notes, created_at, deleted_at = (
+        sleep_log["user_id"],
+        sleep_log["sleep_duration"],
+        sleep_log["sleep_quality"],
+        sleep_log["sleep_notes"],
+        sleep_log["created_at"],
+        sleep_log["deleted_at"]
+    )
+
+    new_sleep_log = create_sleep_log(user_id, sleep_duration, sleep_quality, sleep_notes, created_at, deleted_at)
+    sleep_logs_in_db.append(new_sleep_log)
+
+db.session.add_all(sleep_logs_in_db)
+db.session.commit()
 
 
 
