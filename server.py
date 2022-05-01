@@ -1,5 +1,5 @@
 from flask import (Flask, render_template, request, flash, session, redirect)
-from model import connect_to_db, db
+from model import connect_to_db, db, User, StravaUser, StravaActivity, ActivityLog, MenseLog, SleepLog
 
 from jinja2 import StrictUndefined
 

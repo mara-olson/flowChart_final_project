@@ -1,0 +1,13 @@
+4/30
+1. Should I collapse my sx_logs into general mense_logs? Is the second table worthwhile?
+
+2. Should I store scalar data as strings or integers? For plotting on a graph maybe it makes sense to have an integer?
+	 Flow_volume: (light, medium, heavy) vs. (1 - 3)
+
+3. Should I store the following data on a scale, or as booleans? 
+	Mood, fatigue, cramps, bloating
+	Sleep_quality
+
+4. Seeding data: users have to be committed to db before user_id can be referenced -- do I have to commit each create… function info before the next?
+
+

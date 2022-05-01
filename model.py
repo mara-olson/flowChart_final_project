@@ -19,6 +19,12 @@ class User(db.Model):
     deactivated_at = db.Column(db.DateTime)
     notifications = db.Column(db.Boolean)
 
+    #Relationships with strava_users, activity_logs, mense_logs, & sleep_logs tables
+    strava_user = db.relationship("StravaUser", back_populates="user")
+    activity_log = db.relationship("ActivityLog", back_populates="user")
+    mense_log = db.relationship("MenseLog", back_populates="user")
+    sleep_log = db.relationship("SleepLog", back_populates="user")
+
     def __repr__(self):
         return f'<User user_id={self.user_id} email={self.email}'
 
@@ -36,6 +42,11 @@ class StravaUser(db.Model):
     
     created_at = db.Column(db.DateTime)
     deactivated_at = db.Column(db.DateTime)
+
+    #Relationships with users & strava_activities tables
+    user = db.relationship("User", back_populates="strava_user")
+    strava_activity = db.relationship("StravaActivity", back_populates="strava_user")
+
 
     def __repr__(self):
         return f'<StravaUser strava_user_id={self.user_id} user_id={self.user_id}'
@@ -59,6 +70,9 @@ class StravaActivity(db.Model):
     suffer_score = db.Column(db.Integer) #suffer_score (total of 9 increments, I'm assuming 1-10)
     description = db.Column(db.Text) #description
 
+    #Relationship with strava_users table
+    strava_user = db.relationship("StravaUser", back_populates="strava_activity")
+
     def __repr__(self):
         return f'<StravaActivity strava_activity_id={self.strava_activity_id} title={self.activity_name}'
 
@@ -80,6 +94,9 @@ class ActivityLog(db.Model):
     activity_notes = db.Column(db.Text) 
     created_at = db.Column(db.DateTime)
     deleted_at = db.Column(db.DateTime)
+
+    #Relationship with users table
+    user = db.relationship("User", back_populates="activity_log")
 
     def __repr__(self):
         return f'<Activity activity_id={self.activity_id} title={self.activity_name}'
@@ -105,8 +122,12 @@ class MenseLog(db.Model):
     created_at = db.Column(db.DateTime)
     deleted_at = db.Column(db.DateTime)
 
+    #Relationship with users table
+    user = db.relationship("User", back_populates="mense_log")
+
     def __repr__(self):
         return f'<Mense mense_id={self.mense_id}'
+        
 
 # I think I want to actually include sx data in the period log
 class SymptomLog(db.Model):
@@ -142,11 +163,15 @@ class SleepLog(db.Model):
     sleep_notes = db.Column(db.Text)
     created_at = db.Column(db.DateTime)
     deleted_at = db.Column(db.DateTime)
+
+    #Relationship with users table
+    user = db.relationship("User", back_populates="sleep_log")
+
     def __repr__(self):
-        return f'<SleepLog sleep_log_id={self.sx_id} user={self.user_id}'
+        return f'<SleepLog sleep_log_id={self.sleep_log_id} user={self.user_id}'
 
 
-def connect_to_db(flask_app, db_uri="postgresql:///period", echo=True):
+def connect_to_db(flask_app, db_uri="postgresql:///period",echo=True):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
     flask_app.config["SQLALCHEMY_ECHO"] = echo
     flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False

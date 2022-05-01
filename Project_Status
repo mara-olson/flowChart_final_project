@@ -1,0 +1,29 @@
+4/30
+	- Data model approved
+		- Removed "logs" table, as it was redundant. Activity, mense, & sleep logs can all stand on their own
+		- Sleep logs to be left out of MVP
+
+	- Files created & organized
+		- Templates
+			- base.html (empty)
+			- homepage.html (empty)
+		- requirements.txt (copied from ratings-v2 lab)
+		- Model.py
+			- Created data classes
+			- connect_to_db()
+			- db
+		- Server.py 
+			- flask app
+		- Seed_functions.py
+		- Data
+			- Seed data
+				- JSON files for each data table
+					users, strava_users, strava_activities, activity_logs, mense_logs
+				- functions:
+					create_users, create_strava_users, create_strava_activities, create_activities, create_mense_log
+			- Learned that I must commit each seed data/function after it's defined rather than once at the end, or else the user_id doesn't exist (and the other data tables rely on mapping to the user_id, so they error out)
+
+5/1
+	- Seed data
+		- JSON files for sleep_logs
+		- function: create_sleep_log

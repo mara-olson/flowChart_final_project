@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+  <body>
+    {% for msg in get_flashed_messages() %}
+    <p class="flash-msg">{{ msg }}</p>
+    {% block body %}{% endblock %}
+  </body>
+</html>

@@ -1,0 +1,31 @@
+Components:
+
+Logo
+<Card >
+<Navbar >
+	Navlinks to:
+		/profile
+		/login
+		/register
+		/cycles
+			Dropdown: /menstrual-cycles
+			Dropdown: /training-cycles
+
+<AddButton >
+	<Activity
+	<Period
+
+<ActivityCard >
+	ActivityData
+	AddPeriod
+	<AddActivity >
+
+<UserCard>
+<StatCard >
+
+<Selector >
+	<ActivityTypeSelector >
+	<IntensitySelector >
+	<PeriodTypeSelector >
+	<SxSelector >
+	<FlowSelector >
