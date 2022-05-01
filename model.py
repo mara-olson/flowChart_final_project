@@ -52,6 +52,8 @@ class StravaUser(db.Model):
         return f'<StravaUser strava_user_id={self.user_id} user_id={self.user_id}'
 
 
+
+
 class StravaActivity(db.Model):
     """An activity imported from Strava.
     
@@ -72,6 +74,7 @@ class StravaActivity(db.Model):
 
     #Relationship with strava_users table
     strava_user = db.relationship("StravaUser", back_populates="strava_activity")
+    
 
     def __repr__(self):
         return f'<StravaActivity strava_activity_id={self.strava_activity_id} title={self.activity_name}'
