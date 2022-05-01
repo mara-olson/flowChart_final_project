@@ -14,6 +14,25 @@ def homepage():
     return render_template("homepage.html")
 
 
+@app.route("/profile")
+def profile():
+    """User profile page."""
+    return render_template("profile.html")
+
+
+@app.route("/activities")
+def activities():
+    """Display a user's activities."""
+    return render_template("activities.html")
+
+
+@app.route("/periods")
+def periods():
+    """Display a user's menstrual logs."""
+    return render_template("periods.html")
+
+
+
 if __name__ == "__main__":
     # DebugToolbarExtension(app)
     connect_to_db(app)
