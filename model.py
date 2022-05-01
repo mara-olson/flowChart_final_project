@@ -41,7 +41,7 @@ class StravaUser(db.Model):
         return f'<StravaUser strava_user_id={self.user_id} user_id={self.user_id}'
 
 
-class StravaActvity(db.Model):
+class StravaActivity(db.Model):
     """An activity imported from Strava.
     
     From API /activities/{id}."""
