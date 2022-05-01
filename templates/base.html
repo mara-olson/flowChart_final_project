@@ -6,8 +6,9 @@
     <title>{% block title %}{% endblock %}</title>
   </head>
   <body>
+    <h2>period.</h2>
     {% for msg in get_flashed_messages() %}
     <p class="flash-msg">{{ msg }}</p>
-    {% block body %}{% endblock %}
+    {% endfor %} {% block body %}{% endblock %}
   </body>
 </html>
