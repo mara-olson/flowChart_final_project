@@ -1,4 +1,4 @@
-4/30
+
 1. Should I collapse my sx_logs into general mense_logs? Is the second table worthwhile?
 
 2. Should I store scalar data as strings or integers? For plotting on a graph maybe it makes sense to have an integer?
@@ -10,4 +10,27 @@
 
 4. Seeding data: users have to be committed to db before user_id can be referenced -- do I have to commit each create… function info before the next?
 
+5. Should flash messages be in the base.html file? And should it be a <p>?
+	{% for msg in get_flashed_messages() %}
+    <p class="flash-msg">{{ msg }}</p>
+
+6. user.strava_user or user.mense_log etc. returns a list rather than an object. Is that expected?
+
+7. Calendar vs. list of activities?
+
+8. secret.sh, API key, OAuth
+
+9. /{userid}/profile or just /profile?
+
+10. How do I want to indicate the presence of period info in calendar square -- dot symbol? pink background? red date number?
+
+11. 
+
+12. 
+
+13. 
+
+14. 
+
+15. 
 

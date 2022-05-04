@@ -22,8 +22,24 @@
 				- functions:
 					create_users, create_strava_users, create_strava_activities, create_activities, create_mense_log
 			- Learned that I must commit each seed data/function after it's defined rather than once at the end, or else the user_id doesn't exist (and the other data tables rely on mapping to the user_id, so they error out)
+	TO_DO:
+		x - Finish seed functions for mense_logs and sleep_logs
+		x - Make sure seed data for each has all of the fields (can be null)
 
 5/1
-	- Seed data
+	- Seed data completed!
 		- JSON files for sleep_logs
-		- function: create_sleep_log
+		- functions: create_mense_log, create_sleep_log
+	- Wireframing
+
+
+5/2
+	- base.html -> index.html
+	- App.jsx, Card.jsx, Homepage.jsx
+	- Wireframing cont'd
+	TO-DO
+		- Create folders per page (landing, login, homepage, profile)
+
+
+
+
