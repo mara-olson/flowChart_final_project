@@ -2,9 +2,14 @@
 
 function App() {
   return (
-    <div>
-      <Card />
-    </div>
+    <ReactRouterDOM.BrowserRouter>
+      <Navbar logo="/static/period-logo.png" brand="period" />
+      <div className="container-fluid">
+        <ReactRouterDOM.Route exact path="/">
+          <LandingPage />
+        </ReactRouterDOM.Route>
+      </div>
+    </ReactRouterDOM.BrowserRouter>
   );
 }
 
