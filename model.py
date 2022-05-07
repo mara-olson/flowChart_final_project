@@ -28,6 +28,21 @@ class User(db.Model):
     def __repr__(self):
         return f'<User user_id={self.user_id} email={self.email}'
 
+    @classmethod
+    def create(cls, email, password):
+       """Create and return a new user."""
+       return cls(email=email, password=password)
+
+    @classmethod
+    def get_user_by_id(cls, user_id):
+        """Get & return a user by user_id."""
+        return cls.query.get(user_id)
+
+    @classmethod
+    def get_user_by_email(cls, email):
+        """Get & return a user by email."""
+        return cls.query.filter(User.email == email).first()
+
 
 class StravaUser(db.Model):
     """A user connected to their Strava account."""

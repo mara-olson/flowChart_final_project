@@ -16,7 +16,24 @@ def homepage():
 @app.route("/login")
 def login():
     """User login page."""
+    return render_template("login.html")
 
+@app.route("/login", methods=["POST"])
+def login_process():
+    """Process the user's login."""
+
+    email = request.form.get("email")
+    password = request.form.get("password")
+
+    user = User.get_user_by_email(email)
+    if not user:
+        flash("We could not find an account with this email. Please sign up!")
+
+    elif user.password != password:
+        flash("The password you entered is incorrect. Please re-enter.")
+    else:
+        session["user_email"] = user.email
+        flash(f"Welcome back, {user.first_name}")
 
 
 @app.route("/{user_id}/profile")
