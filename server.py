@@ -13,27 +13,36 @@ def homepage():
     """View homepage."""
     return render_template("index.html")
 
-@app.route("/login")
-def login():
-    """User login page."""
-    return render_template("login.html")
+# @app.route("/login")
+# def login():
+#     """User login page."""
+#     return render_template("login.html")
 
-@app.route("/login", methods=["POST"])
+@app.route("/login", methods=['GET', 'POST'])
 def login_process():
     """Process the user's login."""
+    error = None
 
+    
     email = request.form.get("email")
     password = request.form.get("password")
 
-    user = User.get_user_by_email(email)
-    if not user:
-        flash("We could not find an account with this email. Please sign up!")
+    if request.method == 'POST':
+        user = User.get_user_by_email(email)
+        if not user:
+            error = f"We could not find an account for {email}. Please sign up!"
+            # return redirect("/login", error=error)
 
-    elif user.password != password:
-        flash("The password you entered is incorrect. Please re-enter.")
-    else:
-        session["user_email"] = user.email
-        flash(f"Welcome back, {user.first_name}")
+        elif user.password != password:
+            error = "The password you entered is incorrect. Please re-enter."
+            # return redirect("/login", error=error)
+
+        else:
+            session["user_email"] = user.email
+            flash(f"Welcome back, {user.first_name}")
+            return redirect("/")
+
+    return render_template("/login.html", error=error, email=email)
 
 
 @app.route("/{user_id}/profile")
@@ -42,13 +51,13 @@ def profile(userId):
     return render_template("profile.html")
 
 
-@app.route("/activities")
+@app.route("/{user_id}/activities")
 def activities():
     """Display a user's activities."""
     return render_template("activities.html")
 
 
-@app.route("/periods")
+@app.route("/{user_id}/periods")
 def periods():
     """Display a user's menstrual logs."""
     return render_template("periods.html")

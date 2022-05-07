@@ -2,14 +2,18 @@
 %}
 
 <Navbar logo="/static/period-logo.png" brand="period" />
-<form action="/login" methods="POST">
+{% if error %}
+<p class="error">{{ error }}</p>
+{% endif %}
+
+<form action="/login" method="POST">
   <div>
     Email
-    <input type="text" name="email_entry" />
+    <input type="text" name="email" />
   </div>
   <div>
     Password
-    <input type="text" name="password_entry" />
+    <input type="text" name="password" />
   </div>
   <button type="submit">Log in</button>
 </form>
