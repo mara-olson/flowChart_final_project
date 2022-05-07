@@ -8,3 +8,10 @@
 .error {
   color: red;
 }
+
+#sign-up_button {
+  background-color: rgb(111, 17, 17);
+  border: gray;
+  color: white;
+  text-align: center;
+}

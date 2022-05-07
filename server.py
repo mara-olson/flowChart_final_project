@@ -13,10 +13,7 @@ def homepage():
     """View homepage."""
     return render_template("index.html")
 
-# @app.route("/login")
-# def login():
-#     """User login page."""
-#     return render_template("login.html")
+
 
 @app.route("/login", methods=['GET', 'POST'])
 def login_process():

@@ -40,6 +40,13 @@ function Navbar(props) {
         >
           Profile
         </ReactRouterDOM.NavLink>
+        <ReactRouterDOM.NavLink
+          to="/login"
+          activeClassName="navlink-active"
+          className="nav-link nav-item"
+        >
+          Login
+        </ReactRouterDOM.NavLink>
       </section>
     </nav>
   );
@@ -55,6 +62,11 @@ function LandingPage(props) {
       <section id="landing-message" className="d-flex justify-content-center">
         {landingMessage}
       </section>
+      <form action="/sign-up" id="sign-up">
+        <button type="submit" id="sign-up_button">
+          Sign Up
+        </button>
+      </form>
     </div>
   );
 }
