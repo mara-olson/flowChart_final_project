@@ -97,15 +97,24 @@ def sign_up():
 def save_new_user():
     """Display registration page & create user with entered credentials."""
     new_email = request.form.get("email")
+
+    session["email"] = new_email
+
     new_password = request.form.get("password")
+
+    all_users = [x.email for x in db.session.query(User.email).distinct()]
     
-    new_user = User.create_user(new_email, new_password)
+    if new_email not in all_users: 
+        new_user = User.create_user(new_email, new_password)
     
-    user_id = new_user.user_id
+        user_id = new_user.user_id
 
     # return render_template("sign-up.html")
-
-    return redirect(f"/{user_id}/home")
+        return redirect(f"/{user_id}/home")
+    
+    else:
+        flash("An account with this email already exists. Try another email.")
+        return redirect("/sign-up")
 
 
 
@@ -121,7 +130,7 @@ def user_homepage(user_id):
     
     user_id = user.user_id
 
-    welcome_msg = f"Welcome back, {fname}!"
+    welcome_msg = f"Welcome, {fname}!"
 
     return render_template("home.html", name=fname, user_id=user_id, welcome_msg=welcome_msg)
 
