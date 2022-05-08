@@ -27,6 +27,11 @@ function App() {
           <Home />
         </ReactRouterDOM.Route>
       </div>
+      <div className="container-fluid">
+        <ReactRouterDOM.Route exact path="/sign-up">
+          <SignUp />
+        </ReactRouterDOM.Route>
+      </div>
     </ReactRouterDOM.BrowserRouter>
   );
 }

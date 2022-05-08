@@ -9,7 +9,7 @@ class User(db.Model):
     
     __tablename__ = "users"
 
-    user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user_id = db.Column(db.Integer, autoincrement=True, nullable=False, primary_key=True)
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
     team_name = db.Column(db.String)
@@ -29,9 +29,13 @@ class User(db.Model):
         return f'<User user_id={self.user_id} email={self.email}'
 
     @classmethod
-    def create(cls, email, password):
+    def create_user(cls, email, password):
        """Create and return a new user."""
-       return cls(email=email, password=password)
+       user = cls(email=email, password=password)
+       db.session.add(user)
+       db.session.commit()
+
+       return user
 
     @classmethod
     def get_user_by_id(cls, user_id):

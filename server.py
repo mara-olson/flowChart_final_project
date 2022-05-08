@@ -90,14 +90,22 @@ def login_process():
 def sign_up():
     """Display registration page & create user with entered credentials."""
 
-    return render_template("/sign-up")
+    return render_template("sign-up.html")
 
 
 @app.route("/sign-up", methods=['POST'])
 def save_new_user():
     """Display registration page & create user with entered credentials."""
+    new_email = request.form.get("email")
+    new_password = request.form.get("password")
+    
+    new_user = User.create_user(new_email, new_password)
+    
+    user_id = new_user.user_id
 
-    return redirect("/<user_id>/home")
+    # return render_template("sign-up.html")
+
+    return redirect(f"/{user_id}/home")
 
 
 

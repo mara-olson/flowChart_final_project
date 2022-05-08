@@ -102,9 +102,25 @@ function Login(props) {
         </div>
         <button type="submit">Log in</button>
       </form>
-      {/* <ReactRouterDOM.Route exact path="/home">
-        <Home />
-      </ReactRouterDOM.Route> */}
+    </div>
+  );
+}
+
+function SignUp(props) {
+  return (
+    <div>
+      <p>New User Info</p>
+      <form action="/sign-up" method="POST">
+        <div>
+          Email
+          <input type="text" name="email" />
+        </div>
+        <div>
+          Password
+          <input type="text" name="password" />
+        </div>
+        <button type="submit">Sign Up</button>
+      </form>
     </div>
   );
 }
