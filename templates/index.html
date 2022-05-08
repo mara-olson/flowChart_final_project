@@ -27,9 +27,6 @@
 
   <body>
     <div id="root"></div>
-    {% for msg in get_flashed_messages() %}
-    <p class="flash-msg">{{ msg }}</p>
-    {% endfor %} {% block content %} {% endblock %}
     <script src="/static/Components.jsx" type="text/jsx"></script>
     <!-- App -->
     <script src="/static/App.jsx" type="text/jsx"></script>

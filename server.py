@@ -11,6 +11,7 @@ app.jinja_env.undefined = StrictUndefined
 @app.route("/")
 def homepage():
     """View homepage."""
+
     return render_template("index.html")
 
 
@@ -19,7 +20,7 @@ def homepage():
 def login_process():
     """Process the user's login."""
     error = None
-
+    user = None
     
     email = request.form.get("email")
     password = request.form.get("password")
@@ -36,10 +37,42 @@ def login_process():
 
         else:
             session["user_email"] = user.email
-            flash(f"Welcome back, {user.first_name}")
+            flash(f"Welcome back, {user.first_name}!")
             return redirect("/")
 
-    return render_template("/login.html", error=error, email=email)
+    return render_template("/index.html", error=error, email=email, user=user)
+
+
+@app.route("/sign-up")
+def sign_up():
+    """Display registration page & create user with entered credentials."""
+
+    return render_template("/sign-up")
+
+
+@app.route("/sign-up", methods=['POST'])
+def save_new_user():
+    """Display registration page & create user with entered credentials."""
+
+    return redirect("/{user_id}/home")
+
+
+
+
+@app.route("/<user_id>/home")
+def user_homepage(user_id):
+    """Display user's homepage after logging in."""
+    email = request.form.get("email")
+    
+    user = User.get_user_by_email(email)
+
+    fname = user.first_name
+    
+    user_id = user.user_id
+
+    return render_template("/home.html", name=fname, user_id=user_id)
+
+
 
 
 @app.route("/{user_id}/profile")
