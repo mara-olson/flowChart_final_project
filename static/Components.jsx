@@ -9,13 +9,6 @@ function Card(props) {
 function Navbar(props) {
   const { logo, brand } = props;
 
-  //   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
-
-  //   authenticate(user_id) {
-  //       if {
-  //           user_id in
-  //   }
-
   return (
     <nav>
       <ReactRouterDOM.Link
@@ -84,20 +77,20 @@ function LandingPage(props) {
 
 // HOMEPAGE AFTER LOGIN COMPONENT
 function Home(props) {
-  return <div>{props.name}</div>;
+  return <div>{props.error}</div>;
 }
 
 function Login(props) {
-  fetch("/login", { method: "POST" })
-    .then((response) => response.json())
-    .then((data) => console.log(data.error));
+  //   const [userData, setUserData] = React.useState({});
+
+  //   React.useEffect(() => {
+  //     fetch("/api/user")
+  //       .then((response) => response.json())
+  //       .then((data) => setUserData(data));
+  //   }, []);
+
   return (
     <div>
-      <Navbar logo="/static/period-logo.png" brand="period" />
-      {/* {% if error %} */}
-      {/* <p class="error">{error}</p> */}
-      {/* {% endif %} */}
-
       <form action="/login" method="POST">
         <div>
           Email
@@ -109,6 +102,9 @@ function Login(props) {
         </div>
         <button type="submit">Log in</button>
       </form>
+      {/* <ReactRouterDOM.Route exact path="/home">
+        <Home />
+      </ReactRouterDOM.Route> */}
     </div>
   );
 }

@@ -1,12 +1,10 @@
 {% extends 'index.html' %} {% block title %}Login{% endblock %} {% block content
-%}
-
-<Navbar logo="/static/period-logo.png" brand="period" />
-{% if error %}
+%} {% if error %}
 <p class="error">{{ error }}</p>
 {% endif %}
+<!-- <Login /> -->
 
-<form action="/login" method="POST">
+<!-- <form action="/login" method="POST">
   <div>
     Email
     <input type="text" name="email" />
@@ -16,5 +14,5 @@
     <input type="text" name="password" />
   </div>
   <button type="submit">Log in</button>
-</form>
+</form> -->
 {% endblock %}

@@ -1,9 +1,13 @@
 // import Card from "/static/Components/Card";
 
 function App() {
-  // fetch("/login", { method: "POST" })
-  //   .then((response) => response.json())
-  //   .then((data) => console.log(data));
+  // const [userData, setUserData] = React.useState({});
+
+  // React.useEffect(() => {
+  //   fetch("/api/user")
+  //     .then((response) => response.json())
+  //     .then((data) => setUserData(data));
+  // }, []);
 
   return (
     <ReactRouterDOM.BrowserRouter>
