@@ -123,6 +123,18 @@ class ActivityLog(db.Model):
     def __repr__(self):
         return f'<Activity activity_id={self.activity_id} title={self.activity_name}'
 
+    def to_dict(self):
+        return {
+                'activity_date': self.activity_date,
+                'activity_type': self.activity_type,
+                'activity_id': self.activity_id,
+                'activity_name': self.activity_name,
+                'duration': self.duration,
+                'distance': self.distance,
+                'suffer_score': self.suffer_score,
+                'activity_notes': self.activity_notes,
+                'melon_type': self.melon_type.name}
+
 
 class MenseLog(db.Model):
     """A log added by the user related to their menstrual cycle."""

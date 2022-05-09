@@ -69,6 +69,8 @@ def login_process():
 
     user_id = user.user_id
 
+    session["user_id"] = user_id
+
     if not user:
         error = (f"We could not find an account for {email}. Please sign up!")
         # return redirect("/login")
@@ -100,7 +102,9 @@ def sign_up():
 def save_new_user():
     """Display registration page & create user with entered credentials."""
     new_fname = request.form.get("sign-up-fname")
+
     new_lname = request.form.get("sign-up-lname")
+
     new_team = request.form.get("sign-up-team")
     
     new_email = request.form.get("sign-up-email")
@@ -118,6 +122,8 @@ def save_new_user():
     
         user_id = new_user.user_id
 
+        session["user_id"] = user_id
+
     # return render_template("sign-up.html")
         return redirect(f"/{user_id}/home")
     
@@ -126,6 +132,15 @@ def save_new_user():
         return redirect("/sign-up")
 
 
+# @app.route('/api/<user_id>/activities')
+# def activity_data(user_id):
+#     user_id = session["user_id"]
+    
+#     user = User.get_user_by_id(user_id)
+
+#     activities = ActivityLog.query.get(user.user_id)
+
+#     return jsonify(activities.to_dict())
 
 
 @app.route("/<user_id>/home")
@@ -141,24 +156,27 @@ def user_homepage(user_id):
 
     welcome_msg = f"Welcome, {fname}!"
 
-    return render_template("home.html", name=fname, user_id=user_id, welcome_msg=welcome_msg)
+    activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
+
+
+    return render_template("home.html", name=fname, user_id=user_id, welcome_msg=welcome_msg, activities=activities)
 
 
 
 
-@app.route("/{user_id}/profile")
+@app.route("/<user_id>/profile")
 def profile(userId):
     """User profile page."""
     return render_template("profile.html")
 
 
-@app.route("/{user_id}/activities")
+@app.route("/<user_id>/activities")
 def activities():
     """Display a user's activities."""
     return render_template("activities.html")
 
 
-@app.route("/{user_id}/periods")
+@app.route("/<user_id>/periods")
 def periods():
     """Display a user's menstrual logs."""
     return render_template("periods.html")

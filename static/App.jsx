@@ -1,6 +1,15 @@
 // import Card from "/static/Components/Card";
 
 function App() {
+  const [activities, setActivities] = React.useState({});
+
+  React.useEffect(() => {
+    fetch("/api/<user_id>/activities")
+      .then((response) => response.json())
+      .then((actData) => {
+        setActivities(actData);
+      });
+  }, []);
   // const [userData, setUserData] = React.useState({});
 
   // React.useEffect(() => {
@@ -25,6 +34,7 @@ function App() {
       <div className="container-fluid">
         <ReactRouterDOM.Route exact path="/home">
           <Home />
+          <Activities activities={activities} />
         </ReactRouterDOM.Route>
       </div>
       <div className="container-fluid">
