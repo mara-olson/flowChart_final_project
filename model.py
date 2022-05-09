@@ -29,9 +29,9 @@ class User(db.Model):
         return f'<User user_id={self.user_id} email={self.email}'
 
     @classmethod
-    def create_user(cls, email, password):
+    def create_user(cls, first_name, last_name, team_name, email, password, created_at):
        """Create and return a new user."""
-       user = cls(email=email, password=password)
+       user = cls(email=email, password=password, first_name=first_name, last_name=last_name, team_name=team_name, created_at=created_at)
        db.session.add(user)
        db.session.commit()
 

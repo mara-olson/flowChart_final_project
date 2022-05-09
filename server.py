@@ -1,5 +1,8 @@
-from flask import Flask, render_template, jsonify, request, flash, session, redirect
-from model import connect_to_db, db, User, StravaUser, StravaActivity, ActivityLog, MenseLog, SleepLog
+from flask import Flask, render_template, jsonify, request, flash, session, redirect;
+
+from model import connect_to_db, db, User, StravaUser, StravaActivity, ActivityLog, MenseLog, SleepLog;
+
+import datetime;
 
 from jinja2 import StrictUndefined
 
@@ -96,16 +99,22 @@ def sign_up():
 @app.route("/sign-up", methods=['POST'])
 def save_new_user():
     """Display registration page & create user with entered credentials."""
-    new_email = request.form.get("email")
+    new_fname = request.form.get("sign-up-fname")
+    new_lname = request.form.get("sign-up-lname")
+    new_team = request.form.get("sign-up-team")
+    
+    new_email = request.form.get("sign-up-email")
 
     session["email"] = new_email
 
-    new_password = request.form.get("password")
+    new_password = request.form.get("sign-up-password")
+
+    created_at = datetime.datetime.now()
 
     all_users = [x.email for x in db.session.query(User.email).distinct()]
     
     if new_email not in all_users: 
-        new_user = User.create_user(new_email, new_password)
+        new_user = User.create_user(new_fname, new_lname, new_team, new_email, new_password, created_at)
     
         user_id = new_user.user_id
 
@@ -113,7 +122,7 @@ def save_new_user():
         return redirect(f"/{user_id}/home")
     
     else:
-        flash("An account with this email already exists. Try another email.")
+        flash("We found an existing account, please log in.")
         return redirect("/sign-up")
 
 

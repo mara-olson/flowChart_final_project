@@ -111,14 +111,20 @@ function SignUp(props) {
     <div>
       <p>New User Info</p>
       <form action="/sign-up" method="POST">
-        <div>
-          Email
-          <input type="text" name="email" />
-        </div>
-        <div>
-          Password
-          <input type="text" name="password" />
-        </div>
+        <label htmlFor="sign-up-fname">First name</label>
+        <input type="text" name="sign-up-fname" />
+        <br></br>
+        <label htmlFor="sigh-up-lname">Last name</label>
+        <input type="text" name="sign-up-lname" />
+        <br></br>
+        <label htmlFor="sigh-up-team">Team name</label>
+        <input type="text" name="sign-up-team" />
+        <br></br>
+        <label htmlFor="sigh-up-email">Email</label>
+        <input type="text" name="sign-up-email" />
+        <br></br>
+        <label htmlFor="sign-up-password">Password</label>
+        <input type="text" name="sign-up-password" />
         <button type="submit">Sign Up</button>
       </form>
     </div>
