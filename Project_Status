@@ -66,9 +66,49 @@
 	- ~4 hours spent trying to make both React & Jinja work together to pass data, ended up abandoning fetches
 	- Added @classmethod for Users to create a new user & commit to db, for sake of sign-up
 	- Check if email used in sign-up is in db; if so, flash a message that an account already exists with that email. If not, go ahead & create/commit new user and then redirect to their homepage
+	- Tried to send activity data from db to react component 
+		- @app.route('/api/<user_id>/activities')
+			def activity_data(user_id):
+			    user_id = session["user_id"]
+			    user = User.get_user_by_id(user_id)
+			    activities = ActivityLog.query.get(user.user_id)
+			    return jsonify(activities.to_dict())
+		- App()
+			const [activities, setActivities] = React.useState({});
+			React.useEffect(() => {
+			fetch("/api/<user_id>/activities")
+			  .then((response) => response.json())
+			  .then((actData) => {
+			    setActivities(actData);
+			  });
+			}, []);
+
+			... <Activities activities={activities} />
+		- home.html
+			<Home />
+			<Activities />
 
 	TO-DO:
 		- Above ^^
+
+5/10
+	- Major help from Seem in completing a functional Login component
+		- State of email & state of password
+		- History from ReactRouterDOM that is then used to send user ot their home page history.push(`/${data.user_id}/home`)
+		- handleLogin function to:
+			1. prevent default submission 
+			2. fetch data from /login @app.route (which returns jsonify({"success": True,"user_id":user.user_id}))
+		- call handleLogin onSubmit of form
+		- set values for email & password inputs that correspond to the email/password states
+		- "/:user_id" as way for ReactRouter to get user_id (which is in App indefinitely because of setUserId fxn)
+
+	TO-DO:
+		- Read ReactRouter docs
+		- Review Login component for how these pieces fit together
+		- Review App component props sent to <Login />
+		- Fetch activities within the Activities component, not App
+		- Review further study of second react lab to understand props / function passing (?)
+
 
 
 
