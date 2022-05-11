@@ -7,7 +7,7 @@ function Card(props) {
 }
 
 function Navbar(props) {
-  const { logo, brand } = props;
+  const { logo } = props;
 
   return (
     <nav>
@@ -77,66 +77,58 @@ function LandingPage(props) {
 
 // HOMEPAGE AFTER LOGIN COMPONENT
 function Home(props) {
-  const [activities, setActivities] = React.useState([]);
-
-  React.useEffect(() => {
-    fetch("/api/activities")
-      .then((response) => response.json())
-      .then((result) => {
-        setActivities(result);
-      });
-    // .then((actData) => {
-    // const activities = actData;
-    // console.log(actData);
-    // });
-  }, []);
-
-  if (activities.length === 0) {
-    return <p>Loading...</p>;
-  }
-
-  const activitiesList = [];
-
-  for (const activity of activitiesList) {
-    activitiesList.push(
-      <li key={activity.activity_id}>{activity.activity_name}</li>
-    );
-  }
-
-  return <ul>{activitiesList}</ul>;
-
-  // return (
-  // <div>{actData}</div>
-  //   <div><li>{{activity.activity_date}}</li>
-  //   <ul>
-  //     <li>{{activity.activity_name}}</li>
-  //     <li>Distance: {{activity.distance}}</li>
-  //     <li>Duration: {{activity.duration}}</li>
-  //     <li>Suffer score: {{activity.suffer_score}}</li>
-  //   </ul>
-  // </div>
-  // );
+  return;
 }
 
 function Login(props) {
-  //   const [userData, setUserData] = React.useState({});
+  // form updates state of Login component, submit makes request to backend, retrieve response, use response to update state of App component
+  // Any child component can use user_id
 
-  //   React.useEffect(() => {
-  //     fetch("/api/user")
-  //       .then((response) => response.json())
-  //       .then((data) => setUserData(data));
-  //   }, []);
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const history = ReactRouterDOM.useHistory();
+
+  const handleLogin = (evt) => {
+    console.log(evt);
+    evt.preventDefault();
+
+    fetch("/login", {
+      method: "POST",
+      body: JSON.stringify({ email: "ron@gmail.com", password: "1234abc" }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          props.setUserId(data.user_id);
+          history.push(`/${data.user_id}/home`);
+        }
+      });
+  };
 
   return (
     <div>
-      <form action="/login" method="POST">
+      <form onSubmit={handleLogin}>
         <div>
           Email
-          <input type="text" name="email" />
+          <input
+            type="text"
+            name="email"
+            value={email}
+            onChange={(evt) => setEmail(evt.currentTarget.value)}
+          />
         </div>
         <div>
           Password
-          <input type="text" name="password" />
+          <input
+            type="text"
+            name="password"
+            value={password}
+            onChange={(evt) => setPassword(evt.currentTarget.value)}
+          />
         </div>
         <button type="submit">Log in</button>
       </form>
@@ -173,9 +165,15 @@ function Activities(props) {
   const { activities } = props;
   const actCards = [];
 
-  for (const activity of Object.values(activities)) {
+  // NOTE: fetch here the activity data
+  // Review further study of second react lab
+
+  console.log(activities);
+
+  for (const activity of activities) {
+    // for (const activity of Object.values(activities)) {
     const actCard = (
-      <MelonCard
+      <ActivityCard
         key={activity.activity_id}
         name={activity.activity_name}
         type={activity.activity_type}
@@ -189,6 +187,7 @@ function Activities(props) {
   return (
     <React.Fragment>
       <h1>All Acts</h1>
+      <p>{activities}</p>
       <div id="acting">
         <div className="col-12 col-md-9 d-flex flex-wrap">{actCards}</div>
       </div>
@@ -196,37 +195,12 @@ function Activities(props) {
   );
 }
 
-function MelonCard(props) {
-  const { code, name, imgUrl, price, handleAddToCart } = props;
+function ActivityCard(props) {
+  const { name, type, distance, duration } = props;
 
   return (
-    <div className="card melon-card">
-      <ReactRouterDOM.Link to={`/shop/${code}`}>
-        <img src={imgUrl} className="card-img-top" alt="" />
-      </ReactRouterDOM.Link>
-      <div className="card-body">
-        <h5 className="card-title">
-          <ReactRouterDOM.Link to={`/shop/${code}`}>{name}</ReactRouterDOM.Link>
-        </h5>
-      </div>
-      <div className="card-body pt-0 container-fluid">
-        <div className="row">
-          <div className="col-12 col-lg-6">
-            <span className="lead price d-inline-block">
-              ${price.toFixed(2)}
-            </span>
-          </div>
-          <div className="col-12 col-lg-6">
-            <button
-              type="button"
-              className="btn btn-sm btn-success d-inline-block"
-              onClick={() => handleAddToCart && handleAddToCart(code)}
-            >
-              Add to cart
-            </button>
-          </div>
-        </div>
-      </div>
+    <div>
+      <h2>{name}</h2>
     </div>
   );
 }

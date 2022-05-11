@@ -14,8 +14,8 @@ app.jinja_env.undefined = StrictUndefined
 @app.route("/")
 def homepage():
     """View homepage."""
-
-    return render_template("index.html")
+    error = None
+    return render_template("index.html", error=error)
 
 
 
@@ -59,31 +59,32 @@ def login_process():
     error = None
     user = None
     
-    session["email"] = request.form.get("email")
+    session["email"] = request.json.get("email")
 
     email = session["email"]
 
-    password = request.form.get("password")
+    password = request.json.get("password")
 
     user = User.get_user_by_email(email)
 
-    user_id = user.user_id
+    # user_id = user.user_id
 
-    session["user_id"] = user_id
+    # session["user_id"] = user_id
 
     if not user:
         error = (f"We could not find an account for {email}. Please sign up!")
         # return redirect("/login")
-        return render_template("/login.html", error=error)
+        return jsonify({"success": False,"error":error})
 
     elif user.password != password:
         error = ("The password you entered is incorrect. Please re-enter.")
         # return redirect("/login")
-        return render_template("/login.html", error=error)
+        return jsonify({"success": False,"error":error})
 
     else:
         # email = session["email"]
-        return redirect(f'/{user_id}/home')
+        # return redirect(f'/{user_id}/home')
+        return jsonify({"success": True,"user_id":user.user_id})
     
     
         # return jsonify({"user_email":email})
@@ -132,15 +133,16 @@ def save_new_user():
         return redirect("/sign-up")
 
 
-# @app.route('/api/<user_id>/activities')
-# def activity_data(user_id):
-#     user_id = session["user_id"]
+@app.route('/api/activities')
+def activity_data():
+    user_id = session["user_id"]
     
-#     user = User.get_user_by_id(user_id)
+    user = User.get_user_by_id(user_id)
 
-#     activities = ActivityLog.query.get(user.user_id)
+    activities = ActivityLog.query.filter(ActivityLog.user == user).all()
 
-#     return jsonify(activities.to_dict())
+    return jsonify(activities)
+    # return jsonify(activities.to_dict())
 
 
 @app.route("/<user_id>/home")
@@ -170,10 +172,10 @@ def profile(userId):
     return render_template("profile.html")
 
 
-@app.route("/<user_id>/activities")
-def activities():
-    """Display a user's activities."""
-    return render_template("activities.html")
+# @app.route("/<user_id>/activities")
+# def activities():
+#     """Display a user's activities."""
+#     return render_template("activities.html")
 
 
 @app.route("/<user_id>/periods")

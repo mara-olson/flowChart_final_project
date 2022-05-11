@@ -133,7 +133,9 @@ class ActivityLog(db.Model):
                 'distance': self.distance,
                 'suffer_score': self.suffer_score,
                 'activity_notes': self.activity_notes,
-                'melon_type': self.melon_type.name}
+                'created_at': self.created_at,
+                'deleted_at': self.deleted_at
+                }
 
 
 class MenseLog(db.Model):

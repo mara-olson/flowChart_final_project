@@ -1,15 +1,17 @@
 // import Card from "/static/Components/Card";
 
 function App() {
-  const [activities, setActivities] = React.useState({});
+  const [userId, setUserId] = React.useState(null);
 
-  React.useEffect(() => {
-    fetch("/api/<user_id>/activities")
-      .then((response) => response.json())
-      .then((actData) => {
-        setActivities(actData);
-      });
-  }, []);
+  // const [activities, setActivities] = React.useState({});
+
+  // React.useEffect(() => {
+  //   fetch("/api/activities")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setActivities(data);
+  //     });
+  // }, []);
   // const [userData, setUserData] = React.useState({});
 
   // React.useEffect(() => {
@@ -20,7 +22,7 @@ function App() {
 
   return (
     <ReactRouterDOM.BrowserRouter>
-      <Navbar logo="/static/period-logo.png" brand="period" />
+      <Navbar logo="/static/period-logo.png" />
       <div className="container-fluid">
         <ReactRouterDOM.Route exact path="/">
           <LandingPage />
@@ -28,13 +30,17 @@ function App() {
       </div>
       <div className="container-fluid">
         <ReactRouterDOM.Route exact path="/login">
-          <Login />
+          <Login setUserId={setUserId} />
         </ReactRouterDOM.Route>
       </div>
       <div className="container-fluid">
-        <ReactRouterDOM.Route exact path="/home">
+        <ReactRouterDOM.Route exact path="/:user_id/home">
           <Home />
-          <Activities activities={activities} />
+        </ReactRouterDOM.Route>
+      </div>
+      <div className="container-fluid">
+        <ReactRouterDOM.Route exact path="/activities">
+          <Activities activities={[]} />
         </ReactRouterDOM.Route>
       </div>
       <div className="container-fluid">

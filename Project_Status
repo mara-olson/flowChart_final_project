@@ -1,0 +1,76 @@
+4/30
+	- Data model approved
+		- Removed "logs" table, as it was redundant. Activity, mense, & sleep logs can all stand on their own
+		- Sleep logs to be left out of MVP
+
+	- Files created & organized
+		- Templates
+			- base.html (empty)
+			- homepage.html (empty)
+		- requirements.txt (copied from ratings-v2 lab)
+		- Model.py
+			- Created data classes
+			- connect_to_db()
+			- db
+		- Server.py 
+			- flask app
+		- Seed_functions.py
+		- Data
+			- Seed data
+				- JSON files for each data table
+					users, strava_users, strava_activities, activity_logs, mense_logs
+				- functions:
+					create_users, create_strava_users, create_strava_activities, create_activities, create_mense_log
+			- Learned that I must commit each seed data/function after it's defined rather than once at the end, or else the user_id doesn't exist (and the other data tables rely on mapping to the user_id, so they error out)
+	TO_DO:
+		x - Finish seed functions for mense_logs and sleep_logs
+		x - Make sure seed data for each has all of the fields (can be null)
+
+5/1
+	- Seed data completed!
+		- JSON files for sleep_logs
+		- functions: create_mense_log, create_sleep_log
+	- Wireframing
+
+
+5/2
+	- base.html -> index.html
+	- App.jsx, Card.jsx, Homepage.jsx
+	- Wireframing cont'd
+	TO-DO
+		x - Create folders per page (landing, login, homepage, profile)
+
+
+5/5
+	- <script> in index.html for each new component
+		Probably makes more sense to put all components in a single file at this point
+	- All components must be in static because Flask browser only looks there
+
+5/7
+	- Condensing all components into a single file in /static folder so that I don't have to add <script> in index.html for multiple files
+	- Problems with getting a /login page:
+		- <scripts> for Components.jsx and App.jsx must come AFTER body to avoid "Target container is not DOM element" error
+		- <div id="root" must come before {% block content %}
+		- {% block content %} instead of {% block body %} in order to allow other things in the body (?)
+	- Could not get flash messages to show!
+		Turns out methods=post needed to change to method(no "s")="post"
+	- Opted for error=error_message rather than flash because I can control placement
+	- Made the error message red with .error class in css
+	- Successfully retrieved user's name/email from login page submission & displayed in flash message
+	TO-DO:
+		- Sort out React/AJAX vs. HTML/Jinja (right now I have both fetches and {{}}'s')
+		- If going with react/ajax, remove all non-index .html files
+
+5/8
+	- Blergh, all the struggles
+	- ~4 hours spent trying to make both React & Jinja work together to pass data, ended up abandoning fetches
+	- Added @classmethod for Users to create a new user & commit to db, for sake of sign-up
+	- Check if email used in sign-up is in db; if so, flash a message that an account already exists with that email. If not, go ahead & create/commit new user and then redirect to their homepage
+
+	TO-DO:
+		- Above ^^
+
+
+
+
+
