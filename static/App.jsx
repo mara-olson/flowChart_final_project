@@ -39,7 +39,7 @@ function App() {
         </ReactRouterDOM.Route>
       </div>
       <div className="container-fluid">
-        <ReactRouterDOM.Route exact path="/:user_id/activities">
+        <ReactRouterDOM.Route exact path="/activities">
           <Activities userId={userId} />
         </ReactRouterDOM.Route>
       </div>

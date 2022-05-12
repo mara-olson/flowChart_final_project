@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, flash, session, redirect;
+from flask import Flask, render_template,json, jsonify, request, flash, session, redirect;
 
 from model import connect_to_db, db, User, StravaUser, StravaActivity, ActivityLog, MenseLog, SleepLog;
 
@@ -101,15 +101,28 @@ def save_new_user():
         return redirect("/sign-up")
 
 
-@app.route('/activities', methods=["POST"])
+@app.route('/api/activities', methods=["POST"])
 def activity_data():
     user_id = session["user_id"]
     
     user = User.get_user_by_id(user_id)
 
-    activities = ActivityLog.query.filter(ActivityLog.user == user).all()
-        
-    return jsonify({activity.activity_id: activity.to_dict() for activity in activities})
+    all_activities = ActivityLog.query.filter(ActivityLog.user == user).all()
+
+    # json_activities = json.dumps(activities)
+
+    # return json_activities
+    # jsonify(json_activities=list)
+    
+    activities = {}
+
+    for activity in all_activities:
+        activity.to_dict()
+        for i in range(len(all_activities)):
+            activities[i] = all_activities[i]
+     
+    # return jsonify(activities)
+    return jsonify({"activities": activities})
 
 
 @app.route("/<user_id>/home")

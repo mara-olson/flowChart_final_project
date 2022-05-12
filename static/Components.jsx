@@ -163,11 +163,12 @@ function SignUp(props) {
 
 function Activities(props) {
   const [activities, setActivities] = React.useState({});
+
   console.log(activities);
 
   // NOTE: fetch here the activity data
   // Review further study of second react lab
-  fetch("/activities", {
+  fetch("/api/activities", {
     method: "POST",
     body: JSON.stringify({ activities: activities }),
     headers: {
@@ -177,13 +178,14 @@ function Activities(props) {
     .then((response) => response.json())
     .then((data) => {
       // if (data.activities) {
-      setActivities(props.userId);
+      console.log(data);
+      setActivities(data);
       // }
     });
 
   return (
     <div>
-      <p>{data.activities[0]}</p>
+      <p>{activities[0]}</p>
       <p>Hello</p>
     </div>
   );
