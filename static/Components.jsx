@@ -77,7 +77,7 @@ function LandingPage(props) {
 
 // HOMEPAGE AFTER LOGIN COMPONENT
 function Home(props) {
-  return;
+  return null;
 }
 
 function Login(props) {
@@ -90,12 +90,12 @@ function Login(props) {
   const history = ReactRouterDOM.useHistory();
 
   const handleLogin = (evt) => {
-    console.log(evt);
+    // console.log(evt);
     evt.preventDefault();
 
     fetch("/login", {
       method: "POST",
-      body: JSON.stringify({ email: "ron@gmail.com", password: "1234abc" }),
+      body: JSON.stringify({ email: email, password: password }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -162,36 +162,30 @@ function SignUp(props) {
 }
 
 function Activities(props) {
-  const { activities } = props;
-  const actCards = [];
+  const [activities, setActivities] = React.useState({});
+  console.log(activities);
 
   // NOTE: fetch here the activity data
   // Review further study of second react lab
+  fetch("/activities", {
+    method: "POST",
+    body: JSON.stringify({ activities: activities }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // if (data.activities) {
+      setActivities(props.userId);
+      // }
+    });
 
-  console.log(activities);
-
-  for (const activity of activities) {
-    // for (const activity of Object.values(activities)) {
-    const actCard = (
-      <ActivityCard
-        key={activity.activity_id}
-        name={activity.activity_name}
-        type={activity.activity_type}
-        distance={activity.distance}
-        duration={activity.duration}
-      />
-    );
-
-    actCards.push(actCard);
-  }
   return (
-    <React.Fragment>
-      <h1>All Acts</h1>
-      <p>{activities}</p>
-      <div id="acting">
-        <div className="col-12 col-md-9 d-flex flex-wrap">{actCards}</div>
-      </div>
-    </React.Fragment>
+    <div>
+      <p>{data.activities[0]}</p>
+      <p>Hello</p>
+    </div>
   );
 }
 

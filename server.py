@@ -19,32 +19,6 @@ def homepage():
 
 
 
-
-# @app.route("/login", methods=['GET', 'POST'])
-# def login_process():
-#     """Process the user's login."""
-#     error = None
-#     user = None
-    
-#     email = request.form.get("email")
-#     password = request.form.get("password")
-
-#     if request.method == 'POST':
-#         user = User.get_user_by_email(email)
-#         if not user:
-#             error = f"We could not find an account for {email}. Please sign up!"
-#             # return redirect("/login", error=error)
-
-#         elif user.password != password:
-#             error = "The password you entered is incorrect. Please re-enter."
-#             # return redirect("/login", error=error)
-
-#         else:
-#             session["user_email"] = user.email
-#             flash(f"Welcome back, {user.first_name}!")
-#             return redirect("/")
-
-#     return render_template("/index.html", error=error, email=email, user=user)
 @app.route("/login")
 def login():
     """Display login page."""
@@ -59,17 +33,11 @@ def login_process():
     error = None
     user = None
     
-    session["email"] = request.json.get("email")
-
-    email = session["email"]
+    email = request.json.get("email")
 
     password = request.json.get("password")
 
     user = User.get_user_by_email(email)
-
-    # user_id = user.user_id
-
-    # session["user_id"] = user_id
 
     if not user:
         error = (f"We could not find an account for {email}. Please sign up!")
@@ -84,7 +52,7 @@ def login_process():
     else:
         # email = session["email"]
         # return redirect(f'/{user_id}/home')
-        return jsonify({"success": True,"user_id":user.user_id})
+        return jsonify({"success": True,"user_id":user.user_id, "email":user.email, "password": user.password})
     
     
         # return jsonify({"user_email":email})
@@ -133,16 +101,15 @@ def save_new_user():
         return redirect("/sign-up")
 
 
-@app.route('/api/activities')
+@app.route('/activities', methods=["POST"])
 def activity_data():
     user_id = session["user_id"]
     
     user = User.get_user_by_id(user_id)
 
     activities = ActivityLog.query.filter(ActivityLog.user == user).all()
-
-    return jsonify(activities)
-    # return jsonify(activities.to_dict())
+        
+    return jsonify({activity.activity_id: activity.to_dict() for activity in activities})
 
 
 @app.route("/<user_id>/home")
@@ -161,7 +128,7 @@ def user_homepage(user_id):
     activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
 
 
-    return render_template("home.html", name=fname, user_id=user_id, welcome_msg=welcome_msg, activities=activities)
+    return jsonify({'name':fname, 'welcome_msg': welcome_msg, 'activities': activities})
 
 
 
