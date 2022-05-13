@@ -18,6 +18,17 @@ def homepage():
     return render_template("index.html", error=error)
 
 
+@app.route('/<path>')
+def route(path):
+
+    return render_template('index.html')
+
+
+@app.route('/<path>/<code>')
+def nested_route(path, code):
+
+    return render_template('index.html')
+
 
 @app.route("/login")
 def login():
@@ -91,19 +102,21 @@ def save_new_user():
     
         user_id = new_user.user_id
 
-        session["user_id"] = user_id
+        
 
     # return render_template("sign-up.html")
         return redirect(f"/{user_id}/home")
     
     else:
+        session["user_id"] = user_id
+
         flash("We found an existing account, please log in.")
         return redirect("/sign-up")
 
 
-@app.route('/api/activities', methods=["POST"])
-def activity_data():
-    user_id = session["user_id"]
+@app.route('/users/<user_id>/activities')
+def activity_data(user_id):
+    # user_id = session["user_id"]
     
     user = User.get_user_by_id(user_id)
 
@@ -114,14 +127,16 @@ def activity_data():
     # return json_activities
     # jsonify(json_activities=list)
     
-    activities = {}
+    activities = []
 
     for activity in all_activities:
-        activity.to_dict()
-        for i in range(len(all_activities)):
-            activities[i] = all_activities[i]
+        activity = activity.to_dict()
+        # for i in range(len(all_activities)):
+        #     activities[i] = activity
+        activities.append(activity)
+    # produces:
+    # [0: {'activity_date': datetime.datetime(2022, 4, 16, 0, 0), 'activity_type': 'Run', 'activity_id': 6, 'activity_name': 'Running & Running', 'duration': 91, 'distance': 12, 'suffer_score': 7, 'activity_notes': None, 'created_at': datetime.datetime(2022, 4, 12, 0, 0), 'deleted_at': None}, 1: {'activity_date': datetime.datetime(2022, 4, 16, 0, 0), 'activity_type': 'Run', 'activity_id': 6, 'activity_name': 'Running & Running', 'duration': 91, 'distance': 12, 'suffer_score': 7, 'activity_notes': None, 'created_at': datetime.datetime(2022, 4, 12, 0, 0), 'deleted_at': None}, 2: {'activity_date': datetime.datetime(2022, 4, 16, 0, 0), 'activity_type': 'Run', 'activity_id': 6, 'activity_name': 'Running & Running', 'duration': 91, 'distance': 12, 'suffer_score': 7, 'activity_notes': None, 'created_at': datetime.datetime(2022, 4, 12, 0, 0), 'deleted_at': None}]
      
-    # return jsonify(activities)
     return jsonify({"activities": activities})
 
 

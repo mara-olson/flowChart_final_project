@@ -3,7 +3,7 @@
 function App() {
   const [userId, setUserId] = React.useState(null);
 
-  // const [activities, setActivities] = React.useState({});
+  const [activities, setActivities] = React.useState({});
 
   // React.useEffect(() => {
   //   fetch("/api/activities")
@@ -40,7 +40,7 @@ function App() {
       </div>
       <div className="container-fluid">
         <ReactRouterDOM.Route exact path="/activities">
-          <Activities userId={userId} />
+          <ActivitiesContainer userId={userId} />
         </ReactRouterDOM.Route>
       </div>
       <div className="container-fluid">

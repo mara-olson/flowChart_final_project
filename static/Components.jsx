@@ -161,42 +161,54 @@ function SignUp(props) {
   );
 }
 
-function Activities(props) {
-  const [activities, setActivities] = React.useState({});
+function ActivityCard(props) {
+  return (
+    <div className="card">
+      <p>Name: {props.name}</p>
+      <p>Date: {props.date}</p>
+    </div>
+  );
+}
 
-  console.log(activities);
+function ActivitiesContainer(props) {
+  const [activities, setActivities] = React.useState([]);
+
+  console.log(props.userId);
+  // if ! props.userId {
+  //   redirect("/login")
+  // }
 
   // NOTE: fetch here the activity data
   // Review further study of second react lab
-  fetch("/api/activities", {
-    method: "POST",
-    body: JSON.stringify({ activities: activities }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      // if (data.activities) {
-      console.log(data);
-      setActivities(data);
-      // }
-    });
+  React.useEffect(() => {
+    fetch(`/users/${props.userId}/activities`)
+      .then((response) => response.json())
+      .then((data) => setActivities(data.activities));
+  }, []);
 
-  return (
-    <div>
-      <p>{activities[0]}</p>
-      <p>Hello</p>
-    </div>
-  );
+  const activityDetails = [];
+
+  console.log(activities);
+
+  for (const activity of activities) {
+    activityDetails.push(
+      <ActivityCard
+        key={activity.activity_id}
+        name={activity.activity_name}
+        date={activity.activity_date}
+      />
+    );
+  }
+
+  return <div>{activityDetails}</div>;
 }
 
-function ActivityCard(props) {
-  const { name, type, distance, duration } = props;
+// function ActivityCard(props) {
+//   const { name, type, distance, duration } = props;
 
-  return (
-    <div>
-      <h2>{name}</h2>
-    </div>
-  );
-}
+//   return (
+//     <div>
+//       <h2>{name}</h2>
+//     </div>
+//   );
+// }
