@@ -53,13 +53,6 @@ function Navbar(props) {
         >
           Profile
         </ReactRouterDOM.NavLink>
-        <ReactRouterDOM.NavLink
-          to="/login"
-          activeClassName="navlink-active"
-          className="nav-link nav-item"
-        >
-          Login
-        </ReactRouterDOM.NavLink>
       </section>
     </nav>
   );
