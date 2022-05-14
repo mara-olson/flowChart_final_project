@@ -7,7 +7,27 @@ function Card(props) {
 }
 
 function Navbar(props) {
-  const { logo } = props;
+  const { logo, userId } = props;
+
+  if (!userId) {
+    return (
+      <nav>
+        <ReactRouterDOM.Link
+          to="/"
+          className="navbar-brand d-flex justify-content-left"
+        >
+          <img src={logo} height="30" alt="logo" />
+        </ReactRouterDOM.Link>
+        <ReactRouterDOM.NavLink
+          to="/login"
+          activeClassName="navlink-active"
+          className="nav-link nav-item"
+        >
+          Login
+        </ReactRouterDOM.NavLink>
+      </nav>
+    );
+  }
 
   return (
     <nav>
@@ -20,7 +40,7 @@ function Navbar(props) {
 
       <section className="d-flex justify-content-left">
         <ReactRouterDOM.NavLink
-          to="/activities"
+          to={`/users/${userId}/activities`}
           activeClassName="navlink-active"
           className="nav-link nav-item"
         >
@@ -174,9 +194,6 @@ function ActivitiesContainer(props) {
   const [activities, setActivities] = React.useState([]);
 
   console.log(props.userId);
-  // if ! props.userId {
-  //   redirect("/login")
-  // }
 
   // NOTE: fetch here the activity data
   // Review further study of second react lab

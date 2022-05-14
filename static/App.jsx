@@ -22,7 +22,7 @@ function App() {
 
   return (
     <ReactRouterDOM.BrowserRouter>
-      <Navbar logo="/static/period-logo.png" />
+      <Navbar logo="/static/period-logo.png" userId={userId} />
       <div className="container-fluid">
         <ReactRouterDOM.Route exact path="/">
           <LandingPage />

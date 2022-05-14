@@ -35,7 +35,7 @@ def login():
     """Display login page."""
     error = None
 
-    return render_template("/login.html", error=error)
+    return render_template("index.html", error=error)
 
 
 @app.route("/login", methods=['POST'])
@@ -118,26 +118,26 @@ def save_new_user():
 def activity_data(user_id):
     # user_id = session["user_id"]
     
-    user = User.get_user_by_id(user_id)
+    # if user_id == "null":
+    #     redirect("/login")
+        
+    # else:
+        user = User.get_user_by_id(user_id)
 
-    all_activities = ActivityLog.query.filter(ActivityLog.user == user).all()
+        all_activities = ActivityLog.query.filter(ActivityLog.user == user).all()
 
-    # json_activities = json.dumps(activities)
-
-    # return json_activities
-    # jsonify(json_activities=list)
     
-    activities = []
+        activities = []
 
-    for activity in all_activities:
-        activity = activity.to_dict()
-        # for i in range(len(all_activities)):
-        #     activities[i] = activity
-        activities.append(activity)
-    # produces:
-    # [0: {'activity_date': datetime.datetime(2022, 4, 16, 0, 0), 'activity_type': 'Run', 'activity_id': 6, 'activity_name': 'Running & Running', 'duration': 91, 'distance': 12, 'suffer_score': 7, 'activity_notes': None, 'created_at': datetime.datetime(2022, 4, 12, 0, 0), 'deleted_at': None}, 1: {'activity_date': datetime.datetime(2022, 4, 16, 0, 0), 'activity_type': 'Run', 'activity_id': 6, 'activity_name': 'Running & Running', 'duration': 91, 'distance': 12, 'suffer_score': 7, 'activity_notes': None, 'created_at': datetime.datetime(2022, 4, 12, 0, 0), 'deleted_at': None}, 2: {'activity_date': datetime.datetime(2022, 4, 16, 0, 0), 'activity_type': 'Run', 'activity_id': 6, 'activity_name': 'Running & Running', 'duration': 91, 'distance': 12, 'suffer_score': 7, 'activity_notes': None, 'created_at': datetime.datetime(2022, 4, 12, 0, 0), 'deleted_at': None}]
-     
-    return jsonify({"activities": activities})
+        for activity in all_activities:
+            activity = activity.to_dict()
+            # for i in range(len(all_activities)):
+            #     activities[i] = activity
+            activities.append(activity)
+        # produces:
+        # [0: {'activity_date': datetime.datetime(2022, 4, 16, 0, 0), 'activity_type': 'Run', 'activity_id': 6, 'activity_name': 'Running & Running', 'duration': 91, 'distance': 12, 'suffer_score': 7, 'activity_notes': None, 'created_at': datetime.datetime(2022, 4, 12, 0, 0), 'deleted_at': None}, 1: {'activity_date': datetime.datetime(2022, 4, 16, 0, 0), 'activity_type': 'Run', 'activity_id': 6, 'activity_name': 'Running & Running', 'duration': 91, 'distance': 12, 'suffer_score': 7, 'activity_notes': None, 'created_at': datetime.datetime(2022, 4, 12, 0, 0), 'deleted_at': None}, 2: {'activity_date': datetime.datetime(2022, 4, 16, 0, 0), 'activity_type': 'Run', 'activity_id': 6, 'activity_name': 'Running & Running', 'duration': 91, 'distance': 12, 'suffer_score': 7, 'activity_notes': None, 'created_at': datetime.datetime(2022, 4, 12, 0, 0), 'deleted_at': None}]
+        
+        return jsonify({"activities": activities})
 
 
 @app.route("/<user_id>/home")
