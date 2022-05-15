@@ -32,7 +32,7 @@ function Navbar(props) {
   return (
     <nav>
       <ReactRouterDOM.Link
-        to="/"
+        to={`/users/${userId}/home`}
         className="navbar-brand d-flex justify-content-left"
       >
         <img src={logo} height="30" alt="logo" />
@@ -108,7 +108,8 @@ function Login(props) {
 
     fetch("/login", {
       method: "POST",
-      body: JSON.stringify({ email: email, password: password }),
+      credentials: "include",
+      body: JSON.stringify({ email, password }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -129,7 +130,6 @@ function Login(props) {
           Email
           <input
             type="text"
-            name="email"
             value={email}
             onChange={(evt) => setEmail(evt.currentTarget.value)}
           />
@@ -138,7 +138,6 @@ function Login(props) {
           Password
           <input
             type="text"
-            name="password"
             value={password}
             onChange={(evt) => setPassword(evt.currentTarget.value)}
           />
@@ -150,24 +149,95 @@ function Login(props) {
 }
 
 function SignUp(props) {
+  const [firstName, setFirstName] = React.useState("");
+  const [lastName, setLastName] = React.useState("");
+  const [teamName, setTeamName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const history = ReactRouterDOM.useHistory();
+
+  const handleSignUp = (evt) => {
+    console.log(evt);
+    evt.preventDefault();
+
+    fetch("/sign-up", {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify({
+        first_name: firstName,
+        last_name: lastName,
+        team_name: teamName,
+        email: email,
+        password: password,
+        // created_at: sinceDate,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          props.setUserId(data.user_id);
+          history.push(`/${data.user_id}/home`);
+        }
+      });
+  };
+
   return (
     <div>
-      <p>New User Info</p>
-      <form action="/sign-up" method="POST">
-        <label htmlFor="sign-up-fname">First name</label>
-        <input type="text" name="sign-up-fname" />
+      <h2>New User Info</h2>
+      <form action="/sign-up" method="POST" onSubmit={handleSignUp}>
+        {/* <label htmlFor="sign-up-fname">First name</label> */}
+        <div>
+          First Name
+          <input
+            type="text"
+            value={firstName}
+            onChange={(evt) => setFirstName(evt.currentTarget.value)}
+          />
+        </div>
         <br></br>
-        <label htmlFor="sigh-up-lname">Last name</label>
-        <input type="text" name="sign-up-lname" />
+        {/* <label htmlFor="sign-up-lname">Last name</label> */}
+        <div>
+          Last Name
+          <input
+            type="text"
+            value={lastName}
+            onChange={(evt) => setLastName(evt.currentTarget.value)}
+          />
+        </div>
         <br></br>
-        <label htmlFor="sigh-up-team">Team name</label>
-        <input type="text" name="sign-up-team" />
+        <div>
+          Team Name
+          {/* <label htmlFor="sign-up-team">Team name</label> */}
+          <input
+            type="text"
+            value={teamName}
+            onChange={(evt) => setTeamName(evt.currentTarget.value)}
+          />
+        </div>
         <br></br>
-        <label htmlFor="sigh-up-email">Email</label>
-        <input type="text" name="sign-up-email" />
-        <br></br>
-        <label htmlFor="sign-up-password">Password</label>
-        <input type="text" name="sign-up-password" />
+        {/* <label htmlFor="sign-up-email">Email</label> */}
+        <div>
+          Email
+          <input
+            type="text"
+            value={email}
+            onChange={(evt) => setEmail(evt.currentTarget.value)}
+          />
+          <br></br>
+        </div>
+        {/* <label htmlFor="sign-up-password">Password</label> */}
+        <div>
+          Password
+          <input
+            type="text"
+            value={password}
+            onChange={(evt) => setPassword(evt.currentTarget.value)}
+          />
+        </div>
         <button type="submit">Sign Up</button>
       </form>
     </div>
@@ -213,12 +283,12 @@ function ActivitiesContainer(props) {
   return <div>{activityDetails}</div>;
 }
 
-// function ActivityCard(props) {
-//   const { name, type, distance, duration } = props;
+function Profile(props) {
+  const { name, type, distance, duration } = props;
 
-//   return (
-//     <div>
-//       <h2>{name}</h2>
-//     </div>
-//   );
-// }
+  return (
+    <div>
+      <h2>{name}</h2>
+    </div>
+  );
+}

@@ -42,13 +42,16 @@ def login():
 def login_process():
     """Process the user's login."""
     error = None
-    user = None
+    # user = None
     
     email = request.json.get("email")
 
     password = request.json.get("password")
 
     user = User.get_user_by_email(email)
+
+    session["user_id"] = user.user_id
+    session["email"] = email
 
     if not user:
         error = (f"We could not find an account for {email}. Please sign up!")
@@ -75,43 +78,45 @@ def login_process():
 def sign_up():
     """Display registration page & create user with entered credentials."""
 
-    return render_template("sign-up.html")
+    return render_template("index.html")
 
 
 @app.route("/sign-up", methods=['POST'])
 def save_new_user():
     """Display registration page & create user with entered credentials."""
-    new_fname = request.form.get("sign-up-fname")
+    data = request.json
+    print("*" * 20)
+    print(data)
 
-    new_lname = request.form.get("sign-up-lname")
+    new_fname = data.get("first_name")
 
-    new_team = request.form.get("sign-up-team")
+    new_lname = data.get("last_name")
+
+    new_team = data.get("team_name")
     
-    new_email = request.form.get("sign-up-email")
+    new_email = data.get("email")
 
-    session["email"] = new_email
-
-    new_password = request.form.get("sign-up-password")
+    new_password = data.get("password")
 
     created_at = datetime.datetime.now()
 
     all_users = [x.email for x in db.session.query(User.email).distinct()]
     
+    # if not new_fname or not new_lname or not new_email or not new_password:
+    #     flash('Please complete all required fields')
+
     if new_email not in all_users: 
         new_user = User.create_user(new_fname, new_lname, new_team, new_email, new_password, created_at)
     
-        user_id = new_user.user_id
+        # user_id = new_user.user_id
 
-        
-
-    # return render_template("sign-up.html")
-        return redirect(f"/{user_id}/home")
+        # return redirect(f"/{user_id}/home")
+        return jsonify({"success": True,"user_id":new_user.user_id, "first_name": new_user.first_name, "last_name": new_user.last_name, "team_name": new_user.team_name, "email": new_user.email, "password": new_user.password, "created_at": new_user.created_at})
     
     else:
-        session["user_id"] = user_id
 
         flash("We found an existing account, please log in.")
-        return redirect("/sign-up")
+        return redirect("/login")
 
 
 @app.route('/users/<user_id>/activities')
@@ -140,7 +145,7 @@ def activity_data(user_id):
         return jsonify({"activities": activities})
 
 
-@app.route("/<user_id>/home")
+@app.route("/users/<user_id>/home")
 def user_homepage(user_id):
     """Display user's homepage after logging in."""
     # email = session["email"]

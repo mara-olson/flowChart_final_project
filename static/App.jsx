@@ -1,54 +1,40 @@
 // import Card from "/static/Components/Card";
+const { Route, BrowserRouter } = ReactRouterDOM;
 
 function App() {
   const [userId, setUserId] = React.useState(null);
 
-  const [activities, setActivities] = React.useState({});
-
-  // React.useEffect(() => {
-  //   fetch("/api/activities")
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setActivities(data);
-  //     });
-  // }, []);
-  // const [userData, setUserData] = React.useState({});
-
-  // React.useEffect(() => {
-  //   fetch("/api/user")
-  //     .then((response) => response.json())
-  //     .then((data) => setUserData(data));
-  // }, []);
-
   return (
-    <ReactRouterDOM.BrowserRouter>
+    <BrowserRouter>
       <Navbar logo="/static/period-logo.png" userId={userId} />
       <div className="container-fluid">
-        <ReactRouterDOM.Route exact path="/">
+        <Route exact path="/">
           <LandingPage />
-        </ReactRouterDOM.Route>
+        </Route>
       </div>
       <div className="container-fluid">
-        <ReactRouterDOM.Route exact path="/login">
+        <Route exact path="/login">
           <Login setUserId={setUserId} />
-        </ReactRouterDOM.Route>
+        </Route>
       </div>
       <div className="container-fluid">
-        <ReactRouterDOM.Route exact path="/:user_id/home">
-          <Home />
-        </ReactRouterDOM.Route>
+        <Route exact path="/:user_id/home">
+          <Home userId={userId} />
+        </Route>
       </div>
       <div className="container-fluid">
-        <ReactRouterDOM.Route exact path="/activities">
+        <Route exact path="/:user_id/activities">
           <ActivitiesContainer userId={userId} />
-        </ReactRouterDOM.Route>
+        </Route>
       </div>
       <div className="container-fluid">
-        <ReactRouterDOM.Route exact path="/sign-up">
-          <SignUp />
-        </ReactRouterDOM.Route>
+        <Route exact path="/sign-up">
+          <SignUp setUserId={setUserId} />
+        </Route>
       </div>
-    </ReactRouterDOM.BrowserRouter>
+
+      {/* {Route path = '*' /* cutsie catch-all error page default if no route found */}
+    </BrowserRouter>
   );
 }
 
