@@ -1,15 +1,21 @@
 //"""Components for project"""
 
+const { useEffect } = require("react");
+
 // GENERAL COMPONENTS
 
-function Card(props) {
-  return <div className="card">Displayed!</div>;
-}
-
 function Navbar(props) {
-  const { logo, userId } = props;
+  const { logo, userId, setIsLoggedIn, isLoggedIn, login, logout } = props;
 
-  if (!userId) {
+  React.useEffect(() => {
+    if (!userId) {
+      setIsLoggedIn(false);
+    } else {
+      setIsLoggedIn(true);
+    }
+  });
+
+  if (!isLoggedIn) {
     return (
       <nav>
         <ReactRouterDOM.Link
@@ -28,34 +34,35 @@ function Navbar(props) {
       </nav>
     );
   }
-
-  return (
-    <nav>
-      <ReactRouterDOM.Link
-        to={`/users/${userId}/home`}
-        className="navbar-brand d-flex justify-content-left"
-      >
-        <img src={logo} height="30" alt="logo" />
-      </ReactRouterDOM.Link>
-
-      <section className="d-flex justify-content-left">
-        <ReactRouterDOM.NavLink
-          to={`/users/${userId}/activities`}
-          activeClassName="navlink-active"
-          className="nav-link nav-item"
+  if (isLoggedIn) {
+    return (
+      <nav>
+        <ReactRouterDOM.Link
+          to={`/users/${userId}/home`}
+          className="navbar-brand d-flex justify-content-left"
         >
-          Activities
-        </ReactRouterDOM.NavLink>
-        <ReactRouterDOM.NavLink
-          to="/profile"
-          activeClassName="navlink-active"
-          className="nav-link nav-item"
-        >
-          Profile
-        </ReactRouterDOM.NavLink>
-      </section>
-    </nav>
-  );
+          <img src={logo} height="30" alt="logo" />
+        </ReactRouterDOM.Link>
+
+        <section className="d-flex justify-content-left">
+          <ReactRouterDOM.NavLink
+            to={`/users/${userId}/activities`}
+            activeClassName="navlink-active"
+            className="nav-link nav-item"
+          >
+            Activities
+          </ReactRouterDOM.NavLink>
+          <ReactRouterDOM.NavLink
+            to="/profile"
+            activeClassName="navlink-active"
+            className="nav-link nav-item"
+          >
+            Profile
+          </ReactRouterDOM.NavLink>
+        </section>
+      </nav>
+    );
+  }
 }
 
 // LANDING PAGE COMPONENT

@@ -3,10 +3,21 @@ const { Route, BrowserRouter } = ReactRouterDOM;
 
 function App() {
   const [userId, setUserId] = React.useState(null);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
+  const login = () => setIsLoggedIn(true);
+  const logout = () => setIsLoggedIn(false);
 
   return (
     <BrowserRouter>
-      <Navbar logo="/static/period-logo.png" userId={userId} />
+      <Navbar
+        logo="/static/period-logo.png"
+        userId={userId}
+        login={login}
+        logout={logout}
+        setIsLoggedIn={setIsLoggedIn}
+        isLoggedIn={isLoggedIn}
+      />
       <div className="container-fluid">
         <Route exact path="/">
           <LandingPage />
