@@ -126,6 +126,7 @@ function Login(props) {
   return (
     <div>
       <form onSubmit={handleLogin}>
+        {/* <p className="error">{props.error}</p> */}
         <div>
           Email
           <input
@@ -158,7 +159,7 @@ function SignUp(props) {
   const history = ReactRouterDOM.useHistory();
 
   const handleSignUp = (evt) => {
-    console.log(evt);
+    // console.log(evt);
     evt.preventDefault();
 
     fetch("/sign-up", {
@@ -178,6 +179,7 @@ function SignUp(props) {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data.success);
         if (data.success) {
           props.setUserId(data.user_id);
           history.push(`/${data.user_id}/home`);
@@ -227,8 +229,9 @@ function SignUp(props) {
             value={email}
             onChange={(evt) => setEmail(evt.currentTarget.value)}
           />
-          <br></br>
         </div>
+        <br></br>
+
         {/* <label htmlFor="sign-up-password">Password</label> */}
         <div>
           Password
@@ -268,7 +271,7 @@ function ActivitiesContainer(props) {
 
   const activityDetails = [];
 
-  console.log(activities);
+  // console.log(activities);
 
   for (const activity of activities) {
     activityDetails.push(

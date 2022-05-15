@@ -23,7 +23,7 @@ function App() {
         </Route>
       </div>
       <div className="container-fluid">
-        <Route exact path="/:user_id/activities">
+        <Route exact path="/users/:user_id/activities">
           <ActivitiesContainer userId={userId} />
         </Route>
       </div>

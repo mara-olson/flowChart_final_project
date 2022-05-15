@@ -41,32 +41,31 @@ def login():
 @app.route("/login", methods=['POST'])
 def login_process():
     """Process the user's login."""
-    error = None
-    # user = None
-    
-    email = request.json.get("email")
 
-    password = request.json.get("password")
+    data = request.json
+    email = data.get("email")
+    password = data.get("password")
+    # error = data.get("error")
 
     user = User.get_user_by_email(email)
 
-    session["user_id"] = user.user_id
-    session["email"] = email
-
     if not user:
-        error = (f"We could not find an account for {email}. Please sign up!")
+        flash(f"We could not find an account for {email}. Please sign up!")
         # return redirect("/login")
-        return jsonify({"success": False,"error":error})
+        # return jsonify({"success": False,"error":error})
 
-    elif user.password != password:
-        error = ("The password you entered is incorrect. Please re-enter.")
+    elif password != user.password:
+        flash("The password you entered is incorrect. Please re-enter.")
         # return redirect("/login")
-        return jsonify({"success": False,"error":error})
+        # return jsonify({"success": False,"error":error})
 
     else:
         # email = session["email"]
         # return redirect(f'/{user_id}/home')
-        return jsonify({"success": True,"user_id":user.user_id, "email":user.email, "password": user.password})
+        session["user_id"] = user.user_id
+        session["email"] = email
+
+        return jsonify({"success": True, "user_id":user.user_id, "email":user.email, "password": user.password})
     
     
         # return jsonify({"user_email":email})
@@ -85,8 +84,6 @@ def sign_up():
 def save_new_user():
     """Display registration page & create user with entered credentials."""
     data = request.json
-    print("*" * 20)
-    print(data)
 
     new_fname = data.get("first_name")
 
@@ -105,7 +102,7 @@ def save_new_user():
     # if not new_fname or not new_lname or not new_email or not new_password:
     #     flash('Please complete all required fields')
 
-    if new_email not in all_users: 
+    if new_email not in all_users and "@" in new_email: 
         new_user = User.create_user(new_fname, new_lname, new_team, new_email, new_password, created_at)
     
         # user_id = new_user.user_id
@@ -116,7 +113,8 @@ def save_new_user():
     else:
 
         flash("We found an existing account, please log in.")
-        return redirect("/login")
+
+        return jsonify({"success": False})
 
 
 @app.route('/users/<user_id>/activities')
