@@ -5,16 +5,14 @@
 // GENERAL COMPONENTS
 
 function Logout(props) {
-  const { setIsLoggedIn, setUserId, isLoggedIn, userId } = props;
   const history = ReactRouterDOM.useHistory();
-
   const handleLogout = (evt) => {
     // console.log(evt);
     evt.preventDefault();
     props.setUserId(null);
     props.setIsLoggedIn(false);
-    console.log(isLoggedIn);
-    console.log(userId);
+    console.log(props.isLoggedIn);
+    console.log(props.userId);
     history.push("/");
   };
 
@@ -22,24 +20,14 @@ function Logout(props) {
 }
 
 function Navbar(props) {
-  const { logo, userId, setIsLoggedIn, isLoggedIn, setUserId } = props;
-
-  // React.useEffect(() => {
-  //   if (!userId) {
-  //     setIsLoggedIn(false);
-  //   } else {
-  //     setIsLoggedIn(true);
-  //   }
-  // });
-
-  if (!isLoggedIn) {
+  if (!props.isLoggedIn) {
     return (
       <nav>
         <ReactRouterDOM.Link
           to="/"
           className="navbar-brand d-flex justify-content-left"
         >
-          <img src={logo} height="30" alt="logo" />
+          <img src={props.logo} height="30" alt="logo" />
         </ReactRouterDOM.Link>
         <ReactRouterDOM.NavLink
           to="/login"
@@ -51,26 +39,26 @@ function Navbar(props) {
       </nav>
     );
   }
-  if (isLoggedIn) {
+  if (props.isLoggedIn) {
     return (
       <nav>
         <ReactRouterDOM.Link
-          to={`/users/${userId}/home`}
+          to={`/users/${props.userId}/home`}
           className="navbar-brand d-flex justify-content-left"
         >
-          <img src={logo} height="30" alt="logo" />
+          <img src={props.logo} height="30" alt="logo" />
         </ReactRouterDOM.Link>
 
         <section className="d-flex justify-content-left">
           <ReactRouterDOM.NavLink
-            to={`/users/${userId}/activities`}
+            to={`/users/${props.userId}/activities`}
             activeClassName="navlink-active"
             className="nav-link nav-item"
           >
             Activities
           </ReactRouterDOM.NavLink>
           <ReactRouterDOM.NavLink
-            to="/profile"
+            to={`/users/${props.userId}/profile`}
             activeClassName="navlink-active"
             className="nav-link nav-item"
           >
@@ -78,9 +66,10 @@ function Navbar(props) {
           </ReactRouterDOM.NavLink>
           <Logout
             // logout={logout}
-            setUserId={setUserId}
+            className="justify-content-right"
+            setUserId={props.setUserId}
             // isLoggedIn={isLoggedIn}
-            setIsLoggedIn={setIsLoggedIn}
+            setIsLoggedIn={props.setIsLoggedIn}
           />
         </section>
       </nav>
@@ -120,7 +109,18 @@ function LandingPage(props) {
 
 // HOMEPAGE AFTER LOGIN COMPONENT
 function Home(props) {
-  return null;
+  // const [userInfo, setUserInfo] = React.useState(null);
+
+  // React.useEffect(() => {
+  //   fetch(`/users/${props.userId}/home`)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setUserInfo(data);
+  //       console.log(userInfo);
+  //     });
+  // });
+
+  return <p>Welcome, {props.userId}!</p>;
 }
 
 function Login(props) {
@@ -148,7 +148,7 @@ function Login(props) {
       .then((data) => {
         if (data.success) {
           props.setUserId(data.user_id);
-          history.push(`/${data.user_id}/home`);
+          history.push(`/users/${data.user_id}/home`);
         }
       });
   };
@@ -212,7 +212,7 @@ function SignUp(props) {
         console.log(data.success);
         if (data.success) {
           props.setUserId(data.user_id);
-          history.push(`/${data.user_id}/home`);
+          history.push(`/users/${data.user_id}/home`);
         }
       });
   };
@@ -317,11 +317,54 @@ function ActivitiesContainer(props) {
 }
 
 function Profile(props) {
-  const { name, type, distance, duration } = props;
+  const [firstName, setFirstName] = React.useState(null);
+  const [lastName, setLastName] = React.useState(null);
+  const [teamName, setTeamName] = React.useState(null);
+  const [email, setEmail] = React.useState(null);
+  const [password, setPassword] = React.useState(null);
+  const [sinceDate, setSinceDate] = React.useState(null);
+
+  React.useEffect(() => {
+    fetch(`/users/${props.userId}/profile`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setFirstName(data.first_name);
+        setLastName(data.last_name);
+        setTeamName(data.team_name);
+        setEmail(data.email);
+        setPassword(data.password);
+        setSinceDate(data.member_since);
+      });
+  }, []);
 
   return (
     <div>
-      <h2>{name}</h2>
+      <h2>Account Information</h2>
+      <br></br>
+      <p>
+        First Name: <strong>{firstName}</strong>
+      </p>
+      <br></br>
+      <p>
+        Last Name: <strong>{lastName}</strong>
+      </p>
+      <br></br>
+      <p>
+        Team Name: <strong>{teamName}</strong>
+      </p>
+      <br></br>
+      <p>
+        Email: <strong>{email}</strong>
+      </p>
+      <br></br>
+      <p>
+        Password: <strong>*****</strong>
+      </p>
+      <br></br>
+      <p>
+        Member Since: <strong>{sinceDate}</strong>
+      </p>
     </div>
   );
 }

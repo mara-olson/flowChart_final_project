@@ -9,6 +9,7 @@ function App() {
     <BrowserRouter>
       <Navbar
         logo="/static/period-logo.png"
+        userId={userId}
         setUserId={setUserId}
         setIsLoggedIn={setIsLoggedIn}
         isLoggedIn={isLoggedIn}
@@ -24,13 +25,18 @@ function App() {
         </Route>
       </div>
       <div className="container-fluid">
-        <Route exact path="/:user_id/home">
-          <Home userId={userId} setUserId={setUserId} />
+        <Route exact path="/users/:user_id/home">
+          <Home userId={userId} />
         </Route>
       </div>
       <div className="container-fluid">
         <Route exact path="/users/:user_id/activities">
           <ActivitiesContainer userId={userId} />
+        </Route>
+      </div>
+      <div className="container-fluid">
+        <Route exact path="/users/:user_id/profile">
+          <Profile userId={userId} />
         </Route>
       </div>
       <div className="container-fluid">

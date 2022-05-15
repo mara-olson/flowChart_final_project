@@ -148,9 +148,10 @@ def user_homepage(user_id):
     """Display user's homepage after logging in."""
     # email = session["email"]
     
-    user = User.get_user_by_email(session["email"])
+    user = User.get_user_by_id(session["user_id"])
 
     fname = user.first_name
+    lname = user.last_name
     
     user_id = user.user_id
 
@@ -159,15 +160,22 @@ def user_homepage(user_id):
     activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
 
 
-    return jsonify({'name':fname, 'welcome_msg': welcome_msg, 'activities': activities})
+    return jsonify({'first_name':fname, 'last_name': lname, 'welcome_msg': welcome_msg, 'activities': activities})
 
 
 
 
-@app.route("/<user_id>/profile")
-def profile(userId):
+@app.route("/users/<user_id>/profile")
+def profile(user_id):
     """User profile page."""
-    return render_template("profile.html")
+
+    user = User.get_user_by_id(user_id)
+
+    dt = user.created_at
+    # trunc_date = datetime.date( dt.day, dt.month, dt.year)
+    
+
+    return jsonify({"success":True, "first_name": user.first_name, "last_name": user.last_name, "team_name": user.team_name, "email": user.email, "password": user.password, "member_since": user.created_at})
 
 
 # @app.route("/<user_id>/activities")
