@@ -5,16 +5,11 @@ function App() {
   const [userId, setUserId] = React.useState(null);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
-  const login = () => setIsLoggedIn(true);
-  const logout = () => setIsLoggedIn(false);
-
   return (
     <BrowserRouter>
       <Navbar
         logo="/static/period-logo.png"
-        userId={userId}
-        login={login}
-        logout={logout}
+        setUserId={setUserId}
         setIsLoggedIn={setIsLoggedIn}
         isLoggedIn={isLoggedIn}
       />
@@ -25,12 +20,12 @@ function App() {
       </div>
       <div className="container-fluid">
         <Route exact path="/login">
-          <Login setUserId={setUserId} />
+          <Login setUserId={setUserId} setIsLoggedIn={setIsLoggedIn} />
         </Route>
       </div>
       <div className="container-fluid">
         <Route exact path="/:user_id/home">
-          <Home userId={userId} />
+          <Home userId={userId} setUserId={setUserId} />
         </Route>
       </div>
       <div className="container-fluid">

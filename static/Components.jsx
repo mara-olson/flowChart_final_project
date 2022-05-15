@@ -1,19 +1,36 @@
 //"""Components for project"""
 
-const { useEffect } = require("react");
+// const { useEffect } = require("react");
 
 // GENERAL COMPONENTS
 
-function Navbar(props) {
-  const { logo, userId, setIsLoggedIn, isLoggedIn, login, logout } = props;
+function Logout(props) {
+  const { setIsLoggedIn, setUserId, isLoggedIn, userId } = props;
+  const history = ReactRouterDOM.useHistory();
 
-  React.useEffect(() => {
-    if (!userId) {
-      setIsLoggedIn(false);
-    } else {
-      setIsLoggedIn(true);
-    }
-  });
+  const handleLogout = (evt) => {
+    // console.log(evt);
+    evt.preventDefault();
+    props.setUserId(null);
+    props.setIsLoggedIn(false);
+    console.log(isLoggedIn);
+    console.log(userId);
+    history.push("/");
+  };
+
+  return <button onClick={handleLogout}>Logout</button>;
+}
+
+function Navbar(props) {
+  const { logo, userId, setIsLoggedIn, isLoggedIn, setUserId } = props;
+
+  // React.useEffect(() => {
+  //   if (!userId) {
+  //     setIsLoggedIn(false);
+  //   } else {
+  //     setIsLoggedIn(true);
+  //   }
+  // });
 
   if (!isLoggedIn) {
     return (
@@ -59,6 +76,12 @@ function Navbar(props) {
           >
             Profile
           </ReactRouterDOM.NavLink>
+          <Logout
+            // logout={logout}
+            setUserId={setUserId}
+            // isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
+          />
         </section>
       </nav>
     );
@@ -112,7 +135,7 @@ function Login(props) {
   const handleLogin = (evt) => {
     // console.log(evt);
     evt.preventDefault();
-
+    props.setIsLoggedIn(true);
     fetch("/login", {
       method: "POST",
       credentials: "include",
