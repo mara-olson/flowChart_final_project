@@ -286,10 +286,190 @@ function ActivityCard(props) {
   );
 }
 
+function AddActivityButton(props) {
+  const [show, setShow] = React.useState(false);
+  if (show) {
+    return <AddActivityForm />;
+  }
+  const handleClick = (evt) => {
+    evt.preventDefault();
+    setShow(true);
+  };
+  return <button onClick={handleClick}>Add Activity</button>;
+}
+// function AddActivity(props) {
+//   const [activityName, setActivityName] = React.useState(null);
+//   const [activityDate, setActivityDate] = React.useState(null);
+//   const [activityType, setActivityType] = React.useState(null);
+//   const [duration, setDuration] = React.useState(null);
+//   const [distance, setDistance] = React.useState(null);
+//   const [sufferScore, setSufferScore] = React.useState(null);
+//   const [activityNotes, setActivityNotes] = React.useState(null);
+
+//   const history = ReactRouterDOM.useHistory();
+
+//   const handleAddActivity = (evt) => {
+//     // console.log(evt);
+//     evt.preventDefault();
+
+//     fetch("/add-activity", {
+//       method: "POST",
+//       credentials: "include",
+//       body: JSON.stringify({
+//         activity_date: activityDate,
+//         activity_type: activityType,
+//         activity_name: activityName,
+//         duration: duration,
+//         distance: distance,
+//         suffer_score: sufferScore,
+//         activity_notes: activityNotes,
+//       }),
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     })
+//       .then((response) => response.json())
+//       .then((data) => {
+//         console.log(data.success);
+//         if (data.success) {
+//           // setActivityDate(data.activity_date)
+//           // setActivityType(data.activity_type)
+//           // setActivityName(data.activity_name)
+//           // setDuration(data.duration)
+//           // setDistance(data.distance)
+//           // setSufferScore(data.suffer_score)
+//           // setActivityNotes(data.activity_notes)
+//           history.push(`/users/${data.user_id}/activities`);
+//         }
+//       });
+//   };
+//   return <AddActivityForm handleAddActivity={handleAddActivity} />;
+function AddActivityForm(props) {
+  const [activityName, setActivityName] = React.useState(null);
+  const [activityDate, setActivityDate] = React.useState(null);
+  const [activityType, setActivityType] = React.useState(null);
+  const [duration, setDuration] = React.useState(null);
+  const [distance, setDistance] = React.useState(null);
+  const [sufferScore, setSufferScore] = React.useState(null);
+  const [activityNotes, setActivityNotes] = React.useState(null);
+
+  const history = ReactRouterDOM.useHistory();
+
+  const handleAddActivity = (evt) => {
+    // console.log(evt);
+    evt.preventDefault();
+
+    fetch("/add-activity", {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify({
+        activity_date: activityDate,
+        activity_type: activityType,
+        activity_name: activityName,
+        duration: duration,
+        distance: distance,
+        suffer_score: sufferScore,
+        activity_notes: activityNotes,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        history.push(`/users/${props.userId}/activities`);
+      });
+  };
+  return (
+    <div>
+      <h2>New Activity</h2>
+      <form action="/add-activity" method="POST" onSubmit={handleAddActivity}>
+        {/* <label htmlFor="sign-up-fname">First name</label> */}
+        <div>
+          Activity Date
+          <input
+            type="text"
+            value={activityDate}
+            onChange={(evt) => setActivityDate(evt.currentTarget.value)}
+          />
+        </div>
+        <br></br>
+        {/* <label htmlFor="sign-up-lname">Last name</label> */}
+        <div>
+          Activity Type
+          <select
+            name="activity-types"
+            onChange={(evt) => setActivityType(evt.currentTarget.value)}
+          >
+            <option value="run">Run</option>
+            <option value="bike">Bike</option>
+            <option value="swim">Swim</option>
+            <option value="climb">Climb</option>
+            <option value="elliptical">Elliptical</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <br></br>
+        <div>
+          Activity Name
+          {/* <label htmlFor="sign-up-team">Team name</label> */}
+          <input
+            type="text"
+            value={activityName}
+            onChange={(evt) => setActivityName(evt.currentTarget.value)}
+          />
+        </div>
+        <br></br>
+        {/* <label htmlFor="sign-up-email">Email</label> */}
+        <div>
+          Duration
+          <input
+            type="text"
+            value={duration}
+            onChange={(evt) => setDuration(evt.currentTarget.value)}
+          />
+        </div>
+        <br></br>
+
+        {/* <label htmlFor="sign-up-password">Password</label> */}
+        <div>
+          Distance
+          <input
+            type="text"
+            value={distance}
+            onChange={(evt) => setDistance(evt.currentTarget.value)}
+          />
+        </div>
+        <div>
+          Suffer Score
+          <select
+            name="suffer-score"
+            onChange={(evt) => setSufferScore(evt.currentTarget.value)}
+          >
+            <option value="1">1, minimal discomfort</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5, maximum discomfort</option>
+          </select>
+        </div>
+        <div>
+          Notes
+          <input
+            type="text"
+            value={activityNotes}
+            onChange={(evt) => setActivityNotes(evt.currentTarget.value)}
+          />
+        </div>
+        <button type="submit">Add Activity</button>
+      </form>
+    </div>
+  );
+}
+
 function ActivitiesContainer(props) {
   const [activities, setActivities] = React.useState([]);
-
-  console.log(props.userId);
 
   // NOTE: fetch here the activity data
   // Review further study of second react lab
@@ -313,7 +493,12 @@ function ActivitiesContainer(props) {
     );
   }
 
-  return <div>{activityDetails}</div>;
+  return (
+    <div>
+      <div>{activityDetails}</div>
+      <AddActivityButton userId={props.userId} />
+    </div>
+  );
 }
 
 function Profile(props) {
@@ -328,7 +513,6 @@ function Profile(props) {
     fetch(`/users/${props.userId}/profile`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setFirstName(data.first_name);
         setLastName(data.last_name);
         setTeamName(data.team_name);

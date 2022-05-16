@@ -123,6 +123,7 @@ class ActivityLog(db.Model):
     def __repr__(self):
         return f'<Activity activity_id={self.activity_id} title={self.activity_name}'
 
+    @classmethod
     def to_dict(self):
         return {
                 'activity_date': self.activity_date,
@@ -136,6 +137,15 @@ class ActivityLog(db.Model):
                 'created_at': self.created_at,
                 'deleted_at': self.deleted_at
                 }
+    
+    @classmethod
+    def create_activity(cls, activity_date, activity_type, activity_name, duration, distance, suffer_score, activity_notes, created_at):
+       """Create and return a new user."""
+       activity = cls(activity_date=activity_date, activity_type=activity_type, activity_name=activity_name, duration=duration, distance=distance, suffer_score=suffer_score, activity_notes=activity_notes, created_at=created_at)
+       db.session.add(activity)
+       db.session.commit()
+
+       return activity
 
 
 class MenseLog(db.Model):
