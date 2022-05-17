@@ -153,7 +153,6 @@ function Login(props) {
   const handleLogin = (evt) => {
     // console.log(evt);
     evt.preventDefault();
-    props.setIsLoggedIn(true);
     fetch("/login", {
       method: "POST",
       credentials: "include",
@@ -166,6 +165,7 @@ function Login(props) {
       .then((data) => {
         if (data.success) {
           props.setUserId(data.user_id);
+          props.setIsLoggedIn(true);
           history.push(`/users/${data.user_id}/home`);
         } else {
           setError(data.error);
