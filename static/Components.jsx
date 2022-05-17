@@ -3,6 +3,23 @@
 // const { useEffect } = require("react");
 
 // GENERAL COMPONENTS
+// function ErrorBoundary(props) {
+//   const [errorMessage, setErrorMessage] = React.useState(null);
+//   const [hasError, setHasError] = React.useState(false);
+
+//   const handleError = (error) => {
+//     // Update state so the next render will show the fallback UI.
+//     setErrorMessage(error);
+//   };
+//   render () {
+//     if (errorMessage) {
+//     // You can render any custom fallback UI
+//     setHasError(true);
+//     return <p>{error}</p>;
+//     }
+//   }
+//   return props.children;
+// }
 
 function Logout(props) {
   const history = ReactRouterDOM.useHistory();
@@ -129,6 +146,7 @@ function Login(props) {
 
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [error, setError] = React.useState("");
 
   const history = ReactRouterDOM.useHistory();
 
@@ -139,7 +157,7 @@ function Login(props) {
     fetch("/login", {
       method: "POST",
       credentials: "include",
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password, error }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -149,34 +167,39 @@ function Login(props) {
         if (data.success) {
           props.setUserId(data.user_id);
           history.push(`/users/${data.user_id}/home`);
+        } else {
+          setError(data.error);
         }
       });
   };
-
-  return (
-    <div>
-      <form onSubmit={handleLogin}>
-        {/* <p className="error">{props.error}</p> */}
-        <div>
-          Email
-          <input
-            type="text"
-            value={email}
-            onChange={(evt) => setEmail(evt.currentTarget.value)}
-          />
-        </div>
-        <div>
-          Password
-          <input
-            type="text"
-            value={password}
-            onChange={(evt) => setPassword(evt.currentTarget.value)}
-          />
-        </div>
-        <button type="submit">Log in</button>
-      </form>
-    </div>
-  );
+  if (error) {
+    return <p className="error">{error}</p>;
+  } else {
+    return (
+      <div>
+        <form onSubmit={handleLogin}>
+          {/* <p className="error">{props.error}</p> */}
+          <div>
+            Email
+            <input
+              type="text"
+              value={email}
+              onChange={(evt) => setEmail(evt.currentTarget.value)}
+            />
+          </div>
+          <div>
+            Password
+            <input
+              type="text"
+              value={password}
+              onChange={(evt) => setPassword(evt.currentTarget.value)}
+            />
+          </div>
+          <button type="submit">Log in</button>
+        </form>
+      </div>
+    );
+  }
 }
 
 function SignUp(props) {

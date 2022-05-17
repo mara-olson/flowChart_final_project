@@ -50,14 +50,14 @@ def login_process():
     user = User.get_user_by_email(email)
 
     if not user:
-        flash(f"We could not find an account for {email}. Please sign up!")
+        error = f"We could not find an account for {email}. Please sign up!"
         # return redirect("/login")
-        # return jsonify({"success": False,"error":error})
+        return jsonify({"success": False, "error": error})
 
     elif password != user.password:
-        flash("The password you entered is incorrect. Please re-enter.")
+        error = "The password you entered is incorrect. Please re-enter."
         # return redirect("/login")
-        # return jsonify({"success": False,"error":error})
+        return jsonify({"success": False, "error": error})
 
     else:
         # email = session["email"]
@@ -65,7 +65,7 @@ def login_process():
         session["user_id"] = user.user_id
         session["email"] = email
 
-        return jsonify({"success": True, "user_id":user.user_id, "email":user.email, "password": user.password})
+        return jsonify({"success": True, "user_id":user.user_id, "email":user.email, "password": user.password, "error": None})
     
     
         # return jsonify({"user_email":email})
