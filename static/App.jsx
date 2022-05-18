@@ -4,6 +4,21 @@ const { Route, BrowserRouter } = ReactRouterDOM;
 function App() {
   const [userId, setUserId] = React.useState(null);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [error, setError] = React.useState(null);
+
+  React.useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    if (isLoggedIn) {
+      setIsLoggedIn(JSON.parse(isLoggedIn));
+    }
+  }, []);
+
+  React.useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    if (userId) {
+      setUserId(JSON.parse(userId));
+    }
+  }, []);
 
   return (
     <BrowserRouter>
@@ -14,14 +29,22 @@ function App() {
         setIsLoggedIn={setIsLoggedIn}
         isLoggedIn={isLoggedIn}
       />
-      <div className="container-fluid">
-        <Route exact path="/">
-          <LandingPage />
-        </Route>
-      </div>
+      {error && <p className="error">{error}</p>}
+      {!isLoggedIn && (
+        <div className="container-fluid">
+          <Route exact path="/">
+            <LandingPage />
+          </Route>
+        </div>
+      )}
       <div className="container-fluid">
         <Route exact path="/login">
-          <Login setUserId={setUserId} setIsLoggedIn={setIsLoggedIn} />
+          <Login
+            userId={userId}
+            setUserId={setUserId}
+            setIsLoggedIn={setIsLoggedIn}
+            setError={setError}
+          />
         </Route>
       </div>
       <div className="container-fluid">
@@ -32,6 +55,7 @@ function App() {
       <div className="container-fluid">
         <Route exact path="/users/:user_id/activities">
           <ActivitiesContainer userId={userId} />
+          <AddActivityButton userId={userId} />
         </Route>
       </div>
       <div className="container-fluid">

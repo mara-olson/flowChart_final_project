@@ -123,7 +123,6 @@ class ActivityLog(db.Model):
     def __repr__(self):
         return f'<Activity activity_id={self.activity_id} title={self.activity_name}'
 
-    @classmethod
     def to_dict(self):
         return {
                 'activity_date': self.activity_date,

@@ -28,8 +28,7 @@ function Logout(props) {
     evt.preventDefault();
     props.setUserId(null);
     props.setIsLoggedIn(false);
-    console.log(props.isLoggedIn);
-    console.log(props.userId);
+
     history.push("/");
   };
 
@@ -137,7 +136,12 @@ function Home(props) {
   //     });
   // });
 
-  return <p>Welcome, {props.userId}!</p>;
+  return (
+    <div>
+      <p>Welcome, {props.userId}!</p>
+      {/* <ActivitiesContainer /> */}
+    </div>
+  );
 }
 
 function Login(props) {
@@ -146,7 +150,7 @@ function Login(props) {
 
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [error, setError] = React.useState("");
+  // const [error, setError] = React.useState("");
 
   const history = ReactRouterDOM.useHistory();
 
@@ -156,7 +160,7 @@ function Login(props) {
     fetch("/login", {
       method: "POST",
       credentials: "include",
-      body: JSON.stringify({ email, password, error }),
+      body: JSON.stringify({ email, password }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -165,42 +169,44 @@ function Login(props) {
       .then((data) => {
         if (data.success) {
           props.setUserId(data.user_id);
+          localStorage.setItem("userId", JSON.stringify(data.userId));
           props.setIsLoggedIn(true);
+          localStorage.setItem("isLoggedIn", true);
           history.push(`/users/${data.user_id}/home`);
         } else {
-          setError(data.error);
+          props.setError(data.error);
         }
       });
   };
-  if (error) {
-    return <p className="error">{error}</p>;
-  } else {
-    return (
-      <div>
-        <form onSubmit={handleLogin}>
-          {/* <p className="error">{props.error}</p> */}
-          <div>
-            Email
-            <input
-              type="text"
-              value={email}
-              onChange={(evt) => setEmail(evt.currentTarget.value)}
-            />
-          </div>
-          <div>
-            Password
-            <input
-              type="text"
-              value={password}
-              onChange={(evt) => setPassword(evt.currentTarget.value)}
-            />
-          </div>
-          <button type="submit">Log in</button>
-        </form>
-      </div>
-    );
-  }
+  // if (error) {
+  //   return <p className="error">{error}</p>;
+  // } else {
+  return (
+    <div>
+      <form onSubmit={handleLogin}>
+        {/* <p className="error">{props.error}</p> */}
+        <div>
+          Email
+          <input
+            type="text"
+            value={email}
+            onChange={(evt) => setEmail(evt.currentTarget.value)}
+          />
+        </div>
+        <div>
+          Password
+          <input
+            type="text"
+            value={password}
+            onChange={(evt) => setPassword(evt.currentTarget.value)}
+          />
+        </div>
+        <button type="submit">Log in</button>
+      </form>
+    </div>
+  );
 }
+// }
 
 function SignUp(props) {
   const [firstName, setFirstName] = React.useState("");
@@ -504,7 +510,7 @@ function ActivitiesContainer(props) {
 
   const activityDetails = [];
 
-  // console.log(activities);
+  console.log(activities);
 
   for (const activity of activities) {
     activityDetails.push(
@@ -519,7 +525,7 @@ function ActivitiesContainer(props) {
   return (
     <div>
       <div>{activityDetails}</div>
-      <AddActivityButton userId={props.userId} />
+      {/* <AddActivityButton userId={props.userId} /> */}
     </div>
   );
 }
