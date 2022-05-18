@@ -30,10 +30,17 @@ function App() {
         isLoggedIn={isLoggedIn}
       />
       {error && <p className="error">{error}</p>}
-      {!isLoggedIn && (
+      {/* {!isLoggedIn && ( */}
+      <div className="container-fluid">
+        <Route exact path="/">
+          <LandingPage />
+        </Route>
+      </div>
+      {/* )} */}
+      {isLoggedIn && (
         <div className="container-fluid">
           <Route exact path="/">
-            <LandingPage />
+            <Home userId={userId} />
           </Route>
         </div>
       )}

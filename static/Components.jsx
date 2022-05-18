@@ -157,7 +157,7 @@ function Login(props) {
   const handleLogin = (evt) => {
     // console.log(evt);
     evt.preventDefault();
-    fetch("/login", {
+    fetch("/api/login", {
       method: "POST",
       credentials: "include",
       body: JSON.stringify({ email, password }),
@@ -172,7 +172,11 @@ function Login(props) {
           localStorage.setItem("userId", JSON.stringify(data.userId));
           props.setIsLoggedIn(true);
           localStorage.setItem("isLoggedIn", true);
-          history.push(`/users/${data.user_id}/home`);
+          // history.push(`/users/${data.user_id}/home`);
+          props.setError(null);
+          window.location.replace(
+            "https://www.strava.com/oauth/authorize?client_id=80271&response_type=code&redirect_uri=http://localhost:5001/exchange_token&approval_prompt=force&scope=profile:read_all,activity:read_all"
+          );
         } else {
           props.setError(data.error);
         }
@@ -221,7 +225,7 @@ function SignUp(props) {
     // console.log(evt);
     evt.preventDefault();
 
-    fetch("/sign-up", {
+    fetch("/api/sign-up", {
       method: "POST",
       credentials: "include",
       body: JSON.stringify({
@@ -388,7 +392,7 @@ function AddActivityForm(props) {
     // console.log(evt);
     evt.preventDefault();
 
-    fetch("/add-activity", {
+    fetch("/api/add-activity", {
       method: "POST",
       credentials: "include",
       body: JSON.stringify({

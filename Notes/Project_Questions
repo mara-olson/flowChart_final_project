@@ -24,13 +24,13 @@
 
 10. How do I want to indicate the presence of period info in calendar square -- dot symbol? pink background? red date number?
 
-11. 
+11. Why doesn't the form show up from navbar navigation?
 
-12. 
+12. *** Fetch vs. Jinja *** How do I pass data?
 
-13. 
+13. For a new user, how can I create a new one with all the data fields that they've entered but only require email & password?
 
-14. 
+14. DateTime to readable date
 
-15. 
+15. Session["email"] do anything?
 

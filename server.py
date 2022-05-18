@@ -3,12 +3,43 @@ from flask import Flask, render_template,json, jsonify, request, flash, session,
 from model import connect_to_db, db, User, StravaUser, StravaActivity, ActivityLog, MenseLog, SleepLog;
 
 import datetime;
-
+import requests
+import os
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
+
+
+
+@app.route("/exchange_token")
+def authorize():
+    """Authorizing user."""
+    code = request.args.get("code")
+    scope = request.args.get("scope")
+
+    if "activity:read_all" not in scope:
+        error = "Wrong access" 
+    
+    response = requests.post(url="https://www.strava.com/oauth/token", 
+        data={
+            "client_id": "80271",
+            "client_secret": "4f11f3b1b0190187e7b51ca4a1e8a5ab4b5519c6", "code": code,
+            "grant_type": "authorization_code"
+        })
+
+    strava_token = response.json()
+    with open("strava_token.json", "w") as file:
+        json.dump(strava_token, file)
+
+    session["access_token"] = strava_token['refresh_token']
+
+    print(strava_token)
+
+# ngrok
+
+
 
 
 @app.route("/")
@@ -36,7 +67,7 @@ def login():
     return render_template("index.html", error=None)
 
 
-@app.route("/login", methods=['POST'])
+@app.route("/api/login", methods=['POST'])
 def login_process():
     """Process the user's login."""
 
@@ -74,7 +105,7 @@ def sign_up():
     return render_template("index.html")
 
 
-@app.route("/sign-up", methods=['POST'])
+@app.route("/api/sign-up", methods=['POST'])
 def save_new_user():
     """Display registration page & create user with entered credentials."""
     data = request.json
@@ -189,6 +220,13 @@ def add_activity():
 
     return jsonify({"success": True, "activity_date": new_act.activity_date, "activity_type": new_act.activity_type, "activity_name": new_act.activity_name, "duration": new_act.duration, "distance": new_act.distance, "suffer_score": new_act.suffer_score, "activity_notes": new_act.activity_notes})
 
+
+
+@app.route("/https://www.strava.com/oauth/authorize")
+def get_strava_activities():
+    """Retrieve a user's Strava activities.
+    
+    Requires authentications."""
 
 
 if __name__ == "__main__":
