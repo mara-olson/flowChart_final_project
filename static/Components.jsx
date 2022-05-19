@@ -3,23 +3,6 @@
 // const { useEffect } = require("react");
 
 // GENERAL COMPONENTS
-// function ErrorBoundary(props) {
-//   const [errorMessage, setErrorMessage] = React.useState(null);
-//   const [hasError, setHasError] = React.useState(false);
-
-//   const handleError = (error) => {
-//     // Update state so the next render will show the fallback UI.
-//     setErrorMessage(error);
-//   };
-//   render () {
-//     if (errorMessage) {
-//     // You can render any custom fallback UI
-//     setHasError(true);
-//     return <p>{error}</p>;
-//     }
-//   }
-//   return props.children;
-// }
 
 function Logout(props) {
   const history = ReactRouterDOM.useHistory();
@@ -28,7 +11,8 @@ function Logout(props) {
     evt.preventDefault();
     props.setUserId(null);
     props.setIsLoggedIn(false);
-
+    localStorage.setItem("userId", null);
+    localStorage.setItem("isLoggedIn", true);
     history.push("/");
   };
 
@@ -59,7 +43,7 @@ function Navbar(props) {
     return (
       <nav>
         <ReactRouterDOM.Link
-          to={`/users/${props.userId}/home`}
+          to={`users/${props.userId}/home`}
           className="navbar-brand d-flex justify-content-left"
         >
           <img src={props.logo} height="30" alt="logo" />
@@ -99,43 +83,44 @@ function LandingPage(props) {
     "Your training periods & menstrual periods don’t happen in isolation.";
   const landingMessage2 = "Finally there’s a tracking system for both.";
 
-  return (
-    <div>
-      <section id="landing-message1" className="d-flex justify-content-center">
-        <p>{landingMessage1}</p>
-      </section>
-      <section id="landing-message1" className="d-flex justify-content-center">
-        <p>
-          <strong>{landingMessage2}</strong>
-        </p>
-      </section>
+  const history = ReactRouterDOM.useHistory();
 
-      <form
-        action="/sign-up"
-        id="sign-up"
-        className="d-flex justify-content-center"
-      >
-        <button type="submit" id="sign-up_button">
-          Sign Up
-        </button>
-      </form>
-    </div>
-  );
+  if (props.isLoggedIn) {
+    history.push(`users/${props.userId}/home`);
+  } else {
+    return (
+      <div>
+        <section
+          id="landing-message1"
+          className="d-flex justify-content-center"
+        >
+          <p>{landingMessage1}</p>
+        </section>
+        <section
+          id="landing-message1"
+          className="d-flex justify-content-center"
+        >
+          <p>
+            <strong>{landingMessage2}</strong>
+          </p>
+        </section>
+
+        <form
+          action="/sign-up"
+          id="sign-up"
+          className="d-flex justify-content-center"
+        >
+          <button type="submit" id="sign-up_button">
+            Sign Up
+          </button>
+        </form>
+      </div>
+    );
+  }
 }
 
 // HOMEPAGE AFTER LOGIN COMPONENT
 function Home(props) {
-  // const [userInfo, setUserInfo] = React.useState(null);
-
-  // React.useEffect(() => {
-  //   fetch(`/users/${props.userId}/home`)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setUserInfo(data);
-  //       console.log(userInfo);
-  //     });
-  // });
-
   return (
     <div>
       <p>Welcome, {props.userId}!</p>
@@ -153,7 +138,9 @@ function Login(props) {
   // const [error, setError] = React.useState("");
 
   const history = ReactRouterDOM.useHistory();
-
+  if (props.isLoggedIn) {
+    history.push(`users/${props.userId}/home`);
+  }
   const handleLogin = (evt) => {
     // console.log(evt);
     evt.preventDefault();
@@ -179,6 +166,7 @@ function Login(props) {
           );
         } else {
           props.setError(data.error);
+          localStorage.setItem("isLoggedIn", false);
         }
       });
   };
@@ -245,7 +233,9 @@ function SignUp(props) {
         console.log(data.success);
         if (data.success) {
           props.setUserId(data.user_id);
-          history.push(`/users/${data.user_id}/home`);
+          history.push(`users/${props.userId}/home`);
+        } else {
+          props.setError(data.error_msg);
         }
       });
   };

@@ -19,6 +19,9 @@ def authorize():
     code = request.args.get("code")
     scope = request.args.get("scope")
 
+    # data = request.json
+    # user_id = data.get("userId")
+
     if "activity:read_all" not in scope:
         error = "Wrong access" 
     
@@ -35,16 +38,18 @@ def authorize():
 
     session["access_token"] = strava_token['refresh_token']
 
-    print(strava_token)
+    # print(session["access_token"])
+    # return redirect(f"/users/{user_id}/home")
+    return redirect("/")
 
-# ngrok
 
 
 
 
 @app.route("/")
-def homepage():
+def landing_page():
     """View homepage."""
+    
     return render_template("index.html", error=None)
 
 
@@ -130,16 +135,19 @@ def save_new_user():
     if new_email not in all_users and "@" in new_email: 
         new_user = User.create_user(new_fname, new_lname, new_team, new_email, new_password, created_at)
     
-        # user_id = new_user.user_id
-
-        # return redirect(f"/{user_id}/home")
-        return jsonify({"success": True,"user_id":new_user.user_id, "first_name": new_user.first_name, "last_name": new_user.last_name, "team_name": new_user.team_name, "email": new_user.email, "password": new_user.password, "created_at": new_user.created_at})
+        return jsonify({"success": True,"user_id":new_user.user_id, "first_name": new_user.first_name, "last_name": new_user.last_name, "team_name": new_user.team_name, "email": new_user.email, "password": new_user.password, "created_at": new_user.created_at, "error_msg": None})
     
+    elif "@" not in new_email:
+        error = "Please enter a valid email."
+        return jsonify({"success": False, "error_msg": error})
+
+    elif new_email in all_users:
+        error = "We found an existing account, please log in."
+        return jsonify({"success": False, "error_msg": error})
+        
     else:
-
-        flash("We found an existing account, please log in.")
-
-        return jsonify({"success": False})
+        error = "Please complete all required fields."
+        return jsonify({"success": False, "error_msg": error})
 
 
 @app.route('/users/<user_id>/activities')
@@ -162,7 +170,6 @@ def activity_data(user_id):
 @app.route("/users/<user_id>/home")
 def user_homepage(user_id):
     """Display user's homepage after logging in."""
-    # email = session["email"]
     
     user = User.get_user_by_id(session["user_id"])
 

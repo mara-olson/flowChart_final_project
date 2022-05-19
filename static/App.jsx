@@ -6,19 +6,19 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [error, setError] = React.useState(null);
 
-  React.useEffect(() => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-    if (isLoggedIn) {
-      setIsLoggedIn(JSON.parse(isLoggedIn));
-    }
-  }, []);
+  // React.useEffect(() => {
+  //   const isLoggedIn = localStorage.getItem("isLoggedIn");
+  //   if (isLoggedIn) {
+  //     setIsLoggedIn(JSON.parse(isLoggedIn));
+  //   }
+  // }, []);
 
-  React.useEffect(() => {
-    const userId = localStorage.getItem("userId");
-    if (userId) {
-      setUserId(JSON.parse(userId));
-    }
-  }, []);
+  // React.useEffect(() => {
+  //   const userId = localStorage.getItem("userId");
+  //   if (userId !== undefined) {
+  //     setUserId(JSON.parse(userId));
+  //   }
+  // }, []);
 
   return (
     <BrowserRouter>
@@ -30,13 +30,13 @@ function App() {
         isLoggedIn={isLoggedIn}
       />
       {error && <p className="error">{error}</p>}
-      {/* {!isLoggedIn && ( */}
-      <div className="container-fluid">
-        <Route exact path="/">
-          <LandingPage />
-        </Route>
-      </div>
-      {/* )} */}
+      {!isLoggedIn && (
+        <div className="container-fluid">
+          <Route exact path="/">
+            <LandingPage isLoggedIn={isLoggedIn} />
+          </Route>
+        </div>
+      )}
       {isLoggedIn && (
         <div className="container-fluid">
           <Route exact path="/">
@@ -44,18 +44,20 @@ function App() {
           </Route>
         </div>
       )}
+
       <div className="container-fluid">
         <Route exact path="/login">
           <Login
             userId={userId}
             setUserId={setUserId}
             setIsLoggedIn={setIsLoggedIn}
+            isLoggedIn={isLoggedIn}
             setError={setError}
           />
         </Route>
       </div>
       <div className="container-fluid">
-        <Route exact path="/users/:user_id/home">
+        <Route exact path={`users/${userId}/home`}>
           <Home userId={userId} />
         </Route>
       </div>
@@ -72,7 +74,7 @@ function App() {
       </div>
       <div className="container-fluid">
         <Route exact path="/sign-up">
-          <SignUp setUserId={setUserId} />
+          <SignUp setUserId={setUserId} setError={setError} />
         </Route>
       </div>
 
