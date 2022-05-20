@@ -43,8 +43,13 @@ def authorize():
     return redirect("/")
 
 
+@app.route("api/strava-activities")
+def get_strava_activities():
+    pass
 
-
+# session["access_token"] and put in "headers"
+# before and after epochs in params
+# I can either store the activities I get in my database, or simply send to the frontend
 
 @app.route("/")
 def landing_page():
@@ -227,13 +232,6 @@ def add_activity():
 
     return jsonify({"success": True, "activity_date": new_act.activity_date, "activity_type": new_act.activity_type, "activity_name": new_act.activity_name, "duration": new_act.duration, "distance": new_act.distance, "suffer_score": new_act.suffer_score, "activity_notes": new_act.activity_notes})
 
-
-
-@app.route("/https://www.strava.com/oauth/authorize")
-def get_strava_activities():
-    """Retrieve a user's Strava activities.
-    
-    Requires authentications."""
 
 
 if __name__ == "__main__":

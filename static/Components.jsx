@@ -12,7 +12,7 @@ function Logout(props) {
     props.setUserId(null);
     props.setIsLoggedIn(false);
     localStorage.setItem("userId", null);
-    localStorage.setItem("isLoggedIn", true);
+    localStorage.setItem("isLoggedIn", false);
     history.push("/");
   };
 
@@ -155,18 +155,25 @@ function Login(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
+          console.log(data.user_id);
+
           props.setUserId(data.user_id);
-          localStorage.setItem("userId", JSON.stringify(data.userId));
+
+          // localStorage.setItem("userId", JSON.stringify(data.user_id));
+
           props.setIsLoggedIn(true);
+
           localStorage.setItem("isLoggedIn", true);
-          // history.push(`/users/${data.user_id}/home`);
-          props.setError(null);
-          window.location.replace(
-            "https://www.strava.com/oauth/authorize?client_id=80271&response_type=code&redirect_uri=http://localhost:5001/exchange_token&approval_prompt=force&scope=profile:read_all,activity:read_all"
-          );
-        } else {
-          props.setError(data.error);
-          localStorage.setItem("isLoggedIn", false);
+          localStorage.setItem("userId", data.user_id);
+          if (props.userId) {
+            window.location.replace(
+              "https://www.strava.com/oauth/authorize?client_id=80271&response_type=code&redirect_uri=http://localhost:5001/exchange_token&approval_prompt=force&scope=profile:read_all,activity:read_all"
+            );
+          }
+          //   } else {
+          //     props.setError(data.error);
+          //     localStorage.setItem("isLoggedIn", false);
+          //   }
         }
       });
   };
@@ -494,13 +501,15 @@ function AddActivityForm(props) {
 function ActivitiesContainer(props) {
   const [activities, setActivities] = React.useState([]);
 
+  const [stravaActivities, setStravaActivities] = React.useState([]);
+
   // NOTE: fetch here the activity data
   // Review further study of second react lab
   React.useEffect(() => {
     fetch(`/users/${props.userId}/activities`)
       .then((response) => response.json())
       .then((data) => setActivities(data.activities));
-  }, []);
+  }, [props.userId]);
 
   const activityDetails = [];
 
@@ -515,6 +524,12 @@ function ActivitiesContainer(props) {
       />
     );
   }
+
+  React.useEffect(() => {
+    fetch("https://www.strava.com/api/v3/athlete/activities")
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  }, []);
 
   return (
     <div>
