@@ -155,8 +155,11 @@ function Login(props) {
         if (data.success) {
           console.log(data.user_id);
           console.log("user_id", data.user_id);
+
           props.setUserId(data.user_id);
+
           props.setIsLoggedIn(true);
+
           localStorage.setItem("isLoggedIn", true);
           localStorage.setItem("userId", data.user_id);
 
@@ -317,69 +320,30 @@ function ActivityCard(props) {
   return (
     <div className="card">
       <p>Name: {props.name}</p>
+      <p>Type: {props.type}</p>
       <p>Date: {props.date}</p>
     </div>
   );
 }
 
 function AddActivityButton(props) {
-  const [show, setShow] = React.useState(false);
-  if (show) {
-    return <AddActivityForm />;
+  const [showActivityForm, setShowActivityForm] = React.useState(false);
+  const userId = props.userId;
+  if (showActivityForm) {
+    return (
+      <AddActivityForm
+        userId={userId}
+        setShowActivityForm={props.setShowActivityForm}
+      />
+    );
   }
   const handleClick = (evt) => {
     evt.preventDefault();
-    setShow(true);
+    setShowActivityForm(true);
   };
   return <button onClick={handleClick}>Add Activity</button>;
 }
-// function AddActivity(props) {
-//   const [activityName, setActivityName] = React.useState(null);
-//   const [activityDate, setActivityDate] = React.useState(null);
-//   const [activityType, setActivityType] = React.useState(null);
-//   const [duration, setDuration] = React.useState(null);
-//   const [distance, setDistance] = React.useState(null);
-//   const [sufferScore, setSufferScore] = React.useState(null);
-//   const [activityNotes, setActivityNotes] = React.useState(null);
 
-//   const history = ReactRouterDOM.useHistory();
-
-//   const handleAddActivity = (evt) => {
-//     // console.log(evt);
-//     evt.preventDefault();
-
-//     fetch("/add-activity", {
-//       method: "POST",
-//       credentials: "include",
-//       body: JSON.stringify({
-//         activity_date: activityDate,
-//         activity_type: activityType,
-//         activity_name: activityName,
-//         duration: duration,
-//         distance: distance,
-//         suffer_score: sufferScore,
-//         activity_notes: activityNotes,
-//       }),
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     })
-//       .then((response) => response.json())
-//       .then((data) => {
-//         console.log(data.success);
-//         if (data.success) {
-//           // setActivityDate(data.activity_date)
-//           // setActivityType(data.activity_type)
-//           // setActivityName(data.activity_name)
-//           // setDuration(data.duration)
-//           // setDistance(data.distance)
-//           // setSufferScore(data.suffer_score)
-//           // setActivityNotes(data.activity_notes)
-//           history.push(`/users/${data.user_id}/activities`);
-//         }
-//       });
-//   };
-//   return <AddActivityForm handleAddActivity={handleAddActivity} />;
 function AddActivityForm(props) {
   const [activityName, setActivityName] = React.useState(null);
   const [activityDate, setActivityDate] = React.useState(null);
@@ -394,11 +358,12 @@ function AddActivityForm(props) {
   const handleAddActivity = (evt) => {
     // console.log(evt);
     evt.preventDefault();
-
+    const userId = props.userId;
     fetch("/api/add-activity", {
       method: "POST",
       credentials: "include",
       body: JSON.stringify({
+        user_id: userId,
         activity_date: activityDate,
         activity_type: activityType,
         activity_name: activityName,
@@ -414,13 +379,14 @@ function AddActivityForm(props) {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        history.push(`/users/${props.userId}/activities`);
+        // props.setShowActivityForm(true);
+        // history.push(`/users/${props.userId}/activities`);
       });
   };
   return (
     <div>
       <h2>New Activity</h2>
-      <form action="/add-activity" method="POST" onSubmit={handleAddActivity}>
+      <form onSubmit={handleAddActivity}>
         {/* <label htmlFor="sign-up-fname">First name</label> */}
         <div>
           Activity Date
@@ -531,20 +497,20 @@ function ActivitiesContainer(props) {
         key={activity.activity_id}
         name={activity.activity_name}
         date={activity.activity_date}
+        type={activity.activity_type}
       />
     );
   }
 
-  React.useEffect(() => {
-    fetch("https://www.strava.com/api/v3/athlete/activities")
-      .then((response) => response.json())
-      .then((data) => console.log(data));
-  }, []);
+  // React.useEffect(() => {
+  //   fetch("https://www.strava.com/api/v3/athlete/activities")
+  //     .then((response) => response.json())
+  //     .then((data) => console.log(data));
+  // }, []);
 
   return (
     <div>
       <div>{activityDetails}</div>
-      {/* <AddActivityButton userId={props.userId} /> */}
     </div>
   );
 }

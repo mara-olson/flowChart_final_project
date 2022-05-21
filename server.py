@@ -93,11 +93,11 @@ def login():
 def login_process():
     """Process the user's login."""
 
-    data = request.json
-    email = data.get("email")
-    password = data.get("password")
-    # error = data.get("error")
+    # data = request.json
 
+    email = request.json.get("email")
+    password = request.json.get("password")
+    print(email)
     user = User.get_user_by_email(email)
 
     if not user:
@@ -111,7 +111,7 @@ def login_process():
         return jsonify({"success": False, "error": error})
 
     else:
-
+        session["user_id"] = user.user_id
         return jsonify({"success": True, "user_id":user.user_id, "email":user.email, "password": user.password, "error": None})
     
     
@@ -187,8 +187,7 @@ def activity_data(user_id):
 @app.route("/users/<user_id>/home")
 def user_homepage(user_id):
     """Display user's homepage after logging in."""
-    
-    user = User.get_user_by_id(session["user_id"])
+    user = User.get_user_by_id(user_id)
 
     fname = user.first_name
     lname = user.last_name
@@ -219,10 +218,12 @@ def periods():
     return render_template("periods.html")
 
 
-@app.route("/add-activity", methods=["POST"])
+@app.route("/api/add-activity", methods=["POST"])
 def add_activity():
     """Add a new activity."""
     data = request.json
+
+    user_id = data.get("user_id")
 
     new_act_date = data.get("activity_date")
 
@@ -240,9 +241,10 @@ def add_activity():
 
     created_at = datetime.datetime.now()
 
-    new_act = ActivityLog.create_activity(new_act_date, new_act_type, new_act_name, new_act_duration, new_act_distance, new_act_suffer_score, new_act_notes, created_at)
+    new_act = ActivityLog.create_activity(user_id, new_act_date, new_act_type, new_act_name, new_act_duration, new_act_distance, new_act_suffer_score, new_act_notes, created_at)
 
-    return jsonify({"success": True, "activity_date": new_act.activity_date, "activity_type": new_act.activity_type, "activity_name": new_act.activity_name, "duration": new_act.duration, "distance": new_act.distance, "suffer_score": new_act.suffer_score, "activity_notes": new_act.activity_notes})
+    return jsonify({"success": True})
+    # , "activity_date": new_act.activity_date, "activity_type": new_act.activity_type, "activity_name": new_act.activity_name, "duration": new_act.duration, "distance": new_act.distance, "suffer_score": new_act.suffer_score, "activity_notes": new_act.activity_notes})
 
 
 

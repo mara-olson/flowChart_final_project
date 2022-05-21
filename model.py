@@ -37,10 +37,9 @@ class User(db.Model):
 
        return user
 
-    @classmethod
-    def get_user_by_id(cls, user_id):
+    def get_user_by_id(user_id):
         """Get & return a user by user_id."""
-        return cls.query.get(user_id)
+        return User.query.get(user_id)
 
     @classmethod
     def get_user_by_email(cls, email):
@@ -138,9 +137,9 @@ class ActivityLog(db.Model):
                 }
     
     @classmethod
-    def create_activity(cls, activity_date, activity_type, activity_name, duration, distance, suffer_score, activity_notes, created_at):
-       """Create and return a new user."""
-       activity = cls(activity_date=activity_date, activity_type=activity_type, activity_name=activity_name, duration=duration, distance=distance, suffer_score=suffer_score, activity_notes=activity_notes, created_at=created_at)
+    def create_activity(cls, user_id, activity_date, activity_type, activity_name, duration, distance, suffer_score, activity_notes, created_at):
+       """Create and return a new activity."""
+       activity = cls(user_id=user_id, activity_date=activity_date, activity_type=activity_type, activity_name=activity_name, duration=duration, distance=distance, suffer_score=suffer_score, activity_notes=activity_notes, created_at=created_at)
        db.session.add(activity)
        db.session.commit()
 

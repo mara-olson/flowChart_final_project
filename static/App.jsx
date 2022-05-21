@@ -15,7 +15,7 @@ function App() {
 
   React.useEffect(() => {
     const localUserId = localStorage.getItem("userId");
-    if (localUserId !== undefined) {
+    if (localUserId) {
       setUserId(JSON.parse(localUserId));
     }
   }, [userId]);
@@ -33,7 +33,7 @@ function App() {
       {!isLoggedIn && (
         <div className="container-fluid">
           <Route exact path="/">
-            <LandingPage isLoggedIn={isLoggedIn} />
+            <LandingPage isLoggedIn={isLoggedIn} userId={userId} />
           </Route>
         </div>
       )}
