@@ -19,11 +19,12 @@ def authorize():
     code = request.args.get("code")
     scope = request.args.get("scope")
 
-    # data = request.json
-    # user_id = data.get("userId")
-
     if "activity:read_all" not in scope:
         error = "Wrong access" 
+        success = False
+    else: 
+        error = None
+        success = True
     
     response = requests.post(url="https://www.strava.com/oauth/token", 
         data={
@@ -39,14 +40,25 @@ def authorize():
     session["access_token"] = strava_token['refresh_token']
 
     # print(session["access_token"])
-    # return redirect(f"/users/{user_id}/home")
-    return redirect("/")
+    return redirect(f"/users/home")
+    # return redirect("/")
+    # return jsonify({'error':error, 'success': success})
 
 
-@app.route("api/strava-activities")
+@app.route("/api/strava-activities")
 def get_strava_activities():
-    pass
+    """Retrieve strava activities from API to display on user's activities page."""
+    access_token = session["access_token"]
+   
+    url = "https://www.strava.com/api/v3/activities"
 
+    page = 1
+
+    r = requests.get(f"{url}?{access_token}&per_page=50&page={page}")
+
+    r=r.json()
+
+    print(r)
 # session["access_token"] and put in "headers"
 # before and after epochs in params
 # I can either store the activities I get in my database, or simply send to the frontend

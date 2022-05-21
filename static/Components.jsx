@@ -43,7 +43,7 @@ function Navbar(props) {
     return (
       <nav>
         <ReactRouterDOM.Link
-          to={`users/${props.userId}/home`}
+          to={`users/home`}
           className="navbar-brand d-flex justify-content-left"
         >
           <img src={props.logo} height="30" alt="logo" />
@@ -85,8 +85,8 @@ function LandingPage(props) {
 
   const history = ReactRouterDOM.useHistory();
 
-  if (props.isLoggedIn) {
-    history.push(`users/${props.userId}/home`);
+  if (localStorage.getItem("isLoggedIn") == true) {
+    history.push("users/home");
   } else {
     return (
       <div>
@@ -135,15 +135,12 @@ function Login(props) {
 
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  // const [error, setError] = React.useState("");
-
   const history = ReactRouterDOM.useHistory();
-  if (props.isLoggedIn) {
-    history.push(`users/${props.userId}/home`);
-  }
+
   const handleLogin = (evt) => {
     // console.log(evt);
     evt.preventDefault();
+
     fetch("/api/login", {
       method: "POST",
       credentials: "include",
@@ -154,36 +151,25 @@ function Login(props) {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log("data", data);
         if (data.success) {
           console.log(data.user_id);
-
+          console.log("user_id", data.user_id);
           props.setUserId(data.user_id);
-
-          // localStorage.setItem("userId", JSON.stringify(data.user_id));
-
           props.setIsLoggedIn(true);
-
           localStorage.setItem("isLoggedIn", true);
           localStorage.setItem("userId", data.user_id);
-          if (props.userId) {
-            window.location.replace(
-              "https://www.strava.com/oauth/authorize?client_id=80271&response_type=code&redirect_uri=http://localhost:5001/exchange_token&approval_prompt=force&scope=profile:read_all,activity:read_all"
-            );
-          }
-          //   } else {
-          //     props.setError(data.error);
-          //     localStorage.setItem("isLoggedIn", false);
-          //   }
+
+          window.location.replace(
+            "https://www.strava.com/oauth/authorize?client_id=80271&response_type=code&redirect_uri=http://localhost:5001/exchange_token&approval_prompt=force&scope=profile:read_all,activity:read_all"
+          );
         }
       });
   };
-  // if (error) {
-  //   return <p className="error">{error}</p>;
-  // } else {
+
   return (
     <div>
       <form onSubmit={handleLogin}>
-        {/* <p className="error">{props.error}</p> */}
         <div>
           Email
           <input
@@ -205,6 +191,26 @@ function Login(props) {
     </div>
   );
 }
+
+// function Authorize(props) {
+//   // Verify that the user has gone through Strava's OAuth and return them to their homepage.
+
+//   // const handleAuthorization = (evt) => {
+//   // evt.preventDefault();
+//   fetch("/exchange_token")
+//     .then((response) => response.json())
+//     .then((data) => {
+//       props.setIsLoggedIn(true);
+//       localStorage.setItem("isLoggedIn", true);
+//       const error = data.error;
+//       history.push(`users/${props.userId}/home`);
+//     });
+//   // };
+//   if (isLoggedIn) {
+//     return <Home userId={props.userId} />;
+//   } else {
+//     return <p>{error}</p>;
+//   }
 // }
 
 function SignUp(props) {
@@ -240,7 +246,7 @@ function SignUp(props) {
         console.log(data.success);
         if (data.success) {
           props.setUserId(data.user_id);
-          history.push(`users/${props.userId}/home`);
+          history.push(`users/home`);
         } else {
           props.setError(data.error_msg);
         }
@@ -489,7 +495,11 @@ function AddActivityForm(props) {
           <input
             type="text"
             value={activityNotes}
-            onChange={(evt) => setActivityNotes(evt.currentTarget.value)}
+            onChange={(evt) => {
+              if ({ activityNotes }) {
+                setActivityNotes(evt.currentTarget.value);
+              }
+            }}
           />
         </div>
         <button type="submit">Add Activity</button>
@@ -509,7 +519,7 @@ function ActivitiesContainer(props) {
     fetch(`/users/${props.userId}/activities`)
       .then((response) => response.json())
       .then((data) => setActivities(data.activities));
-  }, [props.userId]);
+  }, []);
 
   const activityDetails = [];
 

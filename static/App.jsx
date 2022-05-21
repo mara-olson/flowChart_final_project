@@ -6,19 +6,19 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [error, setError] = React.useState(null);
 
-  // React.useEffect(() => {
-  //   const isLoggedIn = localStorage.getItem("isLoggedIn");
-  //   if (isLoggedIn) {
-  //     setIsLoggedIn(JSON.parse(isLoggedIn));
-  //   }
-  // }, []);
+  React.useEffect(() => {
+    const localIsLoggedIn = localStorage.getItem("isLoggedIn");
+    if (localIsLoggedIn) {
+      setIsLoggedIn(JSON.parse(localIsLoggedIn));
+    }
+  }, [isLoggedIn]);
 
-  // React.useEffect(() => {
-  //   const userId = localStorage.getItem("userId");
-  //   if (userId !== undefined) {
-  //     setUserId(JSON.parse(userId));
-  //   }
-  // }, []);
+  React.useEffect(() => {
+    const localUserId = localStorage.getItem("userId");
+    if (localUserId !== undefined) {
+      setUserId(JSON.parse(localUserId));
+    }
+  }, [userId]);
 
   return (
     <BrowserRouter>
@@ -37,14 +37,6 @@ function App() {
           </Route>
         </div>
       )}
-      {isLoggedIn && (
-        <div className="container-fluid">
-          <Route exact path="/">
-            <Home userId={userId} />
-          </Route>
-        </div>
-      )}
-
       <div className="container-fluid">
         <Route exact path="/login">
           <Login
@@ -56,9 +48,12 @@ function App() {
           />
         </Route>
       </div>
+      {/* <div>
+        <Authorize isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      </div> */}
       <div className="container-fluid">
-        <Route exact path={`users/${userId}/home`}>
-          <Home userId={userId} />
+        <Route exact path="/users/home">
+          <Home userId={userId} isLoggedIn={isLoggedIn} />
         </Route>
       </div>
       <div className="container-fluid">
