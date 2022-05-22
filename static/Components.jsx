@@ -676,7 +676,7 @@ function PeriodForm(props) {
       <h2>Add a Period</h2>
       <form onSubmit={handleAddPeriod}>
         <label>What are you experiencing?</label>
-        <select
+        {/* <select
           name="entry-type"
           multiple={true}
           size="2"
@@ -684,7 +684,7 @@ function PeriodForm(props) {
         >
           <option value="flow">Flow</option>
           <option value="symptom">Symptom</option>
-        </select>
+        </select> */}
         {/* <input type="checkbox" value="true" name="flow" checked={true}>
           Flow
         </input> */}
@@ -696,20 +696,21 @@ function PeriodForm(props) {
           name="flow-volume"
           onChange={(evt) => setFlowVolume(evt.currentTarget.value)}
         >
+          <option value="none">No Flow</option>
           <option value="light">Light</option>
           <option value="moderate">Moderate</option>
           <option value="heavy">Heavy</option>
         </select>
         <br></br>
-        {/* <label htmlFor="mood">Moodiness</label>
+        <label htmlFor="mood">Moodiness</label>
         <input type="checkbox" value="Mood" />
         <label htmlFor="cramps">Cramps</label>
         <input type="checkbox" value="Cramps" />
         <label htmlFor="bloating">Bloating</label>
         <input type="checkbox" value="Bloating" />
         <label htmlFor="fatigue">Fatigue</label>
-        <input type="checkbox" value="Fatigue" /> */}
-
+        <input type="checkbox" value="Fatigue" />
+        <br></br>
         <button type="submit">Add Period</button>
       </form>
     </div>
