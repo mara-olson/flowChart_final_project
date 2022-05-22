@@ -685,9 +685,9 @@ function PeriodForm(props) {
           <option value="flow">Flow</option>
           <option value="symptom">Symptom</option>
         </select>
-        <input type="checkbox" value="true" name="flow" checked={true}>
+        {/* <input type="checkbox" value="true" name="flow" checked={true}>
           Flow
-        </input>
+        </input> */}
         {/* <input name="flow" type="checkbox"> */}
         {/* Flow */}
         {/* </input> */}
