@@ -182,6 +182,18 @@ class MenseLog(db.Model):
 
        return period
 
+    def to_dict(self):
+        return {
+                'flow_volume': self.flow_volume,
+                'mood': self.mood,
+                'cramps': self.cramps,
+                'bloating': self.bloating,
+                'fatigue': self.fatigue,
+                'mense_notes': self.mense_notes,
+                'created_at': self.created_at,
+                'deleted_at': self.deleted_at
+                }
+
         
 
 # I think I want to actually include sx data in the period log

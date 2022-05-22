@@ -167,7 +167,7 @@ def save_new_user():
         return jsonify({"success": False, "error_msg": error})
 
 
-@app.route('/users/<user_id>/activities')
+@app.route('/api/users/<user_id>/activities')
 def activity_data(user_id):
 
         all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
@@ -249,6 +249,24 @@ def add_activity():
 
         return jsonify({"success": success, "error": error})
     # , "activity_date": new_act.activity_date, "activity_type": new_act.activity_type, "activity_name": new_act.activity_name, "duration": new_act.duration, "distance": new_act.distance, "suffer_score": new_act.suffer_score, "activity_notes": new_act.activity_notes})
+
+
+@app.route('/api/users/<user_id>/periods')
+def period_data(user_id):
+
+        all_periods = MenseLog.query.filter(MenseLog.user_id == user_id).all()
+
+        periods = []
+
+        for period in all_periods:
+            period = period.to_dict()
+            # for i in range(len(all_activities)):
+            #     activities[i] = activity
+            periods.append(period)
+       
+        
+        return jsonify({"periods": periods})
+
 
 
 @app.route("/api/add-period", methods=["POST"])

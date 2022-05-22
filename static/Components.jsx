@@ -64,6 +64,13 @@ function Navbar(props) {
           >
             Profile
           </ReactRouterDOM.NavLink>
+          <ReactRouterDOM.NavLink
+            to={`/users/${props.userId}/periods`}
+            activeClassName="navlink-active"
+            className="nav-link nav-item"
+          >
+            Periods
+          </ReactRouterDOM.NavLink>
           <Logout
             // logout={logout}
             className="justify-content-right"
@@ -71,13 +78,6 @@ function Navbar(props) {
             // isLoggedIn={isLoggedIn}
             setIsLoggedIn={props.setIsLoggedIn}
           />
-          <ReactRouterDOM.NavLink
-            to={"/users/periods"}
-            activeClassName="navlink-active"
-            className="nav-link nav-item"
-          >
-            Periods
-          </ReactRouterDOM.NavLink>
         </section>
       </nav>
     );
@@ -540,7 +540,7 @@ function ActivitiesContainer(props) {
   // NOTE: fetch here the activity data
   // Review further study of second react lab
   React.useEffect(() => {
-    fetch(`/users/${props.userId}/activities`)
+    fetch(`/api/users/${props.userId}/activities`)
       .then((response) => response.json())
       .then((data) => setActivities(data.activities));
   }, []);
@@ -625,6 +625,57 @@ function Profile(props) {
   );
 }
 
+function Periods(props) {
+  const [periods, setPeriods] = React.useState([]);
+
+  // const userId = props.userId;
+
+  React.useEffect(() => {
+    fetch(`/api/users/${props.userId}/periods`)
+      .then((response) => response.json())
+      .then((data) => setPeriods(data.periods));
+  }, []);
+
+  const periodDetails = [];
+
+  console.log(periods);
+
+  for (const period of periods) {
+    // if (period.flow_volume == 0) {
+    //   period.flow_volume = "None";
+    // } else if (period.flow_volume == 1) {
+    //   period.flow_volume = "Light";
+    // } else if (period.flow_volume == 2) {
+    //   period.flow_volume = "Moderate";
+    // } else if (period.flow_volume == 3) {
+    //   period.flow_volume = "Heavy";
+    // }
+    periodDetails.push(
+      <PeriodCard
+        key={period.mense_id}
+        volume={period.flow_volume}
+        date={period.created_at}
+        mood={period.mood}
+      />
+    );
+  }
+  return (
+    <div>
+      <div>{periodDetails}</div>
+    </div>
+  );
+}
+
+function PeriodCard(props) {
+  return (
+    <div className="card">
+      <p>Name: {props.volume}</p>
+      <p>Mood: {props.mood}</p>
+      <p>Date: {props.date}</p>
+    </div>
+  );
+}
+
 function PeriodForm(props) {
   const [flowVolume, setFlowVolume] = React.useState(null);
 
@@ -678,10 +729,10 @@ function PeriodForm(props) {
             name="flow-volume"
             onChange={(evt) => setFlowVolume(evt.currentTarget.value)}
           >
-            <option value="0">No Flow</option>
-            <option value="1">Light</option>
-            <option value="2">Moderate</option>
-            <option value="3">Heavy</option>
+            <option value="No Flow">No Flow</option>
+            <option value="Light">Light</option>
+            <option value="Moderate">Moderate</option>
+            <option value="Heavy">Heavy</option>
           </select>
         </fieldset>
         <br></br>

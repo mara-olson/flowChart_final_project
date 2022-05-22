@@ -75,7 +75,8 @@ function App() {
         </Route>
       </div>
       <div className="container-fluid">
-        <Route exact path="/users/periods">
+        <Route exact path="/users/:user_id/periods">
+          <Periods userId={userId} />
           <PeriodForm userId={userId}></PeriodForm>
         </Route>
       </div>
