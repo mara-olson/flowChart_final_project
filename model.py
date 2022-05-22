@@ -157,11 +157,12 @@ class MenseLog(db.Model):
     flow_volume = db.Column(db.String) #Could be a string (light, medium, heavy) or could be an integer, based on that. For plotting on a graph maybe it makes sense to have an integer?
     
     mood = db.Column(db.Boolean, default=False)
-    fatigue = db.Column(db.Boolean, default=False)
-    bloating = db.Column(db.Boolean, default=False)
     cramps = db.Column(db.Boolean, default=False)
+    bloating = db.Column(db.Boolean, default=False)
+    fatigue = db.Column(db.Boolean, default=False)
+    
 
-    mense_notes = db.Column(db.Text)
+    mense_notes = db.Column(db.Text, default=None)
 
     created_at = db.Column(db.DateTime)
     deleted_at = db.Column(db.DateTime)
@@ -173,9 +174,9 @@ class MenseLog(db.Model):
         return f'<Mense mense_id={self.mense_id}'
 
     @classmethod
-    def create_mense_log(cls, user_id, flow_volume, mood, cramps, bloating, fatigue):
+    def create_mense_log(cls, user_id, flow_volume, mood, cramps, bloating, fatigue, mense_notes, created_at):
        """Create and return a new period."""
-       period = cls(user_id=user_id, flow_volume=flow_volume, mood=mood, cramps=cramps, bloating=bloating, fatigue=fatigue)
+       period = cls(user_id=user_id, flow_volume=flow_volume, mood=mood, cramps=cramps, bloating=bloating, fatigue=fatigue, mense_notes=mense_notes, created_at=created_at)
        db.session.add(period)
        db.session.commit()
 

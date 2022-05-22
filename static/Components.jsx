@@ -626,10 +626,6 @@ function Profile(props) {
 }
 
 function PeriodForm(props) {
-  const [flow, setFlow] = React.useState(false);
-
-  const [symptoms, setSymptoms] = React.useState(false);
-
   const [flowVolume, setFlowVolume] = React.useState(null);
 
   const [mood, setMood] = React.useState(false);
@@ -648,14 +644,16 @@ function PeriodForm(props) {
 
     const userId = props.userId;
 
-    symptoms = fetch("/api/add-period", {
+    fetch("/api/add-period", {
       method: "POST",
       credentials: "include",
       body: JSON.stringify({
         user_id: userId,
-        entry_type: entryType,
         flow_volume: flowVolume,
-        symptoms: symptoms,
+        mood: mood,
+        cramps: cramps,
+        bloating: bloating,
+        fatigue: fatigue,
         notes: notes,
       }),
       headers: {
@@ -664,52 +662,71 @@ function PeriodForm(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.success) {
-          console.log(data.error);
-        } else {
-          props.setError(data.error);
-        }
+        // if (data.success) {
+        console.log(data.flow_volume);
+        // } else {
+        // console.log("error");
+        // props.setError(data.error);
       });
   };
   return (
     <div>
-      <h2>Add a Period</h2>
-      <form onSubmit={handleAddPeriod}>
-        <label>What are you experiencing?</label>
-        {/* <select
-          name="entry-type"
-          multiple={true}
-          size="2"
-          onChange={(evt) => setFlow(true)}
-        >
-          <option value="flow">Flow</option>
-          <option value="symptom">Symptom</option>
-        </select> */}
-        {/* <input type="checkbox" value="true" name="flow" checked={true}>
-          Flow
-        </input> */}
-        {/* <input name="flow" type="checkbox"> */}
-        {/* Flow */}
-        {/* </input> */}
-        {/* <input name="symptoms" type="checkbox" /> */}
-        <select
-          name="flow-volume"
-          onChange={(evt) => setFlowVolume(evt.currentTarget.value)}
-        >
-          <option value="none">No Flow</option>
-          <option value="light">Light</option>
-          <option value="moderate">Moderate</option>
-          <option value="heavy">Heavy</option>
-        </select>
+      <form id="period-form" onSubmit={handleAddPeriod}>
+        <fieldset name="flow-form" id="period-form" disabled={false}>
+          <legend>What's your flow?</legend>
+          <select
+            name="flow-volume"
+            onChange={(evt) => setFlowVolume(evt.currentTarget.value)}
+          >
+            <option value="0">No Flow</option>
+            <option value="1">Light</option>
+            <option value="2">Moderate</option>
+            <option value="3">Heavy</option>
+          </select>
+        </fieldset>
         <br></br>
-        <label htmlFor="mood">Moodiness</label>
-        <input type="checkbox" value="Mood" />
-        <label htmlFor="cramps">Cramps</label>
-        <input type="checkbox" value="Cramps" />
-        <label htmlFor="bloating">Bloating</label>
-        <input type="checkbox" value="Bloating" />
-        <label htmlFor="fatigue">Fatigue</label>
-        <input type="checkbox" value="Fatigue" />
+        <fieldset name="sx-form" id="period-form" disabled={false}>
+          <legend>What symptoms are you experiencing?</legend>
+          <input
+            type="checkbox"
+            name="mood"
+            onChange={(evt) => setMood(evt.currentTarget.checked)}
+          />
+          <label htmlFor="mood">Moodiness</label>
+          <br></br>
+
+          <input
+            type="checkbox"
+            name="cramps"
+            onChange={(evt) => setCramps(evt.currentTarget.checked)}
+          />
+          <label htmlFor="cramps">Cramps</label>
+          <br></br>
+
+          <input
+            type="checkbox"
+            name="bloating"
+            onChange={(evt) => setBloating(evt.currentTarget.checked)}
+          />
+          <label htmlFor="bloating">Bloating</label>
+          <br></br>
+
+          <input
+            type="checkbox"
+            name="fatigue"
+            onChange={(evt) => setFatigue(evt.currentTarget.checked)}
+          />
+          <label htmlFor="fatigue">Fatigue</label>
+        </fieldset>
+        <br></br>
+
+        <label htmlFor="notes">Notes</label>
+        <br></br>
+        <textarea
+          id="notes"
+          name="periodNotes"
+          onChange={(evt) => setNotes(evt.currentTarget.value)}
+        />
         <br></br>
         <button type="submit">Add Period</button>
       </form>

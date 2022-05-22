@@ -241,7 +241,7 @@ def add_activity():
 
         new_activity = ActivityLog.create_activity(user_id, new_act_date, new_act_type, new_act_name, new_act_duration, new_act_distance, new_act_suffer_score, new_act_notes, created_at)
 
-        return jsonify({"new_activity": new_activity, "success": success, "error": error})
+        return jsonify({"success": success, "error": error})
 
     else:
         error = "Please enter an activity date, type, & duration"
@@ -251,18 +251,23 @@ def add_activity():
     # , "activity_date": new_act.activity_date, "activity_type": new_act.activity_type, "activity_name": new_act.activity_name, "duration": new_act.duration, "distance": new_act.distance, "suffer_score": new_act.suffer_score, "activity_notes": new_act.activity_notes})
 
 
-@app.route("/api/add-period")
+@app.route("/api/add-period", methods=["POST"])
 def add_period():
     """Save user-entered period info to the database."""
     data = request.json
 
     user_id = data.get("user_id")
-    entry_type = data.get("entry_type")
-    symptoms = data.get("symptoms")
     flow_volume = data.get("flow_volume")
+    mood = data.get("mood")
+    cramps = data.get("cramps")
+    bloating = data.get("bloating")
+    fatigue = data.get("fatigue")
     notes = data.get("notes")
+    created_at = datetime.datetime.now()
 
-    new_period = MenseLog.create_mense_log(user_id,)
+    new_period = MenseLog.create_mense_log(user_id, flow_volume, mood, cramps, bloating, fatigue, notes, created_at)
+
+    return jsonify({"flowVolume": new_period.flow_volume, "success": True, "error": None})
 
 
 
