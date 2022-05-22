@@ -171,6 +171,16 @@ class MenseLog(db.Model):
 
     def __repr__(self):
         return f'<Mense mense_id={self.mense_id}'
+
+    @classmethod
+    def create_mense_log(cls, user_id, flow_volume, mood, cramps, bloating, fatigue):
+       """Create and return a new period."""
+       period = cls(user_id=user_id, flow_volume=flow_volume, mood=mood, cramps=cramps, bloating=bloating, fatigue=fatigue)
+       db.session.add(period)
+       db.session.commit()
+
+       return period
+
         
 
 # I think I want to actually include sx data in the period log
@@ -194,6 +204,7 @@ class SymptomLog(db.Model):
     def __repr__(self):
         return f'<Symptom strava_activity_id={self.sx_id} user={self.user_id}'
 
+    
 
 class SleepLog(db.Model):
     """A log added by the user related to their sleep."""

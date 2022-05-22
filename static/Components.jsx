@@ -71,6 +71,13 @@ function Navbar(props) {
             // isLoggedIn={isLoggedIn}
             setIsLoggedIn={props.setIsLoggedIn}
           />
+          <ReactRouterDOM.NavLink
+            to={"/users/periods"}
+            activeClassName="navlink-active"
+            className="nav-link nav-item"
+          >
+            Periods
+          </ReactRouterDOM.NavLink>
         </section>
       </nav>
     );
@@ -81,7 +88,7 @@ function Navbar(props) {
 function LandingPage(props) {
   const landingMessage1 =
     "Your training periods & menstrual periods don’t happen in isolation.";
-  const landingMessage2 = "Finally there’s a tracking system for both.";
+  const landingMessage2 = "Finally there is a tracking system for both.";
 
   const history = ReactRouterDOM.useHistory();
 
@@ -166,6 +173,8 @@ function Login(props) {
           window.location.replace(
             "https://www.strava.com/oauth/authorize?client_id=80271&response_type=code&redirect_uri=http://localhost:5001/exchange_token&approval_prompt=force&scope=profile:read_all,activity:read_all"
           );
+        } else {
+          props.setError(data.error);
         }
       });
   };
@@ -333,13 +342,20 @@ function AddActivityButton(props) {
     return (
       <AddActivityForm
         userId={userId}
+        activities={props.actitivies}
+        setActivities={props.setActivities}
         setShowActivityForm={props.setShowActivityForm}
+        setError={props.setError}
       />
     );
   }
   const handleClick = (evt) => {
     evt.preventDefault();
-    setShowActivityForm(true);
+    if (showActivityForm === false) {
+      setShowActivityForm(true);
+    } else {
+      setShowActivityForm(false);
+    }
   };
   return <button onClick={handleClick}>Add Activity</button>;
 }
@@ -378,7 +394,14 @@ function AddActivityForm(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        if (data.success) {
+          console.log(data.error);
+          // history.push(`/users/${props.userId}/activities`);
+          // props.setActivities([...activities, data.new_activity]);
+        } else {
+          props.setError(data.error);
+        }
+
         // props.setShowActivityForm(true);
         // history.push(`/users/${props.userId}/activities`);
       });
@@ -419,7 +442,11 @@ function AddActivityForm(props) {
           <input
             type="text"
             value={activityName}
-            onChange={(evt) => setActivityName(evt.currentTarget.value)}
+            onChange={(evt) => {
+              if ({ activityName }) {
+                setActivityName(evt.currentTarget.value);
+              }
+            }}
           />
         </div>
         <br></br>
@@ -429,7 +456,11 @@ function AddActivityForm(props) {
           <input
             type="text"
             value={duration}
-            onChange={(evt) => setDuration(evt.currentTarget.value)}
+            onChange={(evt) => {
+              if ({ duration }) {
+                setDuration(evt.currentTarget.value);
+              }
+            }}
           />
         </div>
         <br></br>
@@ -440,7 +471,11 @@ function AddActivityForm(props) {
           <input
             type="text"
             value={distance}
-            onChange={(evt) => setDistance(evt.currentTarget.value)}
+            onChange={(evt) => {
+              if ({ distance }) {
+                setDistance(evt.currentTarget.value);
+              }
+            }}
           />
         </div>
         <div>
@@ -449,6 +484,7 @@ function AddActivityForm(props) {
             name="suffer-score"
             onChange={(evt) => setSufferScore(evt.currentTarget.value)}
           >
+            <option value="NA">NA</option>
             <option value="1">1, minimal discomfort</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -474,8 +510,30 @@ function AddActivityForm(props) {
   );
 }
 
-function ActivitiesContainer(props) {
+function Activities(props) {
   const [activities, setActivities] = React.useState([]);
+
+  return (
+    <div>
+      <ActivitiesContainer
+        activities={activities}
+        setActivities={setActivities}
+        setError={props.setError}
+        userId={props.userId}
+      />
+      <AddActivityButton
+        activities={activities}
+        setActivities={setActivities}
+        setError={props.setError}
+        userId={props.userId}
+      />
+    </div>
+  );
+}
+
+function ActivitiesContainer(props) {
+  // const [activities, setActivities] = React.useState([]);
+  const { activities, setActivities } = props;
 
   const [stravaActivities, setStravaActivities] = React.useState([]);
 
@@ -563,6 +621,97 @@ function Profile(props) {
       <p>
         Member Since: <strong>{sinceDate}</strong>
       </p>
+    </div>
+  );
+}
+
+function PeriodForm(props) {
+  const [flow, setFlow] = React.useState(false);
+
+  const [symptoms, setSymptoms] = React.useState(false);
+
+  const [flowVolume, setFlowVolume] = React.useState(null);
+
+  const [mood, setMood] = React.useState(false);
+
+  const [cramps, setCramps] = React.useState(false);
+
+  const [bloating, setBloating] = React.useState(false);
+
+  const [fatigue, setFatigue] = React.useState(false);
+
+  const [notes, setNotes] = React.useState(null);
+
+  const handleAddPeriod = (evt) => {
+    // console.log(evt);
+    evt.preventDefault();
+
+    const userId = props.userId;
+
+    symptoms = fetch("/api/add-period", {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify({
+        user_id: userId,
+        entry_type: entryType,
+        flow_volume: flowVolume,
+        symptoms: symptoms,
+        notes: notes,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          console.log(data.error);
+        } else {
+          props.setError(data.error);
+        }
+      });
+  };
+  return (
+    <div>
+      <h2>Add a Period</h2>
+      <form onSubmit={handleAddPeriod}>
+        <label>What are you experiencing?</label>
+        <select
+          name="entry-type"
+          multiple={true}
+          size="2"
+          onChange={(evt) => setFlow(true)}
+        >
+          <option value="flow">Flow</option>
+          <option value="symptom">Symptom</option>
+        </select>
+        <input type="checkbox" value="true" name="flow" checked={true}>
+          Flow
+        </input>
+        {/* <input name="flow" type="checkbox"> */}
+        {/* Flow */}
+        {/* </input> */}
+        {/* <input name="symptoms" type="checkbox" /> */}
+        <select
+          name="flow-volume"
+          onChange={(evt) => setFlowVolume(evt.currentTarget.value)}
+        >
+          <option value="light">Light</option>
+          <option value="moderate">Moderate</option>
+          <option value="heavy">Heavy</option>
+        </select>
+        <br></br>
+        {/* <label htmlFor="mood">Moodiness</label>
+        <input type="checkbox" value="Mood" />
+        <label htmlFor="cramps">Cramps</label>
+        <input type="checkbox" value="Cramps" />
+        <label htmlFor="bloating">Bloating</label>
+        <input type="checkbox" value="Bloating" />
+        <label htmlFor="fatigue">Fatigue</label>
+        <input type="checkbox" value="Fatigue" /> */}
+
+        <button type="submit">Add Period</button>
+      </form>
     </div>
   );
 }

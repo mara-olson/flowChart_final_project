@@ -4,6 +4,7 @@ const { Route, BrowserRouter } = ReactRouterDOM;
 function App() {
   const [userId, setUserId] = React.useState(null);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
   const [error, setError] = React.useState(null);
 
   React.useEffect(() => {
@@ -58,8 +59,9 @@ function App() {
       </div>
       <div className="container-fluid">
         <Route exact path="/users/:user_id/activities">
-          <ActivitiesContainer userId={userId} />
-          <AddActivityButton userId={userId} />
+          <Activities userId={userId} setError={setError} />
+          {/* <ActivitiesContainer userId={userId} /> */}
+          {/* <AddActivityButton userId={userId} setError={setError} /> */}
         </Route>
       </div>
       <div className="container-fluid">
@@ -70,6 +72,11 @@ function App() {
       <div className="container-fluid">
         <Route exact path="/sign-up">
           <SignUp setUserId={setUserId} setError={setError} />
+        </Route>
+      </div>
+      <div className="container-fluid">
+        <Route exact path="/users/periods">
+          <PeriodForm userId={userId}></PeriodForm>
         </Route>
       </div>
 
