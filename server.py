@@ -267,7 +267,7 @@ def add_period():
 
     new_period = MenseLog.create_mense_log(user_id, flow_volume, mood, cramps, bloating, fatigue, notes, created_at)
 
-    return jsonify({"flowVolume": new_period.flow_volume, "success": True, "error": None})
+    return jsonify({"flow_volume": new_period.flow_volume, "success": True, "error": None})
 
 
 
