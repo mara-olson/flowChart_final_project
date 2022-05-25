@@ -51,28 +51,34 @@ function Navbar(props) {
 
         <section className="d-flex justify-content-left">
           <ReactRouterDOM.NavLink
-            to={`/users/${props.userId}/activities`}
+            to={`/users/activities`}
             activeClassName="navlink-active"
             className="nav-link nav-item"
           >
             Activities
           </ReactRouterDOM.NavLink>
           <ReactRouterDOM.NavLink
-            to={`/users/${props.userId}/profile`}
+            to={"/users/strava-activities"}
+            activeClassName="navlink-active"
+            className="nav-link nav-item"
+          >
+            Strava Activities
+          </ReactRouterDOM.NavLink>
+          <ReactRouterDOM.NavLink
+            to={`/users/profile`}
             activeClassName="navlink-active"
             className="nav-link nav-item"
           >
             Profile
           </ReactRouterDOM.NavLink>
           <ReactRouterDOM.NavLink
-            to={`/users/${props.userId}/periods`}
+            to={`/users/periods`}
             activeClassName="navlink-active"
             className="nav-link nav-item"
           >
             Periods
           </ReactRouterDOM.NavLink>
           <Logout
-            // logout={logout}
             className="justify-content-right"
             setUserId={props.setUserId}
             // isLoggedIn={isLoggedIn}
@@ -93,7 +99,7 @@ function LandingPage(props) {
   const history = ReactRouterDOM.useHistory();
 
   if (localStorage.getItem("isLoggedIn") == true) {
-    history.push("users/home");
+    history.push(`users/${props.userId}/home`);
   } else {
     return (
       <div>
@@ -128,6 +134,13 @@ function LandingPage(props) {
 
 // HOMEPAGE AFTER LOGIN COMPONENT
 function Home(props) {
+  // React.useEffect(() => {
+  fetch(`/users/${props.userId}/home`)
+    .then((response) => response.json())
+    .then((data) => console.log(data.activities));
+  // }
+  // , []);
+
   return (
     <div>
       <p>Welcome, {props.userId}!</p>
@@ -258,7 +271,7 @@ function SignUp(props) {
         console.log(data.success);
         if (data.success) {
           props.setUserId(data.user_id);
-          history.push(`users/home`);
+          history.push(`users/${data.user_id}/home`);
         } else {
           props.setError(data.error_msg);
         }
@@ -540,10 +553,12 @@ function ActivitiesContainer(props) {
   // NOTE: fetch here the activity data
   // Review further study of second react lab
   React.useEffect(() => {
-    fetch(`/api/users/${props.userId}/activities`)
-      .then((response) => response.json())
-      .then((data) => setActivities(data.activities));
-  }, []);
+    if (props.userId) {
+      fetch(`/api/users/${props.userId}/activities`)
+        .then((response) => response.json())
+        .then((data) => setActivities(data.activities));
+    }
+  }, [props.userId]);
 
   const activityDetails = [];
 
@@ -582,17 +597,19 @@ function Profile(props) {
   const [sinceDate, setSinceDate] = React.useState(null);
 
   React.useEffect(() => {
-    fetch(`/users/${props.userId}/profile`)
-      .then((response) => response.json())
-      .then((data) => {
-        setFirstName(data.first_name);
-        setLastName(data.last_name);
-        setTeamName(data.team_name);
-        setEmail(data.email);
-        setPassword(data.password);
-        setSinceDate(data.member_since);
-      });
-  }, []);
+    if (props.userId) {
+      fetch(`/users/${props.userId}/profile`)
+        .then((response) => response.json())
+        .then((data) => {
+          setFirstName(data.first_name);
+          setLastName(data.last_name);
+          setTeamName(data.team_name);
+          setEmail(data.email);
+          setPassword(data.password);
+          setSinceDate(data.member_since);
+        });
+    }
+  }, [props.userId]);
 
   return (
     <div>
@@ -631,31 +648,37 @@ function Periods(props) {
   // const userId = props.userId;
 
   React.useEffect(() => {
-    fetch(`/api/users/${props.userId}/periods`)
-      .then((response) => response.json())
-      .then((data) => setPeriods(data.periods));
-  }, []);
+    if (props.userId) {
+      fetch(`/api/users/${props.userId}/periods`)
+        .then((response) => response.json())
+        .then((data) => setPeriods(data.periods));
+    }
+  }, [props.userId]);
 
   const periodDetails = [];
 
-  console.log(periods);
-
   for (const period of periods) {
-    // if (period.flow_volume == 0) {
-    //   period.flow_volume = "None";
-    // } else if (period.flow_volume == 1) {
-    //   period.flow_volume = "Light";
-    // } else if (period.flow_volume == 2) {
-    //   period.flow_volume = "Moderate";
-    // } else if (period.flow_volume == 3) {
-    //   period.flow_volume = "Heavy";
-    // }
+    const symptoms = [];
+    if (period.mood) {
+      symptoms.push("Moodiness");
+    }
+    if (period.cramps) {
+      symptoms.push("Cramps");
+    }
+    if (period.bloating) {
+      symptoms.push("Bloating");
+    }
+    if (period.fatigue) {
+      symptoms.push("Fatigue");
+    }
+    // console.log(symptoms);
     periodDetails.push(
       <PeriodCard
+        userId={props.userId}
         key={period.mense_id}
         volume={period.flow_volume}
         date={period.created_at}
-        mood={period.mood}
+        symptoms={symptoms}
       />
     );
   }
@@ -667,10 +690,20 @@ function Periods(props) {
 }
 
 function PeriodCard(props) {
+  const sxToDisplay = [];
+  for (const symptom of props.symptoms) {
+    // console.log(symptom);
+    sxToDisplay.push(
+      <ul>
+        <li>{symptom}</li>
+      </ul>
+    );
+  }
+
   return (
     <div className="card">
-      <p>Name: {props.volume}</p>
-      <p>Mood: {props.mood}</p>
+      <p>Flow: {props.volume}</p>
+      <div>Symptoms: {sxToDisplay}</div>
       <p>Date: {props.date}</p>
     </div>
   );
@@ -781,6 +814,48 @@ function PeriodForm(props) {
         <br></br>
         <button type="submit">Add Period</button>
       </form>
+    </div>
+  );
+}
+
+function Calendar(props) {
+  return (
+    <div>
+      <h2>Calendar</h2>
+    </div>
+  );
+}
+
+function StravaActivities(props) {
+  const [stravaActivities, setStravaActivities] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch("/api/strava-activities")
+      .then((response) => response.json())
+      .then((data) =>
+        // console.log(data));
+        setStravaActivities(data)
+      );
+  }, []);
+
+  const stravaActivityDetails = [];
+
+  // console.log(activities);
+
+  for (const stravaActivity of stravaActivities) {
+    stravaActivityDetails.push(
+      <ActivityCard
+        key={stravaActivity.id}
+        name={stravaActivity.name}
+        date={stravaActivity.start_date_local}
+        type={stravaActivity.type}
+      />
+    );
+  }
+
+  return (
+    <div>
+      <div>{stravaActivityDetails}</div>
     </div>
   );
 }

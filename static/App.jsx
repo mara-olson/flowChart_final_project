@@ -55,17 +55,18 @@ function App() {
       <div className="container-fluid">
         <Route exact path="/users/home">
           <Home userId={userId} isLoggedIn={isLoggedIn} />
+          {/* <Calendar /> */}
         </Route>
       </div>
       <div className="container-fluid">
-        <Route exact path="/users/:user_id/activities">
+        <Route exact path="/users/activities">
           <Activities userId={userId} setError={setError} />
           {/* <ActivitiesContainer userId={userId} /> */}
           {/* <AddActivityButton userId={userId} setError={setError} /> */}
         </Route>
       </div>
       <div className="container-fluid">
-        <Route exact path="/users/:user_id/profile">
+        <Route exact path="/users/profile">
           <Profile userId={userId} />
         </Route>
       </div>
@@ -75,9 +76,15 @@ function App() {
         </Route>
       </div>
       <div className="container-fluid">
-        <Route exact path="/users/:user_id/periods">
+        <Route exact path="/users/periods">
           <Periods userId={userId} />
           <PeriodForm userId={userId}></PeriodForm>
+        </Route>
+      </div>
+
+      <div className="container-fluid">
+        <Route exact path="/users/strava-activities">
+          <StravaActivities userId={userId} />
         </Route>
       </div>
 

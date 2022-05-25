@@ -12,6 +12,18 @@ app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
 
 
+# def get_user_activities(user_id):
+    # all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
+
+    # activities = []
+
+    # for activity in all_activities:
+    #     activity = activity.to_dict()
+    #     activities.append(activity)
+    
+    # # return jsonify({"activities": activities})
+
+
 
 @app.route("/exchange_token")
 def authorize():
@@ -37,7 +49,13 @@ def authorize():
     with open("strava_token.json", "w") as file:
         json.dump(strava_token, file)
 
-    session["access_token"] = strava_token['refresh_token']
+    session["refresh_token"] = strava_token['refresh_token']
+
+    session["access_token"] = strava_token['access_token']
+
+
+
+    user_id = session["user_id"]
 
     # print(session["access_token"])
     return redirect(f"/users/home")
@@ -48,17 +66,25 @@ def authorize():
 @app.route("/api/strava-activities")
 def get_strava_activities():
     """Retrieve strava activities from API to display on user's activities page."""
-    access_token = session["access_token"]
+    
    
-    url = "https://www.strava.com/api/v3/activities"
+    url = "https://www.strava.com/api/v3/athlete/activities"
 
-    page = 1
+    access_token = session["access_token"]
+    print(access_token)
+    
+    headers = {
+        "Authorization": f"Bearer {access_token}"
+    }
 
-    r = requests.get(f"{url}?{access_token}&per_page=50&page={page}")
+    page = str(1)
 
-    r=r.json()
+    r = requests.get(f"{url}?before=1653447977&after=959223977&page={page}&per_page=50", headers=headers)
 
-    print(r)
+    print(r.json())
+    return jsonify(r.json())
+
+    # return jsonify({"stravaActivities": stravaActivities})
 # session["access_token"] and put in "headers"
 # before and after epochs in params
 # I can either store the activities I get in my database, or simply send to the frontend
@@ -170,6 +196,7 @@ def save_new_user():
 @app.route('/api/users/<user_id>/activities')
 def activity_data(user_id):
 
+        # activities = get_user_activities(user_id)
         all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
 
         activities = []
@@ -192,14 +219,24 @@ def user_homepage(user_id):
     fname = user.first_name
     lname = user.last_name
     
-    user_id = user.user_id
+    # user_id = user.user_id
 
     welcome_msg = f"Welcome, {fname}!"
 
-    activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
+    # activities = get_user_activities(user_id)
+    all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
 
+    activities = []
 
-    return jsonify({'first_name':fname, 'last_name': lname, 'welcome_msg': welcome_msg, 'activities': activities})
+    for activity in all_activities:
+        activity = activity.to_dict()
+        # for i in range(len(all_activities)):
+        #     activities[i] = activity
+        activities.append(activity)
+
+    return jsonify({'activities': activities})
+    # ({'first_name':fname, 'last_name': lname, 'welcome_msg': welcome_msg, 
+   
 
 
 
@@ -235,7 +272,7 @@ def add_activity():
 
     created_at = datetime.datetime.now()
 
-    if new_act_duration:
+    if new_act_duration and new_act_date:
         error = None
         success = True
 
