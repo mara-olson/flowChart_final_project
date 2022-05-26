@@ -44,7 +44,11 @@ function Calendar(props) {
             );
           })}
         </div>
-        <CalendarDays today={today} changeCurrentDay={changeCurrentDay} />
+        <CalendarDays
+          today={today}
+          changeCurrentDay={changeCurrentDay}
+          userId={props.userId}
+        />
       </div>
     </div>
   );
@@ -100,4 +104,10 @@ function CalendarDays(props) {
       })}
     </div>
   );
+}
+
+function CalendarActivities(props) {
+  const [calActs, setCalActs] = React.useState([]);
+
+  React.useEffect();
 }

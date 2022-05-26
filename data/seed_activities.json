@@ -11,7 +11,8 @@
     "suffer_score": 4,
     "activity_notes": "Wonderful ride!",
     "created_at": "01/12/2022",
-    "deleted_at": null
+    "deleted_at": null,
+    "from_strava": false
   },
   {
     "activity_id": 2,
@@ -25,7 +26,8 @@
     "suffer_score": 4,
     "activity_notes": null,
     "created_at": "01/12/2022",
-    "deleted_at": null
+    "deleted_at": null,
+    "from_strava": false
   },
   {
     "activity_id": 3,
@@ -39,7 +41,8 @@
     "suffer_score": 6,
     "activity_notes": "Had to squeeze this ride in today, short on time",
     "created_at": "02/12/2022",
-    "deleted_at": null
+    "deleted_at": null,
+    "from_strava": false
   },
   {
     "activity_id": 4,
@@ -53,7 +56,8 @@
     "suffer_score": 4,
     "activity_notes": "Wonderful ride!",
     "created_at": "01/12/2022",
-    "deleted_at": null
+    "deleted_at": null,
+    "from_strava": false
   },
   {
     "activity_id": 5,
@@ -67,7 +71,8 @@
     "suffer_score": 1,
     "activity_notes": null,
     "created_at": "03/15/2022",
-    "deleted_at": null
+    "deleted_at": null,
+    "from_strava": false
   },
   {
     "activity_id": 6,
@@ -81,7 +86,8 @@
     "suffer_score": 7,
     "activity_notes": null,
     "created_at": "04/12/2022",
-    "deleted_at": null
+    "deleted_at": null,
+    "from_strava": false
   },
   {
     "activity_id": 7,
@@ -95,7 +101,8 @@
     "suffer_score": 1,
     "activity_notes": null,
     "created_at": "01/12/2022",
-    "deleted_at": null
+    "deleted_at": null,
+    "from_strava": false
   },
   {
     "activity_id": 8,
@@ -109,6 +116,7 @@
     "suffer_score": 6,
     "activity_notes": "Hilly day!",
     "created_at": "01/12/2022",
-    "deleted_at": null
+    "deleted_at": null,
+    "from_strava": false
   }
 ]

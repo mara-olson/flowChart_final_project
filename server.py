@@ -67,7 +67,6 @@ def authorize():
 def get_strava_activities():
     """Retrieve strava activities from API to display on user's activities page."""
     
-   
     url = "https://www.strava.com/api/v3/athlete/activities"
 
     access_token = session["access_token"]
@@ -79,12 +78,13 @@ def get_strava_activities():
 
     page = str(1)
 
-    r = requests.get(f"{url}?before=1653447977&after=959223977&page={page}&per_page=50", headers=headers)
+    r = requests.get(f"{url}?before=1653447977&after=959223977&page={page}&per_page=20", headers=headers)
 
-    print(r.json())
+    # for activity in r.json():
+
+    
     return jsonify(r.json())
 
-    # return jsonify({"stravaActivities": stravaActivities})
 # session["access_token"] and put in "headers"
 # before and after epochs in params
 # I can either store the activities I get in my database, or simply send to the frontend
@@ -118,8 +118,6 @@ def login():
 @app.route("/api/login", methods=['POST'])
 def login_process():
     """Process the user's login."""
-
-    # data = request.json
 
     email = request.json.get("email")
     password = request.json.get("password")
@@ -171,9 +169,6 @@ def save_new_user():
     created_at = datetime.datetime.now()
 
     all_users = [x.email for x in db.session.query(User.email).distinct()]
-    
-    # if not new_fname or not new_lname or not new_email or not new_password:
-    #     flash('Please complete all required fields')
 
     if new_email not in all_users and "@" in new_email: 
         new_user = User.create_user(new_fname, new_lname, new_team, new_email, new_password, created_at)
@@ -197,18 +192,17 @@ def save_new_user():
 def activity_data(user_id):
 
         # activities = get_user_activities(user_id)
-        all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
+    all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
 
-        activities = []
+    activities = []
 
-        for activity in all_activities:
-            activity = activity.to_dict()
-            # for i in range(len(all_activities)):
-            #     activities[i] = activity
-            activities.append(activity)
-       
-        
-        return jsonify({"activities": activities})
+    for activity in all_activities:
+        activity = activity.to_dict()
+        activity.from_strava = False
+        activities.append(activity)
+    
+    
+    return jsonify({"activities": activities})
 
 
 @app.route("/users/<user_id>/home")
@@ -250,28 +244,21 @@ def add_activity():
     data = request.json
 
     user_id = data.get("user_id")
-
     new_act_date = data.get("activity_date")
-
     new_act_type = data.get("activity_type")
-
     new_act_name = data.get("activity_name")
-
     new_act_duration = data.get("duration")
-    
     new_act_distance = data.get("distance")
-
     new_act_suffer_score = data.get("suffer_score")
-
     new_act_notes = data.get("activity_notes")
-
     created_at = datetime.datetime.now()
+    from_strava = data.get("from_strava")
 
     if new_act_duration and new_act_date:
         error = None
         success = True
 
-        new_activity = ActivityLog.create_activity(user_id, new_act_date, new_act_type, new_act_name, new_act_duration, new_act_distance, new_act_suffer_score, new_act_notes, created_at)
+        new_activity = ActivityLog.create_activity(user_id, new_act_date, new_act_type, new_act_name, new_act_duration, new_act_distance, new_act_suffer_score, new_act_notes, created_at, from_strava)
 
         return jsonify({"success": success, "error": error})
 

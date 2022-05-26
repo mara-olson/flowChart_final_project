@@ -49,20 +49,15 @@ function App() {
           />
         </Route>
       </div>
-      {/* <div>
-        <Authorize isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-      </div> */}
       <div className="container-fluid">
         <Route exact path="/users/home">
           <Home userId={userId} isLoggedIn={isLoggedIn} />
-          <Calendar />
+          <Calendar userId={userId} />
         </Route>
       </div>
       <div className="container-fluid">
         <Route exact path="/users/activities">
           <Activities userId={userId} setError={setError} />
-          {/* <ActivitiesContainer userId={userId} /> */}
-          {/* <AddActivityButton userId={userId} setError={setError} /> */}
         </Route>
       </div>
       <div className="container-fluid">
