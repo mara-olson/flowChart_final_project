@@ -16,53 +16,75 @@
   text-align: center;
 }
 
-/*  */
-.melon-card {
-  width: 25%;
-  margin: 0.5rem;
-}
-
-.melon-card h5 {
-  font-size: 1rem;
-}
-
-#shopping .filters {
-  min-width: 20%;
-}
-
-.loading-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  flex-direction: column;
-  margin-top: 300px;
-}
-
-.loading-box img {
-  display: block;
-  max-height: 100px;
-  margin: auto;
-  animation: pulse 1s infinite;
-}
-
-.loading-box div {
-  font-size: 20px;
-  font-family: cursive;
-}
-
-@keyframes pulse {
-  from {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(0.6);
-  }
-  to {
-    transform: scale(1);
-  }
-}
-
 .card-img-top {
   height: 250px;
+}
+
+.calendar {
+  width: 900px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar-header {
+  height: 100px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.calendar-body {
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.weekdays-header {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.weekday {
+  width: 100px;
+  text-align: center;
+}
+
+.table-content {
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.calendar-day {
+  width: 125px;
+  height: 75px;
+  position: relative;
+  border: 1px solid #a6a6a6;
+}
+
+.calendar-day:hover {
+  background-color: rgba(235, 14, 14, 0.324);
+}
+
+.calendar-day p {
+  position: absolute;
+  right: 10px;
+  color: #a6a6a6;
+}
+
+.current p {
+  color: #000000;
+}
+
+.selected p {
+  color: #cc0000;
+  font-weight: bold;
 }
