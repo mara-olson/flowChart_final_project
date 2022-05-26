@@ -219,11 +219,6 @@ def user_homepage(user_id):
     fname = user.first_name
     lname = user.last_name
     
-    # user_id = user.user_id
-
-    welcome_msg = f"Welcome, {fname}!"
-
-    # activities = get_user_activities(user_id)
     all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
 
     activities = []

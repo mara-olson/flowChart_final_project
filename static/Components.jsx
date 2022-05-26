@@ -43,7 +43,7 @@ function Navbar(props) {
     return (
       <nav>
         <ReactRouterDOM.Link
-          to={`users/home`}
+          to="users/home"
           className="navbar-brand d-flex justify-content-left"
         >
           <img src={props.logo} height="30" alt="logo" />
@@ -58,21 +58,21 @@ function Navbar(props) {
             Activities
           </ReactRouterDOM.NavLink>
           <ReactRouterDOM.NavLink
-            to={"/users/strava-activities"}
+            to="/users/strava-activities"
             activeClassName="navlink-active"
             className="nav-link nav-item"
           >
             Strava Activities
           </ReactRouterDOM.NavLink>
           <ReactRouterDOM.NavLink
-            to={`/users/profile`}
+            to="/users/profile"
             activeClassName="navlink-active"
             className="nav-link nav-item"
           >
             Profile
           </ReactRouterDOM.NavLink>
           <ReactRouterDOM.NavLink
-            to={`/users/periods`}
+            to="/users/periods"
             activeClassName="navlink-active"
             className="nav-link nav-item"
           >
@@ -99,7 +99,7 @@ function LandingPage(props) {
   const history = ReactRouterDOM.useHistory();
 
   if (localStorage.getItem("isLoggedIn") == true) {
-    history.push(`users/${props.userId}/home`);
+    history.push("users/home");
   } else {
     return (
       <div>
@@ -135,9 +135,9 @@ function LandingPage(props) {
 // HOMEPAGE AFTER LOGIN COMPONENT
 function Home(props) {
   // React.useEffect(() => {
-  fetch(`/users/${props.userId}/home`)
-    .then((response) => response.json())
-    .then((data) => console.log(data.activities));
+  // fetch("/users/home")
+  //   .then((response) => response.json())
+  //   .then((data) => console.log(data.activities));
   // }
   // , []);
 
@@ -271,7 +271,7 @@ function SignUp(props) {
         console.log(data.success);
         if (data.success) {
           props.setUserId(data.user_id);
-          history.push(`users/${data.user_id}/home`);
+          history.push("users/home");
         } else {
           props.setError(data.error_msg);
         }
@@ -814,14 +814,6 @@ function PeriodForm(props) {
         <br></br>
         <button type="submit">Add Period</button>
       </form>
-    </div>
-  );
-}
-
-function Calendar(props) {
-  return (
-    <div>
-      <h2>Calendar</h2>
     </div>
   );
 }
