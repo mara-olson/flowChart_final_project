@@ -211,14 +211,14 @@ def activity_data(user_id):
     activity_objs = []
 
     for activity in strava_activities:
-        new_strava_act = {"name": activity["name"], "distance": km_to_miles(activity["distance"]), "type": activity["type"]}
+        new_strava_act = {"name": activity["name"], "date": activity["start_date_local"], "distance": km_to_miles(activity["distance"]), "type": activity["type"]}
         activity_objs.append(new_strava_act)
 
 
     all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
 
     for activity in all_activities:
-        new_act = {"name": activity.activity_name, "distance": activity.distance, "type": activity.activity_type}
+        new_act = {"name": activity.activity_name, "date": activity.activity_date, "distance": activity.distance, "type": activity.activity_type}
         # activity = activity.to_dict()
         activity_objs.append(new_act)
     

@@ -58,13 +58,6 @@ function Navbar(props) {
             Activities
           </ReactRouterDOM.NavLink>
           <ReactRouterDOM.NavLink
-            to="/users/strava-activities"
-            activeClassName="navlink-active"
-            className="nav-link nav-item"
-          >
-            Strava Activities
-          </ReactRouterDOM.NavLink>
-          <ReactRouterDOM.NavLink
             to="/users/profile"
             activeClassName="navlink-active"
             className="nav-link nav-item"
@@ -781,40 +774,6 @@ function PeriodForm(props) {
         <br></br>
         <button type="submit">Add Period</button>
       </form>
-    </div>
-  );
-}
-
-function StravaActivities(props) {
-  const [stravaActivities, setStravaActivities] = React.useState([]);
-
-  React.useEffect(() => {
-    fetch("/api/strava-activities")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setStravaActivities(data);
-      });
-  }, []);
-
-  const stravaActivityDetails = [];
-
-  // console.log(activities);
-
-  for (const stravaActivity of stravaActivities) {
-    stravaActivityDetails.push(
-      <ActivityCard
-        key={stravaActivity.id}
-        name={stravaActivity.name}
-        date={stravaActivity.start_date_local}
-        type={stravaActivity.type}
-      />
-    );
-  }
-
-  return (
-    <div>
-      <div>{stravaActivityDetails}</div>
     </div>
   );
 }

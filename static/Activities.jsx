@@ -82,9 +82,6 @@ function AddActivityForm(props) {
         } else {
           props.setError(data.error);
         }
-
-        // props.setShowActivityForm(true);
-        // history.push(`/users/${props.userId}/activities`);
       });
   };
   return (
@@ -232,7 +229,7 @@ function ActivitiesContainer(props) {
 
   const activityDetails = [];
 
-  console.log(activities);
+  // console.log(activities);
 
   for (const activity of activities) {
     activityDetails.push(

@@ -76,13 +76,6 @@ function App() {
           <PeriodForm userId={userId}></PeriodForm>
         </Route>
       </div>
-
-      <div className="container-fluid">
-        <Route exact path="/users/strava-activities">
-          <StravaActivities userId={userId} />
-        </Route>
-      </div>
-
       {/* {Route path = '*' /* cutsie catch-all error page default if no route found */}
     </BrowserRouter>
   );

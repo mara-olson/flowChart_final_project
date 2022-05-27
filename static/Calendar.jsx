@@ -18,20 +18,16 @@ function Calendar(props) {
     "December",
   ];
 
-  const changeCurrentDay = (today) => {
-    setToday({ currentDay: new Date(today.year, today.month, today.number) });
-  };
+  const currentMonth = months[today.getMonth()];
 
-  const headerMonth = months[today.getMonth()];
-
-  const headerYear = today.getFullYear();
+  const currentYear = today.getFullYear();
 
   console.log(today);
   return (
     <div className="calendar">
       <div className="calendar-header">
         <h2>
-          {headerMonth}, {headerYear}
+          {currentMonth}, {currentYear}
         </h2>
       </div>
       <div className="calendar-body">
@@ -46,8 +42,9 @@ function Calendar(props) {
         </div>
         <CalendarDays
           today={today}
-          changeCurrentDay={changeCurrentDay}
           userId={props.userId}
+          activities={props.activities}
+          setActivities={props.setActivities}
         />
       </div>
     </div>
@@ -74,7 +71,7 @@ function CalendarDays(props) {
       firstDayOfMonth.setDate(firstDayOfMonth.getDate() + 1);
     }
 
-    let calendarDay = {
+    const calendarDay = {
       currentMonth: firstDayOfMonth.getMonth() === props.today.getMonth(),
       date: new Date(firstDayOfMonth),
       month: firstDayOfMonth.getMonth(),
@@ -84,6 +81,7 @@ function CalendarDays(props) {
     };
 
     currentDays.push(calendarDay);
+    console.log(currentDays);
   }
 
   return (
@@ -96,9 +94,9 @@ function CalendarDays(props) {
               (day.currentMonth ? " current" : "") +
               (day.selected ? " selected" : "")
             }
-            onClick={() => props.changeCurrentDay(day)}
           >
             <p>{day.number}</p>
+            <CalendarActivities />
           </div>
         );
       })}
@@ -109,5 +107,14 @@ function CalendarDays(props) {
 function CalendarActivities(props) {
   const [calActs, setCalActs] = React.useState([]);
 
-  React.useEffect();
+  React.useEffect(() => {
+    if (props.userId) {
+      fetch(`/api/users/${props.userId}/activities`)
+        .then((response) => response.json())
+        .then((data) => setCalActs(data.activities));
+      console.log(calActs);
+    }
+  }, [props.userId]);
+
+  return <p>{calActs}</p>;
 }
