@@ -115,7 +115,6 @@ class ActivityLog(db.Model):
     activity_notes = db.Column(db.Text) 
     created_at = db.Column(db.DateTime)
     deleted_at = db.Column(db.DateTime)
-    from_strava = db.Column(db.Boolean)
 
     #Relationship with users table
     user = db.relationship("User", back_populates="activity_log")
@@ -134,13 +133,13 @@ class ActivityLog(db.Model):
                 'suffer_score': self.suffer_score,
                 'activity_notes': self.activity_notes,
                 'created_at': self.created_at,
-                'deleted_at': self.deleted_at, 'from_strava': self.from_strava
+                'deleted_at': self.deleted_at
                 }
     
     @classmethod
-    def create_activity(cls, user_id, activity_date, activity_type, activity_name, duration, distance, suffer_score, activity_notes, created_at, from_strava):
+    def create_activity(cls, user_id, activity_date, activity_type, activity_name, duration, distance, suffer_score, activity_notes, created_at):
        """Create and return a new activity."""
-       activity = cls(user_id=user_id, activity_date=activity_date, activity_type=activity_type, activity_name=activity_name, duration=duration, distance=distance, suffer_score=suffer_score, activity_notes=activity_notes, created_at=created_at, from_strava=from_strava)
+       activity = cls(user_id=user_id, activity_date=activity_date, activity_type=activity_type, activity_name=activity_name, duration=duration, distance=distance, suffer_score=suffer_score, activity_notes=activity_notes, created_at=created_at)
        db.session.add(activity)
        db.session.commit()
 

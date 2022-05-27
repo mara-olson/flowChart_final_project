@@ -3,15 +3,15 @@ function ActivityCard(props) {
     <div className="card">
       <p>Name: {props.name}</p>
       <p>Type: {props.type}</p>
-      <p>Date: {props.date}</p>
+      <p>Distance: {props.distance} miles</p>
     </div>
   );
 }
 
 function AddActivityButton(props) {
-  const [showActivityForm, setShowActivityForm] = React.useState(false);
   const userId = props.userId;
-  if (showActivityForm) {
+
+  if (props.showActivityForm) {
     return (
       <AddActivityForm
         userId={userId}
@@ -22,15 +22,18 @@ function AddActivityButton(props) {
       />
     );
   }
-  const handleClick = (evt) => {
-    evt.preventDefault();
-    if (showActivityForm === false) {
-      setShowActivityForm(true);
-    } else {
-      setShowActivityForm(false);
-    }
-  };
-  return <button onClick={handleClick}>Add Activity</button>;
+  // const handleClick = (evt) => {
+  //   evt.preventDefault();
+  //   props.setShowActivityForm(true);
+  // if (props.showActivityForm === false) {
+  //   props.setShowActivityForm(true);
+  // } else {
+  //   props.setShowActivityForm(false);
+  // }
+  // };
+  return (
+    <button onClick={props.setShowActivityForm(true)}>Add Activity</button>
+  );
 }
 
 function AddActivityForm(props) {
@@ -70,9 +73,12 @@ function AddActivityForm(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          console.log(data.error);
-          // history.push(`/users/${props.userId}/activities`);
-          // props.setActivities([...activities, data.new_activity]);
+          fetch(`/api/users/${props.userId}/activities`)
+            .then((response) => response.json())
+            .then((data) => {
+              props.setActivities(data.activities);
+              props.setShowActivityForm(false);
+            });
         } else {
           props.setError(data.error);
         }
@@ -187,6 +193,15 @@ function AddActivityForm(props) {
 
 function Activities(props) {
   const [activities, setActivities] = React.useState([]);
+  const [showActivityForm, setShowActivityForm] = React.useState(false);
+
+  React.useEffect(() => {
+    if (props.userId) {
+      fetch(`/api/users/${props.userId}/activities`)
+        .then((response) => response.json())
+        .then((data) => setActivities(data.activities));
+    }
+  }, [props.userId]);
 
   return (
     <div>
@@ -195,12 +210,16 @@ function Activities(props) {
         setActivities={setActivities}
         setError={props.setError}
         userId={props.userId}
+        setShowActivityForm={setShowActivityForm}
+        showActivityForm={showActivityForm}
       />
       <AddActivityButton
         activities={activities}
         setActivities={setActivities}
         setError={props.setError}
         userId={props.userId}
+        setShowActivityForm={setShowActivityForm}
+        showActivityForm={showActivityForm}
       />
     </div>
   );
@@ -211,14 +230,6 @@ function ActivitiesContainer(props) {
 
   const [stravaActivities, setStravaActivities] = React.useState([]);
 
-  React.useEffect(() => {
-    if (props.userId) {
-      fetch(`/api/users/${props.userId}/activities`)
-        .then((response) => response.json())
-        .then((data) => setActivities(data.activities));
-    }
-  }, [props.userId]);
-
   const activityDetails = [];
 
   console.log(activities);
@@ -226,10 +237,10 @@ function ActivitiesContainer(props) {
   for (const activity of activities) {
     activityDetails.push(
       <ActivityCard
-        key={activity.activity_id}
-        name={activity.activity_name}
-        date={activity.activity_date}
-        type={activity.activity_type}
+        // key={activity.activity_id}
+        name={activity.name}
+        distance={activity.distance}
+        type={activity.type}
       />
     );
   }

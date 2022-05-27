@@ -43,7 +43,7 @@ function Navbar(props) {
     return (
       <nav>
         <ReactRouterDOM.Link
-          to="users/home"
+          to="/users/home"
           className="navbar-brand d-flex justify-content-left"
         >
           <img src={props.logo} height="30" alt="logo" />

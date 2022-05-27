@@ -7,22 +7,10 @@ import requests
 import os
 from jinja2 import StrictUndefined
 
+
 app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
-
-
-# def get_user_activities(user_id):
-    # all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
-
-    # activities = []
-
-    # for activity in all_activities:
-    #     activity = activity.to_dict()
-    #     activities.append(activity)
-    
-    # # return jsonify({"activities": activities})
-
 
 
 @app.route("/exchange_token")
@@ -63,27 +51,27 @@ def authorize():
     # return jsonify({'error':error, 'success': success})
 
 
-@app.route("/api/strava-activities")
-def get_strava_activities():
-    """Retrieve strava activities from API to display on user's activities page."""
+# @app.route("/api/strava-activities")
+# def get_strava_activities():
+#     """Retrieve strava activities from API to display on user's activities page."""
     
-    url = "https://www.strava.com/api/v3/athlete/activities"
+#     url = "https://www.strava.com/api/v3/athlete/activities"
 
-    access_token = session["access_token"]
-    print(access_token)
+#     access_token = session["access_token"]
+#     # print(access_token)
     
-    headers = {
-        "Authorization": f"Bearer {access_token}"
-    }
+#     headers = {
+#         "Authorization": f"Bearer {access_token}"
+#     }
 
-    page = str(1)
+#     page = str(1)
 
-    r = requests.get(f"{url}?before=1653447977&after=959223977&page={page}&per_page=20", headers=headers)
+#     r = requests.get(f"{url}?before=1653447977&after=959223977&page={page}&per_page=20", headers=headers)
 
-    # for activity in r.json():
+#     # for activity in r.json():
 
     
-    return jsonify(r.json())
+#     return jsonify(r.json())
 
 # session["access_token"] and put in "headers"
 # before and after epochs in params
@@ -188,21 +176,54 @@ def save_new_user():
         return jsonify({"success": False, "error_msg": error})
 
 
+
+    
+    
+
+    
+    # return jsonify(r.json())
 @app.route('/api/users/<user_id>/activities')
 def activity_data(user_id):
+    """All activities."""
+    
+    def get_strava_activity_data():
+        url = "https://www.strava.com/api/v3/athlete/activities"
 
-        # activities = get_user_activities(user_id)
+        access_token = session["access_token"]
+        # print(access_token)
+
+        headers = {
+            "Authorization": f"Bearer {access_token}"
+        }
+
+        page = str(1)
+
+        r = requests.get(f"{url}?before=1653447977&after=959223977&page={page}&per_page=20", headers=headers)
+        
+        return r.json()
+
+    strava_activities = get_strava_activity_data()
+    print(strava_activities)
+    
+    def km_to_miles(kilometers):
+        return round((kilometers * 0.000621371), 2)
+
+    activity_objs = []
+
+    for activity in strava_activities:
+        new_strava_act = {"name": activity["name"], "distance": km_to_miles(activity["distance"]), "type": activity["type"]}
+        activity_objs.append(new_strava_act)
+
+
     all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
 
-    activities = []
-
     for activity in all_activities:
-        activity = activity.to_dict()
-        activity.from_strava = False
-        activities.append(activity)
+        new_act = {"name": activity.activity_name, "distance": activity.distance, "type": activity.activity_type}
+        # activity = activity.to_dict()
+        activity_objs.append(new_act)
     
     
-    return jsonify({"activities": activities})
+    return jsonify({"activities": activity_objs})
 
 
 @app.route("/users/<user_id>/home")
@@ -252,13 +273,12 @@ def add_activity():
     new_act_suffer_score = data.get("suffer_score")
     new_act_notes = data.get("activity_notes")
     created_at = datetime.datetime.now()
-    from_strava = data.get("from_strava")
 
     if new_act_duration and new_act_date:
         error = None
         success = True
 
-        new_activity = ActivityLog.create_activity(user_id, new_act_date, new_act_type, new_act_name, new_act_duration, new_act_distance, new_act_suffer_score, new_act_notes, created_at, from_strava)
+        new_activity = ActivityLog.create_activity(user_id, new_act_date, new_act_type, new_act_name, new_act_duration, new_act_distance, new_act_suffer_score, new_act_notes, created_at)
 
         return jsonify({"success": success, "error": error})
 
