@@ -104,12 +104,12 @@ function AddActivityForm(props) {
             name="activity-types"
             onChange={(evt) => setActivityType(evt.currentTarget.value)}
           >
-            <option value="run">Run</option>
-            <option value="bike">Bike</option>
-            <option value="swim">Swim</option>
-            <option value="climb">Climb</option>
-            <option value="elliptical">Elliptical</option>
-            <option value="other">Other</option>
+            <option value="Run">Run</option>
+            <option value="Bike">Bike</option>
+            <option value="Swim">Swim</option>
+            <option value="Climb">Climb</option>
+            <option value="Elliptical">Elliptical</option>
+            <option value="Other">Other</option>
           </select>
         </div>
         <br></br>
