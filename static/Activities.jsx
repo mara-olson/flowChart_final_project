@@ -2,6 +2,7 @@ function ActivityCard(props) {
   return (
     <div className="card">
       <p>Name: {props.name}</p>
+      <p>Date: {props.date} </p>
       <p>Type: {props.type}</p>
       <p>Distance: {props.distance} miles</p>
     </div>
@@ -88,7 +89,6 @@ function AddActivityForm(props) {
     <div>
       <h2>New Activity</h2>
       <form onSubmit={handleAddActivity}>
-        {/* <label htmlFor="sign-up-fname">First name</label> */}
         <div>
           Activity Date
           <input
@@ -98,7 +98,6 @@ function AddActivityForm(props) {
           />
         </div>
         <br></br>
-        {/* <label htmlFor="sign-up-lname">Last name</label> */}
         <div>
           Activity Type
           <select
@@ -116,7 +115,6 @@ function AddActivityForm(props) {
         <br></br>
         <div>
           Activity Name
-          {/* <label htmlFor="sign-up-team">Team name</label> */}
           <input
             type="text"
             value={activityName}
@@ -128,7 +126,6 @@ function AddActivityForm(props) {
           />
         </div>
         <br></br>
-        {/* <label htmlFor="sign-up-email">Email</label> */}
         <div>
           Duration
           <input
@@ -142,8 +139,6 @@ function AddActivityForm(props) {
           />
         </div>
         <br></br>
-
-        {/* <label htmlFor="sign-up-password">Password</label> */}
         <div>
           Distance
           <input
@@ -225,17 +220,14 @@ function Activities(props) {
 function ActivitiesContainer(props) {
   const { activities, setActivities } = props;
 
-  const [stravaActivities, setStravaActivities] = React.useState([]);
-
   const activityDetails = [];
-
-  // console.log(activities);
 
   for (const activity of activities) {
     activityDetails.push(
       <ActivityCard
-        // key={activity.activity_id}
+        key={activity.id}
         name={activity.name}
+        date={activity.date}
         distance={activity.distance}
         type={activity.type}
       />
