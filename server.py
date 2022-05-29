@@ -199,11 +199,18 @@ def activity_data(user_id):
         page = str(1)
 
         r = requests.get(f"{url}?before=1653447977&after=959223977&page={page}&per_page=20", headers=headers)
+
+        # for activity in r:
+        #     date = activity["start_date_local"] 
+            
+        #     activity["start_date_local"] = date.strftime("%a %B %d %Y")
+            
+            # return final_strava
         
         return r.json()
 
     strava_activities = get_strava_activity_data()
-    # print(strava_activities)
+    print(strava_activities)
     
     def km_to_miles(kilometers):
         return round((kilometers * 0.000621371), 2)
