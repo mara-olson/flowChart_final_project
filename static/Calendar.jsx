@@ -1,18 +1,17 @@
 function Calendar(props) {
   const [calActivities, setCalActivities] = React.useState([]);
 
+  const [today, setToday] = React.useState(new Date());
+
   React.useEffect(() => {
     if (props.userId) {
       fetch(`/api/users/${props.userId}/activities`)
         .then((response) => response.json())
         .then((data) => {
           setCalActivities(data.activities);
-          console.log(calActivities);
         });
     }
   }, [props.userId]);
-
-  const [today, setToday] = React.useState(new Date());
 
   const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -56,8 +55,8 @@ function Calendar(props) {
         <CalendarDays
           today={today}
           userId={props.userId}
-          calActivities={props.calActivities}
-          setCalActivities={props.setCalActivities}
+          calActivities={calActivities}
+          setCalActivities={setCalActivities}
         />
         {/* <CalendarActivities today={today} userId={props.userId} /> */}
       </div>
@@ -71,7 +70,6 @@ function CalendarDays(props) {
     props.today.getMonth(),
     1
   );
-
   let weekdayOfFirstDay = firstDayOfMonth.getDay();
 
   const currentDays = [];
@@ -87,22 +85,30 @@ function CalendarDays(props) {
       firstDayOfMonth.setDate(firstDayOfMonth.getDate() + 1);
     }
 
-    const findActivityForDate = (calActivities, date) => {
-      for (const calActivity of calActivities) {
-        return calActivity.date === date;
-      }
-    };
+    // const findActivityForDate = (calActivities, date) => {
+    //   for (const calActivity of props.calActivities) {
+    //     return calActivity.date === date;
+    //   }
+    // };
 
     const calendarDay = {
       currentMonth: firstDayOfMonth.getMonth() === props.today.getMonth(),
-      calDate: new Date(firstDayOfMonth),
+      date: new Date(firstDayOfMonth).toDateString(),
       month: firstDayOfMonth.getMonth(),
       number: firstDayOfMonth.getDate(),
       selected: firstDayOfMonth.toDateString() === props.today.toDateString(),
       year: firstDayOfMonth.getFullYear(),
-      activities: findActivityForDate(props.calActivities, calDate),
+      // activities: props.calActivities, date,
     };
     currentDays.push(calendarDay);
+
+    for (const currentDay of currentDays) {
+      for (const calActivity of props.calActivities) {
+        if (currentDay.date == calActivity.date) {
+          currentDay["activityName"] = calActivity.name;
+        }
+      }
+    }
   }
 
   return (
@@ -117,7 +123,7 @@ function CalendarDays(props) {
             }
           >
             <p>{day.number}</p>
-            <div>{day.activities}</div>
+            <div>{day.activityName}</div>
           </div>
         );
       })}
@@ -125,61 +131,61 @@ function CalendarDays(props) {
   );
 }
 
-function CalendarActivities(props) {
-  const [calActivities, setCalActivities] = React.useState([]);
+// function CalendarActivities(props) {
+//   const [calActivities, setCalActivities] = React.useState([]);
 
-  React.useEffect(() => {
-    if (props.userId) {
-      fetch(`/api/users/${props.userId}/activities`)
-        .then((response) => response.json())
-        .then((data) => {
-          setCalActivities(data.activities);
-          console.log(calActivities);
-        });
-    }
-  }, [props.userId]);
+//   React.useEffect(() => {
+//     if (props.userId) {
+//       fetch(`/api/users/${props.userId}/activities`)
+//         .then((response) => response.json())
+//         .then((data) => {
+//           setCalActivities(data.activities);
+//           console.log(calActivities);
+//         });
+//     }
+//   }, [props.userId]);
 
-  return (
-    <div>
-      <CalActivitiesContainer
-        calActivities={calActivities}
-        setCalActivities={setCalActivities}
-        setError={props.setError}
-        userId={props.userId}
-      />
-      {/* <AddActivityButton
-        activities={activities}
-        setActivities={setActivities}
-        setError={props.setError}
-        userId={props.userId}
-        setShowActivityForm={setShowActivityForm}
-        showActivityForm={showActivityForm}
-      /> */}
-    </div>
-  );
-}
+//   return (
+//     <div>
+//       <CalActivitiesContainer
+//         calActivities={calActivities}
+//         setCalActivities={setCalActivities}
+//         setError={props.setError}
+//         userId={props.userId}
+//       />
+//       {/* <AddActivityButton
+//         activities={activities}
+//         setActivities={setActivities}
+//         setError={props.setError}
+//         userId={props.userId}
+//         setShowActivityForm={setShowActivityForm}
+//         showActivityForm={showActivityForm}
+//       /> */}
+//     </div>
+//   );
+// }
 
-function CalActivitiesContainer(props) {
-  const { calActivities, setCalActivities } = props;
+// function CalActivitiesContainer(props) {
+//   const { calActivities, setCalActivities } = props;
 
-  const calActivityDetails = [];
+//   const calActivityDetails = [];
 
-  for (const calActivity of calActivities) {
-    calActivityDetails.push(
-      <ActivityCard
-        key={calActivity.id}
-        name={calActivity.name}
-        date={calActivity.date}
-        distance={calActivity.distance}
-        type={calActivity.type}
-      />
-    );
-    console.log(calActivities.date);
-  }
+//   for (const calActivity of calActivities) {
+//     calActivityDetails.push(
+//       <ActivityCard
+//         key={calActivity.id}
+//         name={calActivity.name}
+//         date={calActivity.date}
+//         distance={calActivity.distance}
+//         type={calActivity.type}
+//       />
+//     );
+//     console.log(calActivities.date);
+//   }
 
-  return (
-    <div>
-      <div>{calActivityDetails}</div>
-    </div>
-  );
-}
+//   return (
+//     <div>
+//       <div>{calActivityDetails}</div>
+//     </div>
+//   );
+// }

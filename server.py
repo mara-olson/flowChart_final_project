@@ -203,7 +203,7 @@ def activity_data(user_id):
         return r.json()
 
     strava_activities = get_strava_activity_data()
-    print(strava_activities)
+    # print(strava_activities)
     
     def km_to_miles(kilometers):
         return round((kilometers * 0.000621371), 2)
@@ -218,7 +218,7 @@ def activity_data(user_id):
     all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
 
     for activity in all_activities:
-        new_act = {"id": activity.activity_id, "name": activity.activity_name, "date": activity.activity_date, "distance": activity.distance, "type": activity.activity_type}
+        new_act = {"id": activity.activity_id, "name": activity.activity_name, "date": activity.activity_date.strftime("%a %B %d %Y"), "distance": activity.distance, "type": activity.activity_type}
         # activity = activity.to_dict()
         activity_objs.append(new_act)
     
