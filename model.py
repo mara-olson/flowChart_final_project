@@ -108,7 +108,7 @@ class ActivityLog(db.Model):
     activity_name = db.Column(db.String, default="Activity") 
     activity_type = db.Column(db.String, default="Run") 
     activity_date = db.Column(db.DateTime, nullable=False) 
-    distance = db.Column(db.Integer) 
+    distance = db.Column(db.Float) 
     duration = db.Column(db.Integer) 
     workout_type = db.Column(db.String) 
     suffer_score = db.Column(db.Integer) 

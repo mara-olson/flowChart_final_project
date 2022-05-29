@@ -106,6 +106,8 @@ function CalendarDays(props) {
       for (const calActivity of props.calActivities) {
         if (currentDay.date == calActivity.date) {
           currentDay["activityName"] = calActivity.name;
+          currentDay["activityType"] = calActivity.type;
+          currentDay["distance"] = calActivity.distance;
         }
       }
     }
@@ -124,6 +126,8 @@ function CalendarDays(props) {
           >
             <p>{day.number}</p>
             <div>{day.activityName}</div>
+            <div>{day.activityType}</div>
+            {day.activityName && <div>{day.distance} miles</div>}
           </div>
         );
       })}
