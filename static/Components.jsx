@@ -83,6 +83,25 @@ function Navbar(props) {
   }
 }
 
+function Modal(props) {
+  if (!props.showModal) {
+    return null;
+  }
+  return (
+    <div className="modal">
+      <div className="modal-content">
+        <div className="modal-header">
+          <h4 className="modal-title">Modal Title</h4>
+        </div>
+        <div className="modal-body">Content here</div>
+        <div className="modal-footer">
+          <button className="modal-close-button">Close</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // LANDING PAGE COMPONENT
 function LandingPage(props) {
   const landingMessage1 =
@@ -127,9 +146,12 @@ function LandingPage(props) {
 
 // HOMEPAGE AFTER LOGIN COMPONENT
 function Home(props) {
+  const [showModal, setShowModal] = React.useState(false);
   return (
     <div>
-      <p>Welcome, {props.userId}!</p>
+      <Modal showModal={showModal} />
+      <Calendar userId={props.userId} setShowModal={setShowModal} />
+      {/* <p>Welcome, {props.userId}!</p> */}
       {/* <ActivitiesContainer /> */}
     </div>
   );

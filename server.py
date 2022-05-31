@@ -210,7 +210,7 @@ def activity_data(user_id):
         return r.json()
 
     strava_activities = get_strava_activity_data()
-    print(strava_activities)
+    # print(strava_activities)
     
     def km_to_miles(kilometers):
         return round((kilometers * 0.000621371), 2)

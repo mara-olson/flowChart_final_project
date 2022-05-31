@@ -88,3 +88,39 @@
   color: #cc0000;
   font-weight: bold;
 }
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid #ccc; */
+  /* transition: 1.1s ease-out; */
+  /* box-shadow: -2rem 2rem 2rem rgba(black, 0.2);
+  filter: blur(0); */
+}
+
+.modal-content {
+  width: 500px;
+  background-color: rgb(222, 133, 133);
+}
+
+.modal-header,
+.modal-footer {
+  padding: 10px;
+}
+
+.modal-title {
+  margin: 0;
+}
+
+.modal-body {
+  padding: 10px;
+  border-top: 1px solid rgb(200, 88, 88);
+  border-bottom: 1px solid rgb(200, 88, 88);
+}

@@ -52,7 +52,8 @@ function App() {
       <div className="container-fluid">
         <Route exact path="/users/home">
           <Home userId={userId} isLoggedIn={isLoggedIn} />
-          <Calendar userId={userId} />
+
+          {/* <Calendar userId={userId} /> */}
         </Route>
       </div>
       <div className="container-fluid">

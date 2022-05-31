@@ -57,6 +57,7 @@ function Calendar(props) {
           userId={props.userId}
           calActivities={calActivities}
           setCalActivities={setCalActivities}
+          setShowModal={props.setShowModal}
         />
         {/* <CalendarActivities today={today} userId={props.userId} /> */}
       </div>
@@ -71,6 +72,11 @@ function CalendarDays(props) {
     1
   );
   let weekdayOfFirstDay = firstDayOfMonth.getDay();
+
+  const handleClick = (evt) => {
+    evt.preventDefault();
+    props.setShowModal(true);
+  };
 
   const currentDays = [];
 
@@ -117,18 +123,19 @@ function CalendarDays(props) {
     <div className="table-content">
       {currentDays.map((day) => {
         return (
-          <div
+          <button
             className={
               "calendar-day" +
               (day.currentMonth ? " current" : "") +
               (day.selected ? " selected" : "")
             }
+            onClick={day.activityName && handleClick}
           >
             <p>{day.number}</p>
             <div>{day.activityName}</div>
             <div>{day.activityType}</div>
             {day.activityName && <div>{day.distance} miles</div>}
-          </div>
+          </button>
         );
       })}
     </div>
