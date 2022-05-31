@@ -95,7 +95,9 @@ function Modal(props) {
         </div>
         <div className="modal-body">Content here</div>
         <div className="modal-footer">
-          <button className="modal-close-button">Close</button>
+          <button className="modal-close-button" onClick={props.onClose}>
+            Close
+          </button>
         </div>
       </div>
     </div>
@@ -149,7 +151,7 @@ function Home(props) {
   const [showModal, setShowModal] = React.useState(false);
   return (
     <div>
-      <Modal showModal={showModal} />
+      <Modal onClose={() => setShowModal(false)} showModal={showModal} />
       <Calendar userId={props.userId} setShowModal={setShowModal} />
       {/* <p>Welcome, {props.userId}!</p> */}
       {/* <ActivitiesContainer /> */}
