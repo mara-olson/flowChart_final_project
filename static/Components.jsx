@@ -91,9 +91,13 @@ function Modal(props) {
     <div className="modal">
       <div className="modal-content">
         <div className="modal-header">
-          <h4 className="modal-title">Modal Title</h4>
+          <h4 className="modal-title">{props.modalTitle}</h4>
         </div>
-        <div className="modal-body">Content here</div>
+        <div className="modal-body">
+          <div className="modal-act-date">{props.modalDate}</div>
+          <div className="modal-act-type">{props.modalType}</div>
+          <div>{props.children}</div>
+        </div>
         <div className="modal-footer">
           <button className="modal-close-button" onClick={props.onClose}>
             Close
@@ -149,10 +153,22 @@ function LandingPage(props) {
 // HOMEPAGE AFTER LOGIN COMPONENT
 function Home(props) {
   const [showModal, setShowModal] = React.useState(false);
+  const [modalTitle, setModalTitle] = React.useState(null);
+  const [modalDate, setModalDate] = React.useState(null);
+  const [modalType, setModalType] = React.useState(null);
+
   return (
     <div>
-      <Modal onClose={() => setShowModal(false)} showModal={showModal} />
-      <Calendar userId={props.userId} setShowModal={setShowModal} />
+      <Modal
+        onClose={() => setShowModal(false)}
+        showModal={showModal}
+        modalTitle={modalTitle}
+      />
+      <Calendar
+        userId={props.userId}
+        setShowModal={setShowModal}
+        setModalTitle={setModalTitle}
+      />
       {/* <p>Welcome, {props.userId}!</p> */}
       {/* <ActivitiesContainer /> */}
     </div>

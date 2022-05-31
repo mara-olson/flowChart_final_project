@@ -1,5 +1,6 @@
 function Calendar(props) {
   const [calActivities, setCalActivities] = React.useState([]);
+  const [selectedDay, setSelectedDay] = React.useState(null);
 
   const [today, setToday] = React.useState(new Date());
 
@@ -58,6 +59,8 @@ function Calendar(props) {
           calActivities={calActivities}
           setCalActivities={setCalActivities}
           setShowModal={props.setShowModal}
+          setModalTitle={props.setModalTitle}
+          setSelectedDay={setSelectedDay}
         />
         {/* <CalendarActivities today={today} userId={props.userId} /> */}
       </div>
@@ -72,11 +75,6 @@ function CalendarDays(props) {
     1
   );
   let weekdayOfFirstDay = firstDayOfMonth.getDay();
-
-  const handleClick = (evt) => {
-    evt.preventDefault();
-    props.setShowModal(true);
-  };
 
   const currentDays = [];
 
@@ -111,6 +109,7 @@ function CalendarDays(props) {
     for (const currentDay of currentDays) {
       for (const calActivity of props.calActivities) {
         if (currentDay.date == calActivity.date) {
+          currentDay.id == calActivity.id;
           currentDay["activityName"] = calActivity.name;
           currentDay["activityType"] = calActivity.type;
           currentDay["distance"] = calActivity.distance;
@@ -118,6 +117,13 @@ function CalendarDays(props) {
       }
     }
   }
+
+  const handleClick = (evt) => {
+    evt.preventDefault();
+    console.log(evt);
+    // props.setSelectedDay(evt.);
+    props.setShowModal(true);
+  };
 
   return (
     <div className="table-content">
@@ -129,12 +135,20 @@ function CalendarDays(props) {
               (day.currentMonth ? " current" : "") +
               (day.selected ? " selected" : "")
             }
+            key={day.id}
             onClick={day.activityName && handleClick}
           >
             <p>{day.number}</p>
             <div>{day.activityName}</div>
             <div>{day.activityType}</div>
             {day.activityName && <div>{day.distance} miles</div>}
+            {/* <Modal
+              onClose={() => setShowModal(false)}
+              showModal={props.showModal}
+              modalTitle={day.activityName}
+              modalDate={day.activityDate}
+              modalType={day.activityType}
+            /> */}
           </button>
         );
       })}

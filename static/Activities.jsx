@@ -38,6 +38,7 @@ function AddActivityButton(props) {
 }
 
 function AddActivityForm(props) {
+  // const [activityId, setActivityId] = React.useState(null);
   const [activityName, setActivityName] = React.useState(null);
   const [activityDate, setActivityDate] = React.useState(null);
   const [activityType, setActivityType] = React.useState(null);
@@ -58,6 +59,7 @@ function AddActivityForm(props) {
       credentials: "include",
       body: JSON.stringify({
         user_id: userId,
+        // activity_id: activityId,
         activity_date: activityDate,
         activity_type: activityType,
         activity_name: activityName,
