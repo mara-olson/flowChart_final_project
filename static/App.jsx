@@ -10,7 +10,7 @@ function App() {
 
   const [showModal, setShowModal] = React.useState(false);
   const [modalTitle, setModalTitle] = React.useState(null);
-  const [modalDate, setModalDate] = React.useState(null);
+  const [modalContent, setModalContent] = React.useState(null);
   const [modalType, setModalType] = React.useState(null);
 
   React.useEffect(() => {
@@ -61,14 +61,13 @@ function App() {
             userId={userId}
             isLoggedIn={isLoggedIn}
             setShowModal={setShowModal}
-            setModalDate={setModalDate}
+            setModalContent={setModalContent}
           />
           <Modal
             onClose={() => setShowModal(false)}
             showModal={showModal}
-            modalTitle={modalTitle}
-            setModalDate={setModalDate}
-            modalDate={modalDate}
+            setModalContent={setModalContent}
+            modalContent={modalContent}
           />
           {/* <Calendar userId={userId} /> */}
         </Route>
@@ -80,6 +79,7 @@ function App() {
             setError={setError}
             showModal={showModal}
             setShowModal={setShowModal}
+            setModalContent={setModalContent}
           />
           <Modal
             onClose={() => setShowModal(false)}

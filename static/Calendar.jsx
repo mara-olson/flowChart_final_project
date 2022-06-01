@@ -61,7 +61,7 @@ function Calendar(props) {
           setShowModal={props.setShowModal}
           setModalTitle={props.setModalTitle}
           setSelectedDay={props.setSelectedDay}
-          setModalDate={props.setModalDate}
+          setModalContent={props.setModalContent}
         />
         {/* <CalendarActivities today={today} userId={props.userId} /> */}
       </div>
@@ -121,11 +121,11 @@ function CalendarDays(props) {
           name={day.activityName}
           date={day.date}
           type={day.activityType}
+          distance={day.distance}
         />
       );
       props.setShowModal(true);
-      props.setModalDate(content);
-      console.log(day);
+      props.setModalContent(content);
     }
   };
 

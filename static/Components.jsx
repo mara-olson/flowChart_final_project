@@ -90,15 +90,7 @@ function Modal(props) {
   return (
     <div className="modal">
       <div className="modal-content">
-        <div className="modal-header">
-          <h4 className="modal-title">{props.modalTitle}</h4>
-        </div>
-        {/* <ActivityCard setModalDate={props.setModalDate} /> */}
-        <div className="modal-body">
-          <div className="modal-act-date">{props.modalDate}</div>
-          <div className="modal-act-type">{props.modalType}</div>
-          <div>{props.children}</div>
-        </div>
+        {props.modalContent}
         <div className="modal-footer">
           <button className="modal-close-button" onClick={props.onClose}>
             Close
@@ -153,11 +145,6 @@ function LandingPage(props) {
 
 // HOMEPAGE AFTER LOGIN COMPONENT
 function Home(props) {
-  // const [showModal, setShowModal] = React.useState(false);
-  // const [modalTitle, setModalTitle] = React.useState(null);
-  // const [modalDate, setModalDate] = React.useState(null);
-  // const [modalType, setModalType] = React.useState(null);
-
   return (
     <div>
       {/* <Modal
@@ -168,7 +155,7 @@ function Home(props) {
       <Calendar
         userId={props.userId}
         setShowModal={props.setShowModal}
-        setModalDate={props.setModalDate}
+        setModalContent={props.setModalContent}
       />
       {/* <p>Welcome, {props.userId}!</p> */}
       {/* <ActivitiesContainer /> */}
