@@ -60,7 +60,8 @@ function Calendar(props) {
           setCalActivities={setCalActivities}
           setShowModal={props.setShowModal}
           setModalTitle={props.setModalTitle}
-          setSelectedDay={setSelectedDay}
+          setSelectedDay={props.setSelectedDay}
+          setModalDate={props.setModalDate}
         />
         {/* <CalendarActivities today={today} userId={props.userId} /> */}
       </div>
@@ -89,12 +90,6 @@ function CalendarDays(props) {
       firstDayOfMonth.setDate(firstDayOfMonth.getDate() + 1);
     }
 
-    // const findActivityForDate = (calActivities, date) => {
-    //   for (const calActivity of props.calActivities) {
-    //     return calActivity.date === date;
-    //   }
-    // };
-
     const calendarDay = {
       currentMonth: firstDayOfMonth.getMonth() === props.today.getMonth(),
       date: new Date(firstDayOfMonth).toDateString(),
@@ -102,7 +97,6 @@ function CalendarDays(props) {
       number: firstDayOfMonth.getDate(),
       selected: firstDayOfMonth.toDateString() === props.today.toDateString(),
       year: firstDayOfMonth.getFullYear(),
-      // activities: props.calActivities, date,
     };
     currentDays.push(calendarDay);
 
@@ -118,11 +112,21 @@ function CalendarDays(props) {
     }
   }
 
-  const handleClick = (evt) => {
-    evt.preventDefault();
-    console.log(evt);
+  const handleClick = (day) => {
+    // evt.preventDefault();
     // props.setSelectedDay(evt.);
-    props.setShowModal(true);
+    if (day.activityName) {
+      const content = (
+        <ActivityCard
+          name={day.activityName}
+          date={day.date}
+          type={day.activityType}
+        />
+      );
+      props.setShowModal(true);
+      props.setModalDate(content);
+      console.log(day);
+    }
   };
 
   return (
@@ -136,8 +140,9 @@ function CalendarDays(props) {
               (day.selected ? " selected" : "")
             }
             key={day.id}
-            onClick={day.activityName && handleClick}
+            onClick={() => handleClick(day)}
           >
+            {/* day.activityName &&  */}
             <p>{day.number}</p>
             <div>{day.activityName}</div>
             <div>{day.activityType}</div>

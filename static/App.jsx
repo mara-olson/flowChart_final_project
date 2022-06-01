@@ -3,9 +3,15 @@ const { Route, BrowserRouter } = ReactRouterDOM;
 
 function App() {
   const [userId, setUserId] = React.useState(null);
+
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   const [error, setError] = React.useState(null);
+
+  const [showModal, setShowModal] = React.useState(false);
+  const [modalTitle, setModalTitle] = React.useState(null);
+  const [modalDate, setModalDate] = React.useState(null);
+  const [modalType, setModalType] = React.useState(null);
 
   React.useEffect(() => {
     const localIsLoggedIn = localStorage.getItem("isLoggedIn");
@@ -51,14 +57,35 @@ function App() {
       </div>
       <div className="container-fluid">
         <Route exact path="/users/home">
-          <Home userId={userId} isLoggedIn={isLoggedIn} />
-
+          <Home
+            userId={userId}
+            isLoggedIn={isLoggedIn}
+            setShowModal={setShowModal}
+            setModalDate={setModalDate}
+          />
+          <Modal
+            onClose={() => setShowModal(false)}
+            showModal={showModal}
+            modalTitle={modalTitle}
+            setModalDate={setModalDate}
+            modalDate={modalDate}
+          />
           {/* <Calendar userId={userId} /> */}
         </Route>
       </div>
       <div className="container-fluid">
         <Route exact path="/users/activities">
-          <Activities userId={userId} setError={setError} />
+          <Activities
+            userId={userId}
+            setError={setError}
+            showModal={showModal}
+            setShowModal={setShowModal}
+          />
+          <Modal
+            onClose={() => setShowModal(false)}
+            showModal={showModal}
+            modalTitle={modalTitle}
+          />
         </Route>
       </div>
       <div className="container-fluid">

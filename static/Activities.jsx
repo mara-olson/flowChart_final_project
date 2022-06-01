@@ -1,6 +1,12 @@
 function ActivityCard(props) {
+  const handleClick = (evt) => {
+    evt.preventDefault();
+    // props.setSelectedDay(evt.);
+    props.setShowModal(true);
+  };
+
   return (
-    <div className="card">
+    <div className="card" onClick={handleClick}>
       <p>Name: {props.name}</p>
       <p>Date: {props.date} </p>
       <p>Type: {props.type}</p>
@@ -206,6 +212,8 @@ function Activities(props) {
         userId={props.userId}
         setShowActivityForm={setShowActivityForm}
         showActivityForm={showActivityForm}
+        showModal={props.showModal}
+        setShowModal={props.setShowModal}
       />
       <AddActivityButton
         activities={activities}
@@ -232,6 +240,8 @@ function ActivitiesContainer(props) {
         date={activity.date}
         distance={activity.distance}
         type={activity.type}
+        showModal={props.showModal}
+        setShowModal={props.setShowModal}
       />
     );
   }
