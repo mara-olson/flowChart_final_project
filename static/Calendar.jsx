@@ -34,6 +34,15 @@ function Calendar(props) {
 
   const currentYear = today.getFullYear();
 
+  const nextMonth = () => {
+    setToday(new Date(today.setMonth(today.getMonth() + 1)));
+  };
+
+  const prevMonth = () => {
+    setToday(new Date(today.setMonth(today.getMonth() - 1)));
+    // console.log()
+  };
+
   // console.log(today);
   return (
     <div className="calendar">
@@ -41,6 +50,14 @@ function Calendar(props) {
         <h2>
           {currentMonth}, {currentYear}
         </h2>
+        <div className="calendar-nav">
+          <button type="link" onClick={prevMonth}>
+            Previous Month
+          </button>
+          <button type="link" onClick={nextMonth}>
+            Next Month
+          </button>
+        </div>
       </div>
       <div className="calendar-body">
         <div className="weekdays-header">
@@ -77,9 +94,7 @@ function CalendarDays(props) {
   );
   let weekdayOfFirstDay = firstDayOfMonth.getDay();
   const realTodayMonth = props.realToday.getMonth();
-  console.log(realTodayMonth);
   const finalTodayMonth = new Date(firstDayOfMonth).toDateString();
-  console.log(finalTodayMonth);
   const currentDays = [];
 
   for (let day = 0; day < 42; day++) {
@@ -130,29 +145,28 @@ function CalendarDays(props) {
       );
       props.setShowModal(true);
       props.setModalContent(content);
-      console.log(day.date);
     }
   };
 
-  const nextMonth = () => {
-    props.setToday(new Date(props.today.setMonth(props.today.getMonth() + 1)));
-  };
+  // const nextMonth = () => {
+  //   props.setToday(new Date(props.today.setMonth(props.today.getMonth() + 1)));
+  // };
 
-  const prevMonth = () => {
-    props.setToday(new Date(props.today.setMonth(props.today.getMonth() - 1)));
-    console.log(props.realToday);
-    // console.log()
-  };
+  // const prevMonth = () => {
+  //   props.setToday(new Date(props.today.setMonth(props.today.getMonth() - 1)));
+  //   // console.log()
+  // };
 
   return (
     <div className="table-content">
       <div className="calendar-nav">
-        <button type="link" onClick={nextMonth}>
-          Next Month
-        </button>
-        <button type="link" onClick={prevMonth}>
+        {/* <button type="link" onClick={prevMonth}>
           Previous Month
         </button>
+        <button type="link" onClick={nextMonth}>
+          Next Month
+        </button> */}
+        <br></br>
       </div>
       {currentDays.map((day) => {
         return (

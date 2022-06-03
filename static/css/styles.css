@@ -34,6 +34,12 @@
   align-items: center;
 }
 
+.calendar-nav {
+  /* position: absolute;
+  right: 0;
+  top: 120px; */
+}
+
 .calendar-body {
   width: 100%;
   flex-grow: 1;
