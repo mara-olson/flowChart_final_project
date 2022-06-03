@@ -2,6 +2,10 @@ function ActivityCard(props) {
   const handleClick = (evt) => {
     evt.preventDefault();
     // props.setSelectedDay(evt.);
+
+    props.setModalContent(
+      <AddActivityForm formTitle="Edit Activity" buttonTitle="Save Activity" />
+    );
     props.setShowModal(true);
   };
 
@@ -18,29 +22,24 @@ function ActivityCard(props) {
 function AddActivityButton(props) {
   const userId = props.userId;
 
-  if (props.showActivityForm) {
-    return (
+  // if (props.showActivityForm)
+  const handleClick = (evt) => {
+    evt.preventDefault();
+    props.setShowModal(true);
+    props.setModalContent(
       <AddActivityForm
         userId={userId}
         activities={props.actitivies}
         setActivities={props.setActivities}
         setShowActivityForm={props.setShowActivityForm}
         setError={props.setError}
+        setModalContent={props.setModalContent}
+        setShowModal={props.setShowModal}
       />
     );
-  }
-  // const handleClick = (evt) => {
-  //   evt.preventDefault();
-  //   props.setShowActivityForm(true);
-  // if (props.showActivityForm === false) {
-  //   props.setShowActivityForm(true);
-  // } else {
-  //   props.setShowActivityForm(false);
-  // }
-  // };
-  return (
-    <button onClick={props.setShowActivityForm(true)}>Add Activity</button>
-  );
+    return <Modal />;
+  };
+  return <button onClick={handleClick}>Add Activity</button>;
 }
 
 function AddActivityForm(props) {
@@ -52,7 +51,6 @@ function AddActivityForm(props) {
   const [distance, setDistance] = React.useState(null);
   const [sufferScore, setSufferScore] = React.useState(null);
   const [activityNotes, setActivityNotes] = React.useState(null);
-  const [fromStrava, setFromStrava] = React.useState(null);
 
   const history = ReactRouterDOM.useHistory();
 
@@ -73,7 +71,6 @@ function AddActivityForm(props) {
         distance: distance,
         suffer_score: sufferScore,
         activity_notes: activityNotes,
-        from_strava: fromStrava,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -86,13 +83,15 @@ function AddActivityForm(props) {
             .then((response) => response.json())
             .then((data) => {
               props.setActivities(data.activities);
-              props.setShowActivityForm(false);
+              console.log(data.actitivies);
+              props.setShowModal(false);
             });
         } else {
           props.setError(data.error);
         }
       });
   };
+
   return (
     <div>
       <h2>New Activity</h2>
@@ -205,6 +204,16 @@ function Activities(props) {
 
   return (
     <div>
+      <AddActivityButton
+        activities={activities}
+        setActivities={setActivities}
+        setError={props.setError}
+        userId={props.userId}
+        setShowActivityForm={setShowActivityForm}
+        showActivityForm={showActivityForm}
+        setModalContent={props.setModalContent}
+        setShowModal={props.setShowModal}
+      />
       <ActivitiesContainer
         activities={activities}
         setActivities={setActivities}
@@ -214,14 +223,7 @@ function Activities(props) {
         showActivityForm={showActivityForm}
         showModal={props.showModal}
         setShowModal={props.setShowModal}
-      />
-      <AddActivityButton
-        activities={activities}
-        setActivities={setActivities}
-        setError={props.setError}
-        userId={props.userId}
-        setShowActivityForm={setShowActivityForm}
-        showActivityForm={showActivityForm}
+        setModalContent={props.setModalContent}
       />
     </div>
   );
@@ -242,6 +244,7 @@ function ActivitiesContainer(props) {
         type={activity.type}
         showModal={props.showModal}
         setShowModal={props.setShowModal}
+        setModalContent={props.setModalContent}
       />
     );
   }

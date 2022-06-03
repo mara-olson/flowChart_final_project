@@ -11,7 +11,6 @@ function App() {
   const [showModal, setShowModal] = React.useState(false);
   const [modalTitle, setModalTitle] = React.useState(null);
   const [modalContent, setModalContent] = React.useState(null);
-  const [modalType, setModalType] = React.useState(null);
 
   React.useEffect(() => {
     const localIsLoggedIn = localStorage.getItem("isLoggedIn");
@@ -84,6 +83,7 @@ function App() {
           <Modal
             onClose={() => setShowModal(false)}
             showModal={showModal}
+            modalContent={modalContent}
             modalTitle={modalTitle}
           />
         </Route>
