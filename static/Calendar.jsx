@@ -1,8 +1,7 @@
 function Calendar(props) {
   const [calActivities, setCalActivities] = React.useState([]);
-  const [selectedDay, setSelectedDay] = React.useState(null);
-
   const [today, setToday] = React.useState(new Date());
+  const realToday = new Date();
 
   React.useEffect(() => {
     if (props.userId) {
@@ -47,20 +46,21 @@ function Calendar(props) {
         <div className="weekdays-header">
           {weekdays.map((weekday) => {
             return (
-              <div className="weekday">
+              <div key={weekday} className="weekday">
                 <p>{weekday}</p>
               </div>
             );
           })}
         </div>
         <CalendarDays
+          realToday={realToday}
           today={today}
+          setToday={setToday}
           userId={props.userId}
           calActivities={calActivities}
           setCalActivities={setCalActivities}
           setShowModal={props.setShowModal}
           setModalTitle={props.setModalTitle}
-          setSelectedDay={props.setSelectedDay}
           setModalContent={props.setModalContent}
         />
         {/* <CalendarActivities today={today} userId={props.userId} /> */}
@@ -76,7 +76,10 @@ function CalendarDays(props) {
     1
   );
   let weekdayOfFirstDay = firstDayOfMonth.getDay();
-
+  const realTodayMonth = props.realToday.getMonth();
+  console.log(realTodayMonth);
+  const finalTodayMonth = new Date(firstDayOfMonth).toDateString();
+  console.log(finalTodayMonth);
   const currentDays = [];
 
   for (let day = 0; day < 42; day++) {
@@ -95,7 +98,8 @@ function CalendarDays(props) {
       date: new Date(firstDayOfMonth).toDateString(),
       month: firstDayOfMonth.getMonth(),
       number: firstDayOfMonth.getDate(),
-      selected: firstDayOfMonth.toDateString() === props.today.toDateString(),
+      selected:
+        firstDayOfMonth.toDateString() === props.realToday.toDateString(),
       year: firstDayOfMonth.getFullYear(),
     };
     currentDays.push(calendarDay);
@@ -126,11 +130,30 @@ function CalendarDays(props) {
       );
       props.setShowModal(true);
       props.setModalContent(content);
+      console.log(day.date);
     }
+  };
+
+  const nextMonth = () => {
+    props.setToday(new Date(props.today.setMonth(props.today.getMonth() + 1)));
+  };
+
+  const prevMonth = () => {
+    props.setToday(new Date(props.today.setMonth(props.today.getMonth() - 1)));
+    console.log(props.realToday);
+    // console.log()
   };
 
   return (
     <div className="table-content">
+      <div className="calendar-nav">
+        <button type="link" onClick={nextMonth}>
+          Next Month
+        </button>
+        <button type="link" onClick={prevMonth}>
+          Previous Month
+        </button>
+      </div>
       {currentDays.map((day) => {
         return (
           <button
@@ -160,62 +183,3 @@ function CalendarDays(props) {
     </div>
   );
 }
-
-// function CalendarActivities(props) {
-//   const [calActivities, setCalActivities] = React.useState([]);
-
-//   React.useEffect(() => {
-//     if (props.userId) {
-//       fetch(`/api/users/${props.userId}/activities`)
-//         .then((response) => response.json())
-//         .then((data) => {
-//           setCalActivities(data.activities);
-//           console.log(calActivities);
-//         });
-//     }
-//   }, [props.userId]);
-
-//   return (
-//     <div>
-//       <CalActivitiesContainer
-//         calActivities={calActivities}
-//         setCalActivities={setCalActivities}
-//         setError={props.setError}
-//         userId={props.userId}
-//       />
-//       {/* <AddActivityButton
-//         activities={activities}
-//         setActivities={setActivities}
-//         setError={props.setError}
-//         userId={props.userId}
-//         setShowActivityForm={setShowActivityForm}
-//         showActivityForm={showActivityForm}
-//       /> */}
-//     </div>
-//   );
-// }
-
-// function CalActivitiesContainer(props) {
-//   const { calActivities, setCalActivities } = props;
-
-//   const calActivityDetails = [];
-
-//   for (const calActivity of calActivities) {
-//     calActivityDetails.push(
-//       <ActivityCard
-//         key={calActivity.id}
-//         name={calActivity.name}
-//         date={calActivity.date}
-//         distance={calActivity.distance}
-//         type={calActivity.type}
-//       />
-//     );
-//     console.log(calActivities.date);
-//   }
-
-//   return (
-//     <div>
-//       <div>{calActivityDetails}</div>
-//     </div>
-//   );
-// }
