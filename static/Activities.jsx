@@ -32,7 +32,7 @@ function AddActivityButton(props) {
         activities={props.actitivies}
         setActivities={props.setActivities}
         setShowActivityForm={props.setShowActivityForm}
-        setError={props.setError}
+        setModalError={props.setModalError}
         setModalContent={props.setModalContent}
         setShowModal={props.setShowModal}
       />
@@ -87,7 +87,7 @@ function AddActivityForm(props) {
               props.setShowModal(false);
             });
         } else {
-          props.setError(data.error);
+          props.setModalError(data.error);
         }
       });
   };
@@ -207,7 +207,7 @@ function Activities(props) {
       <AddActivityButton
         activities={activities}
         setActivities={setActivities}
-        setError={props.setError}
+        setModalError={props.setModalError}
         userId={props.userId}
         setShowActivityForm={setShowActivityForm}
         showActivityForm={showActivityForm}
@@ -217,7 +217,7 @@ function Activities(props) {
       <ActivitiesContainer
         activities={activities}
         setActivities={setActivities}
-        setError={props.setError}
+        setModalError={props.setModalError}
         userId={props.userId}
         setShowActivityForm={setShowActivityForm}
         showActivityForm={showActivityForm}

@@ -280,7 +280,21 @@ def add_activity():
     new_act_notes = data.get("activity_notes")
     created_at = datetime.datetime.now()
 
-    if new_act_duration and new_act_date:
+    
+    
+    if new_act_date is None:
+        error = "Please enter an activity date, type, & duration"
+        success = False
+        
+        return jsonify({"success": success, "error": error})
+        
+    elif datetime.datetime.strptime(new_act_date, "%m-%d-%Y") > created_at:
+        error = "The date you entered is in the future. Please enter a valid activity date."
+        success = False
+        
+        return jsonify({"success": success, "error": error})
+
+    else:
         error = None
         success = True
 
@@ -288,11 +302,6 @@ def add_activity():
 
         return jsonify({"success": success, "error": error})
 
-    else:
-        error = "Please enter an activity date, type, & duration"
-        success = False
-
-        return jsonify({"success": success, "error": error})
     # , "activity_date": new_act.activity_date, "activity_type": new_act.activity_type, "activity_name": new_act.activity_name, "duration": new_act.duration, "distance": new_act.distance, "suffer_score": new_act.suffer_score, "activity_notes": new_act.activity_notes})
 
 

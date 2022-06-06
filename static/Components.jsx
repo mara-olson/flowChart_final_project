@@ -92,6 +92,7 @@ function Modal(props) {
       <div className="modal-content">
         {props.modalContent}
         <div className="modal-footer">
+          {props.modalError && <p className="error">{props.modalError}</p>}
           <button className="modal-close-button" onClick={props.onClose}>
             Close
           </button>

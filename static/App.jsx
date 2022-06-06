@@ -7,6 +7,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   const [error, setError] = React.useState(null);
+  const [modalError, setModalError] = React.useState(null);
 
   const [showModal, setShowModal] = React.useState(false);
   const [modalTitle, setModalTitle] = React.useState(null);
@@ -67,6 +68,7 @@ function App() {
             showModal={showModal}
             setModalContent={setModalContent}
             modalContent={modalContent}
+            modalError={modalError}
           />
           {/* <Calendar userId={userId} /> */}
         </Route>
@@ -76,6 +78,7 @@ function App() {
           <Activities
             userId={userId}
             setError={setError}
+            setModalError={setModalError}
             showModal={showModal}
             setShowModal={setShowModal}
             setModalContent={setModalContent}
@@ -85,6 +88,7 @@ function App() {
             showModal={showModal}
             modalContent={modalContent}
             modalTitle={modalTitle}
+            modalError={modalError}
           />
         </Route>
       </div>
