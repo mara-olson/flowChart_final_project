@@ -161,6 +161,7 @@ class MenseLog(db.Model):
     bloating = db.Column(db.Boolean, default=False)
     fatigue = db.Column(db.Boolean, default=False)
     
+    mense_date = db.Column(db.DateTime, nullable=False)
 
     mense_notes = db.Column(db.Text, default=None)
 
@@ -174,9 +175,9 @@ class MenseLog(db.Model):
         return f'<Mense mense_id={self.mense_id}'
 
     @classmethod
-    def create_mense_log(cls, user_id, flow_volume, mood, cramps, bloating, fatigue, mense_notes, created_at):
+    def create_mense_log(cls, user_id, flow_volume, mood, cramps, bloating, fatigue, mense_date, mense_notes, created_at):
        """Create and return a new period."""
-       period = cls(user_id=user_id, flow_volume=flow_volume, mood=mood, cramps=cramps, bloating=bloating, fatigue=fatigue, mense_notes=mense_notes, created_at=created_at)
+       period = cls(user_id=user_id, flow_volume=flow_volume, mood=mood, cramps=cramps, bloating=bloating, fatigue=fatigue, mense_date=mense_date, mense_notes=mense_notes, created_at=created_at)
        db.session.add(period)
        db.session.commit()
 
@@ -189,6 +190,7 @@ class MenseLog(db.Model):
                 'cramps': self.cramps,
                 'bloating': self.bloating,
                 'fatigue': self.fatigue,
+                'mense_date': self.mense_date,
                 'mense_notes': self.mense_notes,
                 'created_at': self.created_at,
                 'deleted_at': self.deleted_at

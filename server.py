@@ -313,10 +313,9 @@ def period_data(user_id):
         periods = []
 
         for period in all_periods:
-            period = period.to_dict()
-            # for i in range(len(all_activities)):
-            #     activities[i] = activity
-            periods.append(period)
+            new_period = {"id": period.mense_id, "flow": period.flow_volume, "mood": period.mood, "cramps": period.cramps, "bloating": period.bloating, "fatigue": period.fatigue, "date": period.mense_date, "notes": period.mense_notes}
+            # activity = activity.to_dict()
+            periods.append(new_period)
        
         
         return jsonify({"periods": periods})
@@ -334,10 +333,12 @@ def add_period():
     cramps = data.get("cramps")
     bloating = data.get("bloating")
     fatigue = data.get("fatigue")
+    mense_date = data.get("date")
     notes = data.get("notes")
     created_at = datetime.datetime.now()
 
     new_period = MenseLog.create_mense_log(user_id, flow_volume, mood, cramps, bloating, fatigue, notes, created_at)
+
 
     return jsonify({"flow_volume": new_period.flow_volume, "success": True, "error": None})
 

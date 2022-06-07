@@ -450,15 +450,11 @@ function PeriodCard(props) {
 
 function PeriodForm(props) {
   const [flowVolume, setFlowVolume] = React.useState(null);
-
   const [mood, setMood] = React.useState(false);
-
   const [cramps, setCramps] = React.useState(false);
-
   const [bloating, setBloating] = React.useState(false);
-
   const [fatigue, setFatigue] = React.useState(false);
-
+  const [periodDate, setPeriodDate] = React.useState(null);
   const [notes, setNotes] = React.useState(null);
 
   const handleAddPeriod = (evt) => {
@@ -495,6 +491,14 @@ function PeriodForm(props) {
   return (
     <div>
       <form id="period-form" onSubmit={handleAddPeriod}>
+        <label htmlFor="date">Date of event</label>
+        <input
+          type="text"
+          name="date"
+          onChange={(evt) => setPeriodDate(evt.currentTarget.value)}
+        />
+
+        <br></br>
         <fieldset name="flow-form" id="period-form" disabled={false}>
           <legend>What's your flow?</legend>
           <select
@@ -545,6 +549,7 @@ function PeriodForm(props) {
 
         <label htmlFor="notes">Notes</label>
         <br></br>
+
         <textarea
           id="notes"
           name="periodNotes"

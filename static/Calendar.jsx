@@ -1,5 +1,6 @@
 function Calendar(props) {
   const [calActivities, setCalActivities] = React.useState([]);
+  const [calPeriods, setCalPeriods] = React.useState([]);
   const [today, setToday] = React.useState(new Date());
   const realToday = new Date();
 
@@ -12,6 +13,18 @@ function Calendar(props) {
         });
     }
   }, [props.userId]);
+
+  React.useEffect(() => {
+    if (props.userId) {
+      fetch(`/api/users/${props.userId}/periods`)
+        .then((response) => response.json())
+        .then((data) => {
+          setCalPeriods(data.periods);
+        });
+    }
+  }, [props.userId]);
+
+  console.log(calPeriods);
 
   const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -179,11 +192,9 @@ function CalendarDays(props) {
             key={day.id}
             onClick={() => handleClick(day)}
           >
-            {/* day.activityName &&  */}
             <p>{day.number}</p>
             <div>{day.activityName}</div>
-            <div>{day.activityType}</div>
-            {day.activityName && <div>{day.distance} miles</div>}
+
             {/* <Modal
               onClose={() => setShowModal(false)}
               showModal={props.showModal}

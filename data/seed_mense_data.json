@@ -6,6 +6,7 @@
     "fatigue": false,
     "bloating": false,
     "cramps": true,
+    "mense_date": "02/12/2022",
     "mense_notes": null,
     "created_at": "02/12/2022",
     "deleted_at": null
@@ -17,6 +18,7 @@
     "fatigue": false,
     "bloating": false,
     "cramps": false,
+    "mense_date": "03/12/2022",
     "mense_notes": null,
     "created_at": "03/12/2022",
     "deleted_at": "04/01/2022"
@@ -28,6 +30,7 @@
     "fatigue": true,
     "bloating": false,
     "cramps": false,
+    "mense_date": "02/12/2022",
     "mense_notes": "Feeling horrible today! So grumpy.",
     "created_at": "02/12/2022",
     "deleted_at": null
@@ -39,6 +42,7 @@
     "fatigue": false,
     "bloating": false,
     "cramps": false,
+    "mense_date": "01/20/2022",
     "mense_notes": "Blergh",
     "created_at": "01/20/2022",
     "deleted_at": null
@@ -50,6 +54,7 @@
     "fatigue": false,
     "bloating": false,
     "cramps": true,
+    "mense_date": "03/11/2022",
     "mense_notes": null,
     "created_at": "03/11/2022",
     "deleted_at": null
@@ -61,6 +66,7 @@
     "fatigue": false,
     "bloating": false,
     "cramps": false,
+    "mense_date": "04/01/2022",
     "mense_notes": "Day 1 of period.",
     "created_at": "04/01/2022",
     "deleted_at": null
@@ -72,6 +78,7 @@
     "fatigue": false,
     "bloating": true,
     "cramps": false,
+    "mense_date": "04/02/2022",
     "mense_notes": "Day 2 of period.",
     "created_at": "04/02/2022",
     "deleted_at": null
@@ -83,6 +90,7 @@
     "fatigue": false,
     "bloating": false,
     "cramps": false,
+    "mense_date": "04/03/2022",
     "mense_notes": "Day 3 of period.",
     "created_at": "04/03/2022",
     "deleted_at": null
@@ -94,6 +102,7 @@
     "fatigue": false,
     "bloating": false,
     "cramps": false,
+    "mense_date": "04/04/2022",
     "mense_notes": "Day 4 of period.",
     "created_at": "04/04/2022",
     "deleted_at": null
