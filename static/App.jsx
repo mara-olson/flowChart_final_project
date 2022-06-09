@@ -10,8 +10,10 @@ function App() {
   const [modalError, setModalError] = React.useState(null);
 
   const [showModal, setShowModal] = React.useState(false);
-  const [modalTitle, setModalTitle] = React.useState(null);
+
   const [modalContent, setModalContent] = React.useState(null);
+
+  const [activityDate, setActivityDate] = React.useState(null);
 
   React.useEffect(() => {
     const localIsLoggedIn = localStorage.getItem("isLoggedIn");
@@ -62,6 +64,8 @@ function App() {
             isLoggedIn={isLoggedIn}
             setShowModal={setShowModal}
             setModalContent={setModalContent}
+            activityDate={activityDate}
+            setActivityDate={setActivityDate}
           />
           <Modal
             onClose={() => setShowModal(false)}
@@ -69,6 +73,8 @@ function App() {
             setModalContent={setModalContent}
             modalContent={modalContent}
             modalError={modalError}
+            activityDate={activityDate}
+            setActivityDate={setActivityDate}
           />
           {/* <Calendar userId={userId} /> */}
         </Route>
@@ -82,13 +88,16 @@ function App() {
             showModal={showModal}
             setShowModal={setShowModal}
             setModalContent={setModalContent}
+            activityDate={activityDate}
+            setActivityDate={setActivityDate}
           />
           <Modal
             onClose={() => setShowModal(false)}
             showModal={showModal}
             modalContent={modalContent}
-            modalTitle={modalTitle}
             modalError={modalError}
+            activityDate={activityDate}
+            setActivityDate={setActivityDate}
           />
         </Route>
       </div>

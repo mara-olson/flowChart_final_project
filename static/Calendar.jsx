@@ -92,6 +92,8 @@ function Calendar(props) {
           setShowModal={props.setShowModal}
           setModalTitle={props.setModalTitle}
           setModalContent={props.setModalContent}
+          activityDate={props.activityDate}
+          setActivityDate={props.setActivityDate}
         />
         {/* <CalendarActivities today={today} userId={props.userId} /> */}
       </div>
@@ -159,7 +161,24 @@ function CalendarDays(props) {
       props.setShowModal(true);
       props.setModalContent(content);
     } else {
-      props.setModalContent("Add");
+      const goToAddActivity = () => {
+        props.setActivityDate(day.date);
+        props.setModalContent(
+          <AddActivityForm activityDate={props.activityDate} />
+        );
+      };
+      const goToAddPeriod = () => {
+        props.setModalContent(<PeriodForm />);
+      };
+
+      const content = (
+        <div>
+          <button onClick={goToAddActivity}>Add Activity</button>
+          <button onClick={goToAddPeriod}>Add Period</button>
+          <button onClick={props.setModalContent(content)}>Back</button>
+        </div>
+      );
+      props.setModalContent(content);
       props.setShowModal(true);
     }
   };

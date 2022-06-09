@@ -157,6 +157,8 @@ function Home(props) {
         userId={props.userId}
         setShowModal={props.setShowModal}
         setModalContent={props.setModalContent}
+        activityDate={props.activityDate}
+        setActivityDate={props.setActivityDate}
       />
       {/* <p>Welcome, {props.userId}!</p> */}
       {/* <ActivitiesContainer /> */}
