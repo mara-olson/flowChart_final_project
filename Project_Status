@@ -1,0 +1,281 @@
+4/30
+	- Data model approved
+		- Removed "logs" table, as it was redundant. Activity, mense, & sleep logs can all stand on their own
+		- Sleep logs to be left out of MVP
+
+	- Files created & organized
+		- Templates
+			- base.html (empty)
+			- homepage.html (empty)
+		- requirements.txt (copied from ratings-v2 lab)
+		- Model.py
+			- Created data classes
+			- connect_to_db()
+			- db
+		- Server.py 
+			- flask app
+		- Seed_functions.py
+		- Data
+			- Seed data
+				- JSON files for each data table
+					users, strava_users, strava_activities, activity_logs, mense_logs
+				- functions:
+					create_users, create_strava_users, create_strava_activities, create_activities, create_mense_log
+			- Learned that I must commit each seed data/function after it's defined rather than once at the end, or else the user_id doesn't exist (and the other data tables rely on mapping to the user_id, so they error out)
+	TO_DO:
+		x - Finish seed functions for mense_logs and sleep_logs
+		x - Make sure seed data for each has all of the fields (can be null)
+
+5/1
+	- Seed data completed!
+		- JSON files for sleep_logs
+		- functions: create_mense_log, create_sleep_log
+	- Wireframing
+
+
+5/2
+	- base.html -> index.html
+	- App.jsx, Card.jsx, Homepage.jsx
+	- Wireframing cont'd
+	TO-DO
+		x - Create folders per page (landing, login, homepage, profile)
+
+
+5/5
+	- <script> in index.html for each new component
+		Probably makes more sense to put all components in a single file at this point
+	- All components must be in static because Flask browser only looks there
+
+5/7
+	- Condensing all components into a single file in /static folder so that I don't have to add <script> in index.html for multiple files
+	- Problems with getting a /login page:
+		- <scripts> for Components.jsx and App.jsx must come AFTER body to avoid "Target container is not DOM element" error
+		- <div id="root" must come before {% block content %}
+		- {% block content %} instead of {% block body %} in order to allow other things in the body (?)
+	- Could not get flash messages to show!
+		Turns out methods=post needed to change to method(no "s")="post"
+	- Opted for error=error_message rather than flash because I can control placement
+	- Made the error message red with .error class in css
+	- Successfully retrieved user's name/email from login page submission & displayed in flash message
+	TO-DO:
+		x - Sort out React/AJAX vs. HTML/Jinja (right now I have both fetches and {{}}'s')
+		- If going with react/ajax, remove all non-index .html files
+
+5/8
+	- Blergh, all the struggles
+	- ~4 hours spent trying to make both React & Jinja work together to pass data, ended up abandoning fetches
+	- Added @classmethod for Users to create a new user & commit to db, for sake of sign-up
+	- Check if email used in sign-up is in db; if so, flash a message that an account already exists with that email. If not, go ahead & create/commit new user and then redirect to their homepage
+	- Tried to send activity data from db to react component 
+		- @app.route('/api/<user_id>/activities')
+			def activity_data(user_id):
+			    user_id = session["user_id"]
+			    user = User.get_user_by_id(user_id)
+			    activities = ActivityLog.query.get(user.user_id)
+			    return jsonify(activities.to_dict())
+		- App()
+			const [activities, setActivities] = React.useState({});
+			React.useEffect(() => {
+			fetch("/api/<user_id>/activities")
+			  .then((response) => response.json())
+			  .then((actData) => {
+			    setActivities(actData);
+			  });
+			}, []);
+
+			... <Activities activities={activities} />
+		- home.html
+			<Home />
+			<Activities />
+
+	TO-DO:
+		x - Above ^^
+
+5/10
+	- Major help from Seema in completing a functional Login component
+		- State of email & state of password
+		- History from ReactRouterDOM that is then used to send user ot their home page history.push(`/${data.user_id}/home`)
+		- handleLogin function to:
+			1. prevent default submission 
+			2. fetch data from /login @app.route (which returns jsonify({"success": True,"user_id":user.user_id}))
+		- call handleLogin onSubmit of form
+		- set values for email & password inputs that correspond to the email/password states
+		- "/:user_id" as way for ReactRouter to get user_id (which is in App indefinitely because of setUserId fxn)
+
+	TO-DO:
+		- Read ReactRouter docs
+		x - Review Login component for how these pieces fit together
+		x - Review App component props sent to <Login />
+		x - Fetch activities within the Activities component, not App
+		x - Review further study of second react lab to understand props / function passing (?)
+
+5/12
+	- <ActivitiesContainer />
+	- Help from Seema to get activity data to React component
+		- @app.route('/users/<user_id>/activities')
+def activity_data(user_id):
+			- Added /users/<user_id>, plus user_id as parameter
+		- actvities as a list within a dictionary jsonify({activities: activities})
+		- in component... fetch(`/users/${props.userId}/activities`)
+		- .then((data) => setActivities(data.activities) accesses activity list
+	TO-DO:
+		x -  To avoid the erroring out if refresh page... in ActContainer component... if ! props.userId {redirect("/login")}
+
+5/14
+	- Removed Activities & Profile tabs from navbar if no user_id
+	- Removed Login tab from navbar if user is already logged in
+	- SignUp success with Andrew's help
+		Had been failing to make a new user because it wasn't getting the data from the sign-up form because I'd been trying to request.json.get the name of the HTML input element in the form rather than the values in the body object of the fetch route
+		NOTE: request.json['key'] fails if it's null, whereas request.json.get('item') won't
+	TO-DO:
+		x - Remember to uncomment db.session.commit() in model.py
+		x - if not new_fname or not new_lname or not new_email or not new_password:
+         flash('Please complete all required fields')
+
+5/16
+	- Passed login error messages from @app.route to Login component
+		- Tried to create ErrorBoundary, but unsuccessful
+		- Added logic so that navbar doesn't update if there's an error upon login (isLoggedIn = true only if data.success)
+
+5/17
+	- Global error messaging from <App /> added
+	- Saving userId and isLoggedIn in local storage between App & Login components
+		in .then()... localStorage.setItem("userId", JSON.stringify(data.userId))
+		in <App/>... React.useEffect(() => {const userId = localStorage.getItem("userId")
+    		if (userId){setUserId(JSON.parse(userId))}}, []);
+    - Hide landing page if user is logged in via... {!isLoggedIn && ...}
+    - requests==2.27.1 to requirements.txt
+    - Add error for accss permissions
+    - GET THE TOKEN ('refresh')
+    Returns from strava_token: 
+    {'token_type': 'Bearer', 'expires_at': 1652868489, 'expires_in': 21412, 'refresh_token': 'f77acc8237cc1d270ca10f6cd47e9d74fa0f9d4f', 'access_token': 'fbe46c8bce7b3a36b1991670f0256d39ed65e6f2', 'athlete': {'id': 35746252, 'username': 'mara_olson', 'resource_state': 2, 'firstname': 'Mara', 'lastname': 'Olson', 'bio': None, 'city': None, 'state': None, 'country': None, 'sex': 'F', 'premium': False, 'summit': False, 'created_at': '2018-10-16T02:30:28Z', 'updated_at': '2021-10-15T00:00:12Z', 'badge_type_id': 0, 'weight': 0.0, 'profile_medium': 'https://lh3.googleusercontent.com/a-/AOh14GiVOYD6rEuvFAtrz7u4zpJh0ghq6o-oFc_BLgWn5g=s96-c', 'profile': 'https://lh3.googleusercontent.com/a-/AOh14GiVOYD6rEuvFAtrz7u4zpJh0ghq6o-oFc_BLgWn5g=s96-c', 'friend': None, 'follower': None}}
+
+5/18
+	- Successful authorization & reroute to period!
+	- Still very buggy - when a user authorizes they're currently redirected to / landingpage but I want them to go to their homepage. Yet I haven't been able to get userId into path to redirect. isLoggedIn is true, yet logic in React components doesn't redirect either
+		<App> isLoggedIn to dispaly different components at exact path "/" ... doesn't work
+		<LandingPage> and <Login> if (props.isLoggedIn) {history.push(`users/${props.userId}/home`)...doesn't work
+	- Also successfully sent errors for different scenarios during sign-up (missing "@", existing 	user, catchall other)
+	TO-DO:
+		x - Figure out how to send user to their homepage after authorization
+
+5/19
+	- @app.route("api/strava-activities") started to try to get activities 
+	- No longer sending user to authentication page
+	- No longer storing activity from form entry
+	-  const [stravaActivities, setStravaActivities] = React.useState([]);
+	Remove fetch from frontend in Activities>
+
+5/21
+	- Fixed login routing issue -- after adding the useEffects to <App /> the userId and isLoggedIn isn't being overridden
+	- New activities save to the database, but not immediately updating to add the corresponding ActivityCard
+	- Error message persisting on the Activities page
+	TO-DO:
+		- Reset error message when change page
+		- Show activity card immediately after adding a new activity
+		x - Save new period data in db
+
+5/22
+	- Finished add-period form that saves to db
+	- Added cards for period info on /periods page
+	- 
+	TO-DO:
+		- Function to shorten date on activity & period cards
+
+5/23
+	- Figure out user_id in URL's
+	TO-DO: 
+		x - Figure out how to remove user_id in URL's
+
+5/24
+	- Activites retrieved from Strava API!
+		- Displayed on new page /users/strava-activities, which is also linked in the navbar
+	- user_id removed from URL's -- can be sent to server via props
+		This wasn't working when page was refreshed because there was a timing issue in that Flask was requesting before userId could be sent (or something along those lines)
+		Fix was to wrap "fetch"s in ... if (props.userId) {fetch} and then put "userId" in [] at end of fetch
+	TO-DO
+		x - Combine Strava & user-entered activities into one page
+
+5/25
+	- Calendar skeleton! based on: https://derrickotte.medium.com/how-to-create-a-calendar-from-scratch-in-react-1f2db197454d
+	- "from_strava" column added to activity_logs table in db so that I can more easily combine all data & display in order of date on web app -- not working, though
+	- Organized Components better - broke it out into Calendar.jsx, Activities.jsx, Components.jsx; will continue to structure
+	TO-DO:
+		- Make unique keys for PeriodCard <li> symptom items
+		x - Solve activities issue -- after trying to add "from_strava" column, now won't display
+			- Do I need to recreate the database if I'm making this kind of update?
+
+5/26
+	- Anika helped me...
+		1) Combine Strava data & user-entered activity data into one route on backend that's displayed all in one Activities tab (no db updated needed)
+		2) Show newly added activity upon form submission
+		3) fixed the /users/users/users/home issue (I found it -- there wasn't an "/" in front of the "users/home" to= in navbar (dumbdumb))
+
+	TO-DO:
+		x - Convert Strava distance in meters to miles
+		x - Hide & clear New Activity Form after submission
+		x - Match activity date to calendar date & display in cell
+
+5/28
+	- More work on showing activity info in calendar...still WIP
+
+5/29
+	- Successfully able to show activity info in the calendar! What a bitch to get the dates to match...
+	TO-DO:
+		x - Edit model.py so that distance column is floats rather than integers -- do I need to drop db and then recreate? If so, how?
+		- Welcome message on home page
+
+5/30
+	- Modal made and pops up only when you click on the particular calendar date!
+	TO-DO:
+		- Display activity data & edit ability in modal
+
+5/31
+	- Modal is now dynamic, and on the calendar it displays the activity card inside!
+		In <CalendarDays />...
+		const handleClick = (day) => {
+		    if (day.activityName) {
+		      const content = (
+		        <ActivityCard
+		          name={day.activityName}
+		          date={day.date}
+		          type={day.activityType}
+		        />
+		      );
+		      props.setShowModal(true);
+		      props.setModalContent(content);
+		      console.log(day);
+		    }
+		  };
+	TO-DO:
+		- Activities modal is empty
+		- const content = (<more complex content>) ... props.setModalContent(content)
+
+6/2
+	- AddActivityForm is now in a pop-up modal!
+	TO-DO:
+		x Activity data no longer showing on calendar now that it's June:(
+		- Add calendar month prev/next functionality
+		- Add edit activity ability
+
+
+6/3
+	- Month length shortened in server.py (%b) in order to match date formats to display user-entered activities on the calendar
+	- Prev/Next month buttons added
+	- "Selected" day only for current month shows in red by using setToday state to update "today" for the navigated months 
+		<button
+            className={
+              "calendar-day" +
+              (day.currentMonth ? " current" : "") +
+              (day.selected ? " selected" : "")
+            }
+
+6/5
+	- Added error message to the New Activity form modal instead of on the flat page
+	- Added error message for if the user tries to add an activity in the future
+	TO-DO:
+		- Force user to enter date as MM-DD-YYYY so that checking if add-activity is in the future can use .strptime()
+
+
+
+

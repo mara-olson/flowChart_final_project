@@ -93,7 +93,7 @@ function Modal(props) {
         {props.modalContent}
         <div className="modal-footer">
           {props.modalError && <p className="error">{props.modalError}</p>}
-          <button className="modal-close-button" onClick={props.onClose}>
+          <button className="modal-button" onClick={props.onClose}>
             Close
           </button>
         </div>
@@ -224,106 +224,6 @@ function Login(props) {
           />
         </div>
         <button type="submit">Log in</button>
-      </form>
-    </div>
-  );
-}
-
-function SignUp(props) {
-  const [firstName, setFirstName] = React.useState("");
-  const [lastName, setLastName] = React.useState("");
-  const [teamName, setTeamName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-
-  const history = ReactRouterDOM.useHistory();
-
-  const handleSignUp = (evt) => {
-    // console.log(evt);
-    evt.preventDefault();
-
-    fetch("/api/sign-up", {
-      method: "POST",
-      credentials: "include",
-      body: JSON.stringify({
-        first_name: firstName,
-        last_name: lastName,
-        team_name: teamName,
-        email: email,
-        password: password,
-        // created_at: sinceDate,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.success);
-        if (data.success) {
-          props.setUserId(data.user_id);
-          history.push("users/home");
-        } else {
-          props.setError(data.error_msg);
-        }
-      });
-  };
-
-  return (
-    <div>
-      <h2>New User Info</h2>
-      <form action="/sign-up" method="POST" onSubmit={handleSignUp}>
-        {/* <label htmlFor="sign-up-fname">First name</label> */}
-        <div>
-          First Name
-          <input
-            type="text"
-            value={firstName}
-            onChange={(evt) => setFirstName(evt.currentTarget.value)}
-          />
-        </div>
-        <br></br>
-        {/* <label htmlFor="sign-up-lname">Last name</label> */}
-        <div>
-          Last Name
-          <input
-            type="text"
-            value={lastName}
-            onChange={(evt) => setLastName(evt.currentTarget.value)}
-          />
-        </div>
-        <br></br>
-        <div>
-          Team Name
-          {/* <label htmlFor="sign-up-team">Team name</label> */}
-          <input
-            type="text"
-            value={teamName}
-            onChange={(evt) => setTeamName(evt.currentTarget.value)}
-          />
-        </div>
-        <br></br>
-        {/* <label htmlFor="sign-up-email">Email</label> */}
-        <div>
-          Email
-          <input
-            type="text"
-            value={email}
-            onChange={(evt) => setEmail(evt.currentTarget.value)}
-          />
-        </div>
-        <br></br>
-
-        {/* <label htmlFor="sign-up-password">Password</label> */}
-        <div>
-          Password
-          <input
-            type="text"
-            value={password}
-            onChange={(evt) => setPassword(evt.currentTarget.value)}
-          />
-        </div>
-        <button type="submit">Sign Up</button>
       </form>
     </div>
   );

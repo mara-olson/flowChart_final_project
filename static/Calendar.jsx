@@ -24,7 +24,7 @@ function Calendar(props) {
     }
   }, [props.userId]);
 
-  console.log(calPeriods);
+  // console.log(calPeriods);
 
   const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -158,6 +158,9 @@ function CalendarDays(props) {
       );
       props.setShowModal(true);
       props.setModalContent(content);
+    } else {
+      props.setModalContent("Add");
+      props.setShowModal(true);
     }
   };
 

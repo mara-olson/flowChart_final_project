@@ -160,7 +160,9 @@ def save_new_user():
 
     if new_email not in all_users and "@" in new_email: 
         new_user = User.create_user(new_fname, new_lname, new_team, new_email, new_password, created_at)
-    
+
+        session["user_id"] = new_user.user_id
+
         return jsonify({"success": True,"user_id":new_user.user_id, "first_name": new_user.first_name, "last_name": new_user.last_name, "team_name": new_user.team_name, "email": new_user.email, "password": new_user.password, "created_at": new_user.created_at, "error_msg": None})
     
     elif "@" not in new_email:

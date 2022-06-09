@@ -99,7 +99,19 @@ function App() {
       </div>
       <div className="container-fluid">
         <Route exact path="/sign-up">
-          <SignUp setUserId={setUserId} setError={setError} />
+          <SignUp
+            setUserId={setUserId}
+            setIsLoggedIn={setIsLoggedIn}
+            setError={setError}
+            setModalContent={setModalContent}
+            setShowModal={setShowModal}
+          />
+          <SignUpModal
+            onClose={() => setShowModal(false)}
+            showModal={showModal}
+            modalContent={modalContent}
+            userId={userId}
+          />
         </Route>
       </div>
       <div className="container-fluid">
