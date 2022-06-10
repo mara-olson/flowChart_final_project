@@ -201,13 +201,6 @@ def activity_data(user_id):
         page = str(1)
 
         r = requests.get(f"{url}?before=1653447977&after=959223977&page={page}&per_page=20", headers=headers)
-
-        # for activity in r:
-        #     date = activity["start_date_local"] 
-            
-        #     activity["start_date_local"] = date.strftime("%a %B %d %Y")
-            
-            # return final_strava
         
         return r.json()
 
@@ -339,12 +332,63 @@ def add_period():
     notes = data.get("notes")
     created_at = datetime.datetime.now()
 
-    new_period = MenseLog.create_mense_log(user_id, flow_volume, mood, cramps, bloating, fatigue, notes, created_at)
+    new_period = MenseLog.create_mense_log(user_id, flow_volume, mood, cramps, bloating, fatigue, mense_date, notes, created_at)
 
 
     return jsonify({"flow_volume": new_period.flow_volume, "success": True, "error": None})
 
+@app.route("/api/chart")
+def chart_data(user_id):
+    all_periods = MenseLog.query.filter(MenseLog.user_id == user_id).all()
 
+    all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
+
+    periods = []
+
+    for period in all_periods:
+        new_period = {"id": period.mense_id, "flow": period.flow_volume, "mood": period.mood, "cramps": period.cramps, "bloating": period.bloating, "fatigue": period.fatigue, "date": period.mense_date, "notes": period.mense_notes}
+        # activity = activity.to_dict()
+        periods.append(new_period)
+
+    
+    def get_strava_activity_data():
+        url = "https://www.strava.com/api/v3/athlete/activities"
+
+        access_token = session["access_token"]
+        # print(access_token)
+
+        headers = {
+            "Authorization": f"Bearer {access_token}"
+        }
+
+        page = str(1)
+
+        r = requests.get(f"{url}?before=1653447977&after=959223977&page={page}&per_page=20", headers=headers)
+        
+        return r.json()
+
+    strava_activities = get_strava_activity_data()
+    # print(strava_activities)
+    
+    def km_to_miles(kilometers):
+        return round((kilometers * 0.000621371), 2)
+
+    activity_objs = []
+
+    for activity in strava_activities:
+        new_strava_act = {"id": activity["id"], "name": activity["name"], "date": activity["start_date_local"], "distance": km_to_miles(activity["distance"]), "type": activity["type"]}
+        activity_objs.append(new_strava_act)
+
+
+    all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
+
+    for activity in all_activities:
+        new_act = {"id": activity.activity_id, "name": activity.activity_name, "date": activity.activity_date.strftime("%a %b %d %Y"), "distance": activity.distance, "type": activity.activity_type}
+        # activity = activity.to_dict()
+        activity_objs.append(new_act)
+    
+    
+    return jsonify({"activities": activity_objs, "periods": periods})
 
 if __name__ == "__main__":
     # DebugToolbarExtension(app)

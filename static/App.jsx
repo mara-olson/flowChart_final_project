@@ -1,4 +1,3 @@
-// import Card from "/static/Components/Card";
 const { Route, BrowserRouter } = ReactRouterDOM;
 
 function App() {
@@ -29,7 +28,14 @@ function App() {
     }
   }, [userId]);
 
+  // createContext for userId & activities & periods data
+  UserIdContext = React.createContext();
+
+  ActivitiesContext = React.createContext();
+
   return (
+    // <UserIdContext.Provider value={userId}
+    // <ActivitiesContext.Provider value =
     <BrowserRouter>
       <Navbar
         logo="/static/period-logo.png"

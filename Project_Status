@@ -255,7 +255,7 @@ def activity_data(user_id):
 	- AddActivityForm is now in a pop-up modal!
 	TO-DO:
 		x Activity data no longer showing on calendar now that it's June:(
-		- Add calendar month prev/next functionality
+		x Add calendar month prev/next functionality
 		- Add edit activity ability
 
 
@@ -275,6 +275,22 @@ def activity_data(user_id):
 	- Added error message for if the user tries to add an activity in the future
 	TO-DO:
 		- Force user to enter date as MM-DD-YYYY so that checking if add-activity is in the future can use .strptime()
+
+6/7
+	- Mense_date added to database so that users can enter new periods on days that aren't created_at or date.now()
+
+6/9
+	- setIsLoggedIn(true) in handleSignUp
+	- Ask user if they'd like to connect to Strava - if so, send to authenticate. If not, send to home page
+	- SignUp.jsx separated out
+	- Periods.jsx separated out
+	- Add an activity or period modal appears if user clicks on a calendar day
+	- In an effort to auto-fill the date in the add activity/period forms from the calendar pop-up, I moved activityDate/setActivityDate state to App rather than AddActivityForm, but doesn't seem to have done much
+
+	TO-DO:
+		- Auto-fill date of form to the calendar day selected 
+		- Add "back" button to add activity/period forms in calendar modal
+		- Add a period error messages
 
 
 

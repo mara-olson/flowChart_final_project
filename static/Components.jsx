@@ -1,7 +1,4 @@
 //"""Components for project"""
-
-// const { useEffect } = require("react");
-
 // GENERAL COMPONENTS
 
 function Logout(props) {
@@ -160,8 +157,8 @@ function Home(props) {
         activityDate={props.activityDate}
         setActivityDate={props.setActivityDate}
       />
-      {/* <p>Welcome, {props.userId}!</p> */}
-      {/* <ActivitiesContainer /> */}
+      {/* if chart data, render Chart. If not, show something else like a loading spinner */}
+      <MyChart />
     </div>
   );
 }
@@ -283,4 +280,24 @@ function Profile(props) {
       </p>
     </div>
   );
+}
+
+function MyChart(props) {
+  const chartRef = React.useRef(null);
+  const [currentChart, setCurrentChart] = React.useState(null);
+
+  React.useEffect(() => {
+    // if (chartRef.current && !currentChart)
+
+    const testChart = new Chart(chartRef.current, {
+      type: "line",
+      data: {
+        labels: ["does", "this", "work"],
+        datasets: [{ data: [2, 4, 8] }],
+      },
+    });
+    setCurrentChart(testChart);
+  }, []);
+
+  return <canvas id="test-chart" ref={chartRef}></canvas>;
 }
