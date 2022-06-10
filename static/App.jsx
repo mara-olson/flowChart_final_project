@@ -14,6 +14,8 @@ function App() {
 
   const [activityDate, setActivityDate] = React.useState(null);
 
+  const [dataContext, setDataContext] = React.useState(null);
+
   React.useEffect(() => {
     const localIsLoggedIn = localStorage.getItem("isLoggedIn");
     if (localIsLoggedIn) {
@@ -28,14 +30,16 @@ function App() {
     }
   }, [userId]);
 
-  // createContext for userId & activities & periods data
-  UserIdContext = React.createContext();
+  React.useEffect(() => {
+    fetch(`/api/${userId}/chart`)
+      .then((response) => response.json())
+      .then((data) => setDataContext(data));
+  }, [userId]);
 
-  ActivitiesContext = React.createContext();
+  // const FullContext = React.createContext(dataContext);
 
   return (
-    // <UserIdContext.Provider value={userId}
-    // <ActivitiesContext.Provider value =
+    // <FullContext.Provider value={dataContext}>
     <BrowserRouter>
       <Navbar
         logo="/static/period-logo.png"
@@ -72,6 +76,7 @@ function App() {
             setModalContent={setModalContent}
             activityDate={activityDate}
             setActivityDate={setActivityDate}
+            dataContext={dataContext}
           />
           <Modal
             onClose={() => setShowModal(false)}
@@ -137,6 +142,7 @@ function App() {
       </div>
       {/* {Route path = '*' /* cutsie catch-all error page default if no route found */}
     </BrowserRouter>
+    // </FullContext.Provider>
   );
 }
 

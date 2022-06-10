@@ -337,7 +337,7 @@ def add_period():
 
     return jsonify({"flow_volume": new_period.flow_volume, "success": True, "error": None})
 
-@app.route("/api/chart")
+@app.route("/api/<user_id>/chart")
 def chart_data(user_id):
     all_periods = MenseLog.query.filter(MenseLog.user_id == user_id).all()
 

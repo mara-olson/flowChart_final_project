@@ -145,11 +145,6 @@ function LandingPage(props) {
 function Home(props) {
   return (
     <div>
-      {/* <Modal
-        onClose={() => setShowModal(false)}
-        showModal={showModal}
-        modalTitle={modalTitle}
-      /> */}
       <Calendar
         userId={props.userId}
         setShowModal={props.setShowModal}
@@ -157,8 +152,8 @@ function Home(props) {
         activityDate={props.activityDate}
         setActivityDate={props.setActivityDate}
       />
-      {/* if chart data, render Chart. If not, show something else like a loading spinner */}
-      <MyChart />
+
+      <MyChart dataContext={props.dataContext} />
     </div>
   );
 }
@@ -286,6 +281,9 @@ function MyChart(props) {
   const chartRef = React.useRef(null);
   const [currentChart, setCurrentChart] = React.useState(null);
 
+  const activities = props.dataContext;
+  console.log(activities);
+
   React.useEffect(() => {
     // if (chartRef.current && !currentChart)
 
@@ -293,7 +291,7 @@ function MyChart(props) {
       type: "line",
       data: {
         labels: ["does", "this", "work"],
-        datasets: [{ data: [2, 4, 8] }],
+        datasets: [{ data: activities }],
       },
     });
     setCurrentChart(testChart);
