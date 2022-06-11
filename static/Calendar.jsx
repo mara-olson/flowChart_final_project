@@ -110,6 +110,7 @@ function Calendar(props) {
 function CalendarDays(props) {
   console.log(props.calPeriods);
   console.log(props.calActivities);
+
   let firstDayOfMonth = new Date(
     props.today.getFullYear(),
     props.today.getMonth(),
@@ -145,7 +146,7 @@ function CalendarDays(props) {
     for (const currentDay of currentDays) {
       for (const calActivity of props.calActivities) {
         if (currentDay.date == calActivity.date) {
-          currentDay.id == calActivity.id;
+          currentDay["id"] = calActivity.id;
           currentDay["activityName"] = calActivity.name;
           currentDay["activityType"] = calActivity.type;
           currentDay["distance"] = calActivity.distance;
@@ -165,10 +166,12 @@ function CalendarDays(props) {
         if (calPeriod.fatigue) {
           symptoms.push("Fatigue");
         }
+        // console.log(currentDay.date);
+        // console.log(calPeriod.date);
         if (currentDay.date == calPeriod.date) {
-          currentDay.id == calPeriod.id;
-          currentDay["flow"] = calPeriod.flow;
-          currentDay["symptoms"] = calPeriod.symptoms;
+          currentDay.id = calPeriod.id;
+          currentDay["volume"] = calPeriod.flow;
+          currentDay["symptoms"] = symptoms;
         }
       }
     }
@@ -188,9 +191,13 @@ function CalendarDays(props) {
       );
       props.setShowModal(true);
       props.setModalContent(content);
-    } else if (day.flow) {
+    } else if (day.volume) {
       const content = (
-        <PeriodCard volume={day.flow} date={day.date} symptoms={day.symptoms} />
+        <PeriodCard
+          volume={day.volume}
+          date={day.date}
+          symptoms={day.symptoms}
+        />
       );
       props.setShowModal(true);
       props.setModalContent(content);
@@ -260,6 +267,7 @@ function CalendarDays(props) {
           >
             <p>{day.number}</p>
             <div>{day.activityName}</div>
+            {day.volume && <div>{day.volume} flow</div>}
 
             {/* <Modal
               onClose={() => setShowModal(false)}

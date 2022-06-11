@@ -29,7 +29,7 @@ function App() {
       fetch(`/api/users/${userId}/activities`)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data.activities);
+          // console.log(data.activities);
           setActivities(data.activities);
         });
     }
@@ -40,7 +40,7 @@ function App() {
       fetch(`/api/users/${userId}/periods`)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data.periods);
+          // console.log(data.periods);
           setPeriods(data.periods);
         });
     }
