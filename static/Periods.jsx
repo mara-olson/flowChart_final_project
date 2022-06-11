@@ -1,17 +1,17 @@
 function Periods(props) {
-  const [periods, setPeriods] = React.useState([]);
+  // const [periods, setPeriods] = React.useState([]);
 
-  React.useEffect(() => {
-    if (props.userId) {
-      fetch(`/api/users/${props.userId}/periods`)
-        .then((response) => response.json())
-        .then((data) => setPeriods(data.periods));
-    }
-  }, [props.userId]);
+  // React.useEffect(() => {
+  //   if (props.userId) {
+  //     fetch(`/api/users/${props.userId}/periods`)
+  //       .then((response) => response.json())
+  //       .then((data) => setPeriods(data.periods));
+  //   }
+  // }, [props.userId]);
 
   const periodDetails = [];
 
-  for (const period of periods) {
+  for (const period of props.periods) {
     const symptoms = [];
     if (period.mood) {
       symptoms.push("Moodiness");
@@ -29,10 +29,13 @@ function Periods(props) {
     periodDetails.push(
       <PeriodCard
         userId={props.userId}
-        key={period.mense_id}
-        volume={period.flow_volume}
-        date={period.created_at}
+        key={period.id}
+        volume={period.flow}
+        date={period.date}
+        createdAt={period.created_at}
         symptoms={symptoms}
+        periods={props.periods}
+        setPeriods={props.setPeriods}
       />
     );
   }
@@ -88,6 +91,7 @@ function PeriodForm(props) {
         cramps: cramps,
         bloating: bloating,
         fatigue: fatigue,
+        date: periodDate,
         notes: notes,
       }),
       headers: {
@@ -96,13 +100,20 @@ function PeriodForm(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        // if (data.success) {
-        console.log(data.flow_volume);
-        // } else {
-        // console.log("error");
-        // props.setError(data.error);
+        if (data.success) {
+          fetch(`/api/users/${props.userId}/periods`)
+            .then((response) => response.json())
+            .then((data) => {
+              props.setPeriods(data.periods);
+              console.log(data.periods);
+              props.setShowModal(false);
+            });
+        } else {
+          props.setModalError(data.error);
+        }
       });
   };
+
   return (
     <div>
       <form id="period-form" onSubmit={handleAddPeriod}>

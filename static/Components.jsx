@@ -151,9 +151,15 @@ function Home(props) {
         setModalContent={props.setModalContent}
         activityDate={props.activityDate}
         setActivityDate={props.setActivityDate}
+        activities={props.activities}
+        setActivities={props.setActivities}
       />
 
-      <MyChart dataContext={props.dataContext} />
+      <MyChart
+        activities={props.activities}
+        setActivities={props.setActivities}
+        dataForContext={props.dataForContext}
+      />
     </div>
   );
 }
@@ -181,7 +187,7 @@ function Login(props) {
         if (data.success) {
           console.log(data.user_id);
           console.log("user_id", data.user_id);
-
+          // props.setUpdateContextData(true);
           props.setUserId(data.user_id);
 
           props.setIsLoggedIn(true);
@@ -281,21 +287,66 @@ function MyChart(props) {
   const chartRef = React.useRef(null);
   const [currentChart, setCurrentChart] = React.useState(null);
 
-  const activities = props.dataContext;
-  console.log(activities);
+  // if (props.activities) {
+  //   const activities = props.activities;
+  //   console.log(activities);
+  // }
 
   React.useEffect(() => {
-    // if (chartRef.current && !currentChart)
+    // if (chartRef.current && !currentChart) {
+    if (props.activities) {
+      // const activityData = props.activities;
+      // const periodData = props.periods;
+      // console.log(activityData);
+      // console.log("hi");
 
-    const testChart = new Chart(chartRef.current, {
-      type: "line",
-      data: {
-        labels: ["does", "this", "work"],
-        datasets: [{ data: activities }],
-      },
-    });
-    setCurrentChart(testChart);
-  }, []);
+      // [
+      //   "January",
+      //   "February",
+      //   "March",
+      //   "April",
+      //   "May",
+      //   "June",
+      //   "July",
+      //   "August",
+      //   "September",
+      //   "October",
+      //   "November",
+      //   "December",
+      // ];
+
+      const activityData = [];
+
+      for (const activity of props.activities) {
+        const actObj = {
+          x: activity.date,
+          y: activity.distance,
+        };
+        activityData.push(actObj);
+      }
+
+      const testChart = new Chart(chartRef.current, {
+        type: "line",
+        data: {
+          datasets: [
+            {
+              label: "Activities",
+              data: activityData,
+              borderColor: "rgb(255, 99, 132)",
+              backgroundColor: "rgba(255, 99, 132, 0.5)",
+            },
+            {
+              label: "Periods",
+              data: [1, 2, 3],
+              borderColor: "rgb(53, 162, 235)",
+              backgroundColor: "rgba(53, 162, 235, 0.5)",
+            },
+          ],
+        },
+      });
+      setCurrentChart(testChart);
+    }
+  }, [props.activities]);
 
   return <canvas id="test-chart" ref={chartRef}></canvas>;
 }

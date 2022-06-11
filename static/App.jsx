@@ -12,9 +12,11 @@ function App() {
 
   const [modalContent, setModalContent] = React.useState(null);
 
-  const [activityDate, setActivityDate] = React.useState(null);
+  // const [activityDate, setActivityDate] = React.useState(null);
 
-  const [dataContext, setDataContext] = React.useState(null);
+  const [activities, setActivities] = React.useState(null);
+
+  const [periods, setPeriods] = React.useState([]);
 
   React.useEffect(() => {
     const localIsLoggedIn = localStorage.getItem("isLoggedIn");
@@ -31,12 +33,33 @@ function App() {
   }, [userId]);
 
   React.useEffect(() => {
-    fetch(`/api/${userId}/chart`)
-      .then((response) => response.json())
-      .then((data) => setDataContext(data));
-  }, [userId]);
+    if (userId) {
+      fetch(`/api/users/${userId}/activities`)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.activities);
+          setActivities(data.activities);
+        });
+    }
+  }, [isLoggedIn]);
 
-  // const FullContext = React.createContext(dataContext);
+  React.useEffect(() => {
+    if (userId) {
+      fetch(`/api/users/${userId}/periods`)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.periods);
+          setPeriods(data.periods);
+        });
+    }
+  }, [isLoggedIn]);
+
+  // React.useEffect(() => {
+  //   fetch(`/api/${userId}/data`)
+  //     .then((response) => response.json())
+  //     .then((data) => console.log(data));
+  //   // setDataForContext(data));
+  // }, [userId]);
 
   return (
     // <FullContext.Provider value={dataContext}>
@@ -74,9 +97,12 @@ function App() {
             isLoggedIn={isLoggedIn}
             setShowModal={setShowModal}
             setModalContent={setModalContent}
-            activityDate={activityDate}
-            setActivityDate={setActivityDate}
-            dataContext={dataContext}
+            // activityDate={activityDate}
+            // setActivityDate={setActivityDate}
+            activities={activities}
+            setActivities={setActivities}
+            periods={periods}
+            setPeriods={setPeriods}
           />
           <Modal
             onClose={() => setShowModal(false)}
@@ -84,8 +110,8 @@ function App() {
             setModalContent={setModalContent}
             modalContent={modalContent}
             modalError={modalError}
-            activityDate={activityDate}
-            setActivityDate={setActivityDate}
+            // activityDate={activityDate}
+            // setActivityDate={setActivityDate}
           />
           {/* <Calendar userId={userId} /> */}
         </Route>
@@ -99,16 +125,18 @@ function App() {
             showModal={showModal}
             setShowModal={setShowModal}
             setModalContent={setModalContent}
-            activityDate={activityDate}
-            setActivityDate={setActivityDate}
+            // activityDate={activityDate}
+            // setActivityDate={setActivityDate}
+            activities={activities}
+            setActivities={setActivities}
           />
           <Modal
             onClose={() => setShowModal(false)}
             showModal={showModal}
             modalContent={modalContent}
             modalError={modalError}
-            activityDate={activityDate}
-            setActivityDate={setActivityDate}
+            // activityDate={activityDate}
+            // setActivityDate={setActivityDate}
           />
         </Route>
       </div>
@@ -136,8 +164,12 @@ function App() {
       </div>
       <div className="container-fluid">
         <Route exact path="/users/periods">
-          <Periods userId={userId} />
-          <PeriodForm userId={userId}></PeriodForm>
+          <Periods userId={userId} periods={periods} setPeriods={setPeriods} />
+          <PeriodForm
+            userId={userId}
+            periods={periods}
+            setPeriods={setPeriods}
+          />
         </Route>
       </div>
       {/* {Route path = '*' /* cutsie catch-all error page default if no route found */}

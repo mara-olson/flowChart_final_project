@@ -286,11 +286,23 @@ def activity_data(user_id):
 	- Periods.jsx separated out
 	- Add an activity or period modal appears if user clicks on a calendar day
 	- In an effort to auto-fill the date in the add activity/period forms from the calendar pop-up, I moved activityDate/setActivityDate state to App rather than AddActivityForm, but doesn't seem to have done much
+	- npm i react-chartjs-2 chart.js
+	- Andrew helped me get MyChart set up
+		Note: Don't name your chart "Chart" - it tries to override React's chart :)
+
+	- Andrew suggested using Context ... but this seems to have broken everything, so I commented it out
+		That said, good idea to keep all data in a more globally accessible format - so trying to useState for all data (activity & period) so that I don't have to keep passing down to components
+		Failing to get data in MyChart, though... const activities = props.dataContext;
+		console.log(activities);
+			Seems like pulling from state is occuring before the data fetch, so returning null. But if I have no [] in fetch, it runs infinitely:/
+			If I put [userId], it's still delayed
 
 	TO-DO:
 		- Auto-fill date of form to the calendar day selected 
 		- Add "back" button to add activity/period forms in calendar modal
 		- Add a period error messages
+		x npm i react-chartjs-2 chart.js into requirements?
+		- If there is data to put into a chart, show chart. If not, show something else (loading spinner gif, or simply nothing if no data yet?)
 
 
 
