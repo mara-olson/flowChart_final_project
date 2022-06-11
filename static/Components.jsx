@@ -158,6 +158,8 @@ function Home(props) {
       <MyChart
         activities={props.activities}
         setActivities={props.setActivities}
+        periods={props.periods}
+        setPeriods={props.setPeriods}
         dataForContext={props.dataForContext}
       />
     </div>
@@ -325,6 +327,30 @@ function MyChart(props) {
         activityData.push(actObj);
       }
 
+      const periodData = [];
+
+      for (const period of props.periods) {
+        const volume = null;
+        if (period.flow === "No Flow") {
+          volume = 0;
+        }
+        if (period.flow === "Light") {
+          volume = 1;
+        }
+        if (period.flow === "Moderate") {
+          volume = 2;
+        }
+        if (period.flow === "Heavy") {
+          volume = 3;
+        }
+
+        const perObj = {
+          x: period.date,
+          y: volume,
+        };
+        periodData.push(perObj);
+      }
+
       const testChart = new Chart(chartRef.current, {
         type: "line",
         data: {
@@ -337,7 +363,7 @@ function MyChart(props) {
             },
             {
               label: "Periods",
-              data: [1, 2, 3],
+              data: periodData,
               borderColor: "rgb(53, 162, 235)",
               backgroundColor: "rgba(53, 162, 235, 0.5)",
             },
