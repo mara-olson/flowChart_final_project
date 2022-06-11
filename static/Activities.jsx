@@ -7,8 +7,8 @@ function ActivityCard(props) {
       <AddActivityForm
         formTitle="Edit Activity"
         buttonTitle="Save Activity"
-        activityDate={props.activityDate}
-        setActivityDate={props.setActivityDate}
+        // activityDate={props.activityDate}
+        // setActivityDate={props.setActivityDate}
       />
     );
     props.setShowModal(true);
@@ -40,8 +40,8 @@ function AddActivityButton(props) {
         setModalError={props.setModalError}
         setModalContent={props.setModalContent}
         setShowModal={props.setShowModal}
-        activityDate={props.activityDate}
-        setActivityDate={props.setActivityDate}
+        // activityDate={props.activityDate}
+        // setActivityDate={props.setActivityDate}
       />
     );
     return <Modal />;
@@ -52,7 +52,7 @@ function AddActivityButton(props) {
 function AddActivityForm(props) {
   // const [activityId, setActivityId] = React.useState(null);
   const [activityName, setActivityName] = React.useState(null);
-  // const [activityDate, setActivityDate] = React.useState(null);
+  const [activityDate, setActivityDate] = React.useState(null);
   const [activityType, setActivityType] = React.useState(null);
   const [duration, setDuration] = React.useState(null);
   const [distance, setDistance] = React.useState(null);
@@ -71,7 +71,7 @@ function AddActivityForm(props) {
       body: JSON.stringify({
         user_id: userId,
         // activity_id: activityId,
-        activity_date: props.activityDate,
+        activity_date: activityDate,
         activity_type: activityType,
         activity_name: activityName,
         duration: duration,
@@ -107,8 +107,8 @@ function AddActivityForm(props) {
           Activity Date
           <input
             type="text"
-            value={props.activityDate}
-            onChange={(evt) => props.setActivityDate(evt.currentTarget.value)}
+            value={activityDate}
+            onChange={(evt) => setActivityDate(evt.currentTarget.value)}
           />{" "}
         </div>
         <br></br>

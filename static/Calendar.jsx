@@ -89,11 +89,15 @@ function Calendar(props) {
           userId={props.userId}
           calActivities={calActivities}
           setCalActivities={setCalActivities}
+          showModal={props.showModal}
           setShowModal={props.setShowModal}
           setModalTitle={props.setModalTitle}
+          modalContent={props.modalContent}
           setModalContent={props.setModalContent}
-          activityDate={props.activityDate}
-          setActivityDate={props.setActivityDate}
+          modalError={props.modalError}
+          setModalError={props.setModalError}
+          activities={props.activities}
+          setActivities={props.setActivities}
         />
         {/* <CalendarActivities today={today} userId={props.userId} /> */}
       </div>
@@ -162,9 +166,19 @@ function CalendarDays(props) {
       props.setModalContent(content);
     } else {
       const goToAddActivity = () => {
-        props.setActivityDate(day.date);
         props.setModalContent(
-          <AddActivityForm activityDate={props.activityDate} />
+          <AddActivityForm
+            userId={props.userId}
+            activities={props.actitivies}
+            setActivities={props.setActivities}
+            setShowActivityForm={props.setShowActivityForm}
+            modalError={props.modalError}
+            setModalError={props.setModalError}
+            modalContent={props.modalContent}
+            setModalContent={props.setModalContent}
+            showModal={props.showModal}
+            setShowModal={props.setShowModal}
+          />
         );
       };
       const goToAddPeriod = () => {

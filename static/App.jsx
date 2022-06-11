@@ -12,8 +12,6 @@ function App() {
 
   const [modalContent, setModalContent] = React.useState(null);
 
-  // const [activityDate, setActivityDate] = React.useState(null);
-
   const [activities, setActivities] = React.useState(null);
 
   const [periods, setPeriods] = React.useState([]);
@@ -95,10 +93,12 @@ function App() {
           <Home
             userId={userId}
             isLoggedIn={isLoggedIn}
+            showModal={showModal}
             setShowModal={setShowModal}
+            modalContent={modalContent}
             setModalContent={setModalContent}
-            // activityDate={activityDate}
-            // setActivityDate={setActivityDate}
+            modalError={modalError}
+            setModalError={setModalError}
             activities={activities}
             setActivities={setActivities}
             periods={periods}
@@ -110,8 +110,6 @@ function App() {
             setModalContent={setModalContent}
             modalContent={modalContent}
             modalError={modalError}
-            // activityDate={activityDate}
-            // setActivityDate={setActivityDate}
           />
           {/* <Calendar userId={userId} /> */}
         </Route>
@@ -125,8 +123,6 @@ function App() {
             showModal={showModal}
             setShowModal={setShowModal}
             setModalContent={setModalContent}
-            // activityDate={activityDate}
-            // setActivityDate={setActivityDate}
             activities={activities}
             setActivities={setActivities}
           />
@@ -135,8 +131,6 @@ function App() {
             showModal={showModal}
             modalContent={modalContent}
             modalError={modalError}
-            // activityDate={activityDate}
-            // setActivityDate={setActivityDate}
           />
         </Route>
       </div>

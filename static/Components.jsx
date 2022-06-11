@@ -147,8 +147,12 @@ function Home(props) {
     <div>
       <Calendar
         userId={props.userId}
+        showModal={props.showModal}
         setShowModal={props.setShowModal}
+        modalContent={props.modalContent}
         setModalContent={props.setModalContent}
+        modalError={props.modalError}
+        setModalError={props.setModalError}
         activityDate={props.activityDate}
         setActivityDate={props.setActivityDate}
         activities={props.activities}

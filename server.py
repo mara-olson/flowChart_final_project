@@ -265,13 +265,13 @@ def add_activity():
 
     
     
-    if new_act_date is None:
-        error = "Please enter an activity date, type, & duration"
-        success = False
+    # if new_act_date is None:
+    #     error = "Please enter an activity date, type, & duration"
+    #     success = False
         
-        return jsonify({"success": success, "error": error})
+    #     return jsonify({"success": success, "error": error})
         
-    elif datetime.datetime.strptime(new_act_date, "%m-%d-%Y") > created_at:
+    if datetime.datetime.strptime(new_act_date, "%m-%d-%Y") > created_at:
         error = "The date you entered is in the future. Please enter a valid activity date."
         success = False
         
