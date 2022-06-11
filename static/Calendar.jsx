@@ -145,8 +145,8 @@ function CalendarDays(props) {
 
     for (const currentDay of currentDays) {
       for (const calActivity of props.calActivities) {
-        if (currentDay.date == calActivity.date) {
-          currentDay["id"] = calActivity.id;
+        if (currentDay.date === calActivity.date) {
+          currentDay["activityId"] = calActivity.id;
           currentDay["activityName"] = calActivity.name;
           currentDay["activityType"] = calActivity.type;
           currentDay["distance"] = calActivity.distance;
@@ -167,8 +167,8 @@ function CalendarDays(props) {
           symptoms.push("Fatigue");
         }
 
-        if (currentDay.date == calPeriod.date) {
-          currentDay.id = calPeriod.id;
+        if (currentDay.date === calPeriod.date) {
+          currentDay["periodId"] = calPeriod.id;
           currentDay["volume"] = calPeriod.flow;
           currentDay["symptoms"] = symptoms;
         }
@@ -215,12 +215,24 @@ function CalendarDays(props) {
             setModalContent={props.setModalContent}
             showModal={props.showModal}
             setShowModal={props.setShowModal}
-            selectedDate={day.date}
+            selectedDate={day.displayDate}
           />
         );
       };
       const goToAddPeriod = () => {
-        props.setModalContent(<PeriodForm />);
+        console.log(day.selected);
+        props.setModalContent(
+          <PeriodForm
+            userId={props.userId}
+            modalError={props.modalError}
+            setModalError={props.setModalError}
+            modalContent={props.modalContent}
+            setModalContent={props.setModalContent}
+            showModal={props.showModal}
+            setShowModal={props.setShowModal}
+            selectedDate={day.displayDate}
+          />
+        );
       };
 
       const content = (

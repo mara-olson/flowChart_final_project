@@ -92,7 +92,7 @@ function PeriodForm(props) {
   const [cramps, setCramps] = React.useState(false);
   const [bloating, setBloating] = React.useState(false);
   const [fatigue, setFatigue] = React.useState(false);
-  const [periodDate, setPeriodDate] = React.useState(null);
+  const [periodDate, setPeriodDate] = React.useState(props.selectedDate);
   const [notes, setNotes] = React.useState(null);
 
   const handleAddPeriod = (evt) => {
@@ -139,8 +139,8 @@ function PeriodForm(props) {
       <form id="period-form" onSubmit={handleAddPeriod}>
         <label htmlFor="date">Date of event</label>
         <input
-          type="text"
-          name="date"
+          type="date"
+          value={periodDate}
           onChange={(evt) => setPeriodDate(evt.currentTarget.value)}
         />
 
