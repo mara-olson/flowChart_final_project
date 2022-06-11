@@ -98,6 +98,8 @@ function Calendar(props) {
           setModalError={props.setModalError}
           activities={props.activities}
           setActivities={props.setActivities}
+          calPeriods={calPeriods}
+          setCalPeriods={setCalPeriods}
         />
         {/* <CalendarActivities today={today} userId={props.userId} /> */}
       </div>
@@ -106,14 +108,16 @@ function Calendar(props) {
 }
 
 function CalendarDays(props) {
+  console.log(props.calPeriods);
+  console.log(props.calActivities);
   let firstDayOfMonth = new Date(
     props.today.getFullYear(),
     props.today.getMonth(),
     1
   );
   let weekdayOfFirstDay = firstDayOfMonth.getDay();
-  const realTodayMonth = props.realToday.getMonth();
-  const finalTodayMonth = new Date(firstDayOfMonth).toDateString();
+  // const realTodayMonth = props.realToday.getMonth();
+  // const finalTodayMonth = new Date(firstDayOfMonth).toDateString();
   const currentDays = [];
 
   for (let day = 0; day < 42; day++) {
@@ -147,6 +151,26 @@ function CalendarDays(props) {
           currentDay["distance"] = calActivity.distance;
         }
       }
+      for (const calPeriod of props.calPeriods) {
+        const symptoms = [];
+        if (calPeriod.mood) {
+          symptoms.push("Moodiness");
+        }
+        if (calPeriod.cramps) {
+          symptoms.push("Cramps");
+        }
+        if (calPeriod.bloating) {
+          symptoms.push("Bloating");
+        }
+        if (calPeriod.fatigue) {
+          symptoms.push("Fatigue");
+        }
+        if (currentDay.date == calPeriod.date) {
+          currentDay.id == calPeriod.id;
+          currentDay["flow"] = calPeriod.flow;
+          currentDay["symptoms"] = calPeriod.symptoms;
+        }
+      }
     }
   }
 
@@ -161,6 +185,12 @@ function CalendarDays(props) {
           type={day.activityType}
           distance={day.distance}
         />
+      );
+      props.setShowModal(true);
+      props.setModalContent(content);
+    } else if (day.flow) {
+      const content = (
+        <PeriodCard volume={day.flow} date={day.date} symptoms={day.symptoms} />
       );
       props.setShowModal(true);
       props.setModalContent(content);

@@ -300,9 +300,28 @@ def activity_data(user_id):
 	TO-DO:
 		- Auto-fill date of form to the calendar day selected 
 		- Add "back" button to add activity/period forms in calendar modal
-		- Add a period error messages
+		- Add period error messages
 		x npm i react-chartjs-2 chart.js into requirements?
 		- If there is data to put into a chart, show chart. If not, show something else (loading spinner gif, or simply nothing if no data yet?)
+
+
+6/10
+	- Produced chart with data for both activities & periods!
+	- Removed state for activityDate/setActivityDate - it was messy
+	- Converted flow volume to integer scale in MyChart
+	- Added errors for period adds
+	- State for activities & periods lifted up into App component
+	- Adding an activity via the calendar causes break until refresh the page
+	TO-DO:
+		- Passing activities as props -- seems to lag? 
+		- Fix broken add activity from calendar
+		- Date issues (ofc) with adding activity - how to get it to persist?
+		- Get chart to show timeline rather than plot points as x-axis
+		- Show >1 activity or period in the calendar
+		- Edit existing activity/period
+
+6/11
+	- 
 
 
 

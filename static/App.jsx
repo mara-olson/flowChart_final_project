@@ -2,18 +2,12 @@ const { Route, BrowserRouter } = ReactRouterDOM;
 
 function App() {
   const [userId, setUserId] = React.useState(null);
-
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-
   const [error, setError] = React.useState(null);
   const [modalError, setModalError] = React.useState(null);
-
   const [showModal, setShowModal] = React.useState(false);
-
   const [modalContent, setModalContent] = React.useState(null);
-
   const [activities, setActivities] = React.useState(null);
-
   const [periods, setPeriods] = React.useState([]);
 
   React.useEffect(() => {

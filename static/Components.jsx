@@ -157,6 +157,8 @@ function Home(props) {
         setActivityDate={props.setActivityDate}
         activities={props.activities}
         setActivities={props.setActivities}
+        periods={props.periods}
+        setPeriods={props.setPeriods}
       />
 
       <MyChart

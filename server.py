@@ -298,7 +298,7 @@ def period_data(user_id):
         periods = []
 
         for period in all_periods:
-            new_period = {"id": period.mense_id, "flow": period.flow_volume, "mood": period.mood, "cramps": period.cramps, "bloating": period.bloating, "fatigue": period.fatigue, "date": period.mense_date, "created_at": period.created_at.strftime("%a %b %d %Y"), "notes": period.mense_notes}
+            new_period = {"id": period.mense_id, "flow": period.flow_volume, "mood": period.mood, "cramps": period.cramps, "bloating": period.bloating, "fatigue": period.fatigue, "date": period.mense_date.strftime("%a %b %d %Y"), "created_at": period.created_at.strftime("%a %b %d %Y"), "notes": period.mense_notes}
             # activity = activity.to_dict()
             periods.append(new_period)
        

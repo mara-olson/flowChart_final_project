@@ -59,8 +59,6 @@ function AddActivityForm(props) {
   const [sufferScore, setSufferScore] = React.useState(null);
   const [activityNotes, setActivityNotes] = React.useState(null);
 
-  const history = ReactRouterDOM.useHistory();
-
   const handleAddActivity = (evt) => {
     // console.log(evt);
     evt.preventDefault();
