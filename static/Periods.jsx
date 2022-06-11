@@ -66,6 +66,26 @@ function PeriodCard(props) {
   );
 }
 
+function AddPeriodButton(props) {
+  const handleClick = (evt) => {
+    evt.preventDefault();
+    props.setShowModal(true);
+    props.setModalContent(
+      <PeriodForm
+        userId={userId}
+        // setShowActivityForm={props.setShowActivityForm}
+        setModalError={props.setModalError}
+        setModalContent={props.setModalContent}
+        setShowModal={props.setShowModal}
+        // activityDate={props.activityDate}
+        // setActivityDate={props.setActivityDate}
+      />
+    );
+    return <Modal />;
+  };
+  return <button onClick={handleClick}>Add Period</button>;
+}
+
 function PeriodForm(props) {
   const [flowVolume, setFlowVolume] = React.useState(null);
   const [mood, setMood] = React.useState(false);

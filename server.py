@@ -271,7 +271,7 @@ def add_activity():
         
     #     return jsonify({"success": success, "error": error})
         
-    if datetime.datetime.strptime(new_act_date, "%m-%d-%Y") > created_at:
+    if datetime.datetime.strptime(new_act_date, "%Y-%m-%d") > created_at:
         error = "The date you entered is in the future. Please enter a valid activity date."
         success = False
         
@@ -331,7 +331,7 @@ def add_period():
         
         # return jsonify({"success": success, "error": error})
         
-    elif datetime.datetime.strptime(new_period, "%m-%d-%Y") > created_at:
+    elif datetime.datetime.strptime(new_period, "%Y-%m-%d") > created_at:
         error = "The date you entered is in the future. Please enter a valid date."
         success = False
         

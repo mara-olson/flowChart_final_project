@@ -33,7 +33,7 @@ function App() {
           setActivities(data.activities);
         });
     }
-  }, [isLoggedIn]);
+  }, [userId]);
 
   React.useEffect(() => {
     if (userId) {

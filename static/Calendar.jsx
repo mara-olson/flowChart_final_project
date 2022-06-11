@@ -166,8 +166,7 @@ function CalendarDays(props) {
         if (calPeriod.fatigue) {
           symptoms.push("Fatigue");
         }
-        // console.log(currentDay.date);
-        // console.log(calPeriod.date);
+
         if (currentDay.date == calPeriod.date) {
           currentDay.id = calPeriod.id;
           currentDay["volume"] = calPeriod.flow;
@@ -177,7 +176,8 @@ function CalendarDays(props) {
     }
   }
 
-  const handleClick = (day) => {
+  const handleClick = (day, evt) => {
+    console.log(evt.target);
     // evt.preventDefault();
     // props.setSelectedDay(evt.);
     if (day.activityName) {
@@ -215,6 +215,7 @@ function CalendarDays(props) {
             setModalContent={props.setModalContent}
             showModal={props.showModal}
             setShowModal={props.setShowModal}
+            selectedDate={day.date}
           />
         );
       };
@@ -233,15 +234,6 @@ function CalendarDays(props) {
       props.setShowModal(true);
     }
   };
-
-  // const nextMonth = () => {
-  //   props.setToday(new Date(props.today.setMonth(props.today.getMonth() + 1)));
-  // };
-
-  // const prevMonth = () => {
-  //   props.setToday(new Date(props.today.setMonth(props.today.getMonth() - 1)));
-  //   // console.log()
-  // };
 
   return (
     <div className="table-content">
@@ -263,7 +255,7 @@ function CalendarDays(props) {
               (day.selected ? " selected" : "")
             }
             key={day.id}
-            onClick={() => handleClick(day)}
+            onClick={(evt) => handleClick(day, evt)}
           >
             <p>{day.number}</p>
             <div>{day.activityName}</div>

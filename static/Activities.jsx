@@ -36,7 +36,7 @@ function AddActivityButton(props) {
         userId={userId}
         activities={props.actitivies}
         setActivities={props.setActivities}
-        setShowActivityForm={props.setShowActivityForm}
+        // setShowActivityForm={props.setShowActivityForm}
         setModalError={props.setModalError}
         setModalContent={props.setModalContent}
         setShowModal={props.setShowModal}
@@ -52,7 +52,7 @@ function AddActivityButton(props) {
 function AddActivityForm(props) {
   // const [activityId, setActivityId] = React.useState(null);
   const [activityName, setActivityName] = React.useState(null);
-  const [activityDate, setActivityDate] = React.useState(null);
+  const [activityDate, setActivityDate] = React.useState(props.selectedDate);
   const [activityType, setActivityType] = React.useState(null);
   const [duration, setDuration] = React.useState(null);
   const [distance, setDistance] = React.useState(null);
@@ -104,7 +104,7 @@ function AddActivityForm(props) {
         <div>
           Activity Date
           <input
-            type="text"
+            type="date"
             value={activityDate}
             onChange={(evt) => setActivityDate(evt.currentTarget.value)}
           />{" "}
@@ -197,7 +197,7 @@ function AddActivityForm(props) {
 
 function Activities(props) {
   // const [activities, setActivities] = React.useState([]);
-  const [showActivityForm, setShowActivityForm] = React.useState(false);
+  // const [showActivityForm, setShowActivityForm] = React.useState(false);
 
   // React.useEffect(() => {
   //   if (props.userId) {
@@ -214,8 +214,8 @@ function Activities(props) {
         setActivities={props.setActivities}
         setModalError={props.setModalError}
         userId={props.userId}
-        setShowActivityForm={setShowActivityForm}
-        showActivityForm={showActivityForm}
+        // setShowActivityForm={setShowActivityForm}
+        // showActivityForm={showActivityForm}
         setModalContent={props.setModalContent}
         setShowModal={props.setShowModal}
         activityDate={props.activityDate}
@@ -226,8 +226,8 @@ function Activities(props) {
         setActivities={props.setActivities}
         setModalError={props.setModalError}
         userId={props.userId}
-        setShowActivityForm={setShowActivityForm}
-        showActivityForm={showActivityForm}
+        // setShowActivityForm={setShowActivityForm}
+        // showActivityForm={showActivityForm}
         showModal={props.showModal}
         setShowModal={props.setShowModal}
         setModalContent={props.setModalContent}
