@@ -177,10 +177,29 @@ function CalendarDays(props) {
   }
 
   const handleClick = (day, evt) => {
-    console.log(evt.target);
     // evt.preventDefault();
     // props.setSelectedDay(evt.);
-    if (day.activityName) {
+    if (day.activityName && day.volume) {
+      const content = (
+        <div>
+          <h2>Activity</h2>
+          <ActivityCard
+            name={day.activityName}
+            date={day.date}
+            type={day.activityType}
+            distance={day.distance}
+          />
+          <h2>Period</h2>
+          <PeriodCard
+            volume={day.volume}
+            date={day.date}
+            symptoms={day.symptoms}
+          />
+        </div>
+      );
+      props.setShowModal(true);
+      props.setModalContent(content);
+    } else if (day.activityName) {
       const content = (
         <ActivityCard
           name={day.activityName}
