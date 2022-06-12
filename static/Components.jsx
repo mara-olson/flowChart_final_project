@@ -397,7 +397,9 @@ function MyChart(props) {
 }
 
 function ProfileCard(props) {
-  const [profilePicSrc, setProfilePicSrc] = React.useState(null);
+  const [profilePicSrc, setProfilePicSrc] = React.useState(
+    "/static/ProfilePicDefault.png"
+  );
   const [profilePic, setProfilePic] = React.useState(profilePicSrc);
   const [photoPreviewUrl, setPhotoPreviewUrl] = React.useState(
     "https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true"
@@ -486,9 +488,13 @@ function ProfileCard(props) {
 
 function PhotoUploader(props) {
   return (
-    <label htmlForm="photo-upload" className="file-upload">
-      <div className="img-upload">
-        <img for="photo-upload" src={props.profilePicSrc} />
+    <label htmlForm="photo-upload" className="custom-file-upload fas">
+      <div className="img-wrap img-upload">
+        <img
+          htmlFor="photo-upload"
+          className="profile-pic"
+          src={props.profilePicSrc}
+        />
       </div>
       <input id="photo-upload" type="file" onChange={props.handlePhotoUpload} />
     </label>
@@ -582,7 +588,7 @@ function EditProfile(props) {
         <h2>Profile</h2>
         {props.children}
         <button type="submit">Save</button>
-        <button onClick={props.closeEdit}>Cancel</button>
+        <button onClick={closeEdit}>Cancel</button>
       </form>
     </div>
   );
@@ -593,9 +599,9 @@ function ProfileForm(props) {
     <div className="profile-card">
       <form onSubmit={props.handleSubmit}>
         <h1>Profile Card</h1>
-        <label className="custom-file-upload">
-          <div>
-            <img for="photo-upload" src={props.profilePicSrc} />
+        <label className="custom-file-upload fas">
+          <div className="img-wrap">
+            <img htmlFor="photo-upload" src={props.profilePicSrc} />
           </div>
         </label>
         <h3 className="first-name last-name">
@@ -612,36 +618,3 @@ function ProfileForm(props) {
     </div>
   );
 }
-
-// const handlePhotoUpload = (evt) => {
-//   const reader = new FileReader();
-//   const photo = evt.target.files[0];
-//   const source = URL.createObjectURL(photo);
-
-//   reader.onloadend = () => {
-//     setProfilePic(photo);
-//     setProfilePicSrc(source);
-//     setPhotoPreviewUrl(reader.result);
-//   };
-//   reader.readAsDataURL(photo);
-// };
-
-// const showPhotoPreview = () => {
-//   if (profilePicSrc) {
-//     return <img src={profilePicSrc} />;
-//   } else {
-//     return <p>No Preview</p>;
-//   }
-// };
-
-//   return (
-//     <div>
-//       <h3>Profile Pic Uploader</h3>
-//       <input type="file" onChange={handlePhotoUpload} />
-//       <br></br>
-//       <div>{showPhotoPreview}</div>
-//       <hr />
-//       <button>Upload Photo</button>
-//     </div>
-//   );
-// }
