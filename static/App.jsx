@@ -10,6 +10,11 @@ function App() {
   const [activities, setActivities] = React.useState(null);
   const [periods, setPeriods] = React.useState([]);
 
+  const closeModal = () => {
+    setShowModal(false);
+    setModalError(null);
+  };
+
   React.useEffect(() => {
     const localIsLoggedIn = localStorage.getItem("isLoggedIn");
     if (localIsLoggedIn) {
@@ -99,7 +104,7 @@ function App() {
             setPeriods={setPeriods}
           />
           <Modal
-            onClose={() => setShowModal(false)}
+            onClose={closeModal}
             showModal={showModal}
             setModalContent={setModalContent}
             modalContent={modalContent}
@@ -121,7 +126,7 @@ function App() {
             setActivities={setActivities}
           />
           <Modal
-            onClose={() => setShowModal(false)}
+            onClose={closeModal}
             showModal={showModal}
             modalContent={modalContent}
             modalError={modalError}
@@ -143,7 +148,7 @@ function App() {
             setShowModal={setShowModal}
           />
           <SignUpModal
-            onClose={() => setShowModal(false)}
+            onClose={closeModal}
             showModal={showModal}
             modalContent={modalContent}
             userId={userId}
@@ -166,7 +171,7 @@ function App() {
             setModalContent={setModalContent}
           />
           <Modal
-            onClose={() => setShowModal(false)}
+            onClose={closeModal}
             showModal={showModal}
             modalContent={modalContent}
             modalError={modalError}

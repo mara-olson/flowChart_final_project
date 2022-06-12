@@ -137,7 +137,7 @@ function PeriodForm(props) {
         cramps: cramps,
         bloating: bloating,
         fatigue: fatigue,
-        date: periodDate,
+        mense_date: periodDate,
         notes: notes,
       }),
       headers: {
@@ -151,10 +151,11 @@ function PeriodForm(props) {
             .then((response) => response.json())
             .then((data) => {
               props.setPeriods(data.periods);
-              console.log(data.periods);
+              // console.log(data.periods);
               props.setShowModal(false);
             });
         } else {
+          console.log(data.error);
           props.setModalError(data.error);
         }
       });
@@ -166,6 +167,7 @@ function PeriodForm(props) {
         <label htmlFor="date">Date of event</label>
         <input
           type="date"
+          name="mense_date"
           value={periodDate}
           onChange={(evt) => setPeriodDate(evt.currentTarget.value)}
         />

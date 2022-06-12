@@ -265,11 +265,11 @@ def add_activity():
 
     
     
-    # if new_act_date is None:
-    #     error = "Please enter an activity date, type, & duration"
-    #     success = False
+    if new_act_date is None:
+        error = "Please enter an activity date, type, & duration"
+        success = False
         
-    #     return jsonify({"success": success, "error": error})
+        return jsonify({"success": success, "error": error})
         
     if datetime.datetime.strptime(new_act_date, "%Y/%m/%d") > created_at:
         error = "The date you entered is in the future. Please enter a valid activity date."
@@ -318,30 +318,29 @@ def add_period():
     cramps = data.get("cramps")
     bloating = data.get("bloating")
     fatigue = data.get("fatigue")
-    mense_date = data.get("date")
+    mense_date = data.get("mense_date")
     notes = data.get("notes")
     created_at = datetime.datetime.now()
 
-    new_period = MenseLog.create_mense_log(user_id, flow_volume, mood, cramps, bloating, fatigue, mense_date, notes, created_at)
-
-
-    if new_period is None:
+    if mense_date is None:
         error = "Please enter a date & flow"
         success = False
         
-        # return jsonify({"success": success, "error": error})
+        return jsonify({"success": success, "error": error})
         
     elif datetime.datetime.strptime(mense_date, "%Y-%m-%d") > created_at:
         error = "The date you entered is in the future. Please enter a valid date."
         success = False
         
-        # return jsonify({"success": success, "error": error})
+        return jsonify({"success": success, "error": error})
 
     else:
         error = None
         success = True
 
-    return jsonify({"success": success, "error": error})
+        new_period = MenseLog.create_mense_log(user_id, flow_volume, mood, cramps, bloating, fatigue, mense_date, notes, created_at)
+
+        return jsonify({"success": success, "error": error})
 
 # @app.route("/api/<user_id>/data")
 # def chart_data(user_id):

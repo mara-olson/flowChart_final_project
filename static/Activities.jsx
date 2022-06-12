@@ -105,6 +105,7 @@ function AddActivityForm(props) {
           Activity Date
           <input
             type="date"
+            name="date"
             value={activityDate}
             onChange={(evt) => setActivityDate(evt.currentTarget.value)}
           />{" "}

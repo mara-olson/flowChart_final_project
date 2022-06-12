@@ -19,7 +19,7 @@ function Calendar(props) {
       fetch(`/api/users/${props.userId}/periods`)
         .then((response) => response.json())
         .then((data) => {
-          setCalPeriods(data.periods);
+          props.setPeriods(data.periods);
         });
     }
   }, [props.userId]);
@@ -98,6 +98,8 @@ function Calendar(props) {
           setModalError={props.setModalError}
           activities={props.activities}
           setActivities={props.setActivities}
+          periods={props.periods}
+          setPeriods={props.setPeriods}
           calPeriods={calPeriods}
           setCalPeriods={setCalPeriods}
         />
@@ -108,8 +110,8 @@ function Calendar(props) {
 }
 
 function CalendarDays(props) {
-  console.log(props.calPeriods);
-  console.log(props.calActivities);
+  // console.log(props.calPeriods);
+  // console.log(props.calActivities);
 
   let firstDayOfMonth = new Date(
     props.today.getFullYear(),
@@ -152,7 +154,7 @@ function CalendarDays(props) {
           currentDay["distance"] = calActivity.distance;
         }
       }
-      for (const calPeriod of props.calPeriods) {
+      for (const calPeriod of props.periods) {
         const symptoms = [];
         if (calPeriod.mood) {
           symptoms.push("Moodiness");
@@ -239,7 +241,7 @@ function CalendarDays(props) {
         );
       };
       const goToAddPeriod = () => {
-        console.log(day.selected);
+        // console.log(day.selected);
         props.setModalContent(
           <PeriodForm
             userId={props.userId}
@@ -250,6 +252,8 @@ function CalendarDays(props) {
             showModal={props.showModal}
             setShowModal={props.setShowModal}
             selectedDate={day.displayDate}
+            periods={props.periods}
+            setPeriods={props.setPeriods}
           />
         );
       };
