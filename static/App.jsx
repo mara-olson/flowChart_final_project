@@ -152,11 +152,24 @@ function App() {
       </div>
       <div className="container-fluid">
         <Route exact path="/users/periods">
-          <Periods userId={userId} periods={periods} setPeriods={setPeriods} />
-          <PeriodForm
+          <Periods
             userId={userId}
             periods={periods}
             setPeriods={setPeriods}
+            error={error}
+            setError={setError}
+            modalError={modalError}
+            setModalError={setModalError}
+            showModal={showModal}
+            setShowModal={setShowModal}
+            modalContent={modalContent}
+            setModalContent={setModalContent}
+          />
+          <Modal
+            onClose={() => setShowModal(false)}
+            showModal={showModal}
+            modalContent={modalContent}
+            modalError={modalError}
           />
         </Route>
       </div>

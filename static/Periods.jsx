@@ -1,14 +1,37 @@
 function Periods(props) {
-  // const [periods, setPeriods] = React.useState([]);
+  return (
+    <div>
+      <AddPeriodButton
+        userId={props.userId}
+        periods={props.periods}
+        setPeriods={props.setPeriods}
+        error={props.error}
+        setError={props.setError}
+        modalError={props.modalError}
+        setModalError={props.setModalError}
+        showModal={props.showModal}
+        setShowModal={props.setShowModal}
+        modalContent={props.modalContent}
+        setModalContent={props.setModalContent}
+      />
+      <PeriodContainer
+        userId={props.userId}
+        periods={props.periods}
+        setPeriods={props.setPeriods}
+        error={props.error}
+        setError={props.setError}
+        modalError={props.modalError}
+        setModalError={props.setModalError}
+        showModal={props.showModal}
+        setShowModal={props.setShowModal}
+        modalContent={props.modalContent}
+        setModalContent={props.setModalContent}
+      />
+    </div>
+  );
+}
 
-  // React.useEffect(() => {
-  //   if (props.userId) {
-  //     fetch(`/api/users/${props.userId}/periods`)
-  //       .then((response) => response.json())
-  //       .then((data) => setPeriods(data.periods));
-  //   }
-  // }, [props.userId]);
-
+function PeriodContainer(props) {
   const periodDetails = [];
 
   for (const period of props.periods) {
@@ -72,13 +95,16 @@ function AddPeriodButton(props) {
     props.setShowModal(true);
     props.setModalContent(
       <PeriodForm
-        userId={userId}
-        // setShowActivityForm={props.setShowActivityForm}
+        userId={props.userId}
+        periods={props.periods}
+        setPeriods={props.setPeriods}
+        setError={props.setError}
+        modalError={props.modalError}
         setModalError={props.setModalError}
-        setModalContent={props.setModalContent}
+        showModal={props.showModal}
         setShowModal={props.setShowModal}
-        // activityDate={props.activityDate}
-        // setActivityDate={props.setActivityDate}
+        modalContent={props.modalContent}
+        setModalContent={props.setModalContent}
       />
     );
     return <Modal />;

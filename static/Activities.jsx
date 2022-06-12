@@ -196,17 +196,6 @@ function AddActivityForm(props) {
 }
 
 function Activities(props) {
-  // const [activities, setActivities] = React.useState([]);
-  // const [showActivityForm, setShowActivityForm] = React.useState(false);
-
-  // React.useEffect(() => {
-  //   if (props.userId) {
-  //     fetch(`/api/users/${props.userId}/activities`)
-  //       .then((response) => response.json())
-  //       .then((data) => setActivities(data.activities));
-  //   }
-  // }, [props.userId]);
-
   return (
     <div>
       <AddActivityButton
@@ -214,8 +203,6 @@ function Activities(props) {
         setActivities={props.setActivities}
         setModalError={props.setModalError}
         userId={props.userId}
-        // setShowActivityForm={setShowActivityForm}
-        // showActivityForm={showActivityForm}
         setModalContent={props.setModalContent}
         setShowModal={props.setShowModal}
         activityDate={props.activityDate}
@@ -226,8 +213,6 @@ function Activities(props) {
         setActivities={props.setActivities}
         setModalError={props.setModalError}
         userId={props.userId}
-        // setShowActivityForm={setShowActivityForm}
-        // showActivityForm={showActivityForm}
         showModal={props.showModal}
         setShowModal={props.setShowModal}
         setModalContent={props.setModalContent}
