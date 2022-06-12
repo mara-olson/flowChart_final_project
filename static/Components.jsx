@@ -601,7 +601,11 @@ function ProfileForm(props) {
         <h1>Profile Card</h1>
         <label className="custom-file-upload fas">
           <div className="img-wrap">
-            <img htmlFor="photo-upload" src={props.profilePicSrc} />
+            <img
+              htmlFor="photo-upload"
+              className="profile-img"
+              src={props.profilePicSrc}
+            />
           </div>
         </label>
         <h3 className="first-name last-name">
