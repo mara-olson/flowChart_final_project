@@ -136,12 +136,12 @@ function CalendarDays(props) {
 
     const calendarDay = {
       currentMonth: firstDayOfMonth.getMonth() === props.today.getMonth(),
-      date: new Date(firstDayOfMonth).toDateString(),
-      // toISOString().substring(0, 10)
+      date: new Date(firstDayOfMonth).toISOString().substring(0, 10),
       month: firstDayOfMonth.getMonth(),
       number: firstDayOfMonth.getDate(),
       selected:
-        firstDayOfMonth.toDateString() === props.realToday.toDateString(),
+        firstDayOfMonth.toISOString().substring(0, 10) ===
+        props.realToday.toISOString().substring(0, 10),
       year: firstDayOfMonth.getFullYear(),
     };
     currentDays.push(calendarDay);
@@ -237,7 +237,7 @@ function CalendarDays(props) {
             setModalContent={props.setModalContent}
             showModal={props.showModal}
             setShowModal={props.setShowModal}
-            selectedDate={day.displayDate}
+            selectedDate={day.date}
           />
         );
       };
@@ -252,9 +252,9 @@ function CalendarDays(props) {
             setModalContent={props.setModalContent}
             showModal={props.showModal}
             setShowModal={props.setShowModal}
-            selectedDate={day.displayDate}
             periods={props.periods}
             setPeriods={props.setPeriods}
+            selectedDate={day.date}
           />
         );
       };

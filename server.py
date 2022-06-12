@@ -279,7 +279,7 @@ def add_activity():
         
         return jsonify({"success": success, "error": error})
         
-    if datetime.datetime.strptime(new_act_date, "%Y/%m/%d") > created_at:
+    if datetime.datetime.strptime(new_act_date, "%Y-%m-%d") > datetime.datetime.strptime(created_at, "%Y-%m-%d"):
         error = "The date you entered is in the future. Please enter a valid activity date."
         success = False
         
@@ -306,10 +306,11 @@ def period_data(user_id):
         periods = []
 
         for period in all_periods:
-            new_period = {"id": period.mense_id, "flow": period.flow_volume, "mood": period.mood, "cramps": period.cramps, "bloating": period.bloating, "fatigue": period.fatigue, "date": period.mense_date.strftime("%a %b %d %Y"), "created_at": period.created_at.strftime("%a %b %d %Y"), "notes": period.mense_notes}
+            new_period = {"id": period.mense_id, "flow": period.flow_volume, "mood": period.mood, "cramps": period.cramps, "bloating": period.bloating, "fatigue": period.fatigue, "date": period.mense_date.strftime("%Y-%m-%d"), "created_at": period.created_at.strftime("%Y-%m-%d"), "notes": period.mense_notes}
             # activity = activity.to_dict()
             periods.append(new_period)
-       
+
+        periods.sort(key=lambda x: datetime.datetime.strptime(x['date'], "%Y-%m-%d"))
         
         return jsonify({"periods": periods, "success": True})
 
