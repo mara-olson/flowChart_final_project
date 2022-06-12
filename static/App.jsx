@@ -19,7 +19,6 @@ function App() {
 
   React.useEffect(() => {
     if (userId) {
-      console.log("hi");
       fetch(`/users/${userId}/profile`)
         .then((response) => response.json())
         .then((data) => {

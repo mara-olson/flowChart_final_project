@@ -1,15 +1,58 @@
-function EditActivityForm(props) {}
+function EditActivityForm(props) {
+  const closeEdit = (evt) => {
+    evt.preventDefault();
+    props.setActive("activity");
+  };
+
+  return (
+    <div>
+      <form onSubmit={props.handleSubmit}>
+        <h2>Edit Activity</h2>
+        <div className="field">
+          <label htmlFor="act-name">Name: </label>
+          <input
+            id="act-name"
+            type="text"
+            onChange={props.setActName}
+            // value={props.actName}
+          />
+        </div>
+        <button type="submit">Save</button>
+        <button onClick={closeEdit}>Cancel</button>
+      </form>
+    </div>
+  );
+
+  // return (
+  //   <div className="field">
+  //     <label htmlFor="act-name">Name: </label>
+  //     <input
+  //       id="act-name"
+  //       type="text"
+  //       onChange={props.setActName}
+  //       value={props.actName}
+  //     />
+  //   </div>
+  // );
+}
 
 function ActivityCard(props) {
+  const [actName, setActName] = React.useState(props.name);
+
   const handleClick = (evt) => {
     evt.preventDefault();
     // props.setSelectedDay(evt.);
 
     props.setModalContent(
       <EditActivityForm
+        actName={actName}
+        setActName={setActName}
+        date={props.date}
+        type={props.type}
+        distance={props.distance}
 
-      // activityDate={props.activityDate}
-      // setActivityDate={props.setActivityDate}
+        // activityDate={props.activityDate}
+        // setActivityDate={props.setActivityDate}
       />
     );
     props.setShowModal(true);
@@ -17,7 +60,7 @@ function ActivityCard(props) {
 
   return (
     <div className="card" onClick={handleClick}>
-      <p>Name: {props.name}</p>
+      <p>Name: {actName}</p>
       <p>Date: {props.date} </p>
       <p>Type: {props.type}</p>
       <p>Distance: {props.distance} miles</p>
@@ -236,6 +279,7 @@ function ActivitiesContainer(props) {
       <ActivityCard
         key={activity.id}
         name={activity.name}
+        // setActName={setActName}
         date={activity.date}
         distance={activity.distance}
         type={activity.type}
@@ -255,3 +299,96 @@ function ActivitiesContainer(props) {
     </div>
   );
 }
+
+// function ProfileFirstName(props) {
+//   console.log(props.firstName);
+//   return (
+//     <div className="field">
+//       <label htmlFor="first-name">First Name: </label>
+//       <input
+//         id="first-name"
+//         type="text"
+//         onChange={props.setFirstName}
+//         value={props.firstName}
+//         placeholder="Enter your first name"
+//       />
+//     </div>
+//   );
+// }
+
+// function ProfileLastName(props) {
+//   return (
+//     <div className="field">
+//       <label htmlFor="last-name">Last Name: </label>
+//       <input
+//         id="last-name"
+//         type="text"
+//         onChange={props.setLastName}
+//         value={props.lastName}
+//         placeholder="Enter your last name"
+//       />
+//     </div>
+//   );
+// }
+
+// function ProfileBio(props) {
+//   return (
+//     <div className="field">
+//       <label htmlFor="bio">Bio: </label>
+//       <input
+//         id="bio"
+//         type="text"
+//         onChange={props.editBio}
+//         value={props.bio}
+//         placeholder="Enter a brief bio"
+//       />
+//     </div>
+//   );
+// }
+
+// function ProfileEmail(props) {
+//   return (
+//     <div className="field">
+//       <label htmlFor="email">Email: </label>
+//       <input
+//         id="email"
+//         type="text"
+//         onChange={props.setEmail}
+//         value={props.email}
+//       />
+//     </div>
+//   );
+// }
+
+// function ActivityDistance(props) {
+//   return (
+//     <div className="field">
+//       <label htmlFor="distance">Distance: </label>
+//       <input
+//         id="distance"
+//         type="text"
+//         onChange={props.setTeamName}
+//         value={props.teamName}
+//         placeholder="Enter your team's name"
+//       />
+//     </div>
+//   );
+// }
+
+// function EditActivity(props) {
+//   const closeEdit = (evt) => {
+//     evt.preventDefault();
+//     props.setActive("activity");
+//   };
+
+//   return (
+//     <div>
+//       <form onSubmit={props.handleSubmit}>
+//         <h2>Edit Activity</h2>
+//         {props.children}
+//         <button type="submit">Save</button>
+//         <button onClick={closeEdit}>Cancel</button>
+//       </form>
+//     </div>
+//   );
+// }

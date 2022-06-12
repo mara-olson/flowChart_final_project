@@ -191,6 +191,7 @@ function CalendarDays(props) {
             date={day.date}
             type={day.activityType}
             distance={day.distance}
+            setModalContent={props.setModalContent}
           />
           <h2>Period</h2>
           <PeriodCard
@@ -209,6 +210,7 @@ function CalendarDays(props) {
           date={day.date}
           type={day.activityType}
           distance={day.distance}
+          setModalContent={props.setModalContent}
         />
       );
       props.setShowModal(true);
