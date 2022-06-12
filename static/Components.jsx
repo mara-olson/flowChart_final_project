@@ -426,16 +426,6 @@ function ProfileCard(props) {
     setBio(newBio);
   };
 
-  // const editFirstName = (evt) => {
-  //   const fname = evt.target.value;
-  //   props.setFirstName(fname);
-  // };
-
-  // const editLastName = (evt) => {
-  //   const lname = evt.target.value;
-  //   props.setLastName(lname);
-  // };
-
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const activeProfile = active === "edit" ? "profile" : "edit";
@@ -447,6 +437,7 @@ function ProfileCard(props) {
       {active === "edit" ? (
         <EditProfile
           handleSubmit={handleSubmit}
+          setActive={setActive}
           userId={props.userId}
           firstName={props.firstName}
           setFirstName={props.setFirstName}
@@ -467,11 +458,15 @@ function ProfileCard(props) {
             firstName={props.firstName}
           />
           <ProfileLastName
-            // profileLastName={profileLastName}
             setLastName={props.setLastName}
             lastName={props.lastName}
           />
           <ProfileBio editBio={editBio} bio={bio} />
+          <ProfileEmail setEmail={props.setEmail} email={props.email} />
+          <ProfileTeam
+            setTeamName={props.setTeamName}
+            teamName={props.teamName}
+          />
         </EditProfile>
       ) : (
         <ProfileForm
@@ -546,13 +541,48 @@ function ProfileBio(props) {
   );
 }
 
+function ProfileEmail(props) {
+  return (
+    <div className="field">
+      <label htmlFor="email">Email: </label>
+      <input
+        id="email"
+        type="text"
+        onChange={props.setEmail}
+        value={props.email}
+      />
+    </div>
+  );
+}
+
+function ProfileTeam(props) {
+  return (
+    <div className="field">
+      <label htmlFor="team">Team: </label>
+      <input
+        id="team"
+        type="text"
+        onChange={props.setTeamName}
+        value={props.teamName}
+        placeholder="Enter your team's name"
+      />
+    </div>
+  );
+}
+
 function EditProfile(props) {
+  const closeEdit = (evt) => {
+    evt.preventDefault();
+    props.setActive("profile");
+  };
+
   return (
     <div className="profile-card">
       <form onSubmit={props.handleSubmit}>
         <h2>Profile</h2>
         {props.children}
         <button type="submit">Save</button>
+        <button onClick={props.closeEdit}>Cancel</button>
       </form>
     </div>
   );
