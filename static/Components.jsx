@@ -145,7 +145,18 @@ function LandingPage(props) {
 function Home(props) {
   return (
     <div>
-      <StatsCard />
+      <ProfileCard
+        userId={props.userId}
+        firstName={props.firstName}
+        setFirstName={props.setFirstName}
+        lastName={props.lastName}
+        setLastName={props.setLastName}
+        teamName={props.teamName}
+        setTeamName={props.setTeamName}
+        email={props.email}
+        setEmail={props.setEmail}
+        sinceDate={props.sinceDate}
+      />
       <Calendar
         userId={props.userId}
         showModal={props.showModal}
@@ -239,47 +250,47 @@ function Login(props) {
 }
 
 function Profile(props) {
-  const [firstName, setFirstName] = React.useState(null);
-  const [lastName, setLastName] = React.useState(null);
-  const [teamName, setTeamName] = React.useState(null);
-  const [email, setEmail] = React.useState(null);
-  const [password, setPassword] = React.useState(null);
-  const [sinceDate, setSinceDate] = React.useState(null);
+  // const [firstName, setFirstName] = React.useState(null);
+  // const [lastName, setLastName] = React.useState(null);
+  // const [teamName, setTeamName] = React.useState(null);
+  // const [email, setEmail] = React.useState(null);
+  // const [password, setPassword] = React.useState(null);
+  // const [sinceDate, setSinceDate] = React.useState(null);
 
-  React.useEffect(() => {
-    if (props.userId) {
-      console.log("hi");
-      fetch(`/users/${props.userId}/profile`)
-        .then((response) => response.json())
-        .then((data) => {
-          setFirstName(data.first_name);
-          setLastName(data.last_name);
-          setTeamName(data.team_name);
-          setEmail(data.email);
-          setPassword(data.password);
-          setSinceDate(data.member_since);
-        });
-    }
-  }, [props.userId]);
+  // React.useEffect(() => {
+  //   if (props.userId) {
+  //     console.log("hi");
+  //     fetch(`/users/${props.userId}/profile`)
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         setFirstName(data.first_name);
+  //         setLastName(data.last_name);
+  //         setTeamName(data.team_name);
+  //         setEmail(data.email);
+  //         setPassword(data.password);
+  //         setSinceDate(data.member_since);
+  //       });
+  //   }
+  // }, [props.userId]);
 
   return (
     <div>
       <h2>Account Information</h2>
       <br></br>
       <p>
-        First Name: <strong>{firstName}</strong>
+        First Name: <strong>{props.firstName}</strong>
       </p>
       <br></br>
       <p>
-        Last Name: <strong>{lastName}</strong>
+        Last Name: <strong>{props.lastName}</strong>
       </p>
       <br></br>
       <p>
-        Team Name: <strong>{teamName}</strong>
+        Team Name: <strong>{props.teamName}</strong>
       </p>
       <br></br>
       <p>
-        Email: <strong>{email}</strong>
+        Email: <strong>{props.email}</strong>
       </p>
       <br></br>
       <p>
@@ -287,7 +298,7 @@ function Profile(props) {
       </p>
       <br></br>
       <p>
-        Member Since: <strong>{sinceDate}</strong>
+        Member Since: <strong>{props.sinceDate}</strong>
       </p>
     </div>
   );
@@ -386,22 +397,18 @@ function MyChart(props) {
 }
 
 function ProfileCard(props) {
-  return (
-    <div className="statscard">
-      <p>Stats</p>
-      <PhotoUploader onChange={this.photoUpload} src={imagePreviewUrl} />
-    </div>
-  );
-}
-
-function PhotoUploader(props) {
   const [profilePicSrc, setProfilePicSrc] = React.useState(null);
   const [profilePic, setProfilePic] = React.useState(profilePicSrc);
   const [photoPreviewUrl, setPhotoPreviewUrl] = React.useState(
-    "'https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true'"
+    "https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true"
   );
+  // const [profileFirstName, setProfileFirstName] = React.useState("");
+  // const [profileLastName, setProfileLastName] = React.useState("");
+  const [bio, setBio] = React.useState("");
+  const [active, setActive] = React.useState("profile");
 
   const handlePhotoUpload = (evt) => {
+    evt.preventDefault();
     const reader = new FileReader();
     const photo = evt.target.files[0];
     const source = URL.createObjectURL(photo);
@@ -414,22 +421,197 @@ function PhotoUploader(props) {
     reader.readAsDataURL(photo);
   };
 
-  const showPhotoPreview = () => {
-    if (profilePicSrc) {
-      return <img src={profilePicSrc} />;
-    } else {
-      return <p>No Preview</p>;
-    }
+  const editBio = (evt) => {
+    const newBio = evt.target.value;
+    setBio(newBio);
+  };
+
+  // const editFirstName = (evt) => {
+  //   const fname = evt.target.value;
+  //   props.setFirstName(fname);
+  // };
+
+  // const editLastName = (evt) => {
+  //   const lname = evt.target.value;
+  //   props.setLastName(lname);
+  // };
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    const activeProfile = active === "edit" ? "profile" : "edit";
+    setActive(activeProfile);
   };
 
   return (
-    <div>
-      <h3>Profile Pic Uploader</h3>
-      <input type="file" onChange={handlePhotoUpload} />
-      <br></br>
-      <div>{showPhotoPreview}</div>
-      <hr />
-      <button>Upload Photo</button>
+    <div className="stats-card">
+      {active === "edit" ? (
+        <EditProfile
+          handleSubmit={handleSubmit}
+          userId={props.userId}
+          firstName={props.firstName}
+          setFirstName={props.setFirstName}
+          lastName={props.lastName}
+          setLastName={props.setLastName}
+          teamName={props.teamName}
+          setTeamName={props.setTeamName}
+          email={props.email}
+          setEmail={props.setEmail}
+          sinceDate={props.sinceDate}
+        >
+          <PhotoUploader
+            profilePicSrc={profilePicSrc}
+            handlePhotoUpload={handlePhotoUpload}
+          />
+          <ProfileFirstName
+            setFirstName={props.setFirstName}
+            firstName={props.firstName}
+          />
+          <ProfileLastName
+            // profileLastName={profileLastName}
+            setLastName={props.setLastName}
+            lastName={props.lastName}
+          />
+          <ProfileBio editBio={editBio} bio={bio} />
+        </EditProfile>
+      ) : (
+        <ProfileForm
+          handleSubmit={handleSubmit}
+          profilePicSrc={profilePicSrc}
+          firstName={props.firstName}
+          lastName={props.lastName}
+          bio={bio}
+          email={props.email}
+          teamName={props.teamName}
+          sinceDate={props.sinceDate}
+        />
+      )}
     </div>
   );
 }
+
+function PhotoUploader(props) {
+  return (
+    <label htmlForm="photo-upload" className="file-upload">
+      <div className="img-upload">
+        <img for="photo-upload" src={props.profilePicSrc} />
+      </div>
+      <input id="photo-upload" type="file" onChange={props.handlePhotoUpload} />
+    </label>
+  );
+}
+
+function ProfileFirstName(props) {
+  console.log(props.firstName);
+  return (
+    <div className="field">
+      <label htmlFor="first-name">First Name: </label>
+      <input
+        id="first-name"
+        type="text"
+        onChange={props.setFirstName}
+        value={props.firstName}
+        placeholder="Enter your first name"
+      />
+    </div>
+  );
+}
+
+function ProfileLastName(props) {
+  return (
+    <div className="field">
+      <label htmlFor="last-name">Last Name: </label>
+      <input
+        id="last-name"
+        type="text"
+        onChange={props.setLastName}
+        value={props.lastName}
+        placeholder="Enter your last name"
+      />
+    </div>
+  );
+}
+
+function ProfileBio(props) {
+  return (
+    <div className="field">
+      <label htmlFor="bio">Bio: </label>
+      <input
+        id="bio"
+        type="text"
+        onChange={props.editBio}
+        value={props.bio}
+        placeholder="Enter a brief bio"
+      />
+    </div>
+  );
+}
+
+function EditProfile(props) {
+  return (
+    <div className="profile-card">
+      <form onSubmit={props.handleSubmit}>
+        <h2>Profile</h2>
+        {props.children}
+        <button type="submit">Save</button>
+      </form>
+    </div>
+  );
+}
+
+function ProfileForm(props) {
+  return (
+    <div className="profile-card">
+      <form onSubmit={props.handleSubmit}>
+        <h1>Profile Card</h1>
+        <label className="custom-file-upload">
+          <div>
+            <img for="photo-upload" src={props.profilePicSrc} />
+          </div>
+        </label>
+        <h3 className="first-name last-name">
+          {props.firstName} {props.lastName}
+        </h3>
+        <h6>Member since {props.sinceDate}</h6>
+        <p className="bio">{props.bio}</p>
+        <div className="team-name">{props.teamName}</div>
+        <div className="email">{props.email}</div>
+        <button type="submit" className="edit">
+          Edit Profile{" "}
+        </button>
+      </form>
+    </div>
+  );
+}
+
+// const handlePhotoUpload = (evt) => {
+//   const reader = new FileReader();
+//   const photo = evt.target.files[0];
+//   const source = URL.createObjectURL(photo);
+
+//   reader.onloadend = () => {
+//     setProfilePic(photo);
+//     setProfilePicSrc(source);
+//     setPhotoPreviewUrl(reader.result);
+//   };
+//   reader.readAsDataURL(photo);
+// };
+
+// const showPhotoPreview = () => {
+//   if (profilePicSrc) {
+//     return <img src={profilePicSrc} />;
+//   } else {
+//     return <p>No Preview</p>;
+//   }
+// };
+
+//   return (
+//     <div>
+//       <h3>Profile Pic Uploader</h3>
+//       <input type="file" onChange={handlePhotoUpload} />
+//       <br></br>
+//       <div>{showPhotoPreview}</div>
+//       <hr />
+//       <button>Upload Photo</button>
+//     </div>
+//   );
+// }

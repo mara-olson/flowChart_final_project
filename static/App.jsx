@@ -10,6 +10,29 @@ function App() {
   const [activities, setActivities] = React.useState(null);
   const [periods, setPeriods] = React.useState([]);
 
+  const [firstName, setFirstName] = React.useState(null);
+  const [lastName, setLastName] = React.useState(null);
+  const [teamName, setTeamName] = React.useState(null);
+  const [email, setEmail] = React.useState(null);
+  const [password, setPassword] = React.useState(null);
+  const [sinceDate, setSinceDate] = React.useState(null);
+
+  React.useEffect(() => {
+    if (userId) {
+      console.log("hi");
+      fetch(`/users/${userId}/profile`)
+        .then((response) => response.json())
+        .then((data) => {
+          setFirstName(data.first_name);
+          setLastName(data.last_name);
+          setTeamName(data.team_name);
+          setEmail(data.email);
+          setPassword(data.password);
+          setSinceDate(data.member_since);
+        });
+    }
+  }, [userId]);
+
   const closeModal = () => {
     setShowModal(false);
     setModalError(null);
@@ -102,6 +125,15 @@ function App() {
             setActivities={setActivities}
             periods={periods}
             setPeriods={setPeriods}
+            firstName={firstName}
+            setFirstName={setFirstName}
+            lastName={lastName}
+            setLastName={setLastName}
+            teamName={teamName}
+            setTeamName={setTeamName}
+            email={email}
+            setEmail={setEmail}
+            sinceDate={sinceDate}
           />
           <Modal
             onClose={closeModal}
@@ -135,7 +167,18 @@ function App() {
       </div>
       <div className="container-fluid">
         <Route exact path="/users/profile">
-          <Profile userId={userId} />
+          <Profile
+            userId={userId}
+            firstName={firstName}
+            setFirstName={setFirstName}
+            lastName={lastName}
+            setLastName={setLastName}
+            teamName={teamName}
+            setTeamName={setTeamName}
+            email={email}
+            setEmail={setEmail}
+            sinceDate={sinceDate}
+          />
         </Route>
       </div>
       <div className="container-fluid">
