@@ -137,6 +137,7 @@ function CalendarDays(props) {
     const calendarDay = {
       currentMonth: firstDayOfMonth.getMonth() === props.today.getMonth(),
       date: new Date(firstDayOfMonth).toDateString(),
+      // toISOString().substring(0, 10)
       month: firstDayOfMonth.getMonth(),
       number: firstDayOfMonth.getDate(),
       selected:

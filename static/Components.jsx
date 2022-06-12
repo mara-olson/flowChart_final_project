@@ -247,6 +247,7 @@ function Profile(props) {
 
   React.useEffect(() => {
     if (props.userId) {
+      console.log("hi");
       fetch(`/users/${props.userId}/profile`)
         .then((response) => response.json())
         .then((data) => {

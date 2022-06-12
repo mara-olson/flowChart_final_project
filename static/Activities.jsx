@@ -1,14 +1,15 @@
+function EditActivityForm(props) {}
+
 function ActivityCard(props) {
   const handleClick = (evt) => {
     evt.preventDefault();
     // props.setSelectedDay(evt.);
 
     props.setModalContent(
-      <AddActivityForm
-        formTitle="Edit Activity"
-        buttonTitle="Save Activity"
-        // activityDate={props.activityDate}
-        // setActivityDate={props.setActivityDate}
+      <EditActivityForm
+
+      // activityDate={props.activityDate}
+      // setActivityDate={props.setActivityDate}
       />
     );
     props.setShowModal(true);
@@ -216,9 +217,10 @@ function Activities(props) {
         userId={props.userId}
         showModal={props.showModal}
         setShowModal={props.setShowModal}
+        modalContent={props.modalContent}
         setModalContent={props.setModalContent}
-        activityDate={props.activityDate}
-        setActivityDate={props.setActivityDate}
+        // activityDate={props.activityDate}
+        // setActivityDate={props.setActivityDate}
       />
     </div>
   );
@@ -239,9 +241,10 @@ function ActivitiesContainer(props) {
         type={activity.type}
         showModal={props.showModal}
         setShowModal={props.setShowModal}
+        modalContent={props.modalContent}
         setModalContent={props.setModalContent}
-        activityDate={props.activityDate}
-        setActivityDate={props.setActivityDate}
+        // activityDate={props.activityDate}
+        // setActivityDate={props.setActivityDate}
       />
     );
   }
