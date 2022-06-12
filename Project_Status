@@ -313,15 +313,28 @@ def activity_data(user_id):
 	- State for activities & periods lifted up into App component
 	- Adding an activity via the calendar causes break until refresh the page
 	TO-DO:
-		- Passing activities as props -- seems to lag? 
-		- Fix broken add activity from calendar
-		- Date issues (ofc) with adding activity - how to get it to persist?
+		x Passing activities as props -- seems to lag? 
+		x Fix broken add activity from calendar
+		x Date issues (ofc) with adding activity - how to get it to persist?
 		- Get chart to show timeline rather than plot points as x-axis
-		- Show >1 activity or period in the calendar
+		x Show >1 activity or period in the calendar
 		- Edit existing activity/period
 
 6/11
-	- 
+	- Periods added to calendar, as well as modal with details when day is clicked
+	- Dates all standardized to yyyy-mm-dd
+		In server.py activities, strava_activities, periods... activity.act_date.strftime("%Y-%m-%d")
+		In CalendarDays... date: new Date(firstDayOfMonth).toISOString().substring(0, 10)
+	- Dates sorted
+		periods.sort(key=lambda x: datetime.datetime.strptime(x['date'], "%Y-%m-%d"))
+	- Selected calendar day date now displays in addActivity/Period form 
+		input type="date"
+		default state value for activityDate set to props.selectedDate instead of null
+	- Axes going to be too hard to separate out from data point values, so going to leave as-is
+	TO-DO:
+		- Remove line from period data set so it's more of a scatterplot
+		- Add symptoms to chart?
+
 
 
 

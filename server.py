@@ -273,7 +273,7 @@ def add_activity():
 
     
     
-    if new_act_date is None:
+    if new_act_date or new_act_name is None:
         error = "Please enter an activity date, type, & duration"
         success = False
         
@@ -331,7 +331,7 @@ def add_period():
     notes = data.get("notes")
     created_at = datetime.datetime.now()
 
-    if mense_date is None:
+    if mense_date or flow_volume is None:
         error = "Please enter a date & flow"
         success = False
         

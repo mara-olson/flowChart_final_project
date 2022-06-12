@@ -145,6 +145,7 @@ function LandingPage(props) {
 function Home(props) {
   return (
     <div>
+      <StatsCard />
       <Calendar
         userId={props.userId}
         showModal={props.showModal}
@@ -382,4 +383,53 @@ function MyChart(props) {
   }, [props.activities]);
 
   return <canvas id="test-chart" ref={chartRef}></canvas>;
+}
+
+function ProfileCard(props) {
+  return (
+    <div className="statscard">
+      <p>Stats</p>
+      <PhotoUploader onChange={this.photoUpload} src={imagePreviewUrl} />
+    </div>
+  );
+}
+
+function PhotoUploader(props) {
+  const [profilePicSrc, setProfilePicSrc] = React.useState(null);
+  const [profilePic, setProfilePic] = React.useState(profilePicSrc);
+  const [photoPreviewUrl, setPhotoPreviewUrl] = React.useState(
+    "'https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true'"
+  );
+
+  const handlePhotoUpload = (evt) => {
+    const reader = new FileReader();
+    const photo = evt.target.files[0];
+    const source = URL.createObjectURL(photo);
+
+    reader.onloadend = () => {
+      setProfilePic(photo);
+      setProfilePicSrc(source);
+      setPhotoPreviewUrl(reader.result);
+    };
+    reader.readAsDataURL(photo);
+  };
+
+  const showPhotoPreview = () => {
+    if (profilePicSrc) {
+      return <img src={profilePicSrc} />;
+    } else {
+      return <p>No Preview</p>;
+    }
+  };
+
+  return (
+    <div>
+      <h3>Profile Pic Uploader</h3>
+      <input type="file" onChange={handlePhotoUpload} />
+      <br></br>
+      <div>{showPhotoPreview}</div>
+      <hr />
+      <button>Upload Photo</button>
+    </div>
+  );
 }
