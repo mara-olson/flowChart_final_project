@@ -135,6 +135,7 @@ function App() {
             sinceDate={sinceDate}
           />
           <Modal
+            userId={userId}
             onClose={closeModal}
             showModal={showModal}
             setShowModal={setShowModal}
@@ -159,6 +160,7 @@ function App() {
             setActivities={setActivities}
           />
           <Modal
+            userId={userId}
             onClose={closeModal}
             showModal={showModal}
             setShowModal={setShowModal}
@@ -223,6 +225,7 @@ function App() {
             setModalContent={setModalContent}
           />
           <Modal
+            userId={userId}
             onClose={closeModal}
             showModal={showModal}
             setShowModal={setShowModal}

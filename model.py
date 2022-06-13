@@ -149,6 +149,12 @@ class ActivityLog(db.Model):
 
        return activity
 
+    @classmethod
+    def delete_activity(cls, activity_id):
+        activity = cls(activity_id=activity_id)
+        db.session.delete(activity)
+        db.session.commit()
+
 
 class MenseLog(db.Model):
     """A log added by the user related to their menstrual cycle."""

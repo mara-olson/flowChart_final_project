@@ -149,7 +149,7 @@ function CalendarDays(props) {
     for (const currentDay of currentDays) {
       for (const calActivity of props.calActivities) {
         if (currentDay.date === calActivity.date) {
-          currentDay["activityId"] = calActivity.id;
+          currentDay["activityId"] = calActivity.activity_id;
           currentDay["activityName"] = calActivity.name;
           currentDay["activityType"] = calActivity.type;
           currentDay["distance"] = calActivity.distance;
@@ -187,7 +187,9 @@ function CalendarDays(props) {
         <div>
           <h2>Activity</h2>
           <ActivityCard
-            id={day.activityId}
+            userId={props.userId}
+            key={day.activityId}
+            activityId={day.activityId}
             name={day.activityName}
             date={day.date}
             type={day.activityType}
@@ -200,7 +202,9 @@ function CalendarDays(props) {
           />
           <h2>Period</h2>
           <PeriodCard
-            id={day.periodId}
+            userId={props.userId}
+            key={day.periodId}
+            periodId={day.periodId}
             volume={day.volume}
             date={day.date}
             symptoms={day.symptoms}
@@ -213,6 +217,7 @@ function CalendarDays(props) {
     } else if (day.activityName) {
       const content = (
         <ActivityCard
+          userId={props.userId}
           name={day.activityName}
           date={day.date}
           type={day.activityType}
@@ -226,6 +231,7 @@ function CalendarDays(props) {
     } else if (day.volume) {
       const content = (
         <PeriodCard
+          userId={props.userId}
           volume={day.volume}
           date={day.date}
           symptoms={day.symptoms}

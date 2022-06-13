@@ -210,9 +210,8 @@ def activity_data(user_id):
 
     for activity in all_activities:
         new_act = {
-            "user_id": activity.user_id, "id": activity.activity_id, "name": activity.activity_name, "date": activity.activity_date.strftime("%Y-%m-%d"),
-            # ("%a %b %d %Y"),
-            "distance": activity.distance, "type": activity.activity_type
+            "user_id": activity.user_id, "id": activity.activity_id, "name": activity.activity_name, "type": activity.workout_type, "date": activity.activity_date.strftime("%Y-%m-%d"),
+            "distance": activity.distance, "duration": activity.duration, "suffer_score": activity.suffer_score, "notes": activity.activity_notes
             }
         # activity = activity.to_dict()
         activity_objs.append(new_act)
@@ -256,6 +255,12 @@ def profile(user_id):
     return jsonify({"success":True, "first_name": user.first_name, "last_name": user.last_name, "team_name": user.team_name, "email": user.email, "password": user.password, "member_since": user.created_at.strftime("%b %d, %Y")})
 
 
+@app.route("/api/delete-activity", methods=["POST"])
+def delete_activity():
+    data = request.json
+
+
+
 @app.route("/api/add-activity", methods=["POST"])
 def add_activity():
     """Add a new activity."""
@@ -281,20 +286,23 @@ def add_activity():
         return jsonify({"success": success, "error": error})
         
     elif new_act_id:
+        print(new_act_id)
         edited_activity = ActivityLog.get_activity_by_id(new_act_id)
 
         edited_activity.user_id = user_id
         edited_activity.activity_date = new_act_date
-        edited_activity.activity_type = new_act_type
+        edited_activity.workout_type = new_act_type
         edited_activity.activity_name = new_act_name
         edited_activity.duration = new_act_duration
         edited_activity.distance = new_act_distance
         edited_activity.suffer_score = new_act_suffer_score
         edited_activity.activity_notes = new_act_notes
 
-        activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
+        # ActivityLog.delete_activity(new_act_id)
 
-        return jsonify({"success": True, "error": None, "activities": activities})
+        # activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
+
+        return jsonify({"success": True, "error": None})
 
     elif datetime.datetime.strptime(new_act_date, "%Y-%m-%d") > currentTime:
         error = "The date you entered is in the future. Please enter a valid activity date."
@@ -307,6 +315,8 @@ def add_activity():
         success = True
 
         new_activity = ActivityLog.create_activity(user_id, new_act_date, new_act_type, new_act_name, new_act_duration, new_act_distance, new_act_suffer_score, new_act_notes, created_at)
+
+        # activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
 
 
 

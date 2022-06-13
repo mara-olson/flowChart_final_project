@@ -74,6 +74,7 @@ function AddActivityButton(props) {
     );
     return (
       <Modal
+        userId={props.userId}
         onClose={props.closeModal}
         showModal={props.showModal}
         setModalContent={props.setModalContent}
@@ -87,7 +88,7 @@ function AddActivityButton(props) {
 }
 
 function AddActivityForm(props) {
-  const [activityId, setActivityId] = React.useState(props.id);
+  const [activityId, setActivityId] = React.useState(props.activityId);
   const [activityName, setActivityName] = React.useState(props.name);
   const [activityDate, setActivityDate] = React.useState(props.selectedDate);
   const [activityType, setActivityType] = React.useState(props.type);
@@ -275,7 +276,9 @@ function ActivitiesContainer(props) {
   for (const activity of activities) {
     activityDetails.push(
       <ActivityCard
-        key={activity.id}
+        userId={props.userId}
+        key={activity.activity_id}
+        act_id={activity.activity_id}
         name={activity.name}
         date={activity.date}
         distance={activity.distance}
