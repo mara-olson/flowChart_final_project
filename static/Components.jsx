@@ -156,6 +156,7 @@ function Home(props) {
         email={props.email}
         setEmail={props.setEmail}
         sinceDate={props.sinceDate}
+        setShowModal={props.setShowModal}
       />
       <Calendar
         userId={props.userId}

@@ -210,7 +210,7 @@ def activity_data(user_id):
 
     for activity in all_activities:
         new_act = {
-            "id": activity.activity_id, "name": activity.activity_name, "date": activity.activity_date.strftime("%Y-%m-%d"),
+            "user_id": activity.user_id, "id": activity.activity_id, "name": activity.activity_name, "date": activity.activity_date.strftime("%Y-%m-%d"),
             # ("%a %b %d %Y"),
             "distance": activity.distance, "type": activity.activity_type
             }
@@ -261,7 +261,7 @@ def add_activity():
     """Add a new activity."""
     data = request.json
 
-    user_id = data.get("user_id")
+    user_id = session["user_id"]
     new_act_id = data.get("activity_id")
     new_act_date = data.get("activity_date")
     new_act_type = data.get("activity_type")
@@ -274,7 +274,7 @@ def add_activity():
 
     currentTime= datetime.datetime.now()
     
-    if new_act_date or new_act_name is None:
+    if (new_act_date is None) or (new_act_name is None):
         error = "Please enter an activity date, type, & duration"
         success = False
         
@@ -283,6 +283,7 @@ def add_activity():
     elif new_act_id:
         edited_activity = ActivityLog.get_activity_by_id(new_act_id)
 
+        edited_activity.user_id = user_id
         edited_activity.activity_date = new_act_date
         edited_activity.activity_type = new_act_type
         edited_activity.activity_name = new_act_name
@@ -291,9 +292,11 @@ def add_activity():
         edited_activity.suffer_score = new_act_suffer_score
         edited_activity.activity_notes = new_act_notes
 
-        return jsonify({"success": True, "error": None})
+        activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
 
-    elif datetime.datetime.strptime(new_act_date, "%Y-%m-%d") > datetime.datetime.strptime(currentTime, "%Y-%m-%d"):
+        return jsonify({"success": True, "error": None, "activities": activities})
+
+    elif datetime.datetime.strptime(new_act_date, "%Y-%m-%d") > currentTime:
         error = "The date you entered is in the future. Please enter a valid activity date."
         success = False
         

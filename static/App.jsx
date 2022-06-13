@@ -137,9 +137,11 @@ function App() {
           <Modal
             onClose={closeModal}
             showModal={showModal}
+            setShowModal={setShowModal}
             setModalContent={setModalContent}
             modalContent={modalContent}
             modalError={modalError}
+            setModalError={setModalError}
           />
           {/* <Calendar userId={userId} /> */}
         </Route>
@@ -159,8 +161,10 @@ function App() {
           <Modal
             onClose={closeModal}
             showModal={showModal}
+            setShowModal={setShowModal}
             modalContent={modalContent}
             modalError={modalError}
+            setModalError={setModalError}
           />
         </Route>
       </div>
@@ -177,6 +181,9 @@ function App() {
             email={email}
             setEmail={setEmail}
             sinceDate={sinceDate}
+            setShowModal={setShowModal}
+            modalError={modalError}
+            setModalError={setModalError}
           />
         </Route>
       </div>
@@ -192,8 +199,11 @@ function App() {
           <SignUpModal
             onClose={closeModal}
             showModal={showModal}
+            setShowModal={setShowModal}
             modalContent={modalContent}
             userId={userId}
+            modalError={modalError}
+            setModalError={setModalError}
           />
         </Route>
       </div>
@@ -215,8 +225,10 @@ function App() {
           <Modal
             onClose={closeModal}
             showModal={showModal}
+            setShowModal={setShowModal}
             modalContent={modalContent}
             modalError={modalError}
+            setModalError={setModalError}
           />
         </Route>
       </div>

@@ -1,45 +1,21 @@
-// function EditActivityForm(props) {
-//   const closeEdit = (evt) => {
-//     evt.preventDefault();
-//     props.setActive("activity");
-//     props.setActivities();
-//   };
-
-//   return (
-//     <div>
-//       <form onSubmit={props.handleSubmit}>
-//         <h2>Edit Activity</h2>
-//         <div className="field">
-//           <label htmlFor="act-name">Name: </label>
-//           <input
-//             id="act-name"
-//             type="text"
-//             onChange={props.setActName}
-//             // value={props.actName}
-//           />
-//         </div>
-//         <button type="submit">Save</button>
-//         <button onClick={closeEdit}>Cancel</button>
-//       </form>
-//     </div>
-//   );
-
 function ActivityCard(props) {
   const activityFormTitle = "New Activity";
   const activityFormButtonName = "Add Activity";
 
-  const handleClick = (evt) => {
-    evt.preventDefault();
+  const showActivityForm = () => {
     const activityFormTitle = "Edit Activity";
     const activityFormButtonName = "Save";
+
     props.setModalContent(
       <AddActivityForm
         userId={props.userId}
         acrtivityId={props.activityId}
         activities={props.actitivies}
         setActivities={props.setActivities}
+        modalError={props.modalError}
         setModalError={props.setModalError}
         setModalContent={props.setModalContent}
+        showModal={props.showModal}
         setShowModal={props.setShowModal}
         activityFormTitle={activityFormTitle}
         activityFormButtonName={activityFormButtonName}
@@ -52,6 +28,11 @@ function ActivityCard(props) {
         notes={props.notes}
       />
     );
+  };
+
+  const handleClick = (evt) => {
+    evt.preventDefault();
+    showActivityForm();
     props.setShowModal(true);
   };
 
@@ -74,9 +55,6 @@ function AddActivityButton(props) {
   const userId = props.userId;
   const activityFormButtonName = "Add Activity";
 
-  // const [activityFormTitle, setActivityFormTitle] = React.useState("New Activity")
-
-  // if (props.showActivityForm)
   const handleClick = (evt) => {
     evt.preventDefault();
     props.setShowModal(true);
@@ -85,17 +63,25 @@ function AddActivityButton(props) {
         userId={props.userId}
         activities={props.actitivies}
         setActivities={props.setActivities}
-        // setShowActivityForm={props.setShowActivityForm}
+        modalError={props.modalError}
         setModalError={props.setModalError}
         setModalContent={props.setModalContent}
+        showModal={props.showModal}
         setShowModal={props.setShowModal}
         activityFormTitle={activityFormTitle}
         activityFormButtonName={activityFormButtonName}
-        // activityDate={props.activityDate}
-        // setActivityDate={props.setActivityDate}
       />
     );
-    return <Modal />;
+    return (
+      <Modal
+        onClose={props.closeModal}
+        showModal={props.showModal}
+        setModalContent={props.setModalContent}
+        modalContent={props.modalContent}
+        modalError={props.modalError}
+        setModalError={props.setModalError}
+      />
+    );
   };
   return <button onClick={handleClick}>Add Activity</button>;
 }
@@ -143,7 +129,8 @@ function AddActivityForm(props) {
               props.setShowModal(false);
             });
         } else {
-          props.setModalError(data.error);
+          console.log("nope");
+          // props.setModalError(data.error);
         }
       });
   };
@@ -255,9 +242,12 @@ function Activities(props) {
       <AddActivityButton
         activities={props.activities}
         setActivities={props.setActivities}
+        modalError={props.modalError}
         setModalError={props.setModalError}
         userId={props.userId}
+        modalContent={props.modalContent}
         setModalContent={props.setModalContent}
+        showModal={props.showModal}
         setShowModal={props.setShowModal}
         activityDate={props.activityDate}
         setActivityDate={props.setActivityDate}
@@ -265,14 +255,13 @@ function Activities(props) {
       <ActivitiesContainer
         activities={props.activities}
         setActivities={props.setActivities}
-        setModalError={props.setModalError}
         userId={props.userId}
         showModal={props.showModal}
         setShowModal={props.setShowModal}
         modalContent={props.modalContent}
         setModalContent={props.setModalContent}
-        // activityDate={props.activityDate}
-        // setActivityDate={props.setActivityDate}
+        modalError={props.modalError}
+        setModalError={props.setModalError}
       />
     </div>
   );
@@ -288,7 +277,6 @@ function ActivitiesContainer(props) {
       <ActivityCard
         key={activity.id}
         name={activity.name}
-        // setActName={setActName}
         date={activity.date}
         distance={activity.distance}
         duration={activity.duration}
@@ -299,8 +287,8 @@ function ActivitiesContainer(props) {
         setShowModal={props.setShowModal}
         modalContent={props.modalContent}
         setModalContent={props.setModalContent}
-        // activityDate={props.activityDate}
-        // setActivityDate={props.setActivityDate}
+        modalError={props.modalError}
+        setModalError={props.setModalError}
       />
     );
   }

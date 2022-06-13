@@ -187,20 +187,24 @@ function CalendarDays(props) {
         <div>
           <h2>Activity</h2>
           <ActivityCard
-            activityId={day.activityId}
+            id={day.activityId}
             name={day.activityName}
             date={day.date}
             type={day.activityType}
             duration={day.duration}
             distance={day.distance}
             notes={day.notes}
+            modalContent={props.setModalContent}
             setModalContent={props.setModalContent}
+            setShowModal={props.setShowModal}
           />
           <h2>Period</h2>
           <PeriodCard
+            id={day.periodId}
             volume={day.volume}
             date={day.date}
             symptoms={day.symptoms}
+            setShowModal={props.setShowModal}
           />
         </div>
       );
@@ -214,6 +218,7 @@ function CalendarDays(props) {
           type={day.activityType}
           distance={day.distance}
           setModalContent={props.setModalContent}
+          setShowModal={props.setShowModal}
         />
       );
       props.setShowModal(true);
@@ -224,12 +229,14 @@ function CalendarDays(props) {
           volume={day.volume}
           date={day.date}
           symptoms={day.symptoms}
+          setShowModal={props.setShowModal}
         />
       );
       props.setShowModal(true);
       props.setModalContent(content);
     } else {
-      const goToAddActivity = () => {
+      const goToAddActivity = (evt) => {
+        evt.preventDefault();
         props.setModalContent(
           <AddActivityForm
             userId={props.userId}
@@ -246,7 +253,8 @@ function CalendarDays(props) {
           />
         );
       };
-      const goToAddPeriod = () => {
+      const goToAddPeriod = (evt) => {
+        evt.preventDefault();
         // console.log(day.selected);
         props.setModalContent(
           <PeriodForm

@@ -59,6 +59,7 @@ function PeriodContainer(props) {
         symptoms={symptoms}
         periods={props.periods}
         setPeriods={props.setPeriods}
+        setShowModal={props.setShowModal}
       />
     );
   }
