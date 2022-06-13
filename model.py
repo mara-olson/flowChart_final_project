@@ -136,6 +136,10 @@ class ActivityLog(db.Model):
                 'deleted_at': self.deleted_at
                 }
     
+    def get_activity_by_id(activity_id):
+        """Get & return a user by user_id."""
+        return User.query(User.activity_id == activity_id)
+
     @classmethod
     def create_activity(cls, user_id, activity_date, activity_type, activity_name, duration, distance, suffer_score, activity_notes, created_at):
        """Create and return a new activity."""

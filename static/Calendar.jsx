@@ -187,10 +187,13 @@ function CalendarDays(props) {
         <div>
           <h2>Activity</h2>
           <ActivityCard
+            activityId={day.activityId}
             name={day.activityName}
             date={day.date}
             type={day.activityType}
+            duration={day.duration}
             distance={day.distance}
+            notes={day.notes}
             setModalContent={props.setModalContent}
           />
           <h2>Period</h2>

@@ -335,6 +335,13 @@ def activity_data(user_id):
 		- Remove line from period data set so it's more of a scatterplot
 		- Add symptoms to chart?
 
+6/12
+	- Profile card added to homepage
+		- Editable fields (except sinceDate)
+		- Default image
+		- Modeled after https://codepen.io/OlgaKoplik/pen/ZdyKGY
+	- Started adding editing capability to ActivityCard if clicked on; however, not quite sure how to get activities state to update if it's just a piece of a single activity that is changed. Probably have to untangle the activity again within the card and then setActvitiy?
+		actName, setActName as test
 
 
 

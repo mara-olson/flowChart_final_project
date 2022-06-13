@@ -1,75 +1,80 @@
-function EditActivityForm(props) {
-  const closeEdit = (evt) => {
-    evt.preventDefault();
-    props.setActive("activity");
-  };
+// function EditActivityForm(props) {
+//   const closeEdit = (evt) => {
+//     evt.preventDefault();
+//     props.setActive("activity");
+//     props.setActivities();
+//   };
 
-  return (
-    <div>
-      <form onSubmit={props.handleSubmit}>
-        <h2>Edit Activity</h2>
-        <div className="field">
-          <label htmlFor="act-name">Name: </label>
-          <input
-            id="act-name"
-            type="text"
-            onChange={props.setActName}
-            // value={props.actName}
-          />
-        </div>
-        <button type="submit">Save</button>
-        <button onClick={closeEdit}>Cancel</button>
-      </form>
-    </div>
-  );
-
-  // return (
-  //   <div className="field">
-  //     <label htmlFor="act-name">Name: </label>
-  //     <input
-  //       id="act-name"
-  //       type="text"
-  //       onChange={props.setActName}
-  //       value={props.actName}
-  //     />
-  //   </div>
-  // );
-}
+//   return (
+//     <div>
+//       <form onSubmit={props.handleSubmit}>
+//         <h2>Edit Activity</h2>
+//         <div className="field">
+//           <label htmlFor="act-name">Name: </label>
+//           <input
+//             id="act-name"
+//             type="text"
+//             onChange={props.setActName}
+//             // value={props.actName}
+//           />
+//         </div>
+//         <button type="submit">Save</button>
+//         <button onClick={closeEdit}>Cancel</button>
+//       </form>
+//     </div>
+//   );
 
 function ActivityCard(props) {
-  const [actName, setActName] = React.useState(props.name);
+  const activityFormTitle = "New Activity";
+  const activityFormButtonName = "Add Activity";
 
   const handleClick = (evt) => {
     evt.preventDefault();
-    // props.setSelectedDay(evt.);
-
+    const activityFormTitle = "Edit Activity";
+    const activityFormButtonName = "Save";
     props.setModalContent(
-      <EditActivityForm
-        actName={actName}
-        setActName={setActName}
+      <AddActivityForm
+        userId={props.userId}
+        acrtivityId={props.activityId}
+        activities={props.actitivies}
+        setActivities={props.setActivities}
+        setModalError={props.setModalError}
+        setModalContent={props.setModalContent}
+        setShowModal={props.setShowModal}
+        activityFormTitle={activityFormTitle}
+        activityFormButtonName={activityFormButtonName}
+        name={props.name}
         date={props.date}
         type={props.type}
+        duration={props.duration}
         distance={props.distance}
-
-        // activityDate={props.activityDate}
-        // setActivityDate={props.setActivityDate}
+        suffer={props.suffer}
+        notes={props.notes}
       />
     );
     props.setShowModal(true);
   };
 
   return (
-    <div className="card" onClick={handleClick}>
-      <p>Name: {actName}</p>
+    <div className="card">
+      <p>Name: {props.name}</p>
       <p>Date: {props.date} </p>
       <p>Type: {props.type}</p>
+      <p>Duration: {props.duration}</p>
       <p>Distance: {props.distance} miles</p>
+      <p>Suffer Score: {props.sufferScore}</p>
+      <p>Notes: {props.notes}</p>
+      <div></div>
+      <button onClick={handleClick}>Edit</button>
     </div>
   );
 }
 
 function AddActivityButton(props) {
   const userId = props.userId;
+  const activityFormButtonName = "Add Activity";
+
+  // const [activityFormTitle, setActivityFormTitle] = React.useState("New Activity")
 
   // if (props.showActivityForm)
   const handleClick = (evt) => {
@@ -77,13 +82,15 @@ function AddActivityButton(props) {
     props.setShowModal(true);
     props.setModalContent(
       <AddActivityForm
-        userId={userId}
+        userId={props.userId}
         activities={props.actitivies}
         setActivities={props.setActivities}
         // setShowActivityForm={props.setShowActivityForm}
         setModalError={props.setModalError}
         setModalContent={props.setModalContent}
         setShowModal={props.setShowModal}
+        activityFormTitle={activityFormTitle}
+        activityFormButtonName={activityFormButtonName}
         // activityDate={props.activityDate}
         // setActivityDate={props.setActivityDate}
       />
@@ -94,14 +101,14 @@ function AddActivityButton(props) {
 }
 
 function AddActivityForm(props) {
-  // const [activityId, setActivityId] = React.useState(null);
-  const [activityName, setActivityName] = React.useState(null);
+  const [activityId, setActivityId] = React.useState(props.id);
+  const [activityName, setActivityName] = React.useState(props.name);
   const [activityDate, setActivityDate] = React.useState(props.selectedDate);
-  const [activityType, setActivityType] = React.useState(null);
-  const [duration, setDuration] = React.useState(null);
-  const [distance, setDistance] = React.useState(null);
-  const [sufferScore, setSufferScore] = React.useState(null);
-  const [activityNotes, setActivityNotes] = React.useState(null);
+  const [activityType, setActivityType] = React.useState(props.type);
+  const [duration, setDuration] = React.useState(props.duration);
+  const [distance, setDistance] = React.useState(props.distance);
+  const [sufferScore, setSufferScore] = React.useState(props.suffer_score);
+  const [activityNotes, setActivityNotes] = React.useState(props.notes);
 
   const handleAddActivity = (evt) => {
     // console.log(evt);
@@ -112,7 +119,7 @@ function AddActivityForm(props) {
       credentials: "include",
       body: JSON.stringify({
         user_id: userId,
-        // activity_id: activityId,
+        activity_id: activityId,
         activity_date: activityDate,
         activity_type: activityType,
         activity_name: activityName,
@@ -143,7 +150,7 @@ function AddActivityForm(props) {
 
   return (
     <div>
-      <h2>New Activity</h2>
+      <h2>{props.activityFormTitle}</h2>
       <form onSubmit={handleAddActivity}>
         <div>
           Activity Date
@@ -159,6 +166,7 @@ function AddActivityForm(props) {
           Activity Type
           <select
             name="activity-types"
+            value={activityType}
             onChange={(evt) => setActivityType(evt.currentTarget.value)}
           >
             <option value="Run">Run</option>
@@ -212,6 +220,7 @@ function AddActivityForm(props) {
           Suffer Score
           <select
             name="suffer-score"
+            value={sufferScore}
             onChange={(evt) => setSufferScore(evt.currentTarget.value)}
           >
             <option value="NA">NA</option>
@@ -234,7 +243,7 @@ function AddActivityForm(props) {
             }}
           />
         </div>
-        <button type="submit">Add Activity</button>
+        <button type="submit">{props.activityFormButtonName}</button>
       </form>
     </div>
   );
@@ -282,6 +291,9 @@ function ActivitiesContainer(props) {
         // setActName={setActName}
         date={activity.date}
         distance={activity.distance}
+        duration={activity.duration}
+        suffer_score={activity.sufferScore}
+        notes={activity.notes}
         type={activity.type}
         showModal={props.showModal}
         setShowModal={props.setShowModal}

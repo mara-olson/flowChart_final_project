@@ -262,6 +262,7 @@ def add_activity():
     data = request.json
 
     user_id = data.get("user_id")
+    new_act_id = data.get("activity_id")
     new_act_date = data.get("activity_date")
     new_act_type = data.get("activity_type")
     new_act_name = data.get("activity_name")
@@ -271,7 +272,7 @@ def add_activity():
     new_act_notes = data.get("activity_notes")
     created_at = datetime.datetime.now()
 
-    
+    currentTime= datetime.datetime.now()
     
     if new_act_date or new_act_name is None:
         error = "Please enter an activity date, type, & duration"
@@ -279,7 +280,20 @@ def add_activity():
         
         return jsonify({"success": success, "error": error})
         
-    if datetime.datetime.strptime(new_act_date, "%Y-%m-%d") > datetime.datetime.strptime(created_at, "%Y-%m-%d"):
+    elif new_act_id:
+        edited_activity = ActivityLog.get_activity_by_id(new_act_id)
+
+        edited_activity.activity_date = new_act_date
+        edited_activity.activity_type = new_act_type
+        edited_activity.activity_name = new_act_name
+        edited_activity.duration = new_act_duration
+        edited_activity.distance = new_act_distance
+        edited_activity.suffer_score = new_act_suffer_score
+        edited_activity.activity_notes = new_act_notes
+
+        return jsonify({"success": True, "error": None})
+
+    elif datetime.datetime.strptime(new_act_date, "%Y-%m-%d") > datetime.datetime.strptime(currentTime, "%Y-%m-%d"):
         error = "The date you entered is in the future. Please enter a valid activity date."
         success = False
         
@@ -293,7 +307,7 @@ def add_activity():
 
 
 
-        return jsonify({"success": success, "error": error})
+        return jsonify({"success": success, "error": error, "activityId": new_activity.activity_id})
 
     # , "activity_date": new_act.activity_date, "activity_type": new_act.activity_type, "activity_name": new_act.activity_name, "duration": new_act.duration, "distance": new_act.distance, "suffer_score": new_act.suffer_score, "activity_notes": new_act.activity_notes})
 
@@ -331,13 +345,15 @@ def add_period():
     notes = data.get("notes")
     created_at = datetime.datetime.now()
 
+    currentTime = datetime.datetime.now()
+
     if mense_date or flow_volume is None:
         error = "Please enter a date & flow"
         success = False
         
         return jsonify({"success": success, "error": error})
         
-    elif datetime.datetime.strptime(mense_date, "%Y-%m-%d") > created_at:
+    elif datetime.datetime.strptime(mense_date, "%Y-%m-%d") > datetime.datetime.strptime(currentTime, "%Y-%m-%d"):
         error = "The date you entered is in the future. Please enter a valid date."
         success = False
         
