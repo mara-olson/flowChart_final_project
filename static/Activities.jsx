@@ -96,12 +96,15 @@ function AddActivityForm(props) {
   const [distance, setDistance] = React.useState(props.distance);
   const [sufferScore, setSufferScore] = React.useState(props.suffer_score);
   const [activityNotes, setActivityNotes] = React.useState(props.notes);
+  // edit vs. add mode
+  // handleSubmit function, pass handleAdd vs Edit function in this function when certain
+  const handleEditActivity = (evt) => {};
 
   const handleAddActivity = (evt) => {
     // console.log(evt);
     evt.preventDefault();
     const userId = props.userId;
-    fetch("/api/add-activity", {
+    fetch("/api/activity", {
       method: "POST",
       credentials: "include",
       body: JSON.stringify({
@@ -125,13 +128,14 @@ function AddActivityForm(props) {
           fetch(`/api/users/${props.userId}/activities`)
             .then((response) => response.json())
             .then((data) => {
-              props.setActivities(data.activities);
-              console.log(data.actitivies);
+              // props.setActivities(data.activities);
+              props.setActivityId(data.activityId);
+              // console.log(data.actitivies);
               props.setShowModal(false);
             });
         } else {
-          console.log("nope");
-          // props.setModalError(data.error);
+          console.log("error");
+          props.setModalError(data.error);
         }
       });
   };

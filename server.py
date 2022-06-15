@@ -260,8 +260,11 @@ def delete_activity():
     data = request.json
 
 
+@app.route("/api/activity/<activity_id>", methods=["UPDATE"])
+# change to /api/activity update & /api/activity post
 
-@app.route("/api/add-activity", methods=["POST"])
+
+@app.route("/api/activity", methods=["POST"])
 def add_activity():
     """Add a new activity."""
     data = request.json
@@ -287,6 +290,7 @@ def add_activity():
         
     elif new_act_id:
         print(new_act_id)
+
         edited_activity = ActivityLog.get_activity_by_id(new_act_id)
 
         edited_activity.user_id = user_id
@@ -316,8 +320,12 @@ def add_activity():
 
         new_activity = ActivityLog.create_activity(user_id, new_act_date, new_act_type, new_act_name, new_act_duration, new_act_distance, new_act_suffer_score, new_act_notes, created_at)
 
-        # activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
+        # new_act = {
+            # "user_id": activity.user_id, "id": activity.activity_id, "name": activity.activity_name, "type": activity.workout_type, "date": activity.activity_date.strftime("%Y-%m-%d"),
+            # "distance": activity.distance, "duration": activity.duration, "suffer_score": activity.suffer_score, "notes": activity.activity_notes
+        #     }
 
+        
 
 
         return jsonify({"success": success, "error": error, "activityId": new_activity.activity_id})
@@ -360,13 +368,13 @@ def add_period():
 
     currentTime = datetime.datetime.now()
 
-    if mense_date or flow_volume is None:
+    if mense_date is None or flow_volume is None:
         error = "Please enter a date & flow"
         success = False
         
         return jsonify({"success": success, "error": error})
         
-    elif datetime.datetime.strptime(mense_date, "%Y-%m-%d") > datetime.datetime.strptime(currentTime, "%Y-%m-%d"):
+    elif datetime.datetime.strptime(mense_date, "%Y-%m-%d") > currentTime:
         error = "The date you entered is in the future. Please enter a valid date."
         success = False
         

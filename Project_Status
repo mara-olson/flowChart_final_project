@@ -344,5 +344,16 @@ def activity_data(user_id):
 		actName, setActName as test
 
 
+6/13
+	- Able to edit an activity if you refresh the page, but really unstable
+	- Edited activity persists after editing; a new activity is created instead of replacing the old one
+	- Multiple activities shown in hover on graph
+	- ActivityLogs.delete_activity() created, but not yet used anywhere
+	TO-DO:
+		- Edit activity rather than add a new one - maybe use activityName instead of activityId?
+		- Delete activity
+		- 
+
+
 
 
