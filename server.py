@@ -211,7 +211,7 @@ def activity_data(user_id):
 
     for activity in all_activities:
         new_act = {
-            "user_id": activity.user_id, "id": activity.activity_id, "name": activity.activity_name, "type": activity.workout_type, "date": activity.activity_date.strftime("%Y-%m-%d"),
+            "user_id": activity.user_id, "activity_id": activity.activity_id, "name": activity.activity_name, "type": activity.workout_type, "date": activity.activity_date.strftime("%Y-%m-%d"),
             "distance": activity.distance, "duration": activity.duration, "suffer_score": activity.suffer_score, "notes": activity.activity_notes
             }
         # activity = activity.to_dict()
@@ -265,6 +265,38 @@ def delete_activity(user_id):
 
 @app.route("/api/<user_id>/activities/<activity_id>", methods=["UPDATE"])
 # change to /api/activity update & /api/activity post
+def update_activity(user_id, activity_id):
+    """Update an existing activity."""
+    data = request.json
+
+    user_id = session["user_id"]
+    activity_id = data.get("activity_id")
+
+    edited_act_id = data.get("activity_id")
+    
+    edited_act_date = data.get("activity_date")
+    edited_act_type = data.get("activity_type")
+    edited_act_name = data.get("activity_name")
+    edited_act_duration = data.get("duration")
+    edited_act_distance = data.get("distance")
+    edited_act_suffer_score = data.get("suffer_score")
+    edited_act_notes = data.get("activity_notes")
+    created_at = datetime.datetime.now()
+
+    currentTime= datetime.datetime.now()
+
+    edited_activity = ActivityLog.get_activity_by_id(edited_act_id)
+
+    edited_activity.user_id = user_id
+    edited_activity.activity_date = edited_act_date
+    edited_activity.workout_type = edited_act_type
+    edited_activity.activity_name = edited_act_name
+    edited_activity.duration = edited_act_duration
+    edited_activity.distance = edited_act_distance
+    edited_activity.suffer_score = edited_act_suffer_score
+    edited_activity.activity_notes = edited_act_notes
+
+    return jsonify({"success": True, "error": None, "activityId": edited_activity.activity_id})
 
 
 @app.route("/api/<user_id>/activities", methods=["POST"])
@@ -273,7 +305,7 @@ def add_activity(user_id):
     data = request.json
 
     user_id = session["user_id"]
-    new_act_id = data.get("activity_id")
+    # new_act_id = data.get("activity_id")
     new_act_date = data.get("activity_date")
     new_act_type = data.get("activity_type")
     new_act_name = data.get("activity_name")
@@ -291,25 +323,6 @@ def add_activity(user_id):
         
         return jsonify({"success": success, "error": error})
         
-    elif new_act_id:
-        print(new_act_id)
-
-        edited_activity = ActivityLog.get_activity_by_id(new_act_id)
-
-        edited_activity.user_id = user_id
-        edited_activity.activity_date = new_act_date
-        edited_activity.workout_type = new_act_type
-        edited_activity.activity_name = new_act_name
-        edited_activity.duration = new_act_duration
-        edited_activity.distance = new_act_distance
-        edited_activity.suffer_score = new_act_suffer_score
-        edited_activity.activity_notes = new_act_notes
-
-        # ActivityLog.delete_activity(new_act_id)
-
-        # activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
-
-        return jsonify({"success": True, "error": None})
 
     elif datetime.datetime.strptime(new_act_date, "%Y-%m-%d") > currentTime:
         error = "The date you entered is in the future. Please enter a valid activity date."
@@ -327,9 +340,6 @@ def add_activity(user_id):
             # "user_id": activity.user_id, "id": activity.activity_id, "name": activity.activity_name, "type": activity.workout_type, "date": activity.activity_date.strftime("%Y-%m-%d"),
             # "distance": activity.distance, "duration": activity.duration, "suffer_score": activity.suffer_score, "notes": activity.activity_notes
         #     }
-
-        
-
 
         return jsonify({"success": success, "error": error, "activityId": new_activity.activity_id})
 

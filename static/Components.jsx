@@ -147,6 +147,8 @@ function Home(props) {
     <div>
       <ProfileCard
         userId={props.userId}
+        editMode={props.editMode}
+        setEditMode={props.setEditMode}
         firstName={props.firstName}
         setFirstName={props.setFirstName}
         lastName={props.lastName}
@@ -160,6 +162,8 @@ function Home(props) {
       />
       <Calendar
         userId={props.userId}
+        editMode={props.editMode}
+        setEditMode={props.setEditMode}
         showModal={props.showModal}
         setShowModal={props.setShowModal}
         modalContent={props.modalContent}
@@ -175,6 +179,8 @@ function Home(props) {
       />
 
       <MyChart
+        editMode={props.editMode}
+        setEditMode={props.setEditMode}
         activities={props.activities}
         setActivities={props.setActivities}
         periods={props.periods}

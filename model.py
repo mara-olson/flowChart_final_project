@@ -138,7 +138,7 @@ class ActivityLog(db.Model):
     
     def get_activity_by_id(activity_id):
         """Get & return a user by user_id."""
-        return User.query(User.activity_id == activity_id)
+        return ActivityLog.query(ActivityLog.activity_id == activity_id)
 
     @classmethod
     def create_activity(cls, user_id, activity_date, activity_type, activity_name, duration, distance, suffer_score, activity_notes, created_at):

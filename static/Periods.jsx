@@ -3,6 +3,8 @@ function Periods(props) {
     <div>
       <AddPeriodButton
         userId={props.userId}
+        editMode={props.editMode}
+        setEditMode={props.setEditMode}
         periods={props.periods}
         setPeriods={props.setPeriods}
         error={props.error}
@@ -16,6 +18,8 @@ function Periods(props) {
       />
       <PeriodContainer
         userId={props.userId}
+        editMode={props.editMode}
+        setEditMode={props.setEditMode}
         periods={props.periods}
         setPeriods={props.setPeriods}
         error={props.error}
@@ -52,6 +56,8 @@ function PeriodContainer(props) {
     periodDetails.push(
       <PeriodCard
         userId={props.userId}
+        editMode={props.editMode}
+        setEditMode={props.setEditMode}
         key={period.id}
         volume={period.flow}
         date={period.date}
@@ -97,6 +103,8 @@ function AddPeriodButton(props) {
     props.setModalContent(
       <PeriodForm
         userId={props.userId}
+        editMode={props.editMode}
+        setEditMode={props.setEditMode}
         periods={props.periods}
         setPeriods={props.setPeriods}
         setError={props.setError}
@@ -123,16 +131,12 @@ function PeriodForm(props) {
   const [notes, setNotes] = React.useState(null);
 
   const handleAddPeriod = (evt) => {
-    // console.log(evt);
     evt.preventDefault();
-
-    const userId = props.userId;
-
     fetch("/api/add-period", {
       method: "POST",
       credentials: "include",
       body: JSON.stringify({
-        user_id: userId,
+        user_id: props.userId,
         flow_volume: flowVolume,
         mood: mood,
         cramps: cramps,

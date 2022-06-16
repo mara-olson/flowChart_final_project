@@ -3,13 +3,17 @@ function ActivityCard(props) {
   const activityFormButtonName = "Add Activity";
 
   const showActivityForm = () => {
+    props.setEditMode(true);
+    console.log(props.editMode);
     const activityFormTitle = "Edit Activity";
     const activityFormButtonName = "Save";
 
     props.setModalContent(
       <AddActivityForm
         userId={props.userId}
-        acrtivityId={props.activityId}
+        editMode={props.editMode}
+        setEditMode={props.setEditMode}
+        activityId={props.activityId}
         activities={props.actitivies}
         setActivities={props.setActivities}
         modalError={props.modalError}
@@ -19,13 +23,13 @@ function ActivityCard(props) {
         setShowModal={props.setShowModal}
         activityFormTitle={activityFormTitle}
         activityFormButtonName={activityFormButtonName}
-        name={props.name}
-        date={props.date}
-        type={props.type}
+        activityName={props.activityName}
+        activityDate={props.activityDate}
+        activityType={props.activityType}
         duration={props.duration}
         distance={props.distance}
-        suffer={props.suffer}
-        notes={props.notes}
+        sufferScore={props.sufferScore}
+        activityNotes={props.activityNotes}
       />
     );
   };
@@ -38,13 +42,13 @@ function ActivityCard(props) {
 
   return (
     <div className="card">
-      <p>Name: {props.name}</p>
-      <p>Date: {props.date} </p>
-      <p>Type: {props.type}</p>
+      <p>Name: {props.activityName}</p>
+      <p>Date: {props.activityDate} </p>
+      <p>Type: {props.activityType}</p>
       <p>Duration: {props.duration}</p>
       <p>Distance: {props.distance} miles</p>
       <p>Suffer Score: {props.sufferScore}</p>
-      <p>Notes: {props.notes}</p>
+      <p>Notes: {props.activityNotes}</p>
       <div></div>
       <button onClick={handleClick}>Edit</button>
     </div>
@@ -60,6 +64,8 @@ function AddActivityButton(props) {
     props.setModalContent(
       <AddActivityForm
         userId={props.userId}
+        editMode={props.editMode}
+        setEditMode={props.setEditMode}
         activities={props.actitivies}
         setActivities={props.setActivities}
         modalError={props.modalError}
@@ -74,6 +80,8 @@ function AddActivityButton(props) {
     return (
       <Modal
         userId={props.userId}
+        editMode={props.editMode}
+        setEditMode={props.setEditMode}
         onClose={props.closeModal}
         showModal={props.showModal}
         setModalContent={props.setModalContent}
@@ -88,26 +96,22 @@ function AddActivityButton(props) {
 
 function AddActivityForm(props) {
   const [activityId, setActivityId] = React.useState(props.activityId);
-  const [activityName, setActivityName] = React.useState(props.name);
-  const [activityDate, setActivityDate] = React.useState(props.selectedDate);
-  const [activityType, setActivityType] = React.useState(props.type);
+  const [activityName, setActivityName] = React.useState(props.activityName);
+  const [activityDate, setActivityDate] = React.useState(props.activityDate);
+  const [activityType, setActivityType] = React.useState(props.activityType);
   const [duration, setDuration] = React.useState(props.duration);
   const [distance, setDistance] = React.useState(props.distance);
-  const [sufferScore, setSufferScore] = React.useState(props.suffer_score);
-  const [activityNotes, setActivityNotes] = React.useState(props.notes);
+  const [sufferScore, setSufferScore] = React.useState(props.sufferScore);
+  const [activityNotes, setActivityNotes] = React.useState(props.activityNotes);
   // edit vs. add mode
   // handleSubmit function, pass handleAdd vs Edit function in this function when certain
-  const handleEditActivity = (evt) => {};
-
-  const handleAddActivity = (evt) => {
-    // console.log(evt);
-    evt.preventDefault();
-    const userId = props.userId;
-    fetch(`/api/${props.userId}/activities`, {
-      method: "POST",
+  const handleEditActivity = () => {
+    console.log("editActivity");
+    fetch(`/api/${props.userId}/activities/${activityId}`, {
+      method: "UPDATE",
       credentials: "include",
       body: JSON.stringify({
-        user_id: userId,
+        user_id: props.userId,
         activity_id: activityId,
         activity_date: activityDate,
         activity_type: activityType,
@@ -124,12 +128,44 @@ function AddActivityForm(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
+          console.log("hooray!");
+        } else {
+          console.log("boo");
+        }
+      });
+  };
+
+  const handleAddActivity = () => {
+    console.log("addActivity");
+    setActivityDate(props.activityDate);
+    fetch(`/api/${props.userId}/activities`, {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify({
+        user_id: props.userId,
+        activity_id: activityId,
+        activity_date: activityDate,
+        activity_type: activityType,
+        activity_name: activityName,
+        duration: duration,
+        distance: distance,
+        suffer_score: sufferScore,
+        activity_notes: activityNotes,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setActivityId(data.activityId);
+          console.log(activityId);
+
           fetch(`/api/${props.userId}/activities`)
             .then((response) => response.json())
             .then((data) => {
-              // props.setActivities(data.activities);
-              props.setActivityId(data.activityId);
-              // console.log(data.actitivies);
+              props.setActivities(data.activities);
               props.setShowModal(false);
             });
         } else {
@@ -139,10 +175,19 @@ function AddActivityForm(props) {
       });
   };
 
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    if (props.editMode) {
+      handleEditActivity();
+    } else {
+      handleAddActivity();
+    }
+  };
+
   return (
     <div>
       <h2>{props.activityFormTitle}</h2>
-      <form onSubmit={handleAddActivity}>
+      <form onSubmit={handleSubmit}>
         <div>
           Activity Date
           <input
@@ -244,6 +289,8 @@ function Activities(props) {
   return (
     <div>
       <AddActivityButton
+        editMode={props.editMode}
+        setEditMode={props.setEditMode}
         activities={props.activities}
         setActivities={props.setActivities}
         modalError={props.modalError}
@@ -257,6 +304,8 @@ function Activities(props) {
         setActivityDate={props.setActivityDate}
       />
       <ActivitiesContainer
+        editMode={props.editMode}
+        setEditMode={props.setEditMode}
         activities={props.activities}
         setActivities={props.setActivities}
         userId={props.userId}
@@ -280,21 +329,25 @@ function ActivitiesContainer(props) {
     activityDetails.push(
       <ActivityCard
         userId={props.userId}
+        editMode={props.editMode}
+        setEditMode={props.setEditMode}
         key={activity.activity_id}
-        act_id={activity.activity_id}
-        name={activity.name}
-        date={activity.date}
+        activityId={activity.activity_id}
+        activityName={activity.name}
+        activityDate={activity.date}
         distance={activity.distance}
         duration={activity.duration}
-        suffer_score={activity.sufferScore}
-        notes={activity.notes}
-        type={activity.type}
+        sufferScore={activity.sufferScore}
+        ativityNotes={activity.notes}
+        activityType={activity.type}
         showModal={props.showModal}
         setShowModal={props.setShowModal}
         modalContent={props.modalContent}
         setModalContent={props.setModalContent}
         modalError={props.modalError}
         setModalError={props.setModalError}
+        activities={props.activities}
+        setActivities={props.setActivities}
       />
     );
   }

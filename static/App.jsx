@@ -17,6 +17,8 @@ function App() {
   const [password, setPassword] = React.useState(null);
   const [sinceDate, setSinceDate] = React.useState(null);
 
+  const [editMode, setEditMode] = React.useState(true);
+
   React.useEffect(() => {
     if (userId) {
       fetch("/profile")
@@ -64,7 +66,7 @@ function App() {
 
   React.useEffect(() => {
     if (userId) {
-      fetch("/api/<user_id>/periods")
+      fetch(`/api/${userId}/periods`)
         .then((response) => response.json())
         .then((data) => {
           // console.log(data.periods);
@@ -113,6 +115,8 @@ function App() {
         <Route exact path="/home">
           <Home
             userId={userId}
+            editMode={editMode}
+            setEditMode={setEditMode}
             isLoggedIn={isLoggedIn}
             showModal={showModal}
             setShowModal={setShowModal}
@@ -136,6 +140,8 @@ function App() {
           />
           <Modal
             userId={userId}
+            editMode={editMode}
+            setEditMode={setEditMode}
             onClose={closeModal}
             showModal={showModal}
             setShowModal={setShowModal}
@@ -151,6 +157,8 @@ function App() {
         <Route exact path="/activities">
           <Activities
             userId={userId}
+            editMode={editMode}
+            setEditMode={setEditMode}
             setError={setError}
             setModalError={setModalError}
             showModal={showModal}
@@ -161,6 +169,8 @@ function App() {
           />
           <Modal
             userId={userId}
+            editMode={editMode}
+            setEditMode={setEditMode}
             onClose={closeModal}
             showModal={showModal}
             setShowModal={setShowModal}
@@ -174,6 +184,8 @@ function App() {
         <Route exact path="/profile">
           <Profile
             userId={userId}
+            editMode={editMode}
+            setEditMode={setEditMode}
             firstName={firstName}
             setFirstName={setFirstName}
             lastName={lastName}
@@ -213,6 +225,8 @@ function App() {
         <Route exact path="/periods">
           <Periods
             userId={userId}
+            editMode={editMode}
+            setEditMode={setEditMode}
             periods={periods}
             setPeriods={setPeriods}
             error={error}
@@ -226,6 +240,8 @@ function App() {
           />
           <Modal
             userId={userId}
+            editMode={editMode}
+            setEditMode={setEditMode}
             onClose={closeModal}
             showModal={showModal}
             setShowModal={setShowModal}

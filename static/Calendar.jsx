@@ -9,6 +9,7 @@ function Calendar(props) {
       fetch(`/api/${props.userId}/activities`)
         .then((response) => response.json())
         .then((data) => {
+          console.log(data.activities);
           setCalActivities(data.activities);
         });
     }
@@ -87,6 +88,8 @@ function Calendar(props) {
           today={today}
           setToday={setToday}
           userId={props.userId}
+          editMode={props.editMode}
+          setEditMode={props.setEditMode}
           calActivities={calActivities}
           setCalActivities={setCalActivities}
           showModal={props.showModal}
@@ -136,7 +139,7 @@ function CalendarDays(props) {
 
     const calendarDay = {
       currentMonth: firstDayOfMonth.getMonth() === props.today.getMonth(),
-      date: new Date(firstDayOfMonth).toISOString().substring(0, 10),
+      activityDate: new Date(firstDayOfMonth).toISOString().substring(0, 10),
       month: firstDayOfMonth.getMonth(),
       number: firstDayOfMonth.getDate(),
       selected:
@@ -150,9 +153,13 @@ function CalendarDays(props) {
       for (const calActivity of props.calActivities) {
         if (currentDay.date === calActivity.date) {
           currentDay["activityId"] = calActivity.activity_id;
+          currentDay["activityDate"] = calActivity.date;
           currentDay["activityName"] = calActivity.name;
           currentDay["activityType"] = calActivity.type;
           currentDay["distance"] = calActivity.distance;
+          currentDay["duration"] = calActivity.duration;
+          currentDay["activityNotes"] = calActivity.activityNotes;
+          currentDay["sufferScore"] = calActivity.sufferScore;
         }
       }
       for (const calPeriod of props.periods) {
@@ -180,22 +187,27 @@ function CalendarDays(props) {
   }
 
   const handleClick = (day, evt) => {
-    // evt.preventDefault();
+    evt.preventDefault(evt);
     // props.setSelectedDay(evt.);
+    console.log(day);
     if (day.activityName && day.volume) {
+      console.log(props.editMode);
       const content = (
         <div>
           <h2>Activity</h2>
           <ActivityCard
             userId={props.userId}
+            editMode={props.editMode}
+            setEditMode={props.setEditMode}
             key={day.activityId}
             activityId={day.activityId}
-            name={day.activityName}
-            date={day.date}
-            type={day.activityType}
+            activityName={day.activityName}
+            activityDate={day.activityDate}
+            activityType={day.activityType}
             duration={day.duration}
             distance={day.distance}
-            notes={day.notes}
+            sufferScore={day.sufferScore}
+            activityNotes={day.activityNotes}
             modalContent={props.setModalContent}
             setModalContent={props.setModalContent}
             setShowModal={props.setShowModal}
@@ -213,20 +225,32 @@ function CalendarDays(props) {
         </div>
       );
       props.setShowModal(true);
+      props.setEditMode(true);
       props.setModalContent(content);
     } else if (day.activityName) {
+      props.setEditMode(true);
+      console.log(props.editMode);
       const content = (
         <ActivityCard
           userId={props.userId}
-          name={day.activityName}
-          date={day.date}
-          type={day.activityType}
+          editMode={props.editMode}
+          setEditMode={props.setEditMode}
+          key={day.activityId}
+          activityId={day.activityId}
+          activityName={day.activityName}
+          activityDate={day.activityDate}
+          activityType={day.activityType}
+          duration={day.duration}
           distance={day.distance}
+          sufferScore={day.sufferScore}
+          activityNotes={day.activityNotes}
+          modalContent={props.setModalContent}
           setModalContent={props.setModalContent}
           setShowModal={props.setShowModal}
         />
       );
       props.setShowModal(true);
+
       props.setModalContent(content);
     } else if (day.volume) {
       const content = (
@@ -243,12 +267,17 @@ function CalendarDays(props) {
     } else {
       const goToAddActivity = (evt) => {
         evt.preventDefault();
+        props.setEditMode(false);
+
         props.setModalContent(
           <AddActivityForm
             userId={props.userId}
+            editMode={props.editMode}
+            setEditMode={props.setEditMode}
             activities={props.actitivies}
             setActivities={props.setActivities}
             setShowActivityForm={props.setShowActivityForm}
+            activityDate={day.activityDate}
             modalError={props.modalError}
             setModalError={props.setModalError}
             modalContent={props.modalContent}
@@ -265,6 +294,8 @@ function CalendarDays(props) {
         props.setModalContent(
           <PeriodForm
             userId={props.userId}
+            editMode={props.editMode}
+            setEditMode={props.setEditMode}
             modalError={props.modalError}
             setModalError={props.setModalError}
             modalContent={props.modalContent}
