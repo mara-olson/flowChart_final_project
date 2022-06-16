@@ -355,9 +355,22 @@ def activity_data(user_id):
 		- 
 
 6/14
-	- TO-DO:
+	TO-DO:
 		- Change to /api/activity update & /api/activity post
-		- Create handleSubmit function, pass handleAdd vs Edit function in this function when certain
+		x Create handleSubmit function, pass handleAdd vs Edit function in this function when certain
 		"WIP saving edited data to the database. Will create a separate route for UPDATE vs POST /api/activity, as well as separate handleAddActivity vs handleEditActivity functions that I can pass to handleSubmit in the AddActivityForm component"
+
+6/15
+	- Tried to lift all of activity detail states up to App components, but that was incredibly messy 
+	- Hard reset to last night's commit
+		Had to add back in the default profile image -- two nested static folders?
+	- editMode, setEditMode states added to App component and passed down
+	- handleSubmit(if editMode...)
+		Not working as expected, need to debug
+	- There was an error in model.py where get_activity_by_id was using User.query instead of ActivityLog.query, so had to fix that and drop/createdb again
+	- Perpetuating date fixed (it was broken by the added logic)
+	TO-DO:
+		- Debug editMode: not setting to false if a calendarDay without data in it is clicked"
+		- 
 
 
