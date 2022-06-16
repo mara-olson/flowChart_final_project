@@ -52,7 +52,6 @@ function ActivityCard(props) {
 }
 
 function AddActivityButton(props) {
-  const userId = props.userId;
   const activityFormButtonName = "Add Activity";
 
   const handleClick = (evt) => {
@@ -104,7 +103,7 @@ function AddActivityForm(props) {
     // console.log(evt);
     evt.preventDefault();
     const userId = props.userId;
-    fetch("/api/activity", {
+    fetch(`/api/${props.userId}/activities`, {
       method: "POST",
       credentials: "include",
       body: JSON.stringify({
@@ -125,7 +124,7 @@ function AddActivityForm(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          fetch(`/api/users/${props.userId}/activities`)
+          fetch(`/api/${props.userId}/activities`)
             .then((response) => response.json())
             .then((data) => {
               // props.setActivities(data.activities);

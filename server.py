@@ -46,7 +46,7 @@ def authorize():
     user_id = session["user_id"]
 
     # print(session["access_token"])
-    return redirect(f"/users/home")
+    return redirect(f"/home")
     # return redirect("/")
     # return jsonify({'error':error, 'success': success})
 
@@ -172,10 +172,11 @@ def save_new_user():
 
     
     
-@app.route('/api/users/<user_id>/activities')
+@app.route('/api/<user_id>/activities')
 def activity_data(user_id):
     """All activities."""
-    
+    user_id = session["user_id"]
+
     def get_strava_activity_data():
         url = "https://www.strava.com/api/v3/athlete/activities"
 
@@ -223,9 +224,10 @@ def activity_data(user_id):
     return jsonify({"activities": activity_objs})
 
 
-@app.route("/users/<user_id>/home")
+@app.route("/<user_id>/home")
 def user_homepage(user_id):
     """Display user's homepage after logging in."""
+    user_id = session["user_id"]
     user = User.get_user_by_id(user_id)
 
     fname = user.first_name
@@ -246,26 +248,27 @@ def user_homepage(user_id):
 
 
 
-@app.route("/users/<user_id>/profile")
-def profile(user_id):
+@app.route("/profile")
+def profile():
     """User profile page."""
+    user_id = session["user_id"]
     user = User.get_user_by_id(user_id)
     # dt = user.created_at
     # trunc_date = datetime.date( dt.day, dt.month, dt.year)
     return jsonify({"success":True, "first_name": user.first_name, "last_name": user.last_name, "team_name": user.team_name, "email": user.email, "password": user.password, "member_since": user.created_at.strftime("%b %d, %Y")})
 
 
-@app.route("/api/delete-activity", methods=["POST"])
-def delete_activity():
+@app.route("/api/<user_id>/activities", methods=["DELETE"])
+def delete_activity(user_id):
     data = request.json
 
 
-@app.route("/api/activity/<activity_id>", methods=["UPDATE"])
+@app.route("/api/<user_id>/activities/<activity_id>", methods=["UPDATE"])
 # change to /api/activity update & /api/activity post
 
 
-@app.route("/api/activity", methods=["POST"])
-def add_activity():
+@app.route("/api/<user_id>/activities", methods=["POST"])
+def add_activity(user_id):
     """Add a new activity."""
     data = request.json
 
@@ -333,29 +336,29 @@ def add_activity():
     # , "activity_date": new_act.activity_date, "activity_type": new_act.activity_type, "activity_name": new_act.activity_name, "duration": new_act.duration, "distance": new_act.distance, "suffer_score": new_act.suffer_score, "activity_notes": new_act.activity_notes})
 
 
-@app.route('/api/users/<user_id>/periods')
+@app.route('/api/<user_id>/periods')
 def period_data(user_id):
+    # user_id = session["user_id"]
+    all_periods = MenseLog.query.filter(MenseLog.user_id == user_id).all()
 
-        all_periods = MenseLog.query.filter(MenseLog.user_id == user_id).all()
+    periods = []
 
-        periods = []
+    for period in all_periods:
+        new_period = {"id": period.mense_id, "flow": period.flow_volume, "mood": period.mood, "cramps": period.cramps, "bloating": period.bloating, "fatigue": period.fatigue, "date": period.mense_date.strftime("%Y-%m-%d"), "created_at": period.created_at.strftime("%Y-%m-%d"), "notes": period.mense_notes}
+        # activity = activity.to_dict()
+        periods.append(new_period)
 
-        for period in all_periods:
-            new_period = {"id": period.mense_id, "flow": period.flow_volume, "mood": period.mood, "cramps": period.cramps, "bloating": period.bloating, "fatigue": period.fatigue, "date": period.mense_date.strftime("%Y-%m-%d"), "created_at": period.created_at.strftime("%Y-%m-%d"), "notes": period.mense_notes}
-            # activity = activity.to_dict()
-            periods.append(new_period)
-
-        periods.sort(key=lambda x: datetime.datetime.strptime(x['date'], "%Y-%m-%d"))
-        
-        return jsonify({"periods": periods, "success": True})
+    periods.sort(key=lambda x: datetime.datetime.strptime(x['date'], "%Y-%m-%d"))
+    
+    return jsonify({"periods": periods, "success": True})
 
 
 
-@app.route("/api/add-period", methods=["POST"])
-def add_period():
+@app.route("/api/<user_id>/periods", methods=["POST"])
+def add_period(user_id):
     """Save user-entered period info to the database."""
     data = request.json
-
+    
     user_id = data.get("user_id")
     flow_volume = data.get("flow_volume")
     mood = data.get("mood")

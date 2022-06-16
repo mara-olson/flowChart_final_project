@@ -148,7 +148,7 @@ function PeriodForm(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          fetch(`/api/users/${props.userId}/periods`)
+          fetch(`/api/${props.userId}/periods`)
             .then((response) => response.json())
             .then((data) => {
               props.setPeriods(data.periods);

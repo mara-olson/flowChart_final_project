@@ -6,7 +6,7 @@ function Calendar(props) {
 
   React.useEffect(() => {
     if (props.userId) {
-      fetch(`/api/users/${props.userId}/activities`)
+      fetch(`/api/${props.userId}/activities`)
         .then((response) => response.json())
         .then((data) => {
           setCalActivities(data.activities);
@@ -16,7 +16,7 @@ function Calendar(props) {
 
   React.useEffect(() => {
     if (props.userId) {
-      fetch(`/api/users/${props.userId}/periods`)
+      fetch(`/api/${props.userId}/periods`)
         .then((response) => response.json())
         .then((data) => {
           props.setPeriods(data.periods);

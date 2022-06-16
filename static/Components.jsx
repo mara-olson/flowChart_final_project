@@ -40,7 +40,7 @@ function Navbar(props) {
     return (
       <nav>
         <ReactRouterDOM.Link
-          to="/users/home"
+          to="/home"
           className="navbar-brand d-flex justify-content-left"
         >
           <img src={props.logo} height="30" alt="logo" />
@@ -48,21 +48,21 @@ function Navbar(props) {
 
         <section className="d-flex justify-content-left">
           <ReactRouterDOM.NavLink
-            to={`/users/activities`}
+            to="/activities"
             activeClassName="navlink-active"
             className="nav-link nav-item"
           >
             Activities
           </ReactRouterDOM.NavLink>
           <ReactRouterDOM.NavLink
-            to="/users/profile"
+            to="/profile"
             activeClassName="navlink-active"
             className="nav-link nav-item"
           >
             Profile
           </ReactRouterDOM.NavLink>
           <ReactRouterDOM.NavLink
-            to="/users/periods"
+            to="/periods"
             activeClassName="navlink-active"
             className="nav-link nav-item"
           >
@@ -108,7 +108,7 @@ function LandingPage(props) {
   const history = ReactRouterDOM.useHistory();
 
   if (localStorage.getItem("isLoggedIn") == true) {
-    history.push("users/home");
+    history.push(`/${props.userId}/home`);
   } else {
     return (
       <div>
@@ -399,7 +399,7 @@ function MyChart(props) {
 
 function ProfileCard(props) {
   const [profilePicSrc, setProfilePicSrc] = React.useState(
-    "/static/ProfilePicDefault.png"
+    "/static/static/ProfilePicDefault.png"
   );
   const [profilePic, setProfilePic] = React.useState(profilePicSrc);
   const [photoPreviewUrl, setPhotoPreviewUrl] = React.useState(

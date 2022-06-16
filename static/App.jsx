@@ -19,7 +19,7 @@ function App() {
 
   React.useEffect(() => {
     if (userId) {
-      fetch(`/users/${userId}/profile`)
+      fetch("/profile")
         .then((response) => response.json())
         .then((data) => {
           setFirstName(data.first_name);
@@ -53,7 +53,7 @@ function App() {
 
   React.useEffect(() => {
     if (userId) {
-      fetch(`/api/users/${userId}/activities`)
+      fetch("/api/<user_id>/activities")
         .then((response) => response.json())
         .then((data) => {
           // console.log(data.activities);
@@ -64,7 +64,7 @@ function App() {
 
   React.useEffect(() => {
     if (userId) {
-      fetch(`/api/users/${userId}/periods`)
+      fetch("/api/<user_id>/periods")
         .then((response) => response.json())
         .then((data) => {
           // console.log(data.periods);
@@ -110,7 +110,7 @@ function App() {
         </Route>
       </div>
       <div className="container-fluid">
-        <Route exact path="/users/home">
+        <Route exact path="/home">
           <Home
             userId={userId}
             isLoggedIn={isLoggedIn}
@@ -148,7 +148,7 @@ function App() {
         </Route>
       </div>
       <div className="container-fluid">
-        <Route exact path="/users/activities">
+        <Route exact path="/activities">
           <Activities
             userId={userId}
             setError={setError}
@@ -171,7 +171,7 @@ function App() {
         </Route>
       </div>
       <div className="container-fluid">
-        <Route exact path="/users/profile">
+        <Route exact path="/profile">
           <Profile
             userId={userId}
             firstName={firstName}
@@ -210,7 +210,7 @@ function App() {
         </Route>
       </div>
       <div className="container-fluid">
-        <Route exact path="/users/periods">
+        <Route exact path="/periods">
           <Periods
             userId={userId}
             periods={periods}

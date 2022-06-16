@@ -354,6 +354,10 @@ def activity_data(user_id):
 		- Delete activity
 		- 
 
-
+6/14
+	- TO-DO:
+		- Change to /api/activity update & /api/activity post
+		- Create handleSubmit function, pass handleAdd vs Edit function in this function when certain
+		"WIP saving edited data to the database. Will create a separate route for UPDATE vs POST /api/activity, as well as separate handleAddActivity vs handleEditActivity functions that I can pass to handleSubmit in the AddActivityForm component"
 
 
