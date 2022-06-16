@@ -265,9 +265,10 @@ function CalendarDays(props) {
       props.setShowModal(true);
       props.setModalContent(content);
     } else {
+      props.setEditMode(false);
+
       const goToAddActivity = (evt) => {
         evt.preventDefault();
-        props.setEditMode(false);
 
         props.setModalContent(
           <AddActivityForm
