@@ -88,6 +88,40 @@ function PeriodCard(props) {
     );
   }
 
+  const handleClick = (evt) => {
+    evt.preventDefault();
+    props.setEditMode(true);
+    // showPeriodForm();
+    periodFormTitle = "Edit Period";
+    periodFormButtonName = "Save";
+
+    props.setModalContent(
+      <AddPeriodForm
+        userId={props.userId}
+        editMode={props.editMode}
+        setEditMode={props.setEditMode}
+        activityId={props.activityId}
+        activities={props.actitivies}
+        setActivities={props.setActivities}
+        modalError={props.modalError}
+        setModalError={props.setModalError}
+        setModalContent={props.setModalContent}
+        showModal={props.showModal}
+        setShowModal={props.setShowModal}
+        activityFormTitle={activityFormTitle}
+        activityFormButtonName={activityFormButtonName}
+        activityName={props.activityName}
+        activityDate={props.activityDate}
+        activityType={props.activityType}
+        duration={props.duration}
+        distance={props.distance}
+        sufferScore={props.sufferScore}
+        activityNotes={props.activityNotes}
+      />
+    );
+    props.setShowModal(true);
+  };
+
   return (
     <div className="card">
       <p>Flow: {props.flowVolume}</p>
@@ -99,6 +133,9 @@ function PeriodCard(props) {
 }
 
 function AddPeriodButton(props) {
+  const periodFormButtonName = "Add Period";
+  const periodFormTitle = "New Period";
+
   const handleClick = (evt) => {
     evt.preventDefault();
     props.setShowModal(true);
@@ -119,7 +156,19 @@ function AddPeriodButton(props) {
         periodId={props.periodId}
       />
     );
-    return <Modal />;
+    return (
+      <Modal
+        userId={props.userId}
+        editMode={props.editMode}
+        setEditMode={props.setEditMode}
+        onClose={props.closeModal}
+        showModal={props.showModal}
+        setModalContent={props.setModalContent}
+        modalContent={props.modalContent}
+        modalError={props.modalError}
+        setModalError={props.setModalError}
+      />
+    );
   };
   return <button onClick={handleClick}>Add Period</button>;
 }

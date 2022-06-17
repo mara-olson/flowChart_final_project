@@ -2,9 +2,42 @@ function ActivityCard(props) {
   let activityFormTitle = "New Activity";
   let activityFormButtonName = "Add Activity";
 
-  const showActivityForm = () => {
+  // const showActivityForm = () => {
+  //   props.setEditMode(true);
+  //   console.log(props.editMode);
+  // activityFormTitle = "Edit Activity";
+  // activityFormButtonName = "Save";
+
+  // props.setModalContent(
+  //   <AddActivityForm
+  //     userId={props.userId}
+  //     editMode={props.editMode}
+  //     setEditMode={props.setEditMode}
+  //     activityId={props.activityId}
+  //     activities={props.actitivies}
+  //     setActivities={props.setActivities}
+  //     modalError={props.modalError}
+  //     setModalError={props.setModalError}
+  //     setModalContent={props.setModalContent}
+  //     showModal={props.showModal}
+  //     setShowModal={props.setShowModal}
+  //     activityFormTitle={activityFormTitle}
+  //     activityFormButtonName={activityFormButtonName}
+  //     activityName={props.activityName}
+  //     activityDate={props.activityDate}
+  //     activityType={props.activityType}
+  //     duration={props.duration}
+  //     distance={props.distance}
+  //     sufferScore={props.sufferScore}
+  //     activityNotes={props.activityNotes}
+  //   />
+  // );
+  // };
+
+  const handleClick = (evt) => {
+    evt.preventDefault();
     props.setEditMode(true);
-    console.log(props.editMode);
+    // showActivityForm();
     activityFormTitle = "Edit Activity";
     activityFormButtonName = "Save";
 
@@ -32,12 +65,6 @@ function ActivityCard(props) {
         activityNotes={props.activityNotes}
       />
     );
-  };
-
-  const handleClick = (evt) => {
-    evt.preventDefault();
-    props.setEditMode(true);
-    showActivityForm();
     props.setShowModal(true);
   };
 
@@ -58,6 +85,7 @@ function ActivityCard(props) {
 
 function AddActivityButton(props) {
   const activityFormButtonName = "Add Activity";
+  const activityFormTitle = "New Activity";
 
   const handleClick = (evt) => {
     evt.preventDefault();
