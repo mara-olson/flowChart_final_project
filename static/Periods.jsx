@@ -120,6 +120,7 @@ function PeriodCard(props) {
       />
     );
     props.setShowModal(true);
+    console.log("editMode: ", props.editMode);
   };
 
   return (
@@ -128,6 +129,7 @@ function PeriodCard(props) {
       <div>Symptoms: {sxToDisplay}</div>
       <p>Date: {props.periodDate}</p>
       {props.notes && <p>{props.notes}</p>}
+      <button onClick={handleClick}>Edit</button>
     </div>
   );
 }

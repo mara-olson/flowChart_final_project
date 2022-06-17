@@ -66,6 +66,7 @@ function ActivityCard(props) {
       />
     );
     props.setShowModal(true);
+    console.log("editMode: ", props.editMode);
   };
 
   return (
