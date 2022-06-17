@@ -129,7 +129,13 @@ function AddActivityForm(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          setActivityName(data.)
+          setActivityName(data.activityName);
+          setActivityDate(data.activityDate);
+          setActivityType(data.activityType);
+          setDuration(data.duration);
+          setDistance(data.distance);
+          setSufferScore(data.sufferScore);
+          setActivityNotes(data.activityNotes);
         } else {
           console.log("boo");
         }

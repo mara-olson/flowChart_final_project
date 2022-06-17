@@ -309,7 +309,14 @@ def update_activity(user_id, activity_id):
         "success": True, 
         "error": None, 
         "activityId": edited_activity.activity_id,
-        "activityDate": edited_activity.activity_date})
+        "activityName": edited_activity.activity_name,
+        "activityDate": edited_activity.activity_date,
+        "activityType": edited_activity.workout_type,
+        "duration": edited_activity.duration,
+        "distance": edited_activity.distance,
+        "sufferScore": edited_activity.suffer_score,
+        "activityNotes": edited_activity.activity_notes
+        })
 
 
 @app.route("/api/<user_id>/activities", methods=["POST"])
