@@ -109,7 +109,7 @@ function AddActivityForm(props) {
   const handleEditActivity = () => {
     console.log("editActivity");
     fetch(`/api/${props.userId}/activities/${activityId}`, {
-      method: "UPDATE",
+      method: "PUT",
       credentials: "include",
       body: JSON.stringify({
         user_id: props.userId,
@@ -129,7 +129,7 @@ function AddActivityForm(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          console.log("hooray!");
+          setActivityName(data.)
         } else {
           console.log("boo");
         }

@@ -272,7 +272,7 @@ def delete_activity(user_id):
     data = request.json
 
 
-@app.route("/api/<user_id>/activities/<activity_id>", methods=["UPDATE"])
+@app.route("/api/<user_id>/activities/<activity_id>", methods=["PUT"])
 # change to /api/activity update & /api/activity post
 def update_activity(user_id, activity_id):
     """Update an existing activity."""
@@ -297,7 +297,7 @@ def update_activity(user_id, activity_id):
     edited_activity = ActivityLog.get_activity_by_id(edited_act_id)
 
     edited_activity.user_id = user_id
-    edited_activity.activity_date = edited_act_date
+    edited_activity.activity_date = edited_act_date.strftime("%Y-%m-%d")
     edited_activity.workout_type = edited_act_type
     edited_activity.activity_name = edited_act_name
     edited_activity.duration = edited_act_duration
@@ -305,7 +305,11 @@ def update_activity(user_id, activity_id):
     edited_activity.suffer_score = edited_act_suffer_score
     edited_activity.activity_notes = edited_act_notes
 
-    return jsonify({"success": True, "error": None, "activityId": edited_activity.activity_id})
+    return jsonify({
+        "success": True, 
+        "error": None, 
+        "activityId": edited_activity.activity_id,
+        "activityDate": edited_activity.activity_date})
 
 
 @app.route("/api/<user_id>/activities", methods=["POST"])
@@ -344,6 +348,8 @@ def add_activity(user_id):
         success = True
 
         new_activity = ActivityLog.create_activity(user_id, new_act_date, new_act_type, new_act_name, new_act_duration, new_act_distance, new_act_suffer_score, new_act_notes, created_at)
+
+        new_act_date = new_activity.activity_date.strftime("%Y-%m-%d")
 
 
         # new_act = {
