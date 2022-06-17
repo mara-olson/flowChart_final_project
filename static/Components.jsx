@@ -99,6 +99,22 @@ function Modal(props) {
   );
 }
 
+function StatCard1(props) {
+  return (
+    <div className="profile-card">
+      <div>Mileage this Month: {props.monthlyMileage}</div>
+    </div>
+  );
+}
+
+function StatCard2(props) {
+  return (
+    <div className="profile-card">
+      <div>Last Period: {props.lastPeriod}</div>
+    </div>
+  );
+}
+
 // LANDING PAGE COMPONENT
 function LandingPage(props) {
   const landingMessage1 =
@@ -159,6 +175,14 @@ function Home(props) {
         setEmail={props.setEmail}
         sinceDate={props.sinceDate}
         setShowModal={props.setShowModal}
+      />
+      <StatCard1
+        monthlyMileage={props.monthlyMileage}
+        setMonthlyMileage={props.setMonthlyMileage}
+      />
+      <StatCard2
+        lastPeriod={props.lastPeriod}
+        setLastPeriod={props.setLastPeriod}
       />
       <Calendar
         userId={props.userId}
@@ -442,7 +466,7 @@ function ProfileCard(props) {
   };
 
   return (
-    <div className="stats-card">
+    <div>
       {active === "edit" ? (
         <EditProfile
           handleSubmit={handleSubmit}

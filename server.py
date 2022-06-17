@@ -1,5 +1,7 @@
 from flask import Flask, render_template,json, jsonify, request, flash, session, redirect;
 
+from sqlalchemy.sql import func
+
 from model import connect_to_db, db, User, StravaUser, StravaActivity, ActivityLog, MenseLog, SleepLog;
 
 import datetime;
@@ -209,6 +211,12 @@ def activity_data(user_id):
 
     all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
 
+    currentTime= datetime.datetime.now()
+
+    mileage_this_month = db.session.query(func.sum(ActivityLog.distance)).filter(ActivityLog.activity_date > (currentTime - datetime.timedelta(30))).one()[0]
+
+    # print("*"*20, type(mileage_this_month))    
+
     for activity in all_activities:
         new_act = {
             "user_id": activity.user_id, "activity_id": activity.activity_id, "name": activity.activity_name, "type": activity.workout_type, "date": activity.activity_date.strftime("%Y-%m-%d"),
@@ -219,9 +227,10 @@ def activity_data(user_id):
     
     activity_objs.sort(key=lambda x: datetime.datetime.strptime(x['date'], "%Y-%m-%d"))
 
+
     # print(activity_objs)
 
-    return jsonify({"activities": activity_objs})
+    return jsonify({"activities": activity_objs, "monthlyMileage": mileage_this_month})
 
 
 @app.route("/<user_id>/home")
@@ -360,8 +369,10 @@ def period_data(user_id):
         periods.append(new_period)
 
     periods.sort(key=lambda x: datetime.datetime.strptime(x['date'], "%Y-%m-%d"))
+
+    last_period = db.session.query(func.max(MenseLog.mense_date)).one()[0].strftime("%B %d, %Y")
     
-    return jsonify({"periods": periods, "success": True})
+    return jsonify({"periods": periods, "success": True, "lastPeriod": last_period})
 
 
 

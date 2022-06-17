@@ -19,6 +19,9 @@ function App() {
 
   const [editMode, setEditMode] = React.useState(false);
 
+  const [monthlyMileage, setMonthlyMileage] = React.useState(0);
+  const [lastPeriod, setLastPeriod] = React.useState("--");
+
   React.useEffect(() => {
     if (userId) {
       fetch("/profile")
@@ -60,6 +63,7 @@ function App() {
         .then((data) => {
           // console.log(data.activities);
           setActivities(data.activities);
+          setMonthlyMileage(data.monthlyMileage);
         });
     }
   }, [userId]);
@@ -71,6 +75,7 @@ function App() {
         .then((data) => {
           // console.log(data.periods);
           setPeriods(data.periods);
+          setLastPeriod(data.lastPeriod);
         });
     }
   }, [isLoggedIn]);
@@ -137,6 +142,10 @@ function App() {
             email={email}
             setEmail={setEmail}
             sinceDate={sinceDate}
+            monthlyMileage={monthlyMileage}
+            setMonthlyMileage={setMonthlyMileage}
+            lastPeriod={lastPeriod}
+            setLastPeriod={setLastPeriod}
           />
           <Modal
             userId={userId}
