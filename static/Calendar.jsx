@@ -348,7 +348,7 @@ function CalendarDays(props) {
             onClick={(evt) => handleClick(day, evt)}
           >
             <p>{day.number}</p>
-            <div>{day.activityName}</div>
+            {day.activityName && <div>{day.activityName}</div>}
             {day.volume && <div>{day.volume} flow</div>}
 
             {/* <Modal

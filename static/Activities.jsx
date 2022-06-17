@@ -105,8 +105,10 @@ function AddActivityForm(props) {
   const [sufferScore, setSufferScore] = React.useState(props.sufferScore);
   const [activityNotes, setActivityNotes] = React.useState(props.activityNotes);
 
-  const handleEditActivity = () => {
+  const handleEditActivity = (evt) => {
+    evt.preventDefault();
     console.log("editActivity");
+
     fetch(`/api/${props.userId}/activities/${activityId}`, {
       method: "PUT",
       credentials: "include",
@@ -135,13 +137,24 @@ function AddActivityForm(props) {
           setDistance(data.distance);
           setSufferScore(data.sufferScore);
           setActivityNotes(data.activityNotes);
+          console.log("successful edit", activityName);
+
+          fetch(`/api/${props.userId}/activities`)
+            .then((response) => response.json())
+            .then((data) => {
+              props.setActivities(data.activities);
+              props.setShowModal(false);
+              props.setEditMode(false);
+            });
         } else {
-          console.log("boo");
+          console.log("boo", data.error);
+          props.setModalError(data.error);
         }
       });
   };
 
-  const handleAddActivity = () => {
+  const handleAddActivity = (evt) => {
+    evt.preventDefault();
     console.log("addActivity");
     setActivityDate(props.activityDate);
     fetch(`/api/${props.userId}/activities`, {

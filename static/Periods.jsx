@@ -58,10 +58,11 @@ function PeriodContainer(props) {
         userId={props.userId}
         editMode={props.editMode}
         setEditMode={props.setEditMode}
-        key={period.id}
-        volume={period.flow}
-        date={period.date}
+        key={period.mense_id}
+        flowVolume={period.flow}
+        periodDate={period.date}
         createdAt={period.created_at}
+        notes={period.notes}
         symptoms={symptoms}
         periods={props.periods}
         setPeriods={props.setPeriods}
@@ -89,9 +90,10 @@ function PeriodCard(props) {
 
   return (
     <div className="card">
-      <p>Flow: {props.volume}</p>
+      <p>Flow: {props.flowVolume}</p>
       <div>Symptoms: {sxToDisplay}</div>
-      <p>Date: {props.date}</p>
+      <p>Date: {props.periodDate}</p>
+      {props.notes && <p>{props.notes}</p>}
     </div>
   );
 }
@@ -114,6 +116,7 @@ function AddPeriodButton(props) {
         setShowModal={props.setShowModal}
         modalContent={props.modalContent}
         setModalContent={props.setModalContent}
+        periodId={props.periodId}
       />
     );
     return <Modal />;
@@ -122,6 +125,7 @@ function AddPeriodButton(props) {
 }
 
 function PeriodForm(props) {
+  const [periodId, setPeriodId] = React.useState(props.periodId);
   const [flowVolume, setFlowVolume] = React.useState(null);
   const [mood, setMood] = React.useState(false);
   const [cramps, setCramps] = React.useState(false);
@@ -130,13 +134,16 @@ function PeriodForm(props) {
   const [periodDate, setPeriodDate] = React.useState(props.selectedDate);
   const [notes, setNotes] = React.useState(null);
 
-  const handleAddPeriod = (evt) => {
+  const handleEditPeriod = (evt) => {
+    console.log("editPeriod");
     evt.preventDefault();
-    fetch(`/api/${props.userId}/periods`, {
-      method: "POST",
+
+    fetch(`/api/${props.userId}/periods/${periodId}`, {
+      method: "PUT",
       credentials: "include",
       body: JSON.stringify({
         user_id: props.userId,
+        period_id: periodId,
         flow_volume: flowVolume,
         mood: mood,
         cramps: cramps,
@@ -159,6 +166,53 @@ function PeriodForm(props) {
           setFatigue(data.fatigue);
           setPeriodDate(data.periodDate);
           setNotes(data.notes);
+          console.log("successful edit", flowVolume);
+
+          fetch(`/api/${props.userId}/periods`)
+            .then((response) => response.json())
+            .then((data) => {
+              props.setPeriods(data.periods);
+              props.setShowModal(false);
+              props.setEditMode(false);
+            });
+        } else {
+          console.log(data.error);
+          props.setModalError(data.error);
+        }
+      });
+  };
+
+  const handleAddPeriod = (evt) => {
+    evt.preventDefault();
+
+    fetch(`/api/${props.userId}/periods`, {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify({
+        user_id: props.userId,
+        flow_volume: flowVolume,
+        mood: mood,
+        cramps: cramps,
+        bloating: bloating,
+        fatigue: fatigue,
+        mense_date: periodDate,
+        notes: notes,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setPeriodId(data.mense_id);
+          setFlowVolume(data.flowVolume);
+          setMood(data.mood);
+          setBloating(data.bloating);
+          setCramps(data.cramps);
+          setFatigue(data.fatigue);
+          setPeriodDate(data.periodDate);
+          setNotes(data.notes);
           console.log("successful add", flowVolume);
 
           fetch(`/api/${props.userId}/periods`)
@@ -174,9 +228,18 @@ function PeriodForm(props) {
       });
   };
 
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    if (props.editMode) {
+      handleEditPeriod();
+    } else {
+      handleAddPeriod();
+    }
+  };
+
   return (
     <div>
-      <form id="period-form" onSubmit={handleAddPeriod}>
+      <form id="period-form" onSubmit={handleSubmit}>
         <label htmlFor="date">Date of event</label>
         <input
           type="date"

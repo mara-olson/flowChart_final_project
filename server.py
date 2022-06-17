@@ -279,7 +279,6 @@ def update_activity(user_id, activity_id):
     data = request.json
 
     user_id = session["user_id"]
-    activity_id = data.get("activity_id")
 
     edited_act_id = data.get("activity_id")
     
@@ -404,6 +403,12 @@ def period_data(user_id):
     })
 
 
+@app.route("/api/<user_id>/periods/<period_id>", methods=["PUT"])
+# change to /api/activity update & /api/activity post
+def update_period(user_id, period_id):
+    pass
+
+
 
 @app.route("/api/<user_id>/periods", methods=["POST"])
 def add_period(user_id):
@@ -447,6 +452,7 @@ def add_period(user_id):
         return jsonify({
             "success": success, 
             "error": error,
+            "periodId": new_period.mense_id,
             "flowVolume": new_period.flow_volume,
             "mood": new_period.mood,
             "cramps": new_period.cramps,
