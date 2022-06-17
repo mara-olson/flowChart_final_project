@@ -1,12 +1,12 @@
 function ActivityCard(props) {
-  const activityFormTitle = "New Activity";
-  const activityFormButtonName = "Add Activity";
+  let activityFormTitle = "New Activity";
+  let activityFormButtonName = "Add Activity";
 
   const showActivityForm = () => {
     props.setEditMode(true);
     console.log(props.editMode);
-    const activityFormTitle = "Edit Activity";
-    const activityFormButtonName = "Save";
+    activityFormTitle = "Edit Activity";
+    activityFormButtonName = "Save";
 
     props.setModalContent(
       <AddActivityForm
@@ -36,6 +36,7 @@ function ActivityCard(props) {
 
   const handleClick = (evt) => {
     evt.preventDefault();
+    props.setEditMode(true);
     showActivityForm();
     props.setShowModal(true);
   };

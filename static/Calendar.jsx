@@ -9,7 +9,6 @@ function Calendar(props) {
       fetch(`/api/${props.userId}/activities`)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data.activities);
           setCalActivities(data.activities);
         });
     }
@@ -151,7 +150,7 @@ function CalendarDays(props) {
 
     for (const currentDay of currentDays) {
       for (const calActivity of props.calActivities) {
-        if (currentDay.date === calActivity.date) {
+        if (currentDay.activityDate === calActivity.date) {
           currentDay["activityId"] = calActivity.activity_id;
           currentDay["activityDate"] = calActivity.date;
           currentDay["activityName"] = calActivity.name;
@@ -177,7 +176,7 @@ function CalendarDays(props) {
           symptoms.push("Fatigue");
         }
 
-        if (currentDay.date === calPeriod.date) {
+        if (currentDay.activityDate === calPeriod.date) {
           currentDay["periodId"] = calPeriod.id;
           currentDay["volume"] = calPeriod.flow;
           currentDay["symptoms"] = symptoms;
@@ -191,7 +190,6 @@ function CalendarDays(props) {
     // props.setSelectedDay(evt.);
     console.log(day);
     if (day.activityName && day.volume) {
-      console.log(props.editMode);
       const content = (
         <div>
           <h2>Activity</h2>
@@ -266,7 +264,6 @@ function CalendarDays(props) {
       props.setModalContent(content);
     } else {
       props.setEditMode(false);
-
       const goToAddActivity = (evt) => {
         evt.preventDefault();
 
@@ -286,6 +283,8 @@ function CalendarDays(props) {
             showModal={props.showModal}
             setShowModal={props.setShowModal}
             selectedDate={day.date}
+            activityFormTitle="Edit Activity"
+            activityFormButtonName="Save"
           />
         );
       };

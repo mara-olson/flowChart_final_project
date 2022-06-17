@@ -336,6 +336,7 @@ def add_activity(user_id):
 
         new_activity = ActivityLog.create_activity(user_id, new_act_date, new_act_type, new_act_name, new_act_duration, new_act_distance, new_act_suffer_score, new_act_notes, created_at)
 
+
         # new_act = {
             # "user_id": activity.user_id, "id": activity.activity_id, "name": activity.activity_name, "type": activity.workout_type, "date": activity.activity_date.strftime("%Y-%m-%d"),
             # "distance": activity.distance, "duration": activity.duration, "suffer_score": activity.suffer_score, "notes": activity.activity_notes

@@ -17,7 +17,7 @@ function App() {
   const [password, setPassword] = React.useState(null);
   const [sinceDate, setSinceDate] = React.useState(null);
 
-  const [editMode, setEditMode] = React.useState(true);
+  const [editMode, setEditMode] = React.useState(false);
 
   React.useEffect(() => {
     if (userId) {
