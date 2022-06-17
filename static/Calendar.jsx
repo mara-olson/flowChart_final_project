@@ -213,6 +213,8 @@ function CalendarDays(props) {
           <h2>Period</h2>
           <PeriodCard
             userId={props.userId}
+            editMode={props.editMode}
+            setEditMode={props.setEditMode}
             key={day.periodId}
             periodId={day.periodId}
             volume={day.volume}
@@ -254,6 +256,8 @@ function CalendarDays(props) {
       const content = (
         <PeriodCard
           userId={props.userId}
+          editMode={props.editMode}
+          setEditMode={props.setEditMode}
           volume={day.volume}
           date={day.date}
           symptoms={day.symptoms}

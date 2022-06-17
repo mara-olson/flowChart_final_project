@@ -132,7 +132,7 @@ function PeriodForm(props) {
 
   const handleAddPeriod = (evt) => {
     evt.preventDefault();
-    fetch("/api/add-period", {
+    fetch(`/api/${props.userId}/periods`, {
       method: "POST",
       credentials: "include",
       body: JSON.stringify({
@@ -152,11 +152,19 @@ function PeriodForm(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
+          setFlowVolume(data.flowVolume);
+          setMood(data.mood);
+          setBloating(data.bloating);
+          setCramps(data.cramps);
+          setFatigue(data.fatigue);
+          setPeriodDate(data.periodDate);
+          setNotes(data.notes);
+          console.log("successful add", flowVolume);
+
           fetch(`/api/${props.userId}/periods`)
             .then((response) => response.json())
             .then((data) => {
               props.setPeriods(data.periods);
-              // console.log(data.periods);
               props.setShowModal(false);
             });
         } else {

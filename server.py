@@ -290,7 +290,6 @@ def update_activity(user_id, activity_id):
     edited_act_distance = data.get("distance")
     edited_act_suffer_score = data.get("suffer_score")
     edited_act_notes = data.get("activity_notes")
-    created_at = datetime.datetime.now()
 
     currentTime= datetime.datetime.now()
 
@@ -325,7 +324,7 @@ def add_activity(user_id):
     data = request.json
 
     user_id = session["user_id"]
-    # new_act_id = data.get("activity_id")
+
     new_act_date = data.get("activity_date")
     new_act_type = data.get("activity_type")
     new_act_name = data.get("activity_name")
@@ -338,7 +337,7 @@ def add_activity(user_id):
     currentTime= datetime.datetime.now()
     
     if (new_act_date is None) or (new_act_name is None):
-        error = "Please enter an activity date, type, & duration"
+        error = "Please enter an activity date, type, & name"
         success = False
         
         return jsonify({"success": success, "error": error})
@@ -356,17 +355,21 @@ def add_activity(user_id):
 
         new_activity = ActivityLog.create_activity(user_id, new_act_date, new_act_type, new_act_name, new_act_duration, new_act_distance, new_act_suffer_score, new_act_notes, created_at)
 
-        new_act_date = new_activity.activity_date.strftime("%Y-%m-%d")
+        new_activity.activity_date = new_activity.activity_date.strftime("%Y-%m-%d")
 
+        return jsonify({
+            "success": success, 
+            "error": error, 
+            "activityId": new_activity.activity_id,
+            "activityName": new_activity.activity_name,
+            "activityDate": new_activity.activity_date,
+            "activityType": new_activity.workout_type,
+            "duration": new_activity.duration,
+            "distance": new_activity.distance,
+            "sufferScore": new_activity.suffer_score,
+            "activityNotes": new_activity.activity_notes
+            })
 
-        # new_act = {
-            # "user_id": activity.user_id, "id": activity.activity_id, "name": activity.activity_name, "type": activity.workout_type, "date": activity.activity_date.strftime("%Y-%m-%d"),
-            # "distance": activity.distance, "duration": activity.duration, "suffer_score": activity.suffer_score, "notes": activity.activity_notes
-        #     }
-
-        return jsonify({"success": success, "error": error, "activityId": new_activity.activity_id})
-
-    # , "activity_date": new_act.activity_date, "activity_type": new_act.activity_type, "activity_name": new_act.activity_name, "duration": new_act.duration, "distance": new_act.distance, "suffer_score": new_act.suffer_score, "activity_notes": new_act.activity_notes})
 
 
 @app.route('/api/<user_id>/periods')
@@ -377,15 +380,28 @@ def period_data(user_id):
     periods = []
 
     for period in all_periods:
-        new_period = {"id": period.mense_id, "flow": period.flow_volume, "mood": period.mood, "cramps": period.cramps, "bloating": period.bloating, "fatigue": period.fatigue, "date": period.mense_date.strftime("%Y-%m-%d"), "created_at": period.created_at.strftime("%Y-%m-%d"), "notes": period.mense_notes}
-        # activity = activity.to_dict()
+        new_period = {
+            "id": period.mense_id, 
+            "flow": period.flow_volume,
+            "mood": period.mood, 
+            "cramps": period.cramps, 
+            "bloating": period.bloating, 
+            "fatigue": period.fatigue, 
+            "date": period.mense_date.strftime("%Y-%m-%d"), 
+            "notes": period.mense_notes,
+            "created_at": period.created_at.strftime("%Y-%m-%d")
+        }
         periods.append(new_period)
 
     periods.sort(key=lambda x: datetime.datetime.strptime(x['date'], "%Y-%m-%d"))
 
     last_period = db.session.query(func.max(MenseLog.mense_date)).one()[0].strftime("%B %d, %Y")
     
-    return jsonify({"periods": periods, "success": True, "lastPeriod": last_period})
+    return jsonify({
+        "periods": periods, 
+        "success": True, 
+        "lastPeriod": last_period
+    })
 
 
 
@@ -410,13 +426,17 @@ def add_period(user_id):
         error = "Please enter a date & flow"
         success = False
         
-        return jsonify({"success": success, "error": error})
+        return jsonify({
+            "success": success, 
+            "error": error})
         
     elif datetime.datetime.strptime(mense_date, "%Y-%m-%d") > currentTime:
         error = "The date you entered is in the future. Please enter a valid date."
         success = False
         
-        return jsonify({"success": success, "error": error})
+        return jsonify({
+            "success": success, 
+            "error": error})
 
     else:
         error = None
@@ -424,7 +444,18 @@ def add_period(user_id):
 
         new_period = MenseLog.create_mense_log(user_id, flow_volume, mood, cramps, bloating, fatigue, mense_date, notes, created_at)
 
-        return jsonify({"success": success, "error": error})
+        return jsonify({
+            "success": success, 
+            "error": error,
+            "flowVolume": new_period.flow_volume,
+            "mood": new_period.mood,
+            "cramps": new_period.cramps,
+            "bloating": new_period.bloating,
+            "fatigue": new_period.fatigue,
+            "periodDate": new_period.mense_date,
+            "notes": new_period.notes,
+            "createdAt": new_period.created_at
+            })
 
 # @app.route("/api/<user_id>/data")
 # def chart_data(user_id):

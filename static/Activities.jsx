@@ -104,8 +104,7 @@ function AddActivityForm(props) {
   const [distance, setDistance] = React.useState(props.distance);
   const [sufferScore, setSufferScore] = React.useState(props.sufferScore);
   const [activityNotes, setActivityNotes] = React.useState(props.activityNotes);
-  // edit vs. add mode
-  // handleSubmit function, pass handleAdd vs Edit function in this function when certain
+
   const handleEditActivity = () => {
     console.log("editActivity");
     fetch(`/api/${props.userId}/activities/${activityId}`, {
@@ -167,7 +166,14 @@ function AddActivityForm(props) {
       .then((data) => {
         if (data.success) {
           setActivityId(data.activityId);
-          console.log(activityId);
+          setActivityName(data.activityName);
+          setActivityDate(data.activityDate);
+          setActivityType(data.activityType);
+          setDuration(data.duration);
+          setDistance(data.distance);
+          setSufferScore(data.sufferScore);
+          setActivityNotes(data.activityNotes);
+          console.log(activityId, activityName);
 
           fetch(`/api/${props.userId}/activities`)
             .then((response) => response.json())
