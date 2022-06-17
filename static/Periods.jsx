@@ -154,6 +154,8 @@ function AddPeriodButton(props) {
         modalContent={props.modalContent}
         setModalContent={props.setModalContent}
         periodId={props.periodId}
+        periodFormButtonName={periodFormButtonName}
+        periodFormTitle={periodFormTitle}
       />
     );
     return (
