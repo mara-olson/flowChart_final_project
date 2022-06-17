@@ -371,6 +371,15 @@ def activity_data(user_id):
 	- Perpetuating date fixed (it was broken by the added logic)
 	TO-DO:
 		- Debug editMode: not setting to false if a calendarDay without data in it is clicked"
-		- 
+		- Edit periods
+		- Delete activities/periods
 
+6/16
+	- Stat cards for past 30 days mileage & last period date added
+		- states for both in App component
+		- StatCard1
+		- StatCard2
+	- Edit vs. New activity heading in modal
+	TO-DO:
+		- editMode still not updating on click
 
