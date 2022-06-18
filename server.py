@@ -303,12 +303,16 @@ def update_activity(user_id, activity_id):
     edited_activity.suffer_score = edited_act_suffer_score
     edited_activity.activity_notes = edited_act_notes
 
+    db.session.commit()
+
+    print(edited_activity)
+
     return jsonify({
         "success": True, 
         "error": None, 
-        "activityId": edited_activity.activity_id,
+        "activityId": edited_activity.activity_id,        
         "activityName": edited_activity.activity_name,
-        "activityDate": edited_activity.activity_date,
+        "activityDate": edited_activity.activity_date.strftime("%Y-%m-%d"),
         "activityType": edited_activity.workout_type,
         "duration": edited_activity.duration,
         "distance": edited_activity.distance,

@@ -247,10 +247,11 @@ function CalendarDays(props) {
           modalContent={props.setModalContent}
           setModalContent={props.setModalContent}
           setShowModal={props.setShowModal}
+          activities={props.actitivies}
+          setActivities={props.setActivities}
         />
       );
       props.setShowModal(true);
-
       props.setModalContent(content);
     } else if (day.volume) {
       const content = (

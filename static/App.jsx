@@ -61,7 +61,7 @@ function App() {
       fetch("/api/<user_id>/activities")
         .then((response) => response.json())
         .then((data) => {
-          // console.log(data.activities);
+          console.log(data.activities);
           setActivities(data.activities);
           setMonthlyMileage(data.monthlyMileage);
         });

@@ -2,43 +2,10 @@ function ActivityCard(props) {
   let activityFormTitle = "New Activity";
   let activityFormButtonName = "Add Activity";
 
-  // const showActivityForm = () => {
-  //   props.setEditMode(true);
-  //   console.log(props.editMode);
-  // activityFormTitle = "Edit Activity";
-  // activityFormButtonName = "Save";
-
-  // props.setModalContent(
-  //   <AddActivityForm
-  //     userId={props.userId}
-  //     editMode={props.editMode}
-  //     setEditMode={props.setEditMode}
-  //     activityId={props.activityId}
-  //     activities={props.actitivies}
-  //     setActivities={props.setActivities}
-  //     modalError={props.modalError}
-  //     setModalError={props.setModalError}
-  //     setModalContent={props.setModalContent}
-  //     showModal={props.showModal}
-  //     setShowModal={props.setShowModal}
-  //     activityFormTitle={activityFormTitle}
-  //     activityFormButtonName={activityFormButtonName}
-  //     activityName={props.activityName}
-  //     activityDate={props.activityDate}
-  //     activityType={props.activityType}
-  //     duration={props.duration}
-  //     distance={props.distance}
-  //     sufferScore={props.sufferScore}
-  //     activityNotes={props.activityNotes}
-  //   />
-  // );
-  // };
-
   const handleClick = () => {
     // evt.preventDefault();
     props.setEditMode(true);
     props.setEditMode((state) => {
-      // showActivityForm();
       activityFormTitle = "Edit Activity";
       activityFormButtonName = "Save";
       props.setModalContent(
@@ -168,13 +135,13 @@ function AddActivityForm(props) {
           setSufferScore(data.sufferScore);
           setActivityNotes(data.activityNotes);
           console.log("successful edit", activityName);
+          props.setShowModal(false);
+          props.setEditMode(false);
 
           fetch(`/api/${props.userId}/activities`)
             .then((response) => response.json())
             .then((data) => {
               props.setActivities(data.activities);
-              props.setShowModal(false);
-              props.setEditMode(false);
             });
         } else {
           console.log("boo", data.error);
@@ -233,7 +200,7 @@ function AddActivityForm(props) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    if (!props.editMode) {
+    if (props.editMode) {
       handleEditActivity();
     } else {
       handleAddActivity();
@@ -377,11 +344,11 @@ function Activities(props) {
 }
 
 function ActivitiesContainer(props) {
-  const { activities, setActivities } = props;
+  // const { activities, setActivities } = props;
 
   const activityDetails = [];
 
-  for (const activity of activities) {
+  for (const activity of props.activities) {
     activityDetails.push(
       <ActivityCard
         userId={props.userId}
