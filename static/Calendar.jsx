@@ -104,6 +104,8 @@ function Calendar(props) {
           setPeriods={props.setPeriods}
           calPeriods={calPeriods}
           setCalPeriods={setCalPeriods}
+          selectedActivityId={props.selectedActivityId}
+          setSelectedActivityId={props.setSelectedActivityId}
         />
         {/* <CalendarActivities today={today} userId={props.userId} /> */}
       </div>
@@ -114,12 +116,13 @@ function Calendar(props) {
 function CalendarDays(props) {
   // console.log(props.calPeriods);
   // console.log(props.calActivities);
-
+  console.log("props.selectedActivityId", props.selectedActivityId);
   let firstDayOfMonth = new Date(
     props.today.getFullYear(),
     props.today.getMonth(),
     1
   );
+
   let weekdayOfFirstDay = firstDayOfMonth.getDay();
   // const realTodayMonth = props.realToday.getMonth();
   // const finalTodayMonth = new Date(firstDayOfMonth).toDateString();
@@ -185,10 +188,16 @@ function CalendarDays(props) {
     }
   }
 
+  const updateActivity = (day) => {
+    props.setSelectedActivityId(day.activityId);
+    console.log(day.activityId);
+  };
+
   const handleClick = (day, evt) => {
-    evt.preventDefault(evt);
-    // props.setSelectedDay(evt.);
-    console.log(day);
+    evt.preventDefault();
+    updateActivity(day);
+    console.log("clicked");
+
     if (day.activityName && day.volume) {
       const content = (
         <div>
@@ -206,7 +215,7 @@ function CalendarDays(props) {
             distance={day.distance}
             sufferScore={day.sufferScore}
             activityNotes={day.activityNotes}
-            modalContent={props.setModalContent}
+            modalContent={props.modalContent}
             setModalContent={props.setModalContent}
             setShowModal={props.setShowModal}
           />
@@ -224,35 +233,41 @@ function CalendarDays(props) {
           />
         </div>
       );
-      props.setShowModal(true);
+      // props.setShowModal(true);
       props.setEditMode(true);
       props.setModalContent(content);
     } else if (day.activityName) {
       props.setEditMode(true);
-      console.log(props.editMode);
+
       const content = (
-        <ActivityCard
+        <SelectedActivityContainer
           userId={props.userId}
-          editMode={props.editMode}
-          setEditMode={props.setEditMode}
-          key={day.activityId}
-          activityId={day.activityId}
-          activityName={day.activityName}
-          activityDate={day.activityDate}
-          activityType={day.activityType}
-          duration={day.duration}
-          distance={day.distance}
-          sufferScore={day.sufferScore}
-          activityNotes={day.activityNotes}
-          modalContent={props.setModalContent}
-          setModalContent={props.setModalContent}
-          setShowModal={props.setShowModal}
-          activities={props.actitivies}
-          setActivities={props.setActivities}
+          selectedActivityId={props.selectedActivityId}
         />
+        // <ActivityCard
+        //   userId={props.userId}
+        //   // editMode={props.editMode}
+        //   // setEditMode={props.setEditMode}
+        //   key={selectedActivity.activityId}
+        //   activityId={selectedActivity.activityId}
+        //   activityName={selectedActivity.activityName}
+        //   activityDate={selectedActivity.activityDate}
+        //   activityType={selectedActivity.activityType}
+        //   duration={selectedActivity.duration}
+        //   distance={selectedActivity.distance}
+        //   sufferScore={selectedActivity.sufferScore}
+        //   activityNotes={selectedActivity.activityNotes}
+        //   modalContent={props.setModalContent}
+        //   setModalContent={props.setModalContent}
+        //   setShowModal={props.setShowModal}
+        //   activities={props.actitivies}
+        //   setActivities={props.setActivities}
+        // />
       );
-      props.setShowModal(true);
-      props.setModalContent(content);
+      if (props.selectedActivityId) {
+        props.setModalContent(content);
+        props.setShowModal(true);
+      }
     } else if (day.volume) {
       const content = (
         <PeriodCard
@@ -265,8 +280,8 @@ function CalendarDays(props) {
           setShowModal={props.setShowModal}
         />
       );
-      props.setShowModal(true);
       props.setModalContent(content);
+      props.setShowModal(true);
     } else {
       props.setEditMode(false);
       const goToAddActivity = (evt) => {

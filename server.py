@@ -267,9 +267,31 @@ def profile():
     return jsonify({"success":True, "first_name": user.first_name, "last_name": user.last_name, "team_name": user.team_name, "email": user.email, "password": user.password, "member_since": user.created_at.strftime("%b %d, %Y")})
 
 
-@app.route("/api/<user_id>/activities", methods=["DELETE"])
+@app.route("/api/<user_id>/activities/<activity_id>", methods=["DELETE"])
 def delete_activity(user_id):
     data = request.json
+
+
+@app.route("/api/<user_id>/activities/<activity_id>")
+def get_selected_activity(user_id, activity_id):
+    """Retrieve an existing activity."""
+
+    user_id = session["user_id"]
+
+    activity = ActivityLog.get_activity_by_id(activity_id)
+
+    return jsonify({
+        "success": True, 
+        "error": None, 
+        "activityId": activity.activity_id,        
+        "activityName": activity.activity_name,
+        "activityDate": activity.activity_date.strftime("%Y-%m-%d"),
+        "activityType": activity.workout_type,
+        "duration": activity.duration,
+        "distance": activity.distance,
+        "sufferScore": activity.suffer_score,
+        "activityNotes": activity.activity_notes
+        })
 
 
 @app.route("/api/<user_id>/activities/<activity_id>", methods=["PUT"])

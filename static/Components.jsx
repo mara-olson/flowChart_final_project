@@ -81,7 +81,8 @@ function Navbar(props) {
 }
 
 function Modal(props) {
-  if (!props.showModal) {
+  console.log(props.modalContent);
+  if (!props.showModal || !props.modalContent) {
     return null;
   }
   return (
@@ -200,6 +201,8 @@ function Home(props) {
         setActivities={props.setActivities}
         periods={props.periods}
         setPeriods={props.setPeriods}
+        selectedActivityId={props.selectedActivityId}
+        setSelectedActivityId={props.setSelectedActivityId}
       />
 
       <MyChart
@@ -281,29 +284,6 @@ function Login(props) {
 }
 
 function Profile(props) {
-  // const [firstName, setFirstName] = React.useState(null);
-  // const [lastName, setLastName] = React.useState(null);
-  // const [teamName, setTeamName] = React.useState(null);
-  // const [email, setEmail] = React.useState(null);
-  // const [password, setPassword] = React.useState(null);
-  // const [sinceDate, setSinceDate] = React.useState(null);
-
-  // React.useEffect(() => {
-  //   if (props.userId) {
-  //     console.log("hi");
-  //     fetch(`/users/${props.userId}/profile`)
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         setFirstName(data.first_name);
-  //         setLastName(data.last_name);
-  //         setTeamName(data.team_name);
-  //         setEmail(data.email);
-  //         setPassword(data.password);
-  //         setSinceDate(data.member_since);
-  //       });
-  //   }
-  // }, [props.userId]);
-
   return (
     <div>
       <h2>Account Information</h2>
@@ -339,36 +319,9 @@ function MyChart(props) {
   const chartRef = React.useRef(null);
   const [currentChart, setCurrentChart] = React.useState(null);
 
-  // if (props.activities) {
-  //   const activities = props.activities;
-  //   console.log(activities);
-  // }
-
   React.useEffect(() => {
-    // if (chartRef.current && !currentChart) {
     if (props.activities) {
-      // const activityData = props.activities;
-      // const periodData = props.periods;
-      // console.log(activityData);
-      // console.log("hi");
-
-      // [
-      //   "January",
-      //   "February",
-      //   "March",
-      //   "April",
-      //   "May",
-      //   "June",
-      //   "July",
-      //   "August",
-      //   "September",
-      //   "October",
-      //   "November",
-      //   "December",
-      // ];
-
       const activityData = [];
-
       for (const activity of props.activities) {
         const actObj = {
           x: activity.date,
@@ -378,7 +331,6 @@ function MyChart(props) {
       }
 
       const periodData = [];
-
       for (const period of props.periods) {
         const volume = null;
         if (period.flow === "No Flow") {
@@ -435,8 +387,7 @@ function ProfileCard(props) {
   const [photoPreviewUrl, setPhotoPreviewUrl] = React.useState(
     "https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true"
   );
-  // const [profileFirstName, setProfileFirstName] = React.useState("");
-  // const [profileLastName, setProfileLastName] = React.useState("");
+
   const [bio, setBio] = React.useState("");
   const [active, setActive] = React.useState("profile");
 

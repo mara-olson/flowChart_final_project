@@ -8,6 +8,7 @@ function App() {
   const [showModal, setShowModal] = React.useState(false);
   const [modalContent, setModalContent] = React.useState(null);
   const [activities, setActivities] = React.useState(null);
+  const [selectedActivityId, setSelectedActivityId] = React.useState(null);
   const [periods, setPeriods] = React.useState([]);
 
   const [firstName, setFirstName] = React.useState(null);
@@ -146,6 +147,8 @@ function App() {
             setMonthlyMileage={setMonthlyMileage}
             lastPeriod={lastPeriod}
             setLastPeriod={setLastPeriod}
+            selectedActivityId={selectedActivityId}
+            setSelectedActivityId={setSelectedActivityId}
           />
           <Modal
             userId={userId}
@@ -175,6 +178,8 @@ function App() {
             setModalContent={setModalContent}
             activities={activities}
             setActivities={setActivities}
+            selectedActivityId={selectedActivityId}
+            setSelectedActivityId={setSelectedActivityId}
           />
           <Modal
             userId={userId}
