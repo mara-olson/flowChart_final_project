@@ -138,8 +138,8 @@ function AddPeriodButton(props) {
   const periodFormButtonName = "Add Period";
   const periodFormTitle = "New Period";
 
-  const handleClick = (evt) => {
-    evt.preventDefault();
+  const handleClick = () => {
+    // evt.preventDefault();
     props.setShowModal(true);
     props.setModalContent(
       <PeriodForm

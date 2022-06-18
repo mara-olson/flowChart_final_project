@@ -34,39 +34,40 @@ function ActivityCard(props) {
   // );
   // };
 
-  const handleClick = (evt) => {
-    evt.preventDefault();
+  const handleClick = () => {
+    // evt.preventDefault();
     props.setEditMode(true);
-    // showActivityForm();
-    activityFormTitle = "Edit Activity";
-    activityFormButtonName = "Save";
-
-    props.setModalContent(
-      <AddActivityForm
-        userId={props.userId}
-        editMode={props.editMode}
-        setEditMode={props.setEditMode}
-        activityId={props.activityId}
-        activities={props.actitivies}
-        setActivities={props.setActivities}
-        modalError={props.modalError}
-        setModalError={props.setModalError}
-        setModalContent={props.setModalContent}
-        showModal={props.showModal}
-        setShowModal={props.setShowModal}
-        activityFormTitle={activityFormTitle}
-        activityFormButtonName={activityFormButtonName}
-        activityName={props.activityName}
-        activityDate={props.activityDate}
-        activityType={props.activityType}
-        duration={props.duration}
-        distance={props.distance}
-        sufferScore={props.sufferScore}
-        activityNotes={props.activityNotes}
-      />
-    );
-    props.setShowModal(true);
-    console.log("editMode: ", props.editMode);
+    props.setEditMode((state) => {
+      // showActivityForm();
+      activityFormTitle = "Edit Activity";
+      activityFormButtonName = "Save";
+      props.setModalContent(
+        <AddActivityForm
+          userId={props.userId}
+          editMode={props.editMode}
+          setEditMode={props.setEditMode}
+          activityId={props.activityId}
+          activities={props.actitivies}
+          setActivities={props.setActivities}
+          modalError={props.modalError}
+          setModalError={props.setModalError}
+          setModalContent={props.setModalContent}
+          showModal={props.showModal}
+          setShowModal={props.setShowModal}
+          activityFormTitle={activityFormTitle}
+          activityFormButtonName={activityFormButtonName}
+          activityName={props.activityName}
+          activityDate={props.activityDate}
+          activityType={props.activityType}
+          duration={props.duration}
+          distance={props.distance}
+          sufferScore={props.sufferScore}
+          activityNotes={props.activityNotes}
+        />
+      );
+      props.setShowModal(true);
+      console.log("editMode: ", state);
+    });
   };
 
   return (
@@ -134,8 +135,8 @@ function AddActivityForm(props) {
   const [sufferScore, setSufferScore] = React.useState(props.sufferScore);
   const [activityNotes, setActivityNotes] = React.useState(props.activityNotes);
 
-  const handleEditActivity = (evt) => {
-    evt.preventDefault();
+  const handleEditActivity = () => {
+    // evt.preventDefault();
     console.log("editActivity");
 
     fetch(`/api/${props.userId}/activities/${activityId}`, {
@@ -182,8 +183,8 @@ function AddActivityForm(props) {
       });
   };
 
-  const handleAddActivity = (evt) => {
-    evt.preventDefault();
+  const handleAddActivity = () => {
+    // evt.preventDefault();
     console.log("addActivity");
     setActivityDate(props.activityDate);
     fetch(`/api/${props.userId}/activities`, {
@@ -232,7 +233,7 @@ function AddActivityForm(props) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    if (props.editMode) {
+    if (!props.editMode) {
       handleEditActivity();
     } else {
       handleAddActivity();

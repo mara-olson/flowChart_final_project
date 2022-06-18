@@ -295,7 +295,7 @@ def update_activity(user_id, activity_id):
     edited_activity = ActivityLog.get_activity_by_id(edited_act_id)
 
     edited_activity.user_id = user_id
-    edited_activity.activity_date = edited_act_date.strftime("%Y-%m-%d")
+    edited_activity.activity_date = edited_act_date
     edited_activity.workout_type = edited_act_type
     edited_activity.activity_name = edited_act_name
     edited_activity.duration = edited_act_duration

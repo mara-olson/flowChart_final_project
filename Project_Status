@@ -383,3 +383,13 @@ def activity_data(user_id):
 	TO-DO:
 		- editMode still not updating on click
 
+6/17
+	- PUT instead of UPDATE to edit activities, dumb dumb
+	- Edited activity details sent back to frontend to update states
+	- Add actvity & period details sent to frontend from server, and states for these details updated upon submission
+	- evt preventdefault added to handleEdit/AddActivity/Period -- test this out
+	- fetch activities & periods after edit entry so that it updates in real time -- test this out
+	- periodId, notes retrieved from server
+	- PeriodForm button name and PeriodForm title added
+	- WIP editMode settings
+

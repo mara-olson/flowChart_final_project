@@ -519,7 +519,7 @@ function ProfileCard(props) {
 
 function PhotoUploader(props) {
   return (
-    <label htmlForm="photo-upload" className="custom-file-upload fas">
+    <label htmlFor="photo-upload" className="custom-file-upload fas">
       <div className="img-wrap img-upload">
         <img
           htmlFor="photo-upload"
