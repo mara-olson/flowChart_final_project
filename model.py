@@ -184,6 +184,10 @@ class MenseLog(db.Model):
     def __repr__(self):
         return f'<Mense mense_id={self.mense_id}'
 
+    def get_period_by_id(mense_id):
+        """Get & return a user by user_id."""
+        return MenseLog.query.get(mense_id)
+
     @classmethod
     def create_mense_log(cls, user_id, flow_volume, mood, cramps, bloating, fatigue, mense_date, mense_notes, created_at):
        """Create and return a new period."""

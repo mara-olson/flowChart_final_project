@@ -410,7 +410,47 @@ def period_data(user_id):
 @app.route("/api/<user_id>/periods/<period_id>", methods=["PUT"])
 # change to /api/activity update & /api/activity post
 def update_period(user_id, period_id):
-    pass
+    data = request.json
+
+    user_id = session["user_id"]
+
+    edited_period_id = data.get("period_id")
+    
+    edited_mense_date = data.get("mense_date")
+    edited_flow_volume = data.get("flow_volume")
+    edited_mood = data.get("mood")
+    edited_cramps = data.get("cramps")
+    edited_bloating = data.get("bloating")
+    edited_fatigue = data.get("fatigue")
+    edited_notes = data.get("notes")
+
+    currentTime= datetime.datetime.now()
+
+    edited_period = MenseLog.get_period_by_id(edited_period_id)
+
+    edited_period.user_id = user_id
+    edited_period.mense_date = edited_mense_date
+    edited_period.flow_voume = edited_flow_volume
+    edited_period.mood = edited_mood
+    edited_period.cramps = edited_cramps
+    edited_period.bloating = edited_bloating
+    edited_period.fatigue = edited_fatigue
+    edited_period.notes = edited_notes
+
+    db.session.commit()
+
+    return jsonify({
+        "success": True, 
+        "error": None, 
+        "periodId": edited_period.mense_id,        
+        "flowVolume": edited_period.flow_voume,
+        "periodDate": edited_period.mense_date.strftime("%Y-%m-%d"),
+        "mood": edited_period.mood,
+        "cramps": edited_period.cramps,
+        "bloating": edited_period.bloating,
+        "fatigue": edited_period.fatigue,
+        "activityNotes": edited_period.notes
+        })
 
 
 
