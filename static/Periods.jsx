@@ -95,30 +95,7 @@ function PeriodCard(props) {
     periodFormTitle = "Edit Period";
     periodFormButtonName = "Save";
 
-    props.setModalContent(
-      <AddPeriodForm
-        userId={props.userId}
-        editMode={props.editMode}
-        setEditMode={props.setEditMode}
-        activityId={props.activityId}
-        activities={props.actitivies}
-        setActivities={props.setActivities}
-        modalError={props.modalError}
-        setModalError={props.setModalError}
-        setModalContent={props.setModalContent}
-        showModal={props.showModal}
-        setShowModal={props.setShowModal}
-        activityFormTitle={activityFormTitle}
-        activityFormButtonName={activityFormButtonName}
-        activityName={props.activityName}
-        activityDate={props.activityDate}
-        activityType={props.activityType}
-        duration={props.duration}
-        distance={props.distance}
-        sufferScore={props.sufferScore}
-        activityNotes={props.activityNotes}
-      />
-    );
+    props.setModalContent(<PeriodForm />);
     props.setShowModal(true);
     console.log("editMode: ", props.editMode);
   };

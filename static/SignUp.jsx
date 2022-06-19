@@ -45,8 +45,6 @@ function SignUp(props) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  const history = ReactRouterDOM.useHistory();
-
   const handleSignUp = (evt) => {
     // console.log(evt);
     evt.preventDefault();
@@ -77,10 +75,6 @@ function SignUp(props) {
           localStorage.setItem("userId", data.user_id);
 
           props.setShowModal(true);
-
-          // window.location.replace(
-          //   "https://www.strava.com/oauth/authorize?client_id=80271&response_type=code&redirect_uri=http://localhost:5001/exchange_token&approval_prompt=force&scope=profile:read_all,activity:read_all"
-          // );
         } else {
           props.setError(data.error_msg);
         }

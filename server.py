@@ -267,6 +267,34 @@ def profile():
     return jsonify({"success":True, "first_name": user.first_name, "last_name": user.last_name, "team_name": user.team_name, "email": user.email, "password": user.password, "member_since": user.created_at.strftime("%b %d, %Y")})
 
 
+@app.route("/api/profile", methods=["PUT"])
+def profile():
+    """User profile page."""
+    user_id = session["user_id"]
+
+    data = request.json
+
+    first_name = data.get("first_name")
+    last_name = data.get("last_name")
+    team_name = data.get("team_name")
+    email = data.get("email")
+    password = data.get("password")
+    bio = data.get("bio")
+
+    user = User.get_user_by_id(user_id)
+    
+    user.first_name = first_name
+    user.last_name = last_name
+    user.team_name = team_name
+    user.email = email
+    user.password = password
+    user.bio = bio
+
+    db.session.commit()
+
+    return jsonify({"success":True, "first_name": user.first_name, "last_name": user.last_name, "team_name": user.team_name, "email": user.email, "password": user.password, "bio":bio})
+
+
 @app.route("/api/<user_id>/activities/<activity_id>", methods=["DELETE"])
 def delete_activity(user_id):
     data = request.json

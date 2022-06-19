@@ -80,26 +80,6 @@ function Navbar(props) {
   }
 }
 
-function Modal(props) {
-  console.log(props.modalContent);
-  if (!props.showModal || !props.modalContent) {
-    return null;
-  }
-  return (
-    <div className="modal">
-      <div className="modal-content">
-        {props.modalContent}
-        <div className="modal-footer">
-          {props.modalError && <p className="error">{props.modalError}</p>}
-          <button className="modal-button" onClick={props.onClose}>
-            Close
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function StatCard1(props) {
   return (
     <div className="profile-card">
@@ -412,8 +392,40 @@ function ProfileCard(props) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    const activeProfile = active === "edit" ? "profile" : "edit";
-    setActive(activeProfile);
+    fetch("/api/profile", {
+      method: "PUT",
+      credentials: "include",
+      body: JSON.stringify({
+        first_name: firstName,
+        last_name: lastName,
+        team_name: teamName,
+        email: email,
+        password: password,
+        bio: bio,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.success);
+        console.log(data);
+        if (data.success) {
+          props.setFirstName(data.first_name);
+          props.setLastName(data.last_name);
+          props.setTeamName(data.team_name);
+          props.setEmail(data.email);
+          props.setPassword(data.password);
+          setBio(data.bio);
+
+          props.setShowModal(false);
+          const activeProfile = active === "edit" ? "profile" : "edit";
+          setActive(activeProfile);
+        } else {
+          props.setError(data.error_msg);
+        }
+      });
   };
 
   return (

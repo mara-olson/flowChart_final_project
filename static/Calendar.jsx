@@ -19,7 +19,7 @@ function Calendar(props) {
       fetch(`/api/${props.userId}/periods`)
         .then((response) => response.json())
         .then((data) => {
-          props.setPeriods(data.periods);
+          setCalPeriods(data.periods);
         });
     }
   }, [props.userId]);
@@ -164,7 +164,7 @@ function CalendarDays(props) {
           currentDay["sufferScore"] = calActivity.sufferScore;
         }
       }
-      for (const calPeriod of props.periods) {
+      for (const calPeriod of props.calPeriods) {
         const symptoms = [];
         if (calPeriod.mood) {
           symptoms.push("Moodiness");

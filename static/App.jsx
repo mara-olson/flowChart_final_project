@@ -150,47 +150,63 @@ function App() {
             selectedActivityId={selectedActivityId}
             setSelectedActivityId={setSelectedActivityId}
           />
-          <Modal
+          <ActivityModal
             userId={userId}
-            editMode={editMode}
-            setEditMode={setEditMode}
-            onClose={closeModal}
-            showModal={showModal}
-            setShowModal={setShowModal}
-            setModalContent={setModalContent}
-            modalContent={modalContent}
+            error={error}
+            setError={setError}
             modalError={modalError}
             setModalError={setModalError}
+            showModal={showModal}
+            setShowModal={setShowModal}
+            activities={activities}
+            setActivities={setActivities}
+            selectedActivityId={selectedActivityId}
+            setSelectedActivityId={setSelectedActivityId}
+            onClose={closeModal}
           />
           {/* <Calendar userId={userId} /> */}
         </Route>
       </div>
       <div className="container-fluid">
         <Route exact path="/activities">
-          <Activities
+          <AllActivitiesContainer
             userId={userId}
-            editMode={editMode}
-            setEditMode={setEditMode}
+            error={error}
             setError={setError}
+            modalError={modalError}
             setModalError={setModalError}
             showModal={showModal}
             setShowModal={setShowModal}
-            setModalContent={setModalContent}
             activities={activities}
             setActivities={setActivities}
             selectedActivityId={selectedActivityId}
             setSelectedActivityId={setSelectedActivityId}
           />
-          <Modal
+          <ActivityModal
             userId={userId}
-            editMode={editMode}
-            setEditMode={setEditMode}
+            error={error}
+            setError={setError}
+            modalError={modalError}
+            setModalError={setModalError}
+            showModal={showModal}
+            setShowModal={setShowModal}
+            activities={activities}
+            setActivities={setActivities}
+            selectedActivityId={selectedActivityId}
+            setSelectedActivityId={setSelectedActivityId}
+            onClose={closeModal}
+          />
+          <PeriodModal
+            userId={userId}
             onClose={closeModal}
             showModal={showModal}
             setShowModal={setShowModal}
-            modalContent={modalContent}
             modalError={modalError}
             setModalError={setModalError}
+            error={error}
+            setError={setError}
+            periods={periods}
+            setPeriods={setPeriods}
           />
         </Route>
       </div>
@@ -198,8 +214,6 @@ function App() {
         <Route exact path="/profile">
           <Profile
             userId={userId}
-            editMode={editMode}
-            setEditMode={setEditMode}
             firstName={firstName}
             setFirstName={setFirstName}
             lastName={lastName}
@@ -218,20 +232,25 @@ function App() {
       <div className="container-fluid">
         <Route exact path="/sign-up">
           <SignUp
+            userId={userId}
             setUserId={setUserId}
+            isLoggedIn={isLoggedIn}
             setIsLoggedIn={setIsLoggedIn}
+            modalError={modalError}
             setError={setError}
-            setModalContent={setModalContent}
+            showModal={showModal}
             setShowModal={setShowModal}
           />
           <SignUpModal
-            onClose={closeModal}
+            userId={userId}
+            setUserId={setUserId}
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
+            modalError={modalError}
+            setError={setError}
             showModal={showModal}
             setShowModal={setShowModal}
-            modalContent={modalContent}
-            userId={userId}
-            modalError={modalError}
-            setModalError={setModalError}
+            onClose={closeModal}
           />
         </Route>
       </div>
@@ -239,29 +258,26 @@ function App() {
         <Route exact path="/periods">
           <Periods
             userId={userId}
-            editMode={editMode}
-            setEditMode={setEditMode}
-            periods={periods}
-            setPeriods={setPeriods}
             error={error}
             setError={setError}
             modalError={modalError}
             setModalError={setModalError}
             showModal={showModal}
             setShowModal={setShowModal}
-            modalContent={modalContent}
-            setModalContent={setModalContent}
+            periods={periods}
+            setPeriods={setPeriods}
           />
-          <Modal
+          <PeriodModal
             userId={userId}
-            editMode={editMode}
-            setEditMode={setEditMode}
             onClose={closeModal}
             showModal={showModal}
             setShowModal={setShowModal}
-            modalContent={modalContent}
             modalError={modalError}
             setModalError={setModalError}
+            error={error}
+            setError={setError}
+            periods={periods}
+            setPeriods={setPeriods}
           />
         </Route>
       </div>

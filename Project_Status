@@ -393,3 +393,7 @@ def activity_data(user_id):
 	- PeriodForm button name and PeriodForm title added
 	- WIP editMode settings
 
+6/18
+	- Maybe make separate Modals per modal needed
+	- modalContent is an object, so never null
+	- if {} to hide modal at least (line 276)
