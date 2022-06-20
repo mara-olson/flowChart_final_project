@@ -403,26 +403,26 @@ function SelectedActivityContainer(props) {
 
 function AllActivitiesContainer(props) {
   console.log(props.activities);
-  const handleClick = (evt) => {
-    evt.preventDefault();
-    props.setShowModal(true);
-    return (
-      <ActivityModal
-        userId={props.userId}
-        error={props.error}
-        setError={props.setError}
-        modalError={props.modalError}
-        setModalError={props.setModalError}
-        showModal={props.showModal}
-        setShowModal={props.setShowModal}
-        activities={props.activiies}
-        setActivities={props.setActivities}
-        selectedActivityId={props.selectedActivityId}
-        setSelectedActivityId={props.setSelectedActivityId}
-        selectedDate={day.date}
-      />
-    );
-  };
+  // const handleClick = (evt) => {
+  //   evt.preventDefault();
+  //   props.setShowModal(true);
+  //   return (
+  //     <ActivityModal
+  //       userId={props.userId}
+  //       error={props.error}
+  //       setError={props.setError}
+  //       modalError={props.modalError}
+  //       setModalError={props.setModalError}
+  //       showModal={props.showModal}
+  //       setShowModal={props.setShowModal}
+  //       activities={props.activiies}
+  //       setActivities={props.setActivities}
+  //       selectedActivityId={props.selectedActivityId}
+  //       setSelectedActivityId={props.setSelectedActivityId}
+  //       selectedDate={props.selectedDate}
+  //     />
+  //   );
+  // };
 
   const activityDetails = [];
   for (const activity of props.activities) {
@@ -431,8 +431,8 @@ function AllActivitiesContainer(props) {
         userId={props.userId}
         key={activity.activity_id}
         activityId={activity.activity_id}
-        activityName={activity.activityName}
-        activityDate={activity.activityDate}
+        activityName={activity.name}
+        activityDate={activity.date}
         activityType={activity.type}
         distance={activity.distance}
         duration={activity.duration}
@@ -444,7 +444,6 @@ function AllActivitiesContainer(props) {
         setModalError={props.setModalError}
         activities={props.activities}
         setActivities={props.setActivities}
-        onClick={handleClick}
       />
     );
   }
