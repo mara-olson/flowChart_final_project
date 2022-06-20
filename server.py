@@ -361,10 +361,6 @@ def update_activity(user_id, activity_id):
 
     all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
 
-    currentTime= datetime.datetime.now()
-
-    mileage_this_month = db.session.query(func.round(func.sum(ActivityLog.distance))).filter(ActivityLog.activity_date > (currentTime - datetime.timedelta(30))).one()[0]
-
     # print("*"*20, type(mileage_this_month))    
     activity_objs = []
     for activity in all_activities:

@@ -53,7 +53,7 @@ function App() {
     if (localUserId) {
       setUserId(JSON.parse(localUserId));
     }
-  }, [userId]);
+  }, [userId, showModal]);
 
   React.useEffect(() => {
     const localSelectedActivity = localStorage.getItem("selectedActivity");
@@ -193,7 +193,7 @@ function App() {
             selectedActivityId={selectedActivityId}
             setSelectedActivityId={setSelectedActivityId}
           />
-          <ActivityModal
+          {/* <ActivityModal
             userId={userId}
             error={error}
             setError={setError}
@@ -218,7 +218,7 @@ function App() {
             setError={setError}
             periods={periods}
             setPeriods={setPeriods}
-          />
+          /> */}
         </Route>
       </div>
       <div className="container-fluid">

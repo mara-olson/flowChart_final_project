@@ -402,6 +402,28 @@ function SelectedActivityContainer(props) {
 }
 
 function AllActivitiesContainer(props) {
+  console.log(props.activities);
+  const handleClick = (evt) => {
+    evt.preventDefault();
+    props.setShowModal(true);
+    return (
+      <ActivityModal
+        userId={props.userId}
+        error={props.error}
+        setError={props.setError}
+        modalError={props.modalError}
+        setModalError={props.setModalError}
+        showModal={props.showModal}
+        setShowModal={props.setShowModal}
+        activities={props.activiies}
+        setActivities={props.setActivities}
+        selectedActivityId={props.selectedActivityId}
+        setSelectedActivityId={props.setSelectedActivityId}
+        selectedDate={day.date}
+      />
+    );
+  };
+
   const activityDetails = [];
   for (const activity of props.activities) {
     activityDetails.push(
@@ -422,6 +444,7 @@ function AllActivitiesContainer(props) {
         setModalError={props.setModalError}
         activities={props.activities}
         setActivities={props.setActivities}
+        onClick={handleClick}
       />
     );
   }
@@ -575,11 +598,6 @@ function ActivityCard(props) {
         } else {
           props.setError(data.error_msg);
         }
-      });
-    fetch(`/api/${props.userId}/activities`)
-      .then((response) => response.json())
-      .then((data) => {
-        props.setActivities(data.activities);
       });
   };
 
@@ -789,6 +807,11 @@ function ActivityForm(props) {
     // return <SelectedActivityContainer />;
   };
 
+  const closeEdit = (evt) => {
+    evt.preventDefault();
+    props.setShowModal(false);
+  };
+
   return (
     <div className="card">
       <form>
@@ -803,6 +826,7 @@ function ActivityForm(props) {
         <button className="edit" onClick={handleClick}>
           Edit Activity
         </button>
+        <button onClick={closeEdit}>Cancel</button>
       </form>
     </div>
   );
