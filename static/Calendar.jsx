@@ -209,11 +209,12 @@ function CalendarDays(props) {
 
   const handleClick = (day, evt) => {
     evt.preventDefault();
-    localStorage.setItem("selectedActId", day.activityId);
+    updateActivity(day);
+    // localStorage.setItem("selectedActId", day.activityId);
   };
   // updateActivity(day);
-  const viewActivity = (day) => {
-    console.log(props.showModal);
+  const viewActivity = (day, evt) => {
+    evt.preventDefault();
     props.setShowModal(true);
     console.log(props.selectedActivityId);
     if (day.activityName && props.selectedActivityId) {
@@ -402,7 +403,9 @@ function CalendarDays(props) {
           >
             <p>{day.number}</p>
             {day.activityName && (
-              <button onClick={viewActivity}>{day.activityName}</button>
+              <div onClick={(evt) => viewActivity(day, evt)}>
+                {day.activityName}
+              </div>
             )}
             {day.volume && <div>{day.volume} flow</div>}
 

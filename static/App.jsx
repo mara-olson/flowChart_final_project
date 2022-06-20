@@ -82,12 +82,12 @@ function App() {
     }
   }, [isLoggedIn]);
 
-  React.useEffect(() => {
-    const selectedActId = localStorage.getItem("selectedActId");
-    if (selectedActId) {
-      setSelectedActivityId(JSON.parse(selectedActId));
-    }
-  }, [selectedActivityId]);
+  // React.useEffect(() => {
+  //   const selectedActId = localStorage.getItem("selectedActId");
+  //   if (selectedActId) {
+  //     setSelectedActivityId(JSON.parse(selectedActId));
+  //   }
+  // }, [selectedActivityId]);
 
   // React.useEffect(() => {
   //   fetch(`/api/${userId}/data`)
