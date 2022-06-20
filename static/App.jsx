@@ -25,13 +25,14 @@ function App() {
 
   React.useEffect(() => {
     if (userId) {
-      fetch("/profile")
+      fetch("/api/profile")
         .then((response) => response.json())
         .then((data) => {
           setFirstName(data.first_name);
           setLastName(data.last_name);
           setTeamName(data.team_name);
           setEmail(data.email);
+          console.log(data.email);
           setPassword(data.password);
           setSinceDate(data.member_since);
         });
@@ -142,6 +143,8 @@ function App() {
             setTeamName={setTeamName}
             email={email}
             setEmail={setEmail}
+            password={password}
+            setPassword={setPassword}
             sinceDate={sinceDate}
             monthlyMileage={monthlyMileage}
             setMonthlyMileage={setMonthlyMileage}

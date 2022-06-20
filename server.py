@@ -213,7 +213,7 @@ def activity_data(user_id):
 
     currentTime= datetime.datetime.now()
 
-    mileage_this_month = db.session.query(func.sum(ActivityLog.distance)).filter(ActivityLog.activity_date > (currentTime - datetime.timedelta(30))).one()[0]
+    mileage_this_month = db.session.query(func.round(func.sum(ActivityLog.distance)),1).filter(ActivityLog.activity_date > (currentTime - datetime.timedelta(30))).one()[0]
 
     # print("*"*20, type(mileage_this_month))    
 
@@ -257,19 +257,21 @@ def user_homepage(user_id):
 
 
 
-@app.route("/profile")
+@app.route("/api/profile")
 def profile():
     """User profile page."""
     user_id = session["user_id"]
     user = User.get_user_by_id(user_id)
     # dt = user.created_at
     # trunc_date = datetime.date( dt.day, dt.month, dt.year)
+    print("*"*20, user.password)
+
     return jsonify({"success":True, "first_name": user.first_name, "last_name": user.last_name, "team_name": user.team_name, "email": user.email, "password": user.password, "member_since": user.created_at.strftime("%b %d, %Y")})
 
 
 @app.route("/api/profile", methods=["PUT"])
-def profile():
-    """User profile page."""
+def update_profile():
+    """Update user info based on profile card edit."""
     user_id = session["user_id"]
 
     data = request.json

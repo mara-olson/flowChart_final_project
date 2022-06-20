@@ -144,8 +144,6 @@ function Home(props) {
     <div>
       <ProfileCard
         userId={props.userId}
-        editMode={props.editMode}
-        setEditMode={props.setEditMode}
         firstName={props.firstName}
         setFirstName={props.setFirstName}
         lastName={props.lastName}
@@ -154,8 +152,31 @@ function Home(props) {
         setTeamName={props.setTeamName}
         email={props.email}
         setEmail={props.setEmail}
+        password={props.password}
+        setPassword={props.setPassword}
         sinceDate={props.sinceDate}
+        showModal={props.showModal}
         setShowModal={props.setShowModal}
+      />
+      <ProfileModal
+        userId={props.userId}
+        error={props.error}
+        setError={props.setError}
+        modalError={props.modalError}
+        setModalError={props.setModalError}
+        showModal={props.showModal}
+        setShowModal={props.setShowModal}
+        firstName={props.firstName}
+        setFirstName={props.setFirstName}
+        lastName={props.lastName}
+        setLastName={props.setLastName}
+        teamName={props.teamName}
+        setTeamName={props.setTeamName}
+        email={props.email}
+        setEmail={props.setEmail}
+        password={props.password}
+        setPassword={props.setPassword}
+        sinceDate={props.sinceDate}
       />
       <StatCard1
         monthlyMileage={props.monthlyMileage}
@@ -396,11 +417,11 @@ function ProfileCard(props) {
       method: "PUT",
       credentials: "include",
       body: JSON.stringify({
-        first_name: firstName,
-        last_name: lastName,
-        team_name: teamName,
-        email: email,
-        password: password,
+        first_name: props.firstName,
+        last_name: props.lastName,
+        team_name: props.teamName,
+        email: props.email,
+        password: props.password,
         bio: bio,
       }),
       headers: {
@@ -432,8 +453,9 @@ function ProfileCard(props) {
     <div>
       {active === "edit" ? (
         <EditProfile
-          handleSubmit={handleSubmit}
+          active={active}
           setActive={setActive}
+          handleSubmit={handleSubmit}
           userId={props.userId}
           firstName={props.firstName}
           setFirstName={props.setFirstName}
@@ -443,11 +465,18 @@ function ProfileCard(props) {
           setTeamName={props.setTeamName}
           email={props.email}
           setEmail={props.setEmail}
+          password={props.password}
+          setPassword={props.setPassword}
           sinceDate={props.sinceDate}
         >
           <PhotoUploader
             profilePicSrc={profilePicSrc}
             handlePhotoUpload={handlePhotoUpload}
+          />
+          <ProfileEmail setEmail={props.setEmail} email={props.email} />
+          <ProfilePassword
+            password={props.password}
+            setPassword={props.setPassword}
           />
           <ProfileFirstName
             setFirstName={props.setFirstName}
@@ -458,7 +487,6 @@ function ProfileCard(props) {
             lastName={props.lastName}
           />
           <ProfileBio editBio={editBio} bio={bio} />
-          <ProfileEmail setEmail={props.setEmail} email={props.email} />
           <ProfileTeam
             setTeamName={props.setTeamName}
             teamName={props.teamName}
@@ -466,7 +494,11 @@ function ProfileCard(props) {
         </EditProfile>
       ) : (
         <ProfileForm
+          active={active}
+          setActive={setActive}
           handleSubmit={handleSubmit}
+          showModal={props.showModal}
+          setShowModal={props.setShowModal}
           profilePicSrc={profilePicSrc}
           firstName={props.firstName}
           lastName={props.lastName}
@@ -526,6 +558,20 @@ function ProfileLastName(props) {
   );
 }
 
+function ProfilePassword(props) {
+  return (
+    <div className="field">
+      <label htmlFor="password">Password: </label>
+      <input
+        id="password"
+        type="text"
+        onChange={props.setLastName}
+        value={props.password}
+      />
+    </div>
+  );
+}
+
 function ProfileBio(props) {
   return (
     <div className="field">
@@ -562,7 +608,7 @@ function ProfileTeam(props) {
       <input
         id="team"
         type="text"
-        onChange={props.setTeamName}
+        onChange={(evt) => props.setTeamName(evt.currentTarget.value)}
         value={props.teamName}
         placeholder="Enter your team's name"
       />
@@ -589,6 +635,14 @@ function EditProfile(props) {
 }
 
 function ProfileForm(props) {
+  console.log(props.active);
+  const handleEdit = (evt) => {
+    evt.preventDefault();
+    // props.setShowModal(true);
+    const editProfile = props.active === "edit" ? "profile" : "edit";
+    props.setActive(editProfile);
+  };
+
   return (
     <div className="profile-card">
       <form onSubmit={props.handleSubmit}>
@@ -609,9 +663,16 @@ function ProfileForm(props) {
         <p className="bio">{props.bio}</p>
         <div className="team-name">{props.teamName}</div>
         <div className="email">{props.email}</div>
-        <button type="submit" className="edit">
-          Edit Profile{" "}
-        </button>
+        {props.active === "profile" && (
+          <button onClick={handleEdit} className="edit">
+            Edit Profile
+          </button>
+        )}
+        {/* {props.active === "edit" && (
+          <button type="submit" className="edit">
+            Save
+          </button>
+        )} */}
       </form>
     </div>
   );

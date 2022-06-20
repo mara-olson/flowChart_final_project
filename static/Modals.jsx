@@ -26,6 +26,43 @@ function SignUpModal(props) {
   );
 }
 
+function ProfileModal(props) {
+  if (!props.showModal) {
+    return null;
+  }
+  return (
+    <div className="modal">
+      <div className="modal-content">
+        <ProfileCard
+          userId={props.userId}
+          error={props.error}
+          setError={props.setError}
+          modalError={props.modalError}
+          setModalError={props.setModalError}
+          showModal={props.showModal}
+          setShowModal={props.setShowModal}
+          firstName={props.firstName}
+          setFirstName={props.setFirstName}
+          lastName={props.lastName}
+          setLastName={props.setLastName}
+          teamName={props.teamName}
+          setTeamName={props.setTeamName}
+          email={props.email}
+          setEmail={props.setEmail}
+          password={props.password}
+          sinceDate={props.sinceDate}
+        />
+        <div className="modal-footer">
+          {props.modalError && <p className="error">{props.modalError}</p>}
+          <button className="modal-button" onClick={props.onClose}>
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ActivityModal(props) {
   if (!props.showModal) {
     return null;
