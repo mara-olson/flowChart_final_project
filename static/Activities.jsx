@@ -92,221 +92,211 @@
 //   return <button onClick={handleClick}>Add Activity</button>;
 // }
 
-// function AddActivityForm(props) {
-//   const [activityId, setActivityId] = React.useState(props.activityId);
-//   const [activityName, setActivityName] = React.useState(props.activityName);
-//   const [activityDate, setActivityDate] = React.useState(props.activityDate);
-//   const [activityType, setActivityType] = React.useState(props.activityType);
-//   const [duration, setDuration] = React.useState(props.duration);
-//   const [distance, setDistance] = React.useState(props.distance);
-//   const [sufferScore, setSufferScore] = React.useState(props.sufferScore);
-//   const [activityNotes, setActivityNotes] = React.useState(props.activityNotes);
+function AddActivityForm(props) {
+  const [activityId, setActivityId] = React.useState(props.activityId);
+  const [activityName, setActivityName] = React.useState(props.activityName);
+  const [activityDate, setActivityDate] = React.useState(props.selectedDate);
+  const [activityType, setActivityType] = React.useState(props.activityType);
+  const [duration, setDuration] = React.useState(props.duration);
+  const [distance, setDistance] = React.useState(props.distance);
+  const [sufferScore, setSufferScore] = React.useState(props.sufferScore);
+  const [activityNotes, setActivityNotes] = React.useState(props.activityNotes);
 
-//   const handleEditActivity = () => {
-//     // evt.preventDefault();
-//     console.log("editActivity");
+  // const handleEditActivity = () => {
+  //   // evt.preventDefault();
+  //   console.log("editActivity");
 
-//     fetch(`/api/${props.userId}/activities/${activityId}`, {
-//       method: "PUT",
-//       credentials: "include",
-//       body: JSON.stringify({
-//         user_id: props.userId,
-//         activity_id: activityId,
-//         activity_date: activityDate,
-//         activity_type: activityType,
-//         activity_name: activityName,
-//         duration: duration,
-//         distance: distance,
-//         suffer_score: sufferScore,
-//         activity_notes: activityNotes,
-//       }),
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     })
-//       .then((response) => response.json())
-//       .then((data) => {
-//         if (data.success) {
-//           setActivityName(data.activityName);
-//           setActivityDate(data.activityDate);
-//           setActivityType(data.activityType);
-//           setDuration(data.duration);
-//           setDistance(data.distance);
-//           setSufferScore(data.sufferScore);
-//           setActivityNotes(data.activityNotes);
-//           console.log("successful edit", activityName);
-//           props.setShowModal(false);
-//           props.setEditMode(false);
+  //   fetch(`/api/${props.userId}/activities/${activityId}`, {
+  //     method: "PUT",
+  //     credentials: "include",
+  //     body: JSON.stringify({
+  //       user_id: props.userId,
+  //       activity_id: activityId,
+  //       activity_date: activityDate,
+  //       activity_type: activityType,
+  //       activity_name: activityName,
+  //       duration: duration,
+  //       distance: distance,
+  //       suffer_score: sufferScore,
+  //       activity_notes: activityNotes,
+  //     }),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       if (data.success) {
+  //         setActivityName(data.activityName);
+  //         setActivityDate(data.activityDate);
+  //         setActivityType(data.activityType);
+  //         setDuration(data.duration);
+  //         setDistance(data.distance);
+  //         setSufferScore(data.sufferScore);
+  //         setActivityNotes(data.activityNotes);
+  //         console.log("successful edit", activityName);
+  //         props.setShowModal(false);
 
-//           fetch(`/api/${props.userId}/activities`)
-//             .then((response) => response.json())
-//             .then((data) => {
-//               props.setActivities(data.activities);
-//             });
-//         } else {
-//           console.log("boo", data.error);
-//           props.setModalError(data.error);
-//         }
-//       });
-//   };
+  //         fetch(`/api/${props.userId}/activities`)
+  //           .then((response) => response.json())
+  //           .then((data) => {
+  //             props.setActivities(data.activities);
+  //           });
+  //       } else {
+  //         console.log("boo", data.error);
+  //         props.setModalError(data.error);
+  //       }
+  //     });
+  // };
 
-//   const handleAddActivity = () => {
-//     // evt.preventDefault();
-//     console.log("addActivity");
-//     setActivityDate(props.activityDate);
-//     fetch(`/api/${props.userId}/activities`, {
-//       method: "POST",
-//       credentials: "include",
-//       body: JSON.stringify({
-//         user_id: props.userId,
-//         activity_id: activityId,
-//         activity_date: activityDate,
-//         activity_type: activityType,
-//         activity_name: activityName,
-//         duration: duration,
-//         distance: distance,
-//         suffer_score: sufferScore,
-//         activity_notes: activityNotes,
-//       }),
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     })
-//       .then((response) => response.json())
-//       .then((data) => {
-//         if (data.success) {
-//           setActivityId(data.activityId);
-//           setActivityName(data.activityName);
-//           setActivityDate(data.activityDate);
-//           setActivityType(data.activityType);
-//           setDuration(data.duration);
-//           setDistance(data.distance);
-//           setSufferScore(data.sufferScore);
-//           setActivityNotes(data.activityNotes);
-//           console.log(activityId, activityName);
+  const handleAddActivity = (evt) => {
+    // evt.preventDefault();
+    console.log("addActivity");
+    setActivityDate(props.activityDate);
+    fetch(`/api/${props.userId}/activities`, {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify({
+        user_id: props.userId,
+        activity_id: activityId,
+        activity_date: activityDate,
+        activity_type: activityType,
+        activity_name: activityName,
+        duration: duration,
+        distance: distance,
+        suffer_score: sufferScore,
+        activity_notes: activityNotes,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setActivityId(data.activityId);
+          setActivityName(data.activityName);
+          setActivityDate(data.activityDate);
+          setActivityType(data.activityType);
+          setDuration(data.duration);
+          setDistance(data.distance);
+          setSufferScore(data.sufferScore);
+          setActivityNotes(data.activityNotes);
+          console.log(activityId, activityName);
 
-//           fetch(`/api/${props.userId}/activities`)
-//             .then((response) => response.json())
-//             .then((data) => {
-//               props.setActivities(data.activities);
-//               props.setShowModal(false);
-//             });
-//         } else {
-//           console.log("error");
-//           props.setModalError(data.error);
-//         }
-//       });
-//   };
+          fetch(`/api/${props.userId}/activities`)
+            .then((response) => response.json())
+            .then((data) => {
+              props.setActivities(data.activities);
+              props.setShowModal(false);
+            });
+        } else {
+          console.log("error");
+          props.setModalError(data.error);
+        }
+      });
+  };
 
-// const handleSubmit = (evt) => {
-//   evt.preventDefault();
-//   if (props.editMode) {
-//     handleEditActivity();
-//   } else {
-//     handleAddActivity();
-//   }
-// };
-
-//   return (
-//     <div>
-//       <h2>{props.activityFormTitle}</h2>
-//       <form onSubmit={handleSubmit}>
-//         <div>
-//           Activity Date
-//           <input
-//             type="date"
-//             name="date"
-//             value={activityDate}
-//             onChange={(evt) => setActivityDate(evt.currentTarget.value)}
-//           />{" "}
-//         </div>
-//         <br></br>
-//         <div>
-//           Activity Type
-//           <select
-//             name="activity-types"
-//             value={activityType}
-//             onChange={(evt) => setActivityType(evt.currentTarget.value)}
-//           >
-//             <option value="Run">Run</option>
-//             <option value="Bike">Bike</option>
-//             <option value="Swim">Swim</option>
-//             <option value="Climb">Climb</option>
-//             <option value="Elliptical">Elliptical</option>
-//             <option value="Other">Other</option>
-//           </select>
-//         </div>
-//         <br></br>
-//         <div>
-//           Activity Name
-//           <input
-//             type="text"
-//             value={activityName}
-//             onChange={(evt) => {
-//               if ({ activityName }) {
-//                 setActivityName(evt.currentTarget.value);
-//               }
-//             }}
-//           />
-//         </div>
-//         <br></br>
-//         <div>
-//           Duration
-//           <input
-//             type="text"
-//             value={duration}
-//             onChange={(evt) => {
-//               if ({ duration }) {
-//                 setDuration(evt.currentTarget.value);
-//               }
-//             }}
-//           />
-//         </div>
-//         <br></br>
-//         <div>
-//           Distance
-//           <input
-//             type="text"
-//             value={distance}
-//             onChange={(evt) => {
-//               if ({ distance }) {
-//                 setDistance(evt.currentTarget.value);
-//               }
-//             }}
-//           />
-//         </div>
-//         <div>
-//           Suffer Score
-//           <select
-//             name="suffer-score"
-//             value={sufferScore}
-//             onChange={(evt) => setSufferScore(evt.currentTarget.value)}
-//           >
-//             <option value="NA">NA</option>
-//             <option value="1">1, minimal discomfort</option>
-//             <option value="2">2</option>
-//             <option value="3">3</option>
-//             <option value="4">4</option>
-//             <option value="5">5, maximum discomfort</option>
-//           </select>
-//         </div>
-//         <div>
-//           Notes
-//           <input
-//             type="text"
-//             value={activityNotes}
-//             onChange={(evt) => {
-//               if ({ activityNotes }) {
-//                 setActivityNotes(evt.currentTarget.value);
-//               }
-//             }}
-//           />
-//         </div>
-//         <button type="submit">{props.activityFormButtonName}</button>
-//       </form>
-//     </div>
-//   );
-// }
+  return (
+    <div>
+      <h2>New Activity</h2>
+      <form onSubmit={handleAddActivity}>
+        <div>
+          Activity Date
+          <input
+            type="date"
+            name="date"
+            value={props.selectedDate}
+            onChange={(evt) => setActivityDate(evt.currentTarget.value)}
+          />{" "}
+        </div>
+        <br></br>
+        <div>
+          Activity Type
+          <select
+            name="activity-types"
+            value={activityType}
+            onChange={(evt) => setActivityType(evt.currentTarget.value)}
+          >
+            <option value="Run">Run</option>
+            <option value="Bike">Bike</option>
+            <option value="Swim">Swim</option>
+            <option value="Climb">Climb</option>
+            <option value="Elliptical">Elliptical</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <br></br>
+        <div>
+          Activity Name
+          <input
+            type="text"
+            value={activityName}
+            onChange={(evt) => {
+              if ({ activityName }) {
+                setActivityName(evt.currentTarget.value);
+              }
+            }}
+          />
+        </div>
+        <br></br>
+        <div>
+          Duration
+          <input
+            type="text"
+            value={duration}
+            onChange={(evt) => {
+              if ({ duration }) {
+                setDuration(evt.currentTarget.value);
+              }
+            }}
+          />
+        </div>
+        <br></br>
+        <div>
+          Distance
+          <input
+            type="text"
+            value={distance}
+            onChange={(evt) => {
+              if ({ distance }) {
+                setDistance(evt.currentTarget.value);
+              }
+            }}
+          />
+        </div>
+        <div>
+          Suffer Score
+          <select
+            name="suffer-score"
+            value={sufferScore}
+            onChange={(evt) => setSufferScore(evt.currentTarget.value)}
+          >
+            <option value="NA">NA</option>
+            <option value="1">1, minimal discomfort</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5, maximum discomfort</option>
+          </select>
+        </div>
+        <div>
+          Notes
+          <input
+            type="text"
+            value={activityNotes}
+            onChange={(evt) => {
+              if ({ activityNotes }) {
+                setActivityNotes(evt.currentTarget.value);
+              }
+            }}
+          />
+        </div>
+        <button type="submit">Save Activity</button>
+      </form>
+    </div>
+  );
+}
 
 // function Activities(props) {
 //   return (
@@ -356,7 +346,11 @@ function SelectedActivityContainer(props) {
   console.log("SelectedActivityContainer component is rendering");
   React.useEffect(() => {
     console.log("use effect running");
-    fetch(`/api/${props.userId}/activities/${props.selectedActivityId}`)
+    fetch(
+      `/api/${props.userId}/activities/${localStorage.getItem(
+        "selectedActivity"
+      )}`
+    )
       .then((response) => response.json())
       .then((data) => {
         // setActivityId(data.activityId);
@@ -379,8 +373,6 @@ function SelectedActivityContainer(props) {
   return (
     <ActivityCard
       userId={props.userId}
-      // editMode={props.editMode}
-      // setEditMode={props.setEditMode}
       key={props.selectedActivityId}
       activityId={props.selectedActivityId}
       activityName={activityName}
@@ -539,9 +531,56 @@ function ActivityCard(props) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    const activeActivity = activityEdit === "edit" ? "non-edit" : "edit";
-    setActivityEdit(activeActivity);
-    props.setShowModal(false);
+
+    fetch(
+      `/api/${props.userId}/activities/${localStorage.getItem(
+        "selectedActivity"
+      )}`,
+      {
+        method: "PUT",
+        credentials: "include",
+        body: JSON.stringify({
+          activity_id: localStorage.getItem("selectedActivity"),
+          activity_date: props.activityDate,
+          activity_name: props.activityName,
+          activity_type: props.activityType,
+          distance: props.distance,
+          duration: props.duration,
+          suffer_score: props.sufferScore,
+          activity_notes: props.activityNotes,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log(data.success);
+        // console.log(data);
+        if (data.success) {
+          console.log("edited activity:", data);
+          props.setActivityDate(data.activityDate);
+          props.setActivityName(data.activityName);
+          props.setActivityType(data.activityType);
+          props.setDistance(data.distance);
+          props.setDuration(data.duration);
+          props.setSufferScore(data.sufferScore);
+          props.setActivityNotes(data.activityNotes);
+
+          // props.setActivities(data.activities);
+
+          props.setShowModal(false);
+          setActivityEdit("non-edit");
+        } else {
+          props.setError(data.error_msg);
+        }
+      });
+    fetch(`/api/${props.userId}/activities`)
+      .then((response) => response.json())
+      .then((data) => {
+        props.setActivities(data.activities);
+      });
   };
 
   return (
@@ -554,7 +593,7 @@ function ActivityCard(props) {
         >
           <ActivityDate
             setActivityDate={props.setActivityDate}
-            activityDay={props.activityDate}
+            activityDate={props.activityDate}
           />
           <ActivityType
             setActivityType={props.setActivityType}
@@ -562,7 +601,7 @@ function ActivityCard(props) {
           />
           <ActivityName
             setActivityName={props.setActivityName}
-            firstName={props.firstName}
+            activityName={props.activityName}
           />
           <ActivityDuration
             setDuration={props.setDuration}
@@ -583,15 +622,27 @@ function ActivityCard(props) {
         </EditActivity>
       ) : (
         <ActivityForm
-          handleSubmit={handleSubmit}
-          activityEdit={activityEdit}
-          activityDate={props.activityDate}
+          userId={props.userId}
+          error={props.error}
+          setError={props.setError}
+          modalError={props.modalError}
+          setModalError={props.setModalError}
+          showModal={props.showModal}
+          setShowModal={props.setShowModal}
+          activities={props.activities}
+          setActivities={props.setActivities}
+          selectedActivityId={props.selectedActivityId}
+          setSelectedActivityId={props.setSelectedActivityId}
           activityName={props.activityName}
+          activityDate={props.activityDate}
           activityType={props.activityType}
           duration={props.duration}
           distance={props.distance}
           sufferScore={props.sufferScore}
           activityNotes={props.activityNotes}
+          onClose={props.closeModal}
+          activityEdit={activityEdit}
+          setActivityEdit={setActivityEdit}
         />
       )}
     </div>
@@ -599,13 +650,12 @@ function ActivityCard(props) {
 }
 
 function ActivityType(props) {
-  console.log(props.activityName);
   return (
     <div className="field">
       Activity Type
       <select
         id="act-type"
-        onChange={props.setActivityType}
+        onChange={(evt) => props.setActivityType(evt.currentTarget.value)}
         value={props.activityType}
       >
         <option value="Run">Run</option>
@@ -622,12 +672,12 @@ function ActivityType(props) {
 function ActivityDate(props) {
   return (
     <div className="field">
-      <label htmlFor="act-date">Last Name: </label>
+      <label htmlFor="act-date">Date: </label>
       <input
         id="act-date"
         type="date"
-        onChange={props.setActivityDate}
         value={props.activityDate}
+        onChange={(evt) => props.setActivityDate(evt.currentTarget.value)}
       />
     </div>
   );
@@ -640,7 +690,7 @@ function ActivityName(props) {
       <input
         id="act-name"
         type="text"
-        onChange={props.setActivityName}
+        onChange={(evt) => props.setActivityName(evt.currentTarget.value)}
         value={props.activityName}
         placeholder="Enter a name for your activity"
       />
@@ -655,7 +705,7 @@ function ActivityDistance(props) {
       <input
         id="distance"
         type="text"
-        onChange={props.setDistance}
+        onChange={(evt) => props.setDistance(evt.currentTarget.value)}
         value={props.distance}
       />
     </div>
@@ -669,7 +719,7 @@ function ActivityDuration(props) {
       <input
         id="duration"
         type="text"
-        onChange={props.setDuration}
+        onChange={(evt) => props.setDuration(evt.currentTarget.value)}
         value={props.duration}
         placeholder="Enter activity duration"
       />
@@ -683,7 +733,7 @@ function SufferScore(props) {
       <label htmlFor="suffer-score">Suffer Score:</label>
       <select
         id="suffer-score"
-        onChange={props.setSufferScore}
+        onChange={(evt) => props.setSufferScore(evt.currentTarget.value)}
         value={props.sufferScore}
       >
         <option value="NA">NA</option>
@@ -704,7 +754,7 @@ function ActivityNotes(props) {
       <input
         id="act-notes"
         type="text"
-        onChange={props.setActivityNotes}
+        onChange={(evt) => props.setActivityNotes(evt.currentTarget.value)}
         value={props.activityNotes}
         placeholder="Write notes here"
       />
@@ -734,13 +784,14 @@ function ActivityForm(props) {
   const handleClick = (evt) => {
     evt.preventDefault();
     const formEdit = props.activityEdit === "edit" ? "non-edit" : "edit";
-    setActivityEdit(formEdit);
-    props.setShowModal(false);
+    props.setActivityEdit(formEdit);
+    props.setShowModal(true);
+    // return <SelectedActivityContainer />;
   };
 
   return (
     <div className="card">
-      <form onSubmit={props.handleSubmit}>
+      <form>
         <p>Name: {props.activityName}</p>
         <p>Date: {props.activityDate} </p>
         <p>Type: {props.activityType}</p>
@@ -749,7 +800,7 @@ function ActivityForm(props) {
         <p>Suffer Score: {props.sufferScore}</p>
         <p>Notes: {props.activityNotes}</p>
         <div></div>
-        <button type="submit" className="edit" onClick={handleClick}>
+        <button className="edit" onClick={handleClick}>
           Edit Activity
         </button>
       </form>

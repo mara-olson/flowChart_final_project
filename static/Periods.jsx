@@ -137,19 +137,19 @@ function AddPeriodButton(props) {
         periodFormTitle={periodFormTitle}
       />
     );
-    return (
-      <Modal
-        userId={props.userId}
-        editMode={props.editMode}
-        setEditMode={props.setEditMode}
-        onClose={props.closeModal}
-        showModal={props.showModal}
-        setModalContent={props.setModalContent}
-        modalContent={props.modalContent}
-        modalError={props.modalError}
-        setModalError={props.setModalError}
-      />
-    );
+    // return (
+    //   <Modal
+    //     userId={props.userId}
+    //     editMode={props.editMode}
+    //     setEditMode={props.setEditMode}
+    //     onClose={props.closeModal}
+    //     showModal={props.showModal}
+    //     setModalContent={props.setModalContent}
+    //     modalContent={props.modalContent}
+    //     modalError={props.modalError}
+    //     setModalError={props.setModalError}
+    //   />
+    // );
   };
   return <button onClick={handleClick}>Add Period</button>;
 }

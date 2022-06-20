@@ -18,8 +18,6 @@ function App() {
   const [password, setPassword] = React.useState(null);
   const [sinceDate, setSinceDate] = React.useState(null);
 
-  const [editMode, setEditMode] = React.useState(false);
-
   const [monthlyMileage, setMonthlyMileage] = React.useState(0);
   const [lastPeriod, setLastPeriod] = React.useState("--");
 
@@ -32,7 +30,6 @@ function App() {
           setLastName(data.last_name);
           setTeamName(data.team_name);
           setEmail(data.email);
-          console.log(data.email);
           setPassword(data.password);
           setSinceDate(data.member_since);
         });
@@ -59,11 +56,17 @@ function App() {
   }, [userId]);
 
   React.useEffect(() => {
+    const localSelectedActivity = localStorage.getItem("selectedActivity");
+    if (localSelectedActivity) {
+      setSelectedActivityId(JSON.parse(selectedActivityId));
+    }
+  }, [selectedActivityId]);
+
+  React.useEffect(() => {
     if (userId) {
       fetch("/api/<user_id>/activities")
         .then((response) => response.json())
         .then((data) => {
-          console.log(data.activities);
           setActivities(data.activities);
           setMonthlyMileage(data.monthlyMileage);
         });
@@ -81,20 +84,6 @@ function App() {
         });
     }
   }, [isLoggedIn]);
-
-  // React.useEffect(() => {
-  //   const selectedActId = localStorage.getItem("selectedActId");
-  //   if (selectedActId) {
-  //     setSelectedActivityId(JSON.parse(selectedActId));
-  //   }
-  // }, [selectedActivityId]);
-
-  // React.useEffect(() => {
-  //   fetch(`/api/${userId}/data`)
-  //     .then((response) => response.json())
-  //     .then((data) => console.log(data));
-  //   // setDataForContext(data));
-  // }, [userId]);
 
   return (
     // <FullContext.Provider value={dataContext}>
@@ -129,8 +118,6 @@ function App() {
         <Route exact path="/home">
           <Home
             userId={userId}
-            editMode={editMode}
-            setEditMode={setEditMode}
             isLoggedIn={isLoggedIn}
             showModal={showModal}
             setShowModal={setShowModal}
@@ -160,7 +147,7 @@ function App() {
             selectedActivityId={selectedActivityId}
             setSelectedActivityId={setSelectedActivityId}
           />
-          <ActivityModal
+          {/* <ActivityModal
             userId={userId}
             error={error}
             setError={setError}
@@ -174,6 +161,20 @@ function App() {
             setSelectedActivityId={setSelectedActivityId}
             onClose={closeModal}
           />
+          <AddActivityModal
+            userId={userId}
+            error={error}
+            setError={setError}
+            modalError={modalError}
+            setModalError={setModalError}
+            showModal={showModal}
+            setShowModal={setShowModal}
+            activities={activities}
+            setActivities={setActivities}
+            selectedActivityId={selectedActivityId}
+            setSelectedActivityId={setSelectedActivityId}
+            onClose={closeModal}
+          /> */}
           {/* <Calendar userId={userId} /> */}
         </Route>
       </div>

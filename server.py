@@ -359,9 +359,27 @@ def update_activity(user_id, activity_id):
 
     print(edited_activity)
 
+    all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
+
+    currentTime= datetime.datetime.now()
+
+    mileage_this_month = db.session.query(func.round(func.sum(ActivityLog.distance))).filter(ActivityLog.activity_date > (currentTime - datetime.timedelta(30))).one()[0]
+
+    # print("*"*20, type(mileage_this_month))    
+    activity_objs = []
+    for activity in all_activities:
+        new_act = {
+            "user_id": activity.user_id, "activity_id": activity.activity_id, "name": activity.activity_name, "type": activity.workout_type, "date": activity.activity_date.strftime("%Y-%m-%d"),
+            "distance": activity.distance, "duration": activity.duration, "suffer_score": activity.suffer_score, "notes": activity.activity_notes
+            }
+        # activity = activity.to_dict()
+        activity_objs.append(new_act)
+    activity_objs.sort(key=lambda x: datetime.datetime.strptime(x['date'], "%Y-%m-%d"))
+
     return jsonify({
         "success": True, 
         "error": None, 
+        "activities": activity_objs,
         "activityId": edited_activity.activity_id,        
         "activityName": edited_activity.activity_name,
         "activityDate": edited_activity.activity_date.strftime("%Y-%m-%d"),

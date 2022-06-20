@@ -78,10 +78,39 @@ function ActivityModal(props) {
           setModalError={props.setModalError}
           showModal={props.showModal}
           setShowModal={props.setShowModal}
-          activities={props.activiies}
+          activities={props.activities}
           setActivities={props.setActivities}
           selectedActivityId={props.selectedActivityId}
           setSelectedActivityId={props.setSelectedActivityId}
+        />
+        <div className="modal-footer">
+          {props.modalError && <p className="error">{props.modalError}</p>}
+          <button className="modal-button" onClick={props.onClose}>
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AddActivityModal(props) {
+  if (!props.showModal) {
+    return null;
+  }
+  return (
+    <div className="modal">
+      <div className="modal-content">
+        <AddActivityForm
+          userId={props.userId}
+          error={props.error}
+          setError={props.setError}
+          modalError={props.modalError}
+          setModalError={props.setModalError}
+          showModal={props.showModal}
+          setShowModal={props.setShowModal}
+          activities={props.activities}
+          setActivities={props.setActivities}
         />
         <div className="modal-footer">
           {props.modalError && <p className="error">{props.modalError}</p>}

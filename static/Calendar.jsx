@@ -107,7 +107,7 @@ function Calendar(props) {
           selectedActivityId={props.selectedActivityId}
           setSelectedActivityId={props.setSelectedActivityId}
         />
-        <ActivityModal
+        {/* <ActivityModal
           userId={props.userId}
           error={props.error}
           setError={props.setError}
@@ -121,6 +121,19 @@ function Calendar(props) {
           setSelectedActivityId={props.setSelectedActivityId}
           onClose={props.closeModal}
         />
+        <AddActivityModal
+          userId={props.userId}
+          error={props.error}
+          setError={props.setError}
+          modalError={props.modalError}
+          setModalError={props.setModalError}
+          showModal={props.showModal}
+          setShowModal={props.setShowModal}
+          activities={props.activities}
+          setActivities={props.setActivities}
+          selectedActivityId={props.selectedActivityId}
+          setSelectedActivityId={props.setSelectedActivityId}
+        /> */}
         {/* <CalendarActivities today={today} userId={props.userId} /> */}
       </div>
     </div>
@@ -130,7 +143,7 @@ function Calendar(props) {
 function CalendarDays(props) {
   // console.log(props.calPeriods);
   // console.log(props.calActivities);
-  console.log("props.selectedActivityId", props.selectedActivityId);
+  // console.log("props.selectedActivityId", props.selectedActivityId);
   let firstDayOfMonth = new Date(
     props.today.getFullYear(),
     props.today.getMonth(),
@@ -138,8 +151,7 @@ function CalendarDays(props) {
   );
 
   let weekdayOfFirstDay = firstDayOfMonth.getDay();
-  // const realTodayMonth = props.realToday.getMonth();
-  // const finalTodayMonth = new Date(firstDayOfMonth).toDateString();
+
   const currentDays = [];
 
   for (let day = 0; day < 42; day++) {
@@ -210,14 +222,31 @@ function CalendarDays(props) {
   const handleClick = (day, evt) => {
     evt.preventDefault();
     updateActivity(day);
-    // localStorage.setItem("selectedActId", day.activityId);
+    // if (!day.activityName) {
+    //   props.setShowModal(true);
+    //   return (
+    //     <AddActivityModal
+    //       userId={props.userId}
+    //       error={props.error}
+    //       setError={props.setError}
+    //       modalError={props.modalError}
+    //       setModalError={props.setModalError}
+    //       showModal={props.showModal}
+    //       setShowModal={props.setShowModal}
+    //       activities={props.activities}
+    //       setActivities={props.setActivities}
+    //       selectedDate={day.date}
+    //     />
+    //   );
+    // }
+    localStorage.setItem("selectedActivity", day.activityId);
   };
   // updateActivity(day);
   const viewActivity = (day, evt) => {
     evt.preventDefault();
     props.setShowModal(true);
-    console.log(props.selectedActivityId);
-    if (day.activityName && props.selectedActivityId) {
+    // console.log(props.selectedActivityId);
+    if (day.activityName) {
       return (
         <ActivityModal
           userId={props.userId}
@@ -231,6 +260,7 @@ function CalendarDays(props) {
           setActivities={props.setActivities}
           selectedActivityId={props.selectedActivityId}
           setSelectedActivityId={props.setSelectedActivityId}
+          selectedDate={day.date}
         />
       );
     }
@@ -382,12 +412,6 @@ function CalendarDays(props) {
   return (
     <div className="table-content">
       <div className="calendar-nav">
-        {/* <button type="link" onClick={prevMonth}>
-          Previous Month
-        </button>
-        <button type="link" onClick={nextMonth}>
-          Next Month
-        </button> */}
         <br></br>
       </div>
       {currentDays.map((day) => {
@@ -408,14 +432,6 @@ function CalendarDays(props) {
               </div>
             )}
             {day.volume && <div>{day.volume} flow</div>}
-
-            {/* <Modal
-              onClose={() => setShowModal(false)}
-              showModal={props.showModal}
-              modalTitle={day.activityName}
-              modalDate={day.activityDate}
-              modalType={day.activityType}
-            /> */}
           </button>
         );
       })}

@@ -218,7 +218,19 @@ function Home(props) {
         selectedActivityId={props.selectedActivityId}
         setSelectedActivityId={props.setSelectedActivityId}
       />
-
+      {/* <AddActivityModal
+        userId={props.userId}
+        error={props.error}
+        setError={props.setError}
+        modalError={props.modalError}
+        setModalError={props.setModalError}
+        showModal={props.showModal}
+        setShowModal={props.setShowModal}
+        activities={props.activities}
+        setActivities={props.setActivities}
+        selectedActivityId={props.selectedActivityId}
+        setSelectedActivityId={props.setSelectedActivityId}
+      /> */}
       <MyChart
         editMode={props.editMode}
         setEditMode={props.setEditMode}
@@ -419,11 +431,6 @@ function ProfileCard(props) {
     reader.readAsDataURL(photo);
   };
 
-  const editBio = (evt) => {
-    const newBio = evt.target.value;
-    setBio(newBio);
-  };
-
   const handleSubmit = (evt) => {
     evt.preventDefault();
     fetch("/api/profile", {
@@ -435,7 +442,6 @@ function ProfileCard(props) {
         team_name: props.teamName,
         email: props.email,
         password: props.password,
-        bio: bio,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -443,15 +449,14 @@ function ProfileCard(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.success);
-        console.log(data);
+        // console.log(data.success);
+        // console.log(data);
         if (data.success) {
           props.setFirstName(data.first_name);
           props.setLastName(data.last_name);
           props.setTeamName(data.team_name);
           props.setEmail(data.email);
           props.setPassword(data.password);
-          setBio(data.bio);
 
           props.setShowModal(false);
           const activeProfile = active === "edit" ? "profile" : "edit";
@@ -499,7 +504,7 @@ function ProfileCard(props) {
             setLastName={props.setLastName}
             lastName={props.lastName}
           />
-          <ProfileBio editBio={editBio} bio={bio} />
+          <ProfileBio bio={bio} setBio={setBio} />
           <ProfileTeam
             setTeamName={props.setTeamName}
             teamName={props.teamName}
@@ -541,14 +546,13 @@ function PhotoUploader(props) {
 }
 
 function ProfileFirstName(props) {
-  console.log(props.firstName);
   return (
     <div className="field">
       <label htmlFor="first-name">First Name: </label>
       <input
         id="first-name"
         type="text"
-        onChange={props.setFirstName}
+        onChange={(evt) => props.setFirstName(evt.currentTarget.value)}
         value={props.firstName}
         placeholder="Enter your first name"
       />
@@ -563,7 +567,7 @@ function ProfileLastName(props) {
       <input
         id="last-name"
         type="text"
-        onChange={props.setLastName}
+        onChange={(evt) => props.setLastName(evt.currentTarget.value)}
         value={props.lastName}
         placeholder="Enter your last name"
       />
@@ -578,7 +582,7 @@ function ProfilePassword(props) {
       <input
         id="password"
         type="text"
-        onChange={props.setLastName}
+        onChange={(evt) => props.setPassword(evt.currentTarget.value)}
         value={props.password}
       />
     </div>
@@ -592,7 +596,7 @@ function ProfileBio(props) {
       <input
         id="bio"
         type="text"
-        onChange={props.editBio}
+        onChange={(evt) => props.setBio(evt.currentTarget.value)}
         value={props.bio}
         placeholder="Enter a brief bio"
       />
@@ -607,7 +611,7 @@ function ProfileEmail(props) {
       <input
         id="email"
         type="text"
-        onChange={props.setEmail}
+        onChange={(evt) => props.setEmail(evt.currentTarget.value)}
         value={props.email}
       />
     </div>
