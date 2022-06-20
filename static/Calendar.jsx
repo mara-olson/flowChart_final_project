@@ -107,6 +107,20 @@ function Calendar(props) {
           selectedActivityId={props.selectedActivityId}
           setSelectedActivityId={props.setSelectedActivityId}
         />
+        <ActivityModal
+          userId={props.userId}
+          error={props.error}
+          setError={props.setError}
+          modalError={props.modalError}
+          setModalError={props.setModalError}
+          showModal={props.showModal}
+          setShowModal={props.setShowModal}
+          activities={props.activities}
+          setActivities={props.setActivities}
+          selectedActivityId={props.selectedActivityId}
+          setSelectedActivityId={props.setSelectedActivityId}
+          onClose={props.closeModal}
+        />
         {/* <CalendarActivities today={today} userId={props.userId} /> */}
       </div>
     </div>
@@ -195,151 +209,174 @@ function CalendarDays(props) {
 
   const handleClick = (day, evt) => {
     evt.preventDefault();
-    updateActivity(day);
-    console.log("clicked");
-
-    if (day.activityName && day.volume) {
-      const content = (
-        <div>
-          <h2>Activity</h2>
-          <ActivityCard
-            userId={props.userId}
-            editMode={props.editMode}
-            setEditMode={props.setEditMode}
-            key={day.activityId}
-            activityId={day.activityId}
-            activityName={day.activityName}
-            activityDate={day.activityDate}
-            activityType={day.activityType}
-            duration={day.duration}
-            distance={day.distance}
-            sufferScore={day.sufferScore}
-            activityNotes={day.activityNotes}
-            modalContent={props.modalContent}
-            setModalContent={props.setModalContent}
-            setShowModal={props.setShowModal}
-          />
-          <h2>Period</h2>
-          <PeriodCard
-            userId={props.userId}
-            editMode={props.editMode}
-            setEditMode={props.setEditMode}
-            key={day.periodId}
-            periodId={day.periodId}
-            volume={day.volume}
-            date={day.date}
-            symptoms={day.symptoms}
-            setShowModal={props.setShowModal}
-          />
-        </div>
-      );
-      // props.setShowModal(true);
-      props.setEditMode(true);
-      props.setModalContent(content);
-    } else if (day.activityName) {
-      props.setEditMode(true);
-
-      const content = (
-        <SelectedActivityContainer
+    localStorage.setItem("selectedActId", day.activityId);
+  };
+  // updateActivity(day);
+  const viewActivity = (day) => {
+    console.log(props.showModal);
+    props.setShowModal(true);
+    console.log(props.selectedActivityId);
+    if (day.activityName && props.selectedActivityId) {
+      return (
+        <ActivityModal
           userId={props.userId}
-          selectedActivityId={props.selectedActivityId}
-        />
-        // <ActivityCard
-        //   userId={props.userId}
-        //   // editMode={props.editMode}
-        //   // setEditMode={props.setEditMode}
-        //   key={selectedActivity.activityId}
-        //   activityId={selectedActivity.activityId}
-        //   activityName={selectedActivity.activityName}
-        //   activityDate={selectedActivity.activityDate}
-        //   activityType={selectedActivity.activityType}
-        //   duration={selectedActivity.duration}
-        //   distance={selectedActivity.distance}
-        //   sufferScore={selectedActivity.sufferScore}
-        //   activityNotes={selectedActivity.activityNotes}
-        //   modalContent={props.setModalContent}
-        //   setModalContent={props.setModalContent}
-        //   setShowModal={props.setShowModal}
-        //   activities={props.actitivies}
-        //   setActivities={props.setActivities}
-        // />
-      );
-      if (props.selectedActivityId) {
-        props.setModalContent(content);
-        props.setShowModal(true);
-      }
-    } else if (day.volume) {
-      const content = (
-        <PeriodCard
-          userId={props.userId}
-          editMode={props.editMode}
-          setEditMode={props.setEditMode}
-          volume={day.volume}
-          date={day.date}
-          symptoms={day.symptoms}
+          error={props.error}
+          setError={props.setError}
+          modalError={props.modalError}
+          setModalError={props.setModalError}
+          showModal={props.showModal}
           setShowModal={props.setShowModal}
+          activities={props.activiies}
+          setActivities={props.setActivities}
+          selectedActivityId={props.selectedActivityId}
+          setSelectedActivityId={props.setSelectedActivityId}
         />
       );
-      props.setModalContent(content);
-      props.setShowModal(true);
-    } else {
-      props.setEditMode(false);
-      const goToAddActivity = (evt) => {
-        evt.preventDefault();
-
-        props.setModalContent(
-          <AddActivityForm
-            userId={props.userId}
-            editMode={props.editMode}
-            setEditMode={props.setEditMode}
-            activities={props.actitivies}
-            setActivities={props.setActivities}
-            setShowActivityForm={props.setShowActivityForm}
-            activityDate={day.activityDate}
-            modalError={props.modalError}
-            setModalError={props.setModalError}
-            modalContent={props.modalContent}
-            setModalContent={props.setModalContent}
-            showModal={props.showModal}
-            setShowModal={props.setShowModal}
-            selectedDate={day.date}
-            activityFormTitle="Edit Activity"
-            activityFormButtonName="Save"
-          />
-        );
-      };
-      const goToAddPeriod = (evt) => {
-        evt.preventDefault();
-        // console.log(day.selected);
-        props.setModalContent(
-          <PeriodForm
-            userId={props.userId}
-            editMode={props.editMode}
-            setEditMode={props.setEditMode}
-            modalError={props.modalError}
-            setModalError={props.setModalError}
-            modalContent={props.modalContent}
-            setModalContent={props.setModalContent}
-            showModal={props.showModal}
-            setShowModal={props.setShowModal}
-            periods={props.periods}
-            setPeriods={props.setPeriods}
-            selectedDate={day.date}
-          />
-        );
-      };
-
-      const content = (
-        <div>
-          <button onClick={goToAddActivity}>Add Activity</button>
-          <button onClick={goToAddPeriod}>Add Period</button>
-          <button onClick={props.setModalContent(content)}>Back</button>
-        </div>
-      );
-      props.setModalContent(content);
-      props.setShowModal(true);
     }
   };
+
+  // if (day.activityName && day.volume) {
+  //   const content = (
+  //     <div>
+  //       <h2>Activity</h2>
+  //       <ActivityCard
+  //         userId={props.userId}
+  //         editMode={props.editMode}
+  //         setEditMode={props.setEditMode}
+  //         key={day.activityId}
+  //         activityId={day.activityId}
+  //         activityName={day.activityName}
+  //         activityDate={day.activityDate}
+  //         activityType={day.activityType}
+  //         duration={day.duration}
+  //         distance={day.distance}
+  //         sufferScore={day.sufferScore}
+  //         activityNotes={day.activityNotes}
+  //         modalContent={props.modalContent}
+  //         setModalContent={props.setModalContent}
+  //         setShowModal={props.setShowModal}
+  //       />
+  //       <h2>Period</h2>
+  //       <PeriodCard
+  //         userId={props.userId}
+  //         editMode={props.editMode}
+  //         setEditMode={props.setEditMode}
+  //         key={day.periodId}
+  //         periodId={day.periodId}
+  //         volume={day.volume}
+  //         date={day.date}
+  //         symptoms={day.symptoms}
+  //         setShowModal={props.setShowModal}
+  //       />
+  //     </div>
+  //   );
+  //   // props.setShowModal(true);
+  //   props.setEditMode(true);
+  //   props.setModalContent(content);
+  // } else if (day.activityName) {
+  //   props.setEditMode(true);
+
+  //   const content = (
+  //     <SelectedActivityContainer
+  //       userId={props.userId}
+  //       selectedActivityId={props.selectedActivityId}
+  //     />
+  // <ActivityCard
+  //   userId={props.userId}
+  //   // editMode={props.editMode}
+  //   // setEditMode={props.setEditMode}
+  //   key={selectedActivity.activityId}
+  //   activityId={selectedActivity.activityId}
+  //   activityName={selectedActivity.activityName}
+  //   activityDate={selectedActivity.activityDate}
+  //   activityType={selectedActivity.activityType}
+  //   duration={selectedActivity.duration}
+  //   distance={selectedActivity.distance}
+  //   sufferScore={selectedActivity.sufferScore}
+  //   activityNotes={selectedActivity.activityNotes}
+  //   modalContent={props.setModalContent}
+  //   setModalContent={props.setModalContent}
+  //   setShowModal={props.setShowModal}
+  //   activities={props.actitivies}
+  //   setActivities={props.setActivities}
+  // />
+  //   );
+  //   if (props.selectedActivityId) {
+  //     props.setModalContent(content);
+  //     props.setShowModal(true);
+  //   }
+  // } else if (day.volume) {
+  //   const content = (
+  //     <PeriodCard
+  //       userId={props.userId}
+  //       editMode={props.editMode}
+  //       setEditMode={props.setEditMode}
+  //       volume={day.volume}
+  //       date={day.date}
+  //       symptoms={day.symptoms}
+  //       setShowModal={props.setShowModal}
+  //     />
+  //   );
+  //   props.setModalContent(content);
+  //   props.setShowModal(true);
+  // } else {
+  //   props.setEditMode(false);
+  //   const goToAddActivity = (evt) => {
+  //     evt.preventDefault();
+
+  //     props.setModalContent(
+  //       <AddActivityForm
+  //         userId={props.userId}
+  //         editMode={props.editMode}
+  //         setEditMode={props.setEditMode}
+  //         activities={props.actitivies}
+  //         setActivities={props.setActivities}
+  //         setShowActivityForm={props.setShowActivityForm}
+  //         activityDate={day.activityDate}
+  //         modalError={props.modalError}
+  //         setModalError={props.setModalError}
+  //         modalContent={props.modalContent}
+  //         setModalContent={props.setModalContent}
+  //         showModal={props.showModal}
+  //         setShowModal={props.setShowModal}
+  //         selectedDate={day.date}
+  //         activityFormTitle="Edit Activity"
+  //         activityFormButtonName="Save"
+  //       />
+  //     );
+  //   };
+  //     const goToAddPeriod = (evt) => {
+  //       evt.preventDefault();
+  //       // console.log(day.selected);
+  //       props.setModalContent(
+  //         <PeriodForm
+  //           userId={props.userId}
+  //           editMode={props.editMode}
+  //           setEditMode={props.setEditMode}
+  //           modalError={props.modalError}
+  //           setModalError={props.setModalError}
+  //           modalContent={props.modalContent}
+  //           setModalContent={props.setModalContent}
+  //           showModal={props.showModal}
+  //           setShowModal={props.setShowModal}
+  //           periods={props.periods}
+  //           setPeriods={props.setPeriods}
+  //           selectedDate={day.date}
+  //         />
+  //       );
+  //     };
+
+  //     const content = (
+  //       <div>
+  //         <button onClick={goToAddActivity}>Add Activity</button>
+  //         <button onClick={goToAddPeriod}>Add Period</button>
+  //         <button onClick={props.setModalContent(content)}>Back</button>
+  //       </div>
+  //     );
+  //     props.setModalContent(content);
+  //     props.setShowModal(true);
+  //   }
+  // };
 
   return (
     <div className="table-content">
@@ -364,7 +401,9 @@ function CalendarDays(props) {
             onClick={(evt) => handleClick(day, evt)}
           >
             <p>{day.number}</p>
-            {day.activityName && <div>{day.activityName}</div>}
+            {day.activityName && (
+              <button onClick={viewActivity}>{day.activityName}</button>
+            )}
             {day.volume && <div>{day.volume} flow</div>}
 
             {/* <Modal

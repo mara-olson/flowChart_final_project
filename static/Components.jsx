@@ -205,6 +205,19 @@ function Home(props) {
         selectedActivityId={props.selectedActivityId}
         setSelectedActivityId={props.setSelectedActivityId}
       />
+      <ActivityModal
+        userId={props.userId}
+        error={props.error}
+        setError={props.setError}
+        modalError={props.modalError}
+        setModalError={props.setModalError}
+        showModal={props.showModal}
+        setShowModal={props.setShowModal}
+        activities={props.activiies}
+        setActivities={props.setActivities}
+        selectedActivityId={props.selectedActivityId}
+        setSelectedActivityId={props.setSelectedActivityId}
+      />
 
       <MyChart
         editMode={props.editMode}
@@ -635,7 +648,6 @@ function EditProfile(props) {
 }
 
 function ProfileForm(props) {
-  console.log(props.active);
   const handleEdit = (evt) => {
     evt.preventDefault();
     // props.setShowModal(true);

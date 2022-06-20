@@ -80,6 +80,8 @@ function ActivityModal(props) {
           setShowModal={props.setShowModal}
           activities={props.activiies}
           setActivities={props.setActivities}
+          selectedActivityId={props.selectedActivityId}
+          setSelectedActivityId={props.setSelectedActivityId}
         />
         <div className="modal-footer">
           {props.modalError && <p className="error">{props.modalError}</p>}
