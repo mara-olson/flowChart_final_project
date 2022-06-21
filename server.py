@@ -298,8 +298,18 @@ def update_profile():
 
 
 @app.route("/api/<user_id>/activities/<activity_id>", methods=["DELETE"])
-def delete_activity(user_id):
+def delete_activity(user_id, activity_id):
+    """Delete activity."""
     data = request.json
+    activity_id = data.get("activity_id")
+    
+    delete_activity(activity_id)
+
+    print(f"Activity {activity_id} deleted")
+
+
+
+
 
 
 @app.route("/api/<user_id>/activities/<activity_id>")
@@ -325,7 +335,6 @@ def get_selected_activity(user_id, activity_id):
 
 
 @app.route("/api/<user_id>/activities/<activity_id>", methods=["PUT"])
-# change to /api/activity update & /api/activity post
 def update_activity(user_id, activity_id):
     """Update an existing activity."""
     data = request.json

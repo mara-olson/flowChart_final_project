@@ -600,9 +600,31 @@ function ActivityCard(props) {
       });
   };
 
+  const handleDelete = (evt) => {
+    evt.preventDefault();
+    setActivityEdit("delete");
+    fetch(
+      `/api/${props.userId}/activities/${localStorage.getItem(
+        "selectedActivity"
+      )}`,
+      {
+        method: "DELETE",
+        credentials: "include",
+        body: JSON.stringify({
+          activity_id: localStorage.getItem("selectedActivity"),
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => console.log("deleted"));
+  };
+
   return (
     <div>
-      {activityEdit === "edit" ? (
+      {activityEdit === "delete" && (
+        <DeleteActivity handleDelete={handleDelete} />
+      )}
+      {activityEdit === "edit" && (
         <EditActivity
           handleSubmit={handleSubmit}
           setActivityEdit={setActivityEdit}
@@ -637,7 +659,8 @@ function ActivityCard(props) {
             activityNotes={props.activityNotes}
           />
         </EditActivity>
-      ) : (
+      )}
+      {activityEdit === "non-edit" && (
         <ActivityForm
           userId={props.userId}
           error={props.error}
@@ -798,13 +821,37 @@ function EditActivity(props) {
   );
 }
 
+function DeleteActivity(props) {
+  const closeEdit = (evt) => {
+    evt.preventDefault();
+    props.setActivityEdit("non-edit");
+  };
+
+  return (
+    <div className="card">
+      <form onSubmit={props.handleDelete}>
+        <h2>Are you sure you'd like to delete?</h2>
+        <button type="submit">Yes</button>
+        <button onClick={closeEdit}>No</button>
+      </form>
+    </div>
+  );
+}
+
 function ActivityForm(props) {
   const handleClick = (evt) => {
     evt.preventDefault();
-    console.log(props.activityType, props.activityNotes);
     const formEdit = props.activityEdit === "edit" ? "non-edit" : "edit";
     props.setActivityEdit(formEdit);
     props.setShowActivityModal(true);
+    // return <SelectedActivityContainer />;
+  };
+
+  const handleDeleteClick = (evt) => {
+    evt.preventDefault();
+    const formDelete = props.activityEdit === "delete" ? "non-edit" : "delete";
+    props.setActivityEdit(formDelete);
+    props.setShowDeleteModal(true);
     // return <SelectedActivityContainer />;
   };
 
@@ -826,6 +873,9 @@ function ActivityForm(props) {
         <div></div>
         <button className="edit" onClick={handleClick}>
           Edit Activity
+        </button>
+        <button className="delete" onClick={handleDeleteClick}>
+          Delete Activity
         </button>
         <button onClick={closeEdit}>Cancel</button>
       </form>

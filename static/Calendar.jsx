@@ -97,6 +97,8 @@ function Calendar(props) {
           setShowActivityModal={props.setShowActivityModal}
           showAddActModal={props.showAddActModal}
           setShowAddActModal={props.setShowAddActModal}
+          showDeleteActModal={props.showDeleteActModal}
+          setShowDeleteActModal={props.setShowDeleteActModal}
           setModalTitle={props.setModalTitle}
           modalContent={props.modalContent}
           setModalContent={props.setModalContent}
@@ -250,24 +252,24 @@ function CalendarDays(props) {
     evt.preventDefault();
     props.setShowActivityModal(true);
     // console.log(props.selectedActivityId);
-    if (day.activityName) {
-      return (
-        <ActivityModal
-          userId={props.userId}
-          error={props.error}
-          setError={props.setError}
-          modalError={props.modalError}
-          setModalError={props.setModalError}
-          showActivityModal={props.showActivityModal}
-          setShowActivityModal={props.setShowActivityModal}
-          activities={props.activiies}
-          setActivities={props.setActivities}
-          selectedActivityId={props.selectedActivityId}
-          setSelectedActivityId={props.setSelectedActivityId}
-          selectedDate={day.date}
-        />
-      );
-    }
+    // if (day.activityName) {
+    //   return (
+    //     <ActivityModal
+    //       userId={props.userId}
+    //       error={props.error}
+    //       setError={props.setError}
+    //       modalError={props.modalError}
+    //       setModalError={props.setModalError}
+    //       showActivityModal={props.showActivityModal}
+    //       setShowActivityModal={props.setShowActivityModal}
+    //       activities={props.activiies}
+    //       setActivities={props.setActivities}
+    //       selectedActivityId={props.selectedActivityId}
+    //       setSelectedActivityId={props.setSelectedActivityId}
+    //       selectedDate={day.date}
+    //     />
+    //   );
+    // }
   };
 
   // if (day.activityName && day.volume) {

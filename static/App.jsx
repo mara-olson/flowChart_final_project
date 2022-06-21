@@ -12,6 +12,7 @@ function App() {
   const [showPeriodModal, setShowPeriodModal] = React.useState(false);
   const [showAddPeriodModal, setShowAddPeriodModal] = React.useState(false);
   const [showSignUpModal, setShowSignUpModal] = React.useState(false);
+  const [showDeleteActModal, setShowDeleteActModal] = React.useState(false);
   // const [modalContent, setModalContent] = React.useState(null);
   const [activities, setActivities] = React.useState(null);
   const [selectedActivityId, setSelectedActivityId] = React.useState(null);
@@ -42,10 +43,10 @@ function App() {
     }
   }, [userId]);
 
-  const closeModal = () => {
-    setShowModal(false);
-    setModalError(null);
-  };
+  // const closeModal = () => {
+  //   setShowModal(false);
+  //   setModalError(null);
+  // };
 
   React.useEffect(() => {
     const localIsLoggedIn = localStorage.getItem("isLoggedIn");
@@ -131,6 +132,8 @@ function App() {
             setShowActivityModal={setShowActivityModal}
             showAddActModal={showAddActModal}
             setShowAddActModal={setShowAddActModal}
+            showDeleteActModal={showDeleteActModal}
+            setShowDeleteActModal={setShowDeleteActModal}
             // modalContent={modalContent}
             // setModalContent={setModalContent}
             modalError={modalError}
@@ -169,7 +172,7 @@ function App() {
             setActivities={setActivities}
             selectedActivityId={selectedActivityId}
             setSelectedActivityId={setSelectedActivityId}
-            onClose={closeModal}
+            // onClose={closeModal}
           />
           <AddActivityModal
             userId={userId}
@@ -185,7 +188,7 @@ function App() {
             setActivities={setActivities}
             selectedActivityId={selectedActivityId}
             setSelectedActivityId={setSelectedActivityId}
-            onClose={closeModal}
+            // onClose={closeModal}
           />
           {/* <Calendar userId={userId} /> */}
         </Route>
@@ -217,11 +220,11 @@ function App() {
             setActivities={setActivities}
             selectedActivityId={selectedActivityId}
             setSelectedActivityId={setSelectedActivityId}
-            onClose={closeModal}
+            // onClose={closeModal}
           />
           <PeriodModal
             userId={userId}
-            onClose={closeModal}
+            // onClose={closeModal}
             showPeriodModal={showPeriodModal}
             setShowPeriodModal={setShowPeriodModal}
             modalError={modalError}
@@ -273,7 +276,7 @@ function App() {
             setError={setError}
             showSignUpModal={showSignUpModal}
             setShowSignUpModal={setShowSignUpModal}
-            onClose={closeModal}
+            // onClose={closeModal}
           />
         </Route>
       </div>
@@ -292,7 +295,7 @@ function App() {
           />
           <PeriodModal
             userId={userId}
-            onClose={closeModal}
+            // onClose={closeModal}
             showPeriodModal={showPeriodModal}
             setShowPeriodModal={setShowPeriodModal}
             modalError={modalError}

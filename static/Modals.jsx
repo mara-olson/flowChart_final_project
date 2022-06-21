@@ -64,6 +64,11 @@ function ProfileModal(props) {
 }
 
 function ActivityModal(props) {
+  const closeModal = () => {
+    props.setShowActivityModal(false);
+    props.setModalError(null);
+  };
+
   if (!props.showActivityModal) {
     return null;
   }
@@ -85,7 +90,7 @@ function ActivityModal(props) {
         />
         <div className="modal-footer">
           {props.modalError && <p className="error">{props.modalError}</p>}
-          <button className="modal-button" onClick={props.onClose}>
+          <button className="modal-button" onClick={closeModal}>
             Close
           </button>
         </div>

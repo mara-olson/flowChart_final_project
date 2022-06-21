@@ -194,6 +194,8 @@ function Home(props) {
         setShowActivityModal={props.setShowActivityModal}
         showAddActModal={props.showAddActModal}
         setShowAddActModal={props.setShowAddActModal}
+        showDeleteActModal={props.showDeleteActModal}
+        setShowDeleteActModal={props.setShowDeleteActModal}
         // modalContent={props.modalContent}
         // setModalContent={props.setModalContent}
         modalError={props.modalError}
