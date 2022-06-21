@@ -188,7 +188,7 @@ function AddActivityForm(props) {
             .then((response) => response.json())
             .then((data) => {
               props.setActivities(data.activities);
-              props.setShowModal(false);
+              props.setShowAddActModal(false);
             });
         } else {
           console.log("error");
@@ -356,7 +356,7 @@ function SelectedActivityContainer(props) {
         // setActivityId(data.activityId);
         setActivityName(data.activityName);
         setActivityDate(data.activityDate);
-        setActivityType(data.type);
+        setActivityType(data.activityType);
         setDuration(data.duration);
         setDistance(data.distance);
         setSufferScore(data.sufferScore);
@@ -387,12 +387,12 @@ function SelectedActivityContainer(props) {
       setDuration={setDuration}
       sufferScore={sufferScore}
       setSufferScore={setSufferScore}
-      ativityNotes={activityNotes}
+      activityNotes={activityNotes}
       setActivityNotes={setActivityNotes}
-      showModal={props.showModal}
-      setShowModal={props.setShowModal}
-      modalContent={props.modalContent}
-      setModalContent={props.setModalContent}
+      showActivityModal={props.showActivityModal}
+      setShowActivityModal={props.setShowActivityModal}
+      // modalContent={props.modalContent}
+      // setModalContent={props.setModalContent}
       modalError={props.modalError}
       setModalError={props.setModalError}
       activities={props.activities}
@@ -438,8 +438,8 @@ function AllActivitiesContainer(props) {
         duration={activity.duration}
         sufferScore={activity.suffer_score}
         activityNotes={activity.notes}
-        showModal={props.showModal}
-        setShowModal={props.setShowModal}
+        showActivityModal={props.showActivityModal}
+        setShowActivityModal={props.setShowActivityModal}
         modalError={props.modalError}
         setModalError={props.setModalError}
         activities={props.activities}
@@ -592,7 +592,7 @@ function ActivityCard(props) {
 
           // props.setActivities(data.activities);
 
-          props.setShowModal(false);
+          props.setShowActivityModal(false);
           setActivityEdit("non-edit");
         } else {
           props.setError(data.error_msg);
@@ -644,8 +644,8 @@ function ActivityCard(props) {
           setError={props.setError}
           modalError={props.modalError}
           setModalError={props.setModalError}
-          showModal={props.showModal}
-          setShowModal={props.setShowModal}
+          showActivityModal={props.showActivityModal}
+          setShowActivityModal={props.setShowActivityModal}
           activities={props.activities}
           setActivities={props.setActivities}
           selectedActivityId={props.selectedActivityId}
@@ -675,6 +675,7 @@ function ActivityType(props) {
         onChange={(evt) => props.setActivityType(evt.currentTarget.value)}
         value={props.activityType}
       >
+        <option value="Null"></option>
         <option value="Run">Run</option>
         <option value="Bike">Bike</option>
         <option value="Swim">Swim</option>
@@ -768,13 +769,13 @@ function ActivityNotes(props) {
   return (
     <div className="field">
       <label htmlFor="act-notes">Notes: </label>
-      <input
+      <textarea
         id="act-notes"
         type="text"
         onChange={(evt) => props.setActivityNotes(evt.currentTarget.value)}
         value={props.activityNotes}
         placeholder="Write notes here"
-      />
+      ></textarea>
     </div>
   );
 }
@@ -800,15 +801,16 @@ function EditActivity(props) {
 function ActivityForm(props) {
   const handleClick = (evt) => {
     evt.preventDefault();
+    console.log(props.activityType, props.activityNotes);
     const formEdit = props.activityEdit === "edit" ? "non-edit" : "edit";
     props.setActivityEdit(formEdit);
-    props.setShowModal(true);
+    props.setShowActivityModal(true);
     // return <SelectedActivityContainer />;
   };
 
   const closeEdit = (evt) => {
     evt.preventDefault();
-    props.setShowModal(false);
+    props.setShowActivityModal(false);
   };
 
   return (

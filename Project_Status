@@ -397,3 +397,22 @@ def activity_data(user_id):
 	- Maybe make separate Modals per modal needed
 	- modalContent is an object, so never null
 	- if {} to hide modal at least (line 276)
+
+6/19
+	- Modals.jsx
+		SignUpModal
+			SignUp
+		ActivityModal (WIP)
+		PeriodModal (WIP)
+	- setShowModal(false) in EditActivity handleSubmit()
+	- New route & fetch/request in order to save edited profile details to the db
+
+
+
+
+6/20
+	- WIP editing activities from the Activities page. I may need to make a custom way of doing this rather than recycling ActivityCard/Form, with unique onCLick function perhaps
+	- Can edit from caeldnar page!
+		Must refresh for name to update
+	TO-DO:
+		- Add activity from unnamed calendar square

@@ -155,8 +155,8 @@ function Home(props) {
         password={props.password}
         setPassword={props.setPassword}
         sinceDate={props.sinceDate}
-        showModal={props.showModal}
-        setShowModal={props.setShowModal}
+        showProfileModal={props.showProfileModal}
+        setShowProfileModal={props.setShowProfileModal}
       />
       <ProfileModal
         userId={props.userId}
@@ -164,7 +164,7 @@ function Home(props) {
         setError={props.setError}
         modalError={props.modalError}
         setModalError={props.setModalError}
-        showModal={props.showModal}
+        showProfileModal={props.showProfileModal}
         setShowModal={props.setShowModal}
         firstName={props.firstName}
         setFirstName={props.setFirstName}
@@ -190,10 +190,12 @@ function Home(props) {
         userId={props.userId}
         editMode={props.editMode}
         setEditMode={props.setEditMode}
-        showModal={props.showModal}
-        setShowModal={props.setShowModal}
-        modalContent={props.modalContent}
-        setModalContent={props.setModalContent}
+        showActivityModal={props.showActivityModal}
+        setShowActivityModal={props.setShowActivityModal}
+        showAddActModal={props.showAddActModal}
+        setShowAddActModal={props.setShowAddActModal}
+        // modalContent={props.modalContent}
+        // setModalContent={props.setModalContent}
         modalError={props.modalError}
         setModalError={props.setModalError}
         activityDate={props.activityDate}
@@ -211,8 +213,8 @@ function Home(props) {
         setError={props.setError}
         modalError={props.modalError}
         setModalError={props.setModalError}
-        showModal={props.showModal}
-        setShowModal={props.setShowModal}
+        showActivityModal={props.showActivityModal}
+        setShowActivityModal={props.setShowActivityModal}
         activities={props.activiies}
         setActivities={props.setActivities}
         selectedActivityId={props.selectedActivityId}

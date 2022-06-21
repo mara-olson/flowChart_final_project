@@ -3,10 +3,16 @@ const { Route, BrowserRouter } = ReactRouterDOM;
 function App() {
   const [userId, setUserId] = React.useState(null);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
   const [error, setError] = React.useState(null);
   const [modalError, setModalError] = React.useState(null);
-  const [showModal, setShowModal] = React.useState(false);
-  const [modalContent, setModalContent] = React.useState(null);
+  const [showProfileModal, setShowProfileModal] = React.useState(false);
+  const [showActivityModal, setShowActivityModal] = React.useState(false);
+  const [showAddActModal, setShowAddActModal] = React.useState(false);
+  const [showPeriodModal, setShowPeriodModal] = React.useState(false);
+  const [showAddPeriodModal, setShowAddPeriodModal] = React.useState(false);
+  const [showSignUpModal, setShowSignUpModal] = React.useState(false);
+  // const [modalContent, setModalContent] = React.useState(null);
   const [activities, setActivities] = React.useState(null);
   const [selectedActivityId, setSelectedActivityId] = React.useState(null);
   const [periods, setPeriods] = React.useState([]);
@@ -53,7 +59,7 @@ function App() {
     if (localUserId) {
       setUserId(JSON.parse(localUserId));
     }
-  }, [userId, showModal]);
+  }, [userId, showActivityModal]);
 
   React.useEffect(() => {
     const localSelectedActivity = localStorage.getItem("selectedActivity");
@@ -119,10 +125,14 @@ function App() {
           <Home
             userId={userId}
             isLoggedIn={isLoggedIn}
-            showModal={showModal}
-            setShowModal={setShowModal}
-            modalContent={modalContent}
-            setModalContent={setModalContent}
+            showProfileModal={showProfileModal}
+            setShowProfileModal={setShowProfileModal}
+            showActivityModal={showActivityModal}
+            setShowActivityModal={setShowActivityModal}
+            showAddActModal={showAddActModal}
+            setShowAddActModal={setShowAddActModal}
+            // modalContent={modalContent}
+            // setModalContent={setModalContent}
             modalError={modalError}
             setModalError={setModalError}
             activities={activities}
@@ -147,14 +157,14 @@ function App() {
             selectedActivityId={selectedActivityId}
             setSelectedActivityId={setSelectedActivityId}
           />
-          {/* <ActivityModal
+          <ActivityModal
             userId={userId}
             error={error}
             setError={setError}
             modalError={modalError}
             setModalError={setModalError}
-            showModal={showModal}
-            setShowModal={setShowModal}
+            showActivityModal={showActivityModal}
+            setShowActivityModal={setShowActivityModal}
             activities={activities}
             setActivities={setActivities}
             selectedActivityId={selectedActivityId}
@@ -167,14 +177,16 @@ function App() {
             setError={setError}
             modalError={modalError}
             setModalError={setModalError}
-            showModal={showModal}
-            setShowModal={setShowModal}
+            showActivityModal={showActivityModal}
+            setshowActivityModal={setShowActivityModal}
+            showAddActModal={showAddActModal}
+            setShowAddActModal={setShowAddActModal}
             activities={activities}
             setActivities={setActivities}
             selectedActivityId={selectedActivityId}
             setSelectedActivityId={setSelectedActivityId}
             onClose={closeModal}
-          /> */}
+          />
           {/* <Calendar userId={userId} /> */}
         </Route>
       </div>
@@ -186,21 +198,21 @@ function App() {
             setError={setError}
             modalError={modalError}
             setModalError={setModalError}
-            showModal={showModal}
-            setShowModal={setShowModal}
+            showActivityModal={showActivityModal}
+            setShowActivityModal={setShowActivityModal}
             activities={activities}
             setActivities={setActivities}
             selectedActivityId={selectedActivityId}
             setSelectedActivityId={setSelectedActivityId}
           />
-          {/* <ActivityModal
+          <ActivityModal
             userId={userId}
             error={error}
             setError={setError}
             modalError={modalError}
             setModalError={setModalError}
-            showModal={showModal}
-            setShowModal={setShowModal}
+            showActivityModal={showActivityModal}
+            setShowActivityModal={setShowActivityModal}
             activities={activities}
             setActivities={setActivities}
             selectedActivityId={selectedActivityId}
@@ -210,15 +222,15 @@ function App() {
           <PeriodModal
             userId={userId}
             onClose={closeModal}
-            showModal={showModal}
-            setShowModal={setShowModal}
+            showPeriodModal={showPeriodModal}
+            setShowPeriodModal={setShowPeriodModal}
             modalError={modalError}
             setModalError={setModalError}
             error={error}
             setError={setError}
             periods={periods}
             setPeriods={setPeriods}
-          /> */}
+          />
         </Route>
       </div>
       <div className="container-fluid">
@@ -234,7 +246,7 @@ function App() {
             email={email}
             setEmail={setEmail}
             sinceDate={sinceDate}
-            setShowModal={setShowModal}
+            setShowProfileModal={setShowProfileModal}
             modalError={modalError}
             setModalError={setModalError}
           />
@@ -249,8 +261,8 @@ function App() {
             setIsLoggedIn={setIsLoggedIn}
             modalError={modalError}
             setError={setError}
-            showModal={showModal}
-            setShowModal={setShowModal}
+            showSignUpModal={showSignUpModal}
+            setShowSignUpModal={setShowSignUpModal}
           />
           <SignUpModal
             userId={userId}
@@ -259,8 +271,8 @@ function App() {
             setIsLoggedIn={setIsLoggedIn}
             modalError={modalError}
             setError={setError}
-            showModal={showModal}
-            setShowModal={setShowModal}
+            showSignUpModal={showSignUpModal}
+            setShowSignUpModal={setShowSignUpModal}
             onClose={closeModal}
           />
         </Route>
@@ -273,16 +285,16 @@ function App() {
             setError={setError}
             modalError={modalError}
             setModalError={setModalError}
-            showModal={showModal}
-            setShowModal={setShowModal}
+            showPeriodModal={showPeriodModal}
+            setShowPeriodModal={setShowPeriodModal}
             periods={periods}
             setPeriods={setPeriods}
           />
           <PeriodModal
             userId={userId}
             onClose={closeModal}
-            showModal={showModal}
-            setShowModal={setShowModal}
+            showPeriodModal={showPeriodModal}
+            setShowPeriodModal={setShowPeriodModal}
             modalError={modalError}
             setModalError={setModalError}
             error={error}

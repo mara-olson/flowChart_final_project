@@ -371,7 +371,8 @@ def update_activity(user_id, activity_id):
         # activity = activity.to_dict()
         activity_objs.append(new_act)
     activity_objs.sort(key=lambda x: datetime.datetime.strptime(x['date'], "%Y-%m-%d"))
-
+    print("*"*25, edited_activity.workout_type, edited_activity.activity_notes)
+    
     return jsonify({
         "success": True, 
         "error": None, 
@@ -405,7 +406,7 @@ def add_activity(user_id):
 
     currentTime= datetime.datetime.now()
     
-    if (new_act_date is None) or (new_act_name is None):
+    if (new_act_date is None) or (new_act_name is None) or (new_act_type == "Null"):
         error = "Please enter an activity date, type, & name"
         success = False
         

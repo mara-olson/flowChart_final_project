@@ -91,8 +91,12 @@ function Calendar(props) {
           setEditMode={props.setEditMode}
           calActivities={calActivities}
           setCalActivities={setCalActivities}
-          showModal={props.showModal}
-          setShowModal={props.setShowModal}
+          // showModal={props.showModal}
+          // setShowModal={props.setShowModal}
+          f={props.showActivityModal}
+          setShowActivityModal={props.setShowActivityModal}
+          showAddActModal={props.showAddActModal}
+          setShowAddActModal={props.setShowAddActModal}
           setModalTitle={props.setModalTitle}
           modalContent={props.modalContent}
           setModalContent={props.setModalContent}
@@ -244,7 +248,7 @@ function CalendarDays(props) {
   // updateActivity(day);
   const viewActivity = (day, evt) => {
     evt.preventDefault();
-    props.setShowModal(true);
+    props.setShowActivityModal(true);
     // console.log(props.selectedActivityId);
     if (day.activityName) {
       return (
@@ -254,8 +258,8 @@ function CalendarDays(props) {
           setError={props.setError}
           modalError={props.modalError}
           setModalError={props.setModalError}
-          showModal={props.showModal}
-          setShowModal={props.setShowModal}
+          showActivityModal={props.showActivityModal}
+          setShowActivityModal={props.setShowActivityModal}
           activities={props.activiies}
           setActivities={props.setActivities}
           selectedActivityId={props.selectedActivityId}

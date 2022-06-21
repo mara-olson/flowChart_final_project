@@ -1,5 +1,5 @@
 function SignUpModal(props) {
-  if (!props.showModal) {
+  if (!props.showSignUpModal) {
     return null;
   }
   return (
@@ -27,7 +27,7 @@ function SignUpModal(props) {
 }
 
 function ProfileModal(props) {
-  if (!props.showModal) {
+  if (!props.showProfileModal) {
     return null;
   }
   return (
@@ -64,7 +64,7 @@ function ProfileModal(props) {
 }
 
 function ActivityModal(props) {
-  if (!props.showModal) {
+  if (!props.showActivityModal) {
     return null;
   }
   return (
@@ -76,8 +76,8 @@ function ActivityModal(props) {
           setError={props.setError}
           modalError={props.modalError}
           setModalError={props.setModalError}
-          showModal={props.showModal}
-          setShowModal={props.setShowModal}
+          showActivityModal={props.showActivityModal}
+          setShowActivityModal={props.setShowActivityModal}
           activities={props.activities}
           setActivities={props.setActivities}
           selectedActivityId={props.selectedActivityId}
@@ -95,7 +95,7 @@ function ActivityModal(props) {
 }
 
 function AddActivityModal(props) {
-  if (!props.showModal) {
+  if (!props.showAddActModal) {
     return null;
   }
   return (
@@ -107,8 +107,8 @@ function AddActivityModal(props) {
           setError={props.setError}
           modalError={props.modalError}
           setModalError={props.setModalError}
-          showModal={props.showModal}
-          setShowModal={props.setShowModal}
+          showAddActModal={props.showAddActModal}
+          setShowAddActModal={props.setShowAddActModal}
           activities={props.activities}
           setActivities={props.setActivities}
         />
