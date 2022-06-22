@@ -426,3 +426,9 @@ def activity_data(user_id):
     - Ufda today was a lot of modal finessing. EntryChoiceModal added so that when user selects a calendar day they are given the option to add an activity or a period
     TO-DO:
     	- Editing activity from Activities tab :(
+
+6/22
+	- SignUp modal & authentication process fixed! Now goes through Strava if user opts to
+	- Strava data saved to the db so that it's able to be accessed & viwed
+	- Deleting activity works! But modal doesn't yet close and activity isn't removed from the calendar until refresh
+	- 
