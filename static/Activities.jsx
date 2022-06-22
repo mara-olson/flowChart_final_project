@@ -184,12 +184,12 @@ function AddActivityForm(props) {
           setActivityNotes(data.activityNotes);
           console.log(activityId, activityName);
 
-          fetch(`/api/${props.userId}/activities`)
-            .then((response) => response.json())
-            .then((data) => {
-              props.setActivities(data.activities);
-              props.setShowAddActModal(false);
-            });
+          // fetch(`/api/${props.userId}/activities`)
+          //   .then((response) => response.json())
+          //   .then((data) => {
+          //     props.setActivities(data.activities);
+          //     props.setShowAddActModal(false);
+          //   });
         } else {
           console.log("error");
           props.setModalError(data.error);
@@ -683,6 +683,8 @@ function ActivityCard(props) {
           onClose={props.closeModal}
           activityEdit={activityEdit}
           setActivityEdit={setActivityEdit}
+          selectedDate={props.selectedDate}
+          setSelectedDate={props.setSelectedDate}
         />
       )}
     </div>

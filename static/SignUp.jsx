@@ -44,6 +44,7 @@ function SignUp(props) {
   const [teamName, setTeamName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [bio, setBio] = React.useState("");
 
   const handleSignUp = (evt) => {
     // console.log(evt);
@@ -58,6 +59,7 @@ function SignUp(props) {
         team_name: teamName,
         email: email,
         password: password,
+        bio: bio,
         // created_at: sinceDate,
       }),
       headers: {
@@ -127,6 +129,15 @@ function SignUp(props) {
             type="text"
             value={password}
             onChange={(evt) => setPassword(evt.currentTarget.value)}
+          />
+        </div>
+        <br></br>
+        <div>
+          Bio
+          <input
+            type="text"
+            value={bio}
+            onChange={(evt) => setBio(evt.currentTarget.value)}
           />
         </div>
         <button type="submit">Sign Up</button>

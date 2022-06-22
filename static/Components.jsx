@@ -83,7 +83,11 @@ function Navbar(props) {
 function StatCard1(props) {
   return (
     <div className="profile-card">
-      <div>Mileage this Month: {props.monthlyMileage}</div>
+      {props.monthlyMileage ? (
+        <div>Mileage this Month: {props.monthlyMileage}</div>
+      ) : (
+        <div>Mileage this Month: 0</div>
+      )}
     </div>
   );
 }
@@ -154,6 +158,8 @@ function Home(props) {
         setEmail={props.setEmail}
         password={props.password}
         setPassword={props.setPassword}
+        profileBio={props.profileBio}
+        setProfileBio={props.setProfileBio}
         sinceDate={props.sinceDate}
         showProfileModal={props.showProfileModal}
         setShowProfileModal={props.setShowProfileModal}
@@ -176,6 +182,8 @@ function Home(props) {
         setEmail={props.setEmail}
         password={props.password}
         setPassword={props.setPassword}
+        profileBio={props.profileBio}
+        setProfileBio={props.setProfileBio}
         sinceDate={props.sinceDate}
       />
       <StatCard1
@@ -196,8 +204,6 @@ function Home(props) {
         setShowAddActModal={props.setShowAddActModal}
         showDeleteActModal={props.showDeleteActModal}
         setShowDeleteActModal={props.setShowDeleteActModal}
-        // modalContent={props.modalContent}
-        // setModalContent={props.setModalContent}
         modalError={props.modalError}
         setModalError={props.setModalError}
         activityDate={props.activityDate}
@@ -208,6 +214,8 @@ function Home(props) {
         setPeriods={props.setPeriods}
         selectedActivityId={props.selectedActivityId}
         setSelectedActivityId={props.setSelectedActivityId}
+        selectedDate={props.selectedDate}
+        setSelectedDate={props.setSelectedDate}
       />
       <ActivityModal
         userId={props.userId}
@@ -222,19 +230,21 @@ function Home(props) {
         selectedActivityId={props.selectedActivityId}
         setSelectedActivityId={props.setSelectedActivityId}
       />
-      {/* <AddActivityModal
+      <AddActivityModal
         userId={props.userId}
         error={props.error}
         setError={props.setError}
         modalError={props.modalError}
         setModalError={props.setModalError}
-        showModal={props.showModal}
-        setShowModal={props.setShowModal}
+        showAddActModal={props.showAddActModal}
+        setShowAddActModal={props.setShowAddActModal}
         activities={props.activities}
         setActivities={props.setActivities}
         selectedActivityId={props.selectedActivityId}
         setSelectedActivityId={props.setSelectedActivityId}
-      /> */}
+        selectedDate={props.selectedDate}
+        setSelectedDate={props.setSelectedDate}
+      />
       <MyChart
         editMode={props.editMode}
         setEditMode={props.setEditMode}
@@ -331,6 +341,9 @@ function Profile(props) {
       </p>
       <br></br>
       <p>
+        Bio: <strong>{props.profileBio}</strong>
+      </p>
+      <p>
         Email: <strong>{props.email}</strong>
       </p>
       <br></br>
@@ -418,7 +431,6 @@ function ProfileCard(props) {
     "https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true"
   );
 
-  const [bio, setBio] = React.useState("");
   const [active, setActive] = React.useState("profile");
 
   const handlePhotoUpload = (evt) => {
@@ -446,6 +458,7 @@ function ProfileCard(props) {
         team_name: props.teamName,
         email: props.email,
         password: props.password,
+        bio: props.profileBio,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -461,8 +474,10 @@ function ProfileCard(props) {
           props.setTeamName(data.team_name);
           props.setEmail(data.email);
           props.setPassword(data.password);
+          props.setProfileBio(data.bio);
+          console.log(data.bio);
 
-          props.setShowModal(false);
+          props.setShowProfileModal(false);
           const activeProfile = active === "edit" ? "profile" : "edit";
           setActive(activeProfile);
         } else {
@@ -489,6 +504,8 @@ function ProfileCard(props) {
           setEmail={props.setEmail}
           password={props.password}
           setPassword={props.setPassword}
+          profileBio={props.profileBio}
+          setProfileBio={props.setProfileBio}
           sinceDate={props.sinceDate}
         >
           <PhotoUploader
@@ -508,7 +525,10 @@ function ProfileCard(props) {
             setLastName={props.setLastName}
             lastName={props.lastName}
           />
-          <ProfileBio bio={bio} setBio={setBio} />
+          <ProfileBio
+            profileBio={props.profileBio}
+            setProfileBio={props.setProfileBio}
+          />
           <ProfileTeam
             setTeamName={props.setTeamName}
             teamName={props.teamName}
@@ -524,7 +544,8 @@ function ProfileCard(props) {
           profilePicSrc={profilePicSrc}
           firstName={props.firstName}
           lastName={props.lastName}
-          bio={bio}
+          profileBio={props.profileBio}
+          setProfileBio={props.setProfileBio}
           email={props.email}
           teamName={props.teamName}
           sinceDate={props.sinceDate}
@@ -600,8 +621,8 @@ function ProfileBio(props) {
       <input
         id="bio"
         type="text"
-        onChange={(evt) => props.setBio(evt.currentTarget.value)}
-        value={props.bio}
+        onChange={(evt) => props.setProfileBio(evt.currentTarget.value)}
+        value={props.profileBio}
         placeholder="Enter a brief bio"
       />
     </div>
@@ -679,10 +700,11 @@ function ProfileForm(props) {
         <h3 className="first-name last-name">
           {props.firstName} {props.lastName}
         </h3>
-        <h6>Member since {props.sinceDate}</h6>
-        <p className="bio">{props.bio}</p>
-        <div className="team-name">{props.teamName}</div>
+
         <div className="email">{props.email}</div>
+        <h6>Member since {props.sinceDate}</h6>
+        <div className="bio">{props.profileBio}</div>
+        <div className="team-name">Team: {props.teamName}</div>
         {props.active === "profile" && (
           <button onClick={handleEdit} className="edit">
             Edit Profile

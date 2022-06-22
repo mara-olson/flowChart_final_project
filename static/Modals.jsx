@@ -66,6 +66,7 @@ function ProfileModal(props) {
 function ActivityModal(props) {
   const closeModal = () => {
     props.setShowActivityModal(false);
+    localStorage.setItem("selectedActivity", null);
     props.setModalError(null);
   };
 
@@ -100,6 +101,12 @@ function ActivityModal(props) {
 }
 
 function AddActivityModal(props) {
+  const closeModal = () => {
+    props.setShowAddActModal(false);
+    localStorage.setItem("selectedActivity", null);
+    props.setModalError(null);
+  };
+
   if (!props.showAddActModal) {
     return null;
   }
@@ -116,10 +123,11 @@ function AddActivityModal(props) {
           setShowAddActModal={props.setShowAddActModal}
           activities={props.activities}
           setActivities={props.setActivities}
+          selectedDate={props.selectedDate}
         />
         <div className="modal-footer">
           {props.modalError && <p className="error">{props.modalError}</p>}
-          <button className="modal-button" onClick={props.onClose}>
+          <button className="modal-button" onClick={closeModal}>
             Close
           </button>
         </div>

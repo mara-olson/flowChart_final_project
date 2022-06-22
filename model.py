@@ -15,6 +15,7 @@ class User(db.Model):
     team_name = db.Column(db.String)
     email = db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String, nullable=False)
+    bio = db.Column(db.String)
     created_at = db.Column(db.DateTime)
     deactivated_at = db.Column(db.DateTime)
     notifications = db.Column(db.Boolean)
@@ -29,9 +30,11 @@ class User(db.Model):
         return f'<User user_id={self.user_id} email={self.email}'
 
     @classmethod
-    def create_user(cls, first_name, last_name, team_name, email, password, created_at):
+    def create_user(cls, first_name, last_name, team_name, email, password, bio, created_at):
        """Create and return a new user."""
-       user = cls(email=email, password=password, first_name=first_name, last_name=last_name, team_name=team_name, created_at=created_at)
+       user = cls(email=email, password=password, first_name=first_name, last_name=last_name, team_name=team_name, 
+       bio=bio,
+       created_at=created_at)
        db.session.add(user)
        db.session.commit()
 

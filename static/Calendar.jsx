@@ -93,7 +93,7 @@ function Calendar(props) {
           setCalActivities={setCalActivities}
           // showModal={props.showModal}
           // setShowModal={props.setShowModal}
-          f={props.showActivityModal}
+          showActivityModal={props.showActivityModal}
           setShowActivityModal={props.setShowActivityModal}
           showAddActModal={props.showAddActModal}
           setShowAddActModal={props.setShowAddActModal}
@@ -112,6 +112,8 @@ function Calendar(props) {
           setCalPeriods={setCalPeriods}
           selectedActivityId={props.selectedActivityId}
           setSelectedActivityId={props.setSelectedActivityId}
+          selectedDate={props.selectedDate}
+          setSelectedDate={props.setSelectedDate}
         />
         {/* <ActivityModal
           userId={props.userId}
@@ -222,12 +224,13 @@ function CalendarDays(props) {
 
   const updateActivity = (day) => {
     props.setSelectedActivityId(day.activityId);
-    console.log(day.activityId);
   };
 
   const handleClick = (day, evt) => {
     evt.preventDefault();
     updateActivity(day);
+    props.setSelectedDate(day.activityDate);
+    console.log(day.activityDate);
     // if (!day.activityName) {
     //   props.setShowModal(true);
     //   return (
@@ -250,26 +253,28 @@ function CalendarDays(props) {
   // updateActivity(day);
   const viewActivity = (day, evt) => {
     evt.preventDefault();
-    props.setShowActivityModal(true);
-    // console.log(props.selectedActivityId);
-    // if (day.activityName) {
-    //   return (
-    //     <ActivityModal
-    //       userId={props.userId}
-    //       error={props.error}
-    //       setError={props.setError}
-    //       modalError={props.modalError}
-    //       setModalError={props.setModalError}
-    //       showActivityModal={props.showActivityModal}
-    //       setShowActivityModal={props.setShowActivityModal}
-    //       activities={props.activiies}
-    //       setActivities={props.setActivities}
-    //       selectedActivityId={props.selectedActivityId}
-    //       setSelectedActivityId={props.setSelectedActivityId}
-    //       selectedDate={day.date}
-    //     />
-    //   );
-    // }
+
+    if (day.activityName) {
+      props.setShowActivityModal(true);
+      // return (
+      //   <ActivityModal
+      //     userId={props.userId}
+      //     error={props.error}
+      //     setError={props.setError}
+      //     modalError={props.modalError}
+      //     setModalError={props.setModalError}
+      //     showActivityModal={props.showActivityModal}
+      //     setShowActivityModal={props.setShowActivityModal}
+      //     activities={props.activiies}
+      //     setActivities={props.setActivities}
+      //     selectedActivityId={props.selectedActivityId}
+      //     setSelectedActivityId={props.setSelectedActivityId}
+      //     selectedDate={day.date}
+      //   />
+      // );
+    } else {
+      props.setShowAddActModal(true);
+    }
   };
 
   // if (day.activityName && day.volume) {

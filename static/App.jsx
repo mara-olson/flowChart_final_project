@@ -16,6 +16,7 @@ function App() {
   // const [modalContent, setModalContent] = React.useState(null);
   const [activities, setActivities] = React.useState(null);
   const [selectedActivityId, setSelectedActivityId] = React.useState(null);
+  const [selectedDate, setSelectedDate] = React.useState(null);
   const [periods, setPeriods] = React.useState([]);
 
   const [firstName, setFirstName] = React.useState(null);
@@ -23,9 +24,10 @@ function App() {
   const [teamName, setTeamName] = React.useState(null);
   const [email, setEmail] = React.useState(null);
   const [password, setPassword] = React.useState(null);
+  const [profileBio, setProfileBio] = React.useState(null);
   const [sinceDate, setSinceDate] = React.useState(null);
 
-  const [monthlyMileage, setMonthlyMileage] = React.useState(0);
+  const [monthlyMileage, setMonthlyMileage] = React.useState("0");
   const [lastPeriod, setLastPeriod] = React.useState("--");
 
   React.useEffect(() => {
@@ -39,6 +41,7 @@ function App() {
           setEmail(data.email);
           setPassword(data.password);
           setSinceDate(data.member_since);
+          setProfileBio(data.bio);
         });
     }
   }, [userId]);
@@ -64,7 +67,9 @@ function App() {
 
   React.useEffect(() => {
     const localSelectedActivity = localStorage.getItem("selectedActivity");
-    if (localSelectedActivity) {
+
+    if (typeof localStorage.getItem("selectedActivity") != undefined) {
+      console.log("printed");
       setSelectedActivityId(JSON.parse(selectedActivityId));
     }
   }, [selectedActivityId]);
@@ -152,6 +157,8 @@ function App() {
             setEmail={setEmail}
             password={password}
             setPassword={setPassword}
+            profileBio={profileBio}
+            setProfileBio={setProfileBio}
             sinceDate={sinceDate}
             monthlyMileage={monthlyMileage}
             setMonthlyMileage={setMonthlyMileage}
@@ -159,6 +166,8 @@ function App() {
             setLastPeriod={setLastPeriod}
             selectedActivityId={selectedActivityId}
             setSelectedActivityId={setSelectedActivityId}
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
           />
           <ActivityModal
             userId={userId}
@@ -188,6 +197,8 @@ function App() {
             setActivities={setActivities}
             selectedActivityId={selectedActivityId}
             setSelectedActivityId={setSelectedActivityId}
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
             // onClose={closeModal}
           />
           {/* <Calendar userId={userId} /> */}

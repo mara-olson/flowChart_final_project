@@ -146,17 +146,18 @@ def save_new_user():
     new_lname = data.get("last_name")
     new_team = data.get("team_name")
     new_email = data.get("email")
+    new_bio = data.get("bio")
     new_password = data.get("password")
     created_at = datetime.datetime.now()
 
     all_users = [x.email for x in db.session.query(User.email).distinct()]
 
     if new_email not in all_users and "@" in new_email: 
-        new_user = User.create_user(new_fname, new_lname, new_team, new_email, new_password, created_at)
+        new_user = User.create_user(new_fname, new_lname, new_team, new_email, new_password, new_bio, created_at)
 
         session["user_id"] = new_user.user_id
 
-        return jsonify({"success": True,"user_id":new_user.user_id, "first_name": new_user.first_name, "last_name": new_user.last_name, "team_name": new_user.team_name, "email": new_user.email, "password": new_user.password, "created_at": new_user.created_at, "error_msg": None})
+        return jsonify({"success": True,"user_id":new_user.user_id, "first_name": new_user.first_name, "last_name": new_user.last_name, "team_name": new_user.team_name, "email": new_user.email, "password": new_user.password, "bio": new_user.bio, "created_at": new_user.created_at, "error_msg": None})
     
     elif "@" not in new_email:
         error = "Please enter a valid email."
@@ -264,9 +265,8 @@ def profile():
     user = User.get_user_by_id(user_id)
     # dt = user.created_at
     # trunc_date = datetime.date( dt.day, dt.month, dt.year)
-    print("*"*20, user.password)
 
-    return jsonify({"success":True, "first_name": user.first_name, "last_name": user.last_name, "team_name": user.team_name, "email": user.email, "password": user.password, "member_since": user.created_at.strftime("%b %d, %Y")})
+    return jsonify({"success":True, "first_name": user.first_name, "last_name": user.last_name, "team_name": user.team_name, "email": user.email, "password": user.password, "bio": user.bio, "member_since": user.created_at.strftime("%b %d, %Y")})
 
 
 @app.route("/api/profile", methods=["PUT"])
@@ -283,6 +283,7 @@ def update_profile():
     password = data.get("password")
     bio = data.get("bio")
 
+
     user = User.get_user_by_id(user_id)
     
     user.first_name = first_name
@@ -293,8 +294,9 @@ def update_profile():
     user.bio = bio
 
     db.session.commit()
+    print("***********THIS IS THE BIO"*3, user.bio)
 
-    return jsonify({"success":True, "first_name": user.first_name, "last_name": user.last_name, "team_name": user.team_name, "email": user.email, "password": user.password, "bio":bio})
+    return jsonify({"success":True, "first_name": user.first_name, "last_name": user.last_name, "team_name": user.team_name, "email": user.email, "password": user.password, "bio": user.bio})
 
 
 @app.route("/api/<user_id>/activities/<activity_id>", methods=["DELETE"])
