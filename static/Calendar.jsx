@@ -230,9 +230,13 @@ function CalendarDays(props) {
     evt.preventDefault();
     updateActivity(day);
     props.setSelectedDate(day.activityDate);
-    console.log(day.activityDate);
-    props.setShowAddActModal(true);
-    console.log("clicked!");
+
+    if (day.activityName) {
+      props.setShowActivityModal(true);
+    } else {
+      props.setShowAddActModal(true);
+    }
+
     // if (!day.activityName) {
     //   props.setShowModal(true);
     //   return (
@@ -253,29 +257,26 @@ function CalendarDays(props) {
     localStorage.setItem("selectedActivity", day.activityId);
   };
   // updateActivity(day);
-  const viewActivity = (day, evt) => {
-    evt.preventDefault();
+  // const viewActivity = (day, evt) => {
+  //   evt.preventDefault();
 
-    if (day.activityName) {
-      props.setShowActivityModal(true);
-      // return (
-      //   <ActivityModal
-      //     userId={props.userId}
-      //     error={props.error}
-      //     setError={props.setError}
-      //     modalError={props.modalError}
-      //     setModalError={props.setModalError}
-      //     showActivityModal={props.showActivityModal}
-      //     setShowActivityModal={props.setShowActivityModal}
-      //     activities={props.activiies}
-      //     setActivities={props.setActivities}
-      //     selectedActivityId={props.selectedActivityId}
-      //     setSelectedActivityId={props.setSelectedActivityId}
-      //     selectedDate={day.date}
-      //   />
-      // );
-    }
-  };
+  //   return (
+  //     <ActivityModal
+  //       userId={props.userId}
+  //       error={props.error}
+  //       setError={props.setError}
+  //       modalError={props.modalError}
+  //       setModalError={props.setModalError}
+  //       showActivityModal={props.showActivityModal}
+  //       setShowActivityModal={props.setShowActivityModal}
+  //       activities={props.activiies}
+  //       setActivities={props.setActivities}
+  //       selectedActivityId={props.selectedActivityId}
+  //       setSelectedActivityId={props.setSelectedActivityId}
+  //       selectedDate={day.date}
+  //     />
+  //   );
+  // }
 
   // if (day.activityName && day.volume) {
   //   const content = (
