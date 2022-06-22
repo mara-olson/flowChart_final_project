@@ -151,9 +151,6 @@ function Calendar(props) {
 }
 
 function CalendarDays(props) {
-  // console.log(props.calPeriods);
-  // console.log(props.calActivities);
-  // console.log("props.selectedActivityId", props.selectedActivityId);
   let firstDayOfMonth = new Date(
     props.today.getFullYear(),
     props.today.getMonth(),
@@ -232,6 +229,7 @@ function CalendarDays(props) {
     evt.preventDefault();
     updateActivity(day);
     props.setSelectedDate(day.activityDate);
+    console.log(props.calActivities);
 
     if (!day.activityName) {
       props.setShowEntryChoiceModal(true);

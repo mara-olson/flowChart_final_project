@@ -111,7 +111,6 @@ def login_process():
 
     email = request.json.get("email")
     password = request.json.get("password")
-    print(email)
     user = User.get_user_by_email(email)
 
     if not user:
@@ -197,7 +196,6 @@ def activity_data(user_id):
         return r.json()
 
     strava_activities = get_strava_activity_data()
-    # print(strava_activities)
     
     def km_to_miles(kilometers):
         return round((kilometers * 0.000621371), 2)
@@ -205,13 +203,23 @@ def activity_data(user_id):
     activity_objs = []
 
     for activity in strava_activities:
-        new_strava_act = {"id": activity["id"], "name": activity["name"], "date": activity["start_date_local"][:10]
-        , "distance": km_to_miles(activity["distance"]), "type": activity["type"]}
-        activity_objs.append(new_strava_act)
-
+        new_strava_act = {
+            "id": activity["id"],
+            "activity_name": activity["name"], 
+            "activity_date": activity["start_date_local"][:10], 
+            "duration": activity["moving_time"], 
+            "distance": km_to_miles(activity["distance"]), 
+            "activity_type": activity["type"], 
+            "suffer_score": None, 
+            "activity_notes": activity["location_city"], 
+            "created_at": datetime.datetime.now()}
+        
+        strava_add_to_db = ActivityLog.create_activity(user_id, new_strava_act["activity_date"], new_strava_act["activity_type"], new_strava_act["activity_name"], new_strava_act["duration"], new_strava_act["distance"], new_strava_act["suffer_score"], new_strava_act["activity_notes"], new_strava_act["created_at"])
+        
 
     all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
 
+    
     currentTime= datetime.datetime.now()
 
     mileage_this_month = db.session.query(func.round(func.sum(ActivityLog.distance))).filter(ActivityLog.activity_date > (currentTime - datetime.timedelta(30))).one()[0]
@@ -225,7 +233,8 @@ def activity_data(user_id):
             }
         # activity = activity.to_dict()
         activity_objs.append(new_act)
-    
+        
+    print("******"*20, activity_objs)
     activity_objs.sort(key=lambda x: datetime.datetime.strptime(x['date'], "%Y-%m-%d"))
 
 
