@@ -231,6 +231,8 @@ function CalendarDays(props) {
     updateActivity(day);
     props.setSelectedDate(day.activityDate);
     console.log(day.activityDate);
+    props.setShowAddActModal(true);
+    console.log("clicked!");
     // if (!day.activityName) {
     //   props.setShowModal(true);
     //   return (
@@ -272,8 +274,6 @@ function CalendarDays(props) {
       //     selectedDate={day.date}
       //   />
       // );
-    } else {
-      props.setShowAddActModal(true);
     }
   };
 

@@ -68,9 +68,10 @@ function App() {
   React.useEffect(() => {
     const localSelectedActivity = localStorage.getItem("selectedActivity");
 
-    if (typeof localStorage.getItem("selectedActivity") != undefined) {
-      console.log("printed");
-      setSelectedActivityId(JSON.parse(selectedActivityId));
+    if (localSelectedActivity) {
+      try {
+        setSelectedActivityId(JSON.parse(selectedActivityId));
+      } catch (e) {}
     }
   }, [selectedActivityId]);
 

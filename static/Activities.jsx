@@ -845,7 +845,6 @@ function ActivityForm(props) {
     evt.preventDefault();
     const formEdit = props.activityEdit === "edit" ? "non-edit" : "edit";
     props.setActivityEdit(formEdit);
-    props.setShowActivityModal(true);
     // return <SelectedActivityContainer />;
   };
 
