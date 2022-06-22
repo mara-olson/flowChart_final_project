@@ -137,7 +137,12 @@ function AddActivityModal(props) {
 }
 
 function PeriodModal(props) {
-  if (!props.showModal) {
+  const closeModal = () => {
+    props.setShowPeriodModal(false);
+    props.setModalError(null);
+  };
+
+  if (!props.showPeriodModal) {
     return null;
   }
   return (
@@ -151,17 +156,54 @@ function PeriodModal(props) {
           modalError={props.modalError}
           error={props.error}
           setError={props.setError}
-          showModal={props.showModal}
-          setShowModal={props.setShowModal}
+          showPeriodModal={props.showPeriodModal}
+          setShowPeriodModal={props.setShowPeriodModal}
           periods={props.periods}
           setPeriods={props.setPeriods}
         />
         <div className="modal-footer">
           {props.modalError && <p className="error">{props.modalError}</p>}
-          <button className="modal-button" onClick={props.onClose}>
+          <button className="modal-button" onClick={closeModal}>
             Close
           </button>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function EntryChoice(props) {
+  const closeModal = () => {
+    props.setShowEntryChoiceModal(false);
+    props.setModalError(null);
+  };
+
+  const goToAddActivity = (evt) => {
+    evt.preventDefault();
+    props.setShowEntryChoiceModal(false);
+    props.setShowAddActModal(true);
+  };
+
+  const goToAddPeriod = (evt) => {
+    evt.preventDefault();
+    props.setShowEntryChoiceModal(false);
+    props.setShowPeriodModal(true);
+  };
+
+  if (!props.showEntryChoiceModal) {
+    return null;
+  }
+  return (
+    <div className="modal">
+      <div className="modal-content">
+        <button onClick={goToAddActivity}>Add Activity</button>
+        <button onClick={goToAddPeriod}>Add Period</button>
+      </div>
+      <div className="modal-footer">
+        {props.modalError && <p className="error">{props.modalError}</p>}
+        <button className="modal-button" onClick={closeModal}>
+          Close
+        </button>
       </div>
     </div>
   );

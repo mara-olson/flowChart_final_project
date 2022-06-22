@@ -204,6 +204,10 @@ function Home(props) {
         setShowAddActModal={props.setShowAddActModal}
         showDeleteActModal={props.showDeleteActModal}
         setShowDeleteActModal={props.setShowDeleteActModal}
+        showPeriodModal={props.showPeriodModal}
+        setShowPeriodModal={props.setShowPeriodModal}
+        showEntryChoiceModal={props.showEntryChoiceModal}
+        setShowEntryChoiceModal={props.setShowEntryChoiceModal}
         modalError={props.modalError}
         setModalError={props.setModalError}
         activityDate={props.activityDate}
@@ -244,6 +248,26 @@ function Home(props) {
         setSelectedActivityId={props.setSelectedActivityId}
         selectedDate={props.selectedDate}
         setSelectedDate={props.setSelectedDate}
+      />
+      <PeriodModal
+        userId={props.userId}
+        showPeriodModal={props.showPeriodModal}
+        setShowPeriodModal={props.setShowPeriodModal}
+        modalError={props.modalError}
+        setModalError={props.setModalError}
+        error={props.error}
+        setError={props.setError}
+        periods={props.periods}
+        setPeriods={props.setPeriods}
+      />
+      <EntryChoice
+        showEntryChoiceModal={props.showEntryChoiceModal}
+        setShowEntryChoiceModal={props.setShowEntryChoiceModal}
+        showPeriodModal={props.showPeriodModal}
+        setShowPeriodModal={props.setShowPeriodModal}
+        modalError={props.modalError}
+        setModalError={props.setModalError}
+        setShowAddActModal={props.setShowAddActModal}
       />
       <MyChart
         editMode={props.editMode}

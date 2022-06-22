@@ -13,6 +13,7 @@ function App() {
   const [showAddPeriodModal, setShowAddPeriodModal] = React.useState(false);
   const [showSignUpModal, setShowSignUpModal] = React.useState(false);
   const [showDeleteActModal, setShowDeleteActModal] = React.useState(false);
+  const [showEntryChoiceModal, setShowEntryChoiceModal] = React.useState(false);
   // const [modalContent, setModalContent] = React.useState(null);
   const [activities, setActivities] = React.useState(null);
   const [selectedActivityId, setSelectedActivityId] = React.useState(null);
@@ -140,6 +141,10 @@ function App() {
             setShowAddActModal={setShowAddActModal}
             showDeleteActModal={showDeleteActModal}
             setShowDeleteActModal={setShowDeleteActModal}
+            showPeriodModal={showPeriodModal}
+            setShowPeriodModal={setShowPeriodModal}
+            showEntryChoiceModal={showEntryChoiceModal}
+            setShowEntryChoiceModal={setShowEntryChoiceModal}
             // modalContent={modalContent}
             // setModalContent={setModalContent}
             modalError={modalError}
@@ -201,6 +206,18 @@ function App() {
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
             // onClose={closeModal}
+          />
+          <PeriodModal
+            userId={userId}
+            // onClose={closeModal}
+            showPeriodModal={showPeriodModal}
+            setShowPeriodModal={setShowPeriodModal}
+            modalError={modalError}
+            setModalError={setModalError}
+            error={error}
+            setError={setError}
+            periods={periods}
+            setPeriods={setPeriods}
           />
           {/* <Calendar userId={userId} /> */}
         </Route>

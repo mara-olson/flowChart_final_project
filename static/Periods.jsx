@@ -11,10 +11,8 @@ function Periods(props) {
         setError={props.setError}
         modalError={props.modalError}
         setModalError={props.setModalError}
-        showModal={props.showModal}
-        setShowModal={props.setShowModal}
-        modalContent={props.modalContent}
-        setModalContent={props.setModalContent}
+        showPeriodModal={props.showPeriodModal}
+        setShowPeriodModal={props.setShowPeriodModal}
       />
       <PeriodContainer
         userId={props.userId}
@@ -26,10 +24,8 @@ function Periods(props) {
         setError={props.setError}
         modalError={props.modalError}
         setModalError={props.setModalError}
-        showModal={props.showModal}
-        setShowModal={props.setShowModal}
-        modalContent={props.modalContent}
-        setModalContent={props.setModalContent}
+        showPeriodModal={props.showPeriodModal}
+        setShowPeriodModal={props.setShowPeriodModal}
       />
     </div>
   );
@@ -66,7 +62,7 @@ function PeriodContainer(props) {
         symptoms={symptoms}
         periods={props.periods}
         setPeriods={props.setPeriods}
-        setShowModal={props.setShowModal}
+        setShowPeriodModal={props.setShowPeriodModal}
       />
     );
   }
@@ -90,13 +86,13 @@ function PeriodCard(props) {
 
   const handleClick = (evt) => {
     evt.preventDefault();
-    props.setEditMode(true);
+    // props.setEditMode(true);
     // showPeriodForm();
     periodFormTitle = "Edit Period";
     periodFormButtonName = "Save";
 
-    props.setModalContent(<PeriodForm />);
-    props.setShowModal(true);
+    // props.setModalContent(<PeriodForm />);
+    props.setShowPeriodModal(true);
     console.log("editMode: ", props.editMode);
   };
 
@@ -117,26 +113,26 @@ function AddPeriodButton(props) {
 
   const handleClick = () => {
     // evt.preventDefault();
-    props.setShowModal(true);
-    props.setModalContent(
-      <PeriodForm
-        userId={props.userId}
-        editMode={props.editMode}
-        setEditMode={props.setEditMode}
-        periods={props.periods}
-        setPeriods={props.setPeriods}
-        setError={props.setError}
-        modalError={props.modalError}
-        setModalError={props.setModalError}
-        showModal={props.showModal}
-        setShowModal={props.setShowModal}
-        modalContent={props.modalContent}
-        setModalContent={props.setModalContent}
-        periodId={props.periodId}
-        periodFormButtonName={periodFormButtonName}
-        periodFormTitle={periodFormTitle}
-      />
-    );
+    props.setShowPeriodModal(true);
+    // props.setModalContent(
+    //   <PeriodForm
+    //     userId={props.userId}
+    //     editMode={props.editMode}
+    //     setEditMode={props.setEditMode}
+    //     periods={props.periods}
+    //     setPeriods={props.setPeriods}
+    //     setError={props.setError}
+    //     modalError={props.modalError}
+    //     setModalError={props.setModalError}
+    //     showModal={props.showModal}
+    //     setShowModal={props.setShowModal}
+    //     modalContent={props.modalContent}
+    //     setModalContent={props.setModalContent}
+    //     periodId={props.periodId}
+    //     periodFormButtonName={periodFormButtonName}
+    //     periodFormTitle={periodFormTitle}
+    //   />
+    // );
     // return (
     //   <Modal
     //     userId={props.userId}
@@ -202,8 +198,8 @@ function PeriodForm(props) {
             .then((response) => response.json())
             .then((data) => {
               props.setPeriods(data.periods);
-              props.setShowModal(false);
-              props.setEditMode(false);
+              props.setShowPeriodModal(false);
+              // props.setEditMode(false);
             });
         } else {
           console.log(data.error);

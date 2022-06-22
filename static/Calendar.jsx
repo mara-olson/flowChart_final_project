@@ -99,9 +99,11 @@ function Calendar(props) {
           setShowAddActModal={props.setShowAddActModal}
           showDeleteActModal={props.showDeleteActModal}
           setShowDeleteActModal={props.setShowDeleteActModal}
+          showPeriodModal={props.showPeriodModal}
+          setShowPeriodModal={props.setShowPeriodModal}
           setModalTitle={props.setModalTitle}
-          modalContent={props.modalContent}
-          setModalContent={props.setModalContent}
+          showEntryChoiceModal={props.showEntryChoiceModal}
+          setShowEntryChoiceModal={props.setShowEntryChoiceModal}
           modalError={props.modalError}
           setModalError={props.setModalError}
           activities={props.activities}
@@ -231,11 +233,13 @@ function CalendarDays(props) {
     updateActivity(day);
     props.setSelectedDate(day.activityDate);
 
-    if (day.activityName) {
-      props.setShowActivityModal(true);
-    } else {
-      props.setShowAddActModal(true);
+    if (!day.activityName) {
+      props.setShowEntryChoiceModal(true);
     }
+    //   props.setShowActivityModal(true);
+    // } else {
+    //   showEntryChoice(evt);
+    // }
 
     // if (!day.activityName) {
     //   props.setShowModal(true);
@@ -257,8 +261,10 @@ function CalendarDays(props) {
     localStorage.setItem("selectedActivity", day.activityId);
   };
   // updateActivity(day);
-  // const viewActivity = (day, evt) => {
-  //   evt.preventDefault();
+  const viewActivity = (day, evt) => {
+    evt.preventDefault();
+    props.setShowActivityModal(true);
+  };
 
   //   return (
   //     <ActivityModal
@@ -364,9 +370,7 @@ function CalendarDays(props) {
   //   props.setShowModal(true);
   // } else {
   //   props.setEditMode(false);
-  //   const goToAddActivity = (evt) => {
-  //     evt.preventDefault();
-
+  //
   //     props.setModalContent(
   //       <AddActivityForm
   //         userId={props.userId}
