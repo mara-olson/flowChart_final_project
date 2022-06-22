@@ -4,10 +4,10 @@ function SignUpModal(props) {
     window.location.replace(
       "https://www.strava.com/oauth/authorize?client_id=80271&response_type=code&redirect_uri=http://localhost:5001/exchange_token&approval_prompt=force&scope=profile:read_all,activity:read_all"
     );
-    setShowModal(false);
+    setShowSignUpModal(false);
   };
 
-  if (!props.showModal) {
+  if (!props.showSignUpModal) {
     return null;
   }
   return (
@@ -76,7 +76,7 @@ function SignUp(props) {
           localStorage.setItem("isLoggedIn", true);
           localStorage.setItem("userId", data.user_id);
 
-          props.setShowModal(true);
+          props.setShowSignUpModal(true);
         } else {
           props.setError(data.error_msg);
         }

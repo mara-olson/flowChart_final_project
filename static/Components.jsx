@@ -499,7 +499,6 @@ function ProfileCard(props) {
           props.setEmail(data.email);
           props.setPassword(data.password);
           props.setProfileBio(data.bio);
-          console.log(data.bio);
 
           props.setShowProfileModal(false);
           const activeProfile = active === "edit" ? "profile" : "edit";

@@ -416,3 +416,13 @@ def activity_data(user_id):
 		Must refresh for name to update
 	TO-DO:
 		- Add activity from unnamed calendar square
+
+6/21
+	- Issue with clicking on square!
+	if (typeof localStorage.getItem("selectedActivity") != undefined) {
+      console.log("printed");
+      setSelectedActivityId(JSON.parse(selectedActivityId));
+    Fixed
+    - Ufda today was a lot of modal finessing. EntryChoiceModal added so that when user selects a calendar day they are given the option to add an activity or a period
+    TO-DO:
+    	- Editing activity from Activities tab :(
