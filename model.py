@@ -154,7 +154,8 @@ class ActivityLog(db.Model):
 
     @classmethod
     def delete_activity(cls, activity_id):
-        activity = cls(activity_id=activity_id)
+        activity = ActivityLog.query.get(activity_id)
+
         db.session.delete(activity)
         db.session.commit()
 

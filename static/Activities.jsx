@@ -603,20 +603,21 @@ function ActivityCard(props) {
   const handleDelete = (evt) => {
     evt.preventDefault();
     setActivityEdit("delete");
-    fetch(
-      `/api/${props.userId}/activities/${localStorage.getItem(
-        "selectedActivity"
-      )}`,
-      {
-        method: "DELETE",
-        credentials: "include",
-        body: JSON.stringify({
-          activity_id: localStorage.getItem("selectedActivity"),
-        }),
-      }
-    )
+
+    const activityId = localStorage.getItem("selectedActivity");
+
+    fetch(`/api/${props.userId}/activities/${activityId}`, {
+      method: "DELETE",
+      credentials: "include",
+      body: JSON.stringify({
+        activity_id: activityId,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => response.json())
-      .then((data) => console.log("deleted"));
+      .then((data) => console.log(data.reponse));
   };
 
   return (
@@ -867,7 +868,7 @@ function ActivityForm(props) {
         <p>Name: {props.activityName}</p>
         <p>Date: {props.activityDate} </p>
         <p>Type: {props.activityType}</p>
-        <p>Duration: {props.duration}</p>
+        <p>Duration: {props.duration} minutes</p>
         <p>Distance: {props.distance} miles</p>
         <p>Suffer Score: {props.sufferScore}</p>
         <p>Notes: {props.activityNotes}</p>
@@ -878,7 +879,7 @@ function ActivityForm(props) {
         <button className="delete" onClick={handleDeleteClick}>
           Delete Activity
         </button>
-        <button onClick={closeEdit}>Cancel</button>
+        {/* <button onClick={closeEdit}>Cancel</button> */}
       </form>
     </div>
   );

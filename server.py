@@ -200,6 +200,9 @@ def activity_data(user_id):
     def km_to_miles(kilometers):
         return round((kilometers * 0.000621371), 2)
 
+    def sec_to_min(seconds):
+        return (seconds/60)
+
     activity_objs = []
 
     for activity in strava_activities:
@@ -207,7 +210,7 @@ def activity_data(user_id):
             "id": activity["id"],
             "activity_name": activity["name"], 
             "activity_date": activity["start_date_local"][:10], 
-            "duration": activity["moving_time"], 
+            "duration": sec_to_min(activity["moving_time"]), 
             "distance": km_to_miles(activity["distance"]), 
             "activity_type": activity["type"], 
             "suffer_score": None, 
@@ -234,11 +237,8 @@ def activity_data(user_id):
         # activity = activity.to_dict()
         activity_objs.append(new_act)
         
-    print("******"*20, activity_objs)
     activity_objs.sort(key=lambda x: datetime.datetime.strptime(x['date'], "%Y-%m-%d"))
 
-
-    # print(activity_objs)
 
     return jsonify({"activities": activity_objs, "monthlyMileage": mileage_this_month})
 
@@ -309,14 +309,22 @@ def update_profile():
 
 
 @app.route("/api/<user_id>/activities/<activity_id>", methods=["DELETE"])
-def delete_activity(user_id, activity_id):
+def delete_user_activity(user_id, activity_id):
     """Delete activity."""
-    data = request.json
-    activity_id = data.get("activity_id")
+    user_id = session["user_id"]
     
-    delete_activity(activity_id)
+    data = request.json
+
+    activity_id = data.get("activity_id")
+
+    print("*"*40, data.get("activity_id"))
+    
+    ActivityLog.delete_activity(activity_id)
 
     print(f"Activity {activity_id} deleted")
+
+    response = "deleted"
+    return response 
 
 
 
