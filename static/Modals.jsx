@@ -68,6 +68,7 @@ function ActivityModal(props) {
     props.setShowActivityModal(false);
     localStorage.setItem("selectedActivity", null);
     props.setModalError(null);
+    props.setSelectedActivityId(null);
   };
 
   if (!props.showActivityModal) {
@@ -107,6 +108,7 @@ function AddActivityModal(props) {
     props.setShowAddActModal(false);
     localStorage.setItem("selectedActivity", null);
     props.setModalError(null);
+    props.setSelectedActivityId(null);
   };
 
   if (!props.showAddActModal) {

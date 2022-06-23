@@ -186,13 +186,7 @@ function AddActivityForm(props) {
           // props.setSelectedDate(data.activityDate);
 
           props.setModalError(null);
-
-          // fetch(`/api/${props.userId}/activities`)
-          //   .then((response) => response.json())
-          //   .then((data) => {
-          //     props.setActivities(data.activities);
-          //     props.setShowAddActModal(false);
-          //   });
+          props.setShowAddActModal(false);
         } else {
           console.log("error");
           props.setModalError(data.error);
@@ -721,8 +715,8 @@ function ActivityType(props) {
       Activity Type
       <select
         id="act-type"
-        onChange={(evt) => props.setActivityType(evt.currentTarget.value)}
         value={props.activityType}
+        onChange={(evt) => props.setActivityType(evt.currentTarget.value)}
       >
         <option value="Null"></option>
         <option value="Run">Run</option>
