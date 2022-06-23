@@ -83,7 +83,10 @@ function Navbar(props) {
 function StatCard1(props) {
   return (
     <div className="profile-card">
-      <div>Mileage this Month: {props.monthlyMileage}</div>
+      {props.monthlyMileage && (
+        <div>Mileage this Month: {props.monthlyMileage}</div>
+      )}
+      {!props.monthlyMileage && <div>Mileage this Month: 0</div>}
     </div>
   );
 }
