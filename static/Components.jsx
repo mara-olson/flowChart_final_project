@@ -217,6 +217,8 @@ function Home(props) {
         setPeriods={props.setPeriods}
         selectedActivityId={props.selectedActivityId}
         setSelectedActivityId={props.setSelectedActivityId}
+        selectedPeriodId={props.selectedPeriodId}
+        setSelectedPeriodId={props.setSelectedPeriodId}
         selectedDate={props.selectedDate}
         setSelectedDate={props.setSelectedDate}
       />
@@ -266,15 +268,38 @@ function Home(props) {
         setError={props.setError}
         periods={props.periods}
         setPeriods={props.setPeriods}
+        selectedPeriodId={props.selectedPeriodId}
+        setSelectedPeriodId={props.setSelectedPeriodId}
+      />
+      <AddPeriodModal
+        userId={props.userId}
+        // onClose={closeModal}
+        showAddPeriodModal={props.showPeriodModal}
+        setShowAddPeriodModal={props.setShowPeriodModal}
+        modalError={props.modalError}
+        setModalError={props.setModalError}
+        error={props.error}
+        setError={props.setError}
+        periods={props.periods}
+        setPeriods={props.setPeriods}
+        selectedDate={props.selectedDate}
+        setSelectedDate={props.setSelectedDate}
+        selectedPeriodId={props.selectedPeriodId}
+        setSelectedPeriodId={props.setSelectedPeriodId}
       />
       <EntryChoice
         showEntryChoiceModal={props.showEntryChoiceModal}
         setShowEntryChoiceModal={props.setShowEntryChoiceModal}
+        showAddActModal={props.showAddActModal}
+        setShowAddActModal={props.setShowAddActModal}
         showPeriodModal={props.showPeriodModal}
         setShowPeriodModal={props.setShowPeriodModal}
+        showAddPeriodModal={props.showAddPeriodModal}
+        setShowAddPeriodModal={props.setShowAddPeriodModal}
         modalError={props.modalError}
         setModalError={props.setModalError}
-        setShowAddActModal={props.setShowAddActModal}
+        selectedDate={props.selectedDate}
+        setSelectedDate={props.setSelectedDate}
       />
       <MyChart
         editMode={props.editMode}

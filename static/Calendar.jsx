@@ -101,6 +101,8 @@ function Calendar(props) {
           setShowDeleteActModal={props.setShowDeleteActModal}
           showPeriodModal={props.showPeriodModal}
           setShowPeriodModal={props.setShowPeriodModal}
+          showAddPeriodModal={props.showAddPeriodModal}
+          setShowAddPeriodModal={props.setShowAddPeriodModal}
           setModalTitle={props.setModalTitle}
           showEntryChoiceModal={props.showEntryChoiceModal}
           setShowEntryChoiceModal={props.setShowEntryChoiceModal}
@@ -114,6 +116,8 @@ function Calendar(props) {
           setCalPeriods={setCalPeriods}
           selectedActivityId={props.selectedActivityId}
           setSelectedActivityId={props.setSelectedActivityId}
+          selectedPeriodId={props.selectedPeriodId}
+          setSelectedPeriodId={props.setSelectedPeriodId}
           selectedDate={props.selectedDate}
           setSelectedDate={props.setSelectedDate}
         />
@@ -212,10 +216,11 @@ function CalendarDays(props) {
           symptoms.push("Fatigue");
         }
 
-        if (currentDay.activityDate === calPeriod.date) {
+        if (currentDay.activityDate === calPeriod.mense_date) {
           currentDay["periodId"] = calPeriod.id;
-          currentDay["volume"] = calPeriod.flow;
+          currentDay["flowVolume"] = calPeriod.flow_volume;
           currentDay["symptoms"] = symptoms;
+          currentDay["periodNotes"] = calPeriod.mense_notes;
         }
       }
     }
@@ -223,6 +228,7 @@ function CalendarDays(props) {
 
   const updateActivity = (day) => {
     props.setSelectedActivityId(day.activityId);
+    props.setSelectedPeriodId(day.periodId);
   };
 
   const handleClick = (day, evt) => {
@@ -230,32 +236,13 @@ function CalendarDays(props) {
     updateActivity(day);
     props.setSelectedDate(day.activityDate);
 
-    if (!day.activityName) {
+    if (!day.activityName && !day.flowVolume) {
       props.setShowEntryChoiceModal(true);
+    } else if (day.activityName) {
+      localStorage.setItem("selectedActivity", day.activityId);
+    } else if (day.flowVolume) {
+      localStorage.setItem("selectedPeriod", day.periodId);
     }
-    //   props.setShowActivityModal(true);
-    // } else {
-    //   showEntryChoice(evt);
-    // }
-
-    // if (!day.activityName) {
-    //   props.setShowModal(true);
-    //   return (
-    //     <AddActivityModal
-    //       userId={props.userId}
-    //       error={props.error}
-    //       setError={props.setError}
-    //       modalError={props.modalError}
-    //       setModalError={props.setModalError}
-    //       showModal={props.showModal}
-    //       setShowModal={props.setShowModal}
-    //       activities={props.activities}
-    //       setActivities={props.setActivities}
-    //       selectedDate={day.date}
-    //     />
-    //   );
-    // }
-    localStorage.setItem("selectedActivity", day.activityId);
   };
   // updateActivity(day);
   const viewActivity = (day, evt) => {
@@ -263,6 +250,10 @@ function CalendarDays(props) {
     props.setShowActivityModal(true);
   };
 
+  const viewPeriod = (day, evt) => {
+    evt.preventDefault();
+    props.setShowPeriodModal(true);
+  };
   //   return (
   //     <ActivityModal
   //       userId={props.userId}
@@ -444,7 +435,11 @@ function CalendarDays(props) {
                 {day.activityName}
               </div>
             )}
-            {day.volume && <div>{day.volume} flow</div>}
+            {day.volume && (
+              <div onClick={(evt) => viewPeriod(day, evt)}>
+                {day.flowVolume} flow
+              </div>
+            )}
           </button>
         );
       })}

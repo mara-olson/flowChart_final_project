@@ -13,10 +13,13 @@ function App() {
   const [showAddPeriodModal, setShowAddPeriodModal] = React.useState(false);
   const [showSignUpModal, setShowSignUpModal] = React.useState(false);
   const [showDeleteActModal, setShowDeleteActModal] = React.useState(false);
+  const [showDeletePeriodModal, setShowDeletePeriodModal] =
+    React.useState(false);
   const [showEntryChoiceModal, setShowEntryChoiceModal] = React.useState(false);
   // const [modalContent, setModalContent] = React.useState(null);
   const [activities, setActivities] = React.useState(null);
   const [selectedActivityId, setSelectedActivityId] = React.useState(null);
+  const [selectedPeriodId, setSelectedPeriodId] = React.useState(null);
   const [selectedDate, setSelectedDate] = React.useState(null);
   const [periods, setPeriods] = React.useState([]);
 
@@ -75,6 +78,16 @@ function App() {
       } catch (e) {}
     }
   }, [selectedActivityId]);
+
+  React.useEffect(() => {
+    const localSelectedPeriod = localStorage.getItem("selectedPeriod");
+
+    if (localSelectedPeriod) {
+      try {
+        setSelectedPeriodId(JSON.parse(selectedPeriodId));
+      } catch (e) {}
+    }
+  }, [selectedPeriodId]);
 
   React.useEffect(() => {
     if (userId) {
@@ -143,8 +156,12 @@ function App() {
             setShowDeleteActModal={setShowDeleteActModal}
             showPeriodModal={showPeriodModal}
             setShowPeriodModal={setShowPeriodModal}
+            showDeletePeriodModal={showDeletePeriodModal}
+            setShowDeletePeriodModal={setShowDeletePeriodModal}
             showEntryChoiceModal={showEntryChoiceModal}
             setShowEntryChoiceModal={setShowEntryChoiceModal}
+            showAddPeriodModal={showAddPeriodModal}
+            setShowAddPeriodModal={setShowAddPeriodModal}
             // modalContent={modalContent}
             // setModalContent={setModalContent}
             modalError={modalError}
@@ -172,6 +189,8 @@ function App() {
             setLastPeriod={setLastPeriod}
             selectedActivityId={selectedActivityId}
             setSelectedActivityId={setSelectedActivityId}
+            selectedPeriodId={selectedPeriodId}
+            setSelectedPeriodId={setSelectedPeriodId}
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
           />
@@ -189,6 +208,8 @@ function App() {
             setActivities={setActivities}
             selectedActivityId={selectedActivityId}
             setSelectedActivityId={setSelectedActivityId}
+            selectedPeriodId={selectedPeriodId}
+            setSelectedPeriodId={setSelectedPeriodId}
             // onClose={closeModal}
           />
           <AddActivityModal
@@ -217,7 +238,6 @@ function App() {
           />
           <PeriodModal
             userId={userId}
-            // onClose={closeModal}
             showPeriodModal={showPeriodModal}
             setShowPeriodModal={setShowPeriodModal}
             modalError={modalError}
@@ -226,8 +246,36 @@ function App() {
             setError={setError}
             periods={periods}
             setPeriods={setPeriods}
+            showAddPeriodModal={showAddPeriodModal}
+            setShowAddPeriodModal={setShowAddPeriodModal}
+            showDeletePeriodModal={showDeletePeriodModal}
+            setShowDeletePeriodModal={setShowDeletePeriodModal}
+            selectedPeriodId={selectedPeriodId}
+            setSelectedPeriodId={setSelectedPeriodId}
           />
-          {/* <Calendar userId={userId} /> */}
+          <AddPeriodModal
+            userId={userId}
+            showPeriodModal={showPeriodModal}
+            setShowPeriodModal={setShowPeriodModal}
+            modalError={modalError}
+            setModalError={setModalError}
+            error={error}
+            setError={setError}
+            periods={periods}
+            setPeriods={setPeriods}
+            showAddPeriodModal={showAddPeriodModal}
+            setShowAddPeriodModal={setShowAddPeriodModal}
+            showDeletePeriodModal={showDeletePeriodModal}
+            setShowDeletePeriodModal={setShowDeletePeriodModal}
+            selectedPeriodId={selectedPeriodId}
+            setSelectedPeriodId={setSelectedPeriodId}
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
+          />
+          <DeletePeriod
+            showDeletePeriodModal={showDeletePeriodModal}
+            setShowDeletePeriodModal={setShowDeletePeriodModal}
+          />
         </Route>
       </div>
       <div className="container-fluid">
@@ -258,18 +306,6 @@ function App() {
             selectedActivityId={selectedActivityId}
             setSelectedActivityId={setSelectedActivityId}
             // onClose={closeModal}
-          />
-          <PeriodModal
-            userId={userId}
-            // onClose={closeModal}
-            showPeriodModal={showPeriodModal}
-            setShowPeriodModal={setShowPeriodModal}
-            modalError={modalError}
-            setModalError={setModalError}
-            error={error}
-            setError={setError}
-            periods={periods}
-            setPeriods={setPeriods}
           />
         </Route>
       </div>
@@ -319,7 +355,7 @@ function App() {
       </div>
       <div className="container-fluid">
         <Route exact path="/periods">
-          <Periods
+          {/* <Periods
             userId={userId}
             error={error}
             setError={setError}
@@ -329,18 +365,40 @@ function App() {
             setShowPeriodModal={setShowPeriodModal}
             periods={periods}
             setPeriods={setPeriods}
-          />
+          /> */}
           <PeriodModal
             userId={userId}
-            // onClose={closeModal}
             showPeriodModal={showPeriodModal}
             setShowPeriodModal={setShowPeriodModal}
+            showAddPeriodModal={showAddPeriodModal}
+            setShowAddPeriodModal={setShowAddPeriodModal}
             modalError={modalError}
             setModalError={setModalError}
             error={error}
             setError={setError}
             periods={periods}
             setPeriods={setPeriods}
+            showDeletePeriodModal={showDeletePeriodModal}
+            setShowDeletePeriodModal={setShowDeletePeriodModal}
+            selectedPeriodId={selectedPeriodId}
+            setSelectedPeriodId={setSelectedPeriodId}
+          />
+          <AddPeriodModal
+            userId={userId}
+            showAddPeriodModal={showPeriodModal}
+            setShowAddPeriodModal={setShowPeriodModal}
+            modalError={modalError}
+            setModalError={setModalError}
+            error={error}
+            setError={setError}
+            periods={periods}
+            setPeriods={setPeriods}
+            selectedPeriodId={selectedPeriodId}
+            setSelectedPeriodId={setSelectedPeriodId}
+          />
+          <DeletePeriod
+            showDeletePeriodModal={showDeletePeriodModal}
+            setShowDeletePeriodModal={setShowDeletePeriodModal}
           />
         </Route>
       </div>

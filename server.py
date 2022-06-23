@@ -239,7 +239,6 @@ def activity_data(user_id):
         
     activity_objs.sort(key=lambda x: datetime.datetime.strptime(x['date'], "%Y-%m-%d"))
 
-
     return jsonify({"activities": activity_objs, "monthlyMileage": mileage_this_month})
 
 
@@ -448,7 +447,7 @@ def add_activity(user_id):
     created_at = datetime.datetime.now()
 
     currentTime= datetime.datetime.now()
-    
+
     if (new_act_date is None or new_act_name is None or new_act_type is None):
 
         error = "Please enter an activity date, type, & name"
@@ -496,19 +495,21 @@ def period_data(user_id):
 
     for period in all_periods:
         new_period = {
-            "id": period.mense_id, 
-            "flow": period.flow_volume,
+            "mense_id": period.mense_id, 
+            "flow_volume": period.flow_volume,
             "mood": period.mood, 
             "cramps": period.cramps, 
             "bloating": period.bloating, 
             "fatigue": period.fatigue, 
-            "date": period.mense_date.strftime("%Y-%m-%d"), 
-            "notes": period.mense_notes,
+            "mense_date": period.mense_date.strftime("%Y-%m-%d"), 
+            "mense_notes": period.mense_notes,
             "created_at": period.created_at.strftime("%Y-%m-%d")
         }
         periods.append(new_period)
 
-    periods.sort(key=lambda x: datetime.datetime.strptime(x['date'], "%Y-%m-%d"))
+    periods.sort(key=lambda x: datetime.datetime.strptime(x['mense_date'], "%Y-%m-%d"))
+
+    print("****"*25, periods)
 
     last_period = db.session.query(func.max(MenseLog.mense_date)).one()[0].strftime("%B %d, %Y")
     
@@ -526,7 +527,7 @@ def update_period(user_id, period_id):
 
     user_id = session["user_id"]
 
-    edited_period_id = data.get("period_id")
+    edited_period_id = data.get("mense_id")
     
     edited_mense_date = data.get("mense_date")
     edited_flow_volume = data.get("flow_volume")
@@ -534,7 +535,7 @@ def update_period(user_id, period_id):
     edited_cramps = data.get("cramps")
     edited_bloating = data.get("bloating")
     edited_fatigue = data.get("fatigue")
-    edited_notes = data.get("notes")
+    edited_notes = data.get("mense_notes")
 
     currentTime= datetime.datetime.now()
 
@@ -555,13 +556,13 @@ def update_period(user_id, period_id):
         "success": True, 
         "error": None, 
         "periodId": edited_period.mense_id,        
-        "flowVolume": edited_period.flow_voume,
-        "periodDate": edited_period.mense_date.strftime("%Y-%m-%d"),
+        "flow_volume": edited_period.flow_voume,
+        "mense_date": edited_period.mense_date.strftime("%Y-%m-%d"),
         "mood": edited_period.mood,
         "cramps": edited_period.cramps,
         "bloating": edited_period.bloating,
         "fatigue": edited_period.fatigue,
-        "activityNotes": edited_period.notes
+        "mense_notes": edited_period.notes
         })
 
 
@@ -578,7 +579,7 @@ def add_period(user_id):
     bloating = data.get("bloating")
     fatigue = data.get("fatigue")
     mense_date = data.get("mense_date")
-    notes = data.get("notes")
+    mense_notes = data.get("mense_notes")
     created_at = datetime.datetime.now()
 
     currentTime = datetime.datetime.now()
@@ -603,20 +604,20 @@ def add_period(user_id):
         error = None
         success = True
 
-        new_period = MenseLog.create_mense_log(user_id, flow_volume, mood, cramps, bloating, fatigue, mense_date, notes, created_at)
+        new_period = MenseLog.create_mense_log(user_id, flow_volume, mood, cramps, bloating, fatigue, mense_date, mense_notes, created_at)
 
         return jsonify({
             "success": success, 
             "error": error,
             "periodId": new_period.mense_id,
-            "flowVolume": new_period.flow_volume,
+            "flow_volume": new_period.flow_volume,
             "mood": new_period.mood,
             "cramps": new_period.cramps,
             "bloating": new_period.bloating,
             "fatigue": new_period.fatigue,
-            "periodDate": new_period.mense_date,
-            "notes": new_period.notes,
-            "createdAt": new_period.created_at
+            "mense_date": new_period.mense_date,
+            "mense_notes": new_period.mense_notes,
+            "created_at": new_period.created_at
             })
 
 # @app.route("/api/<user_id>/data")

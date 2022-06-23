@@ -153,7 +153,7 @@ function PeriodModal(props) {
   return (
     <div className="modal">
       <div className="modal-content">
-        <Periods
+        <SelectedPeriodContainer
           userId={props.userId}
           setUserId={props.setUserId}
           isLoggedIn={props.isLoggedIn}
@@ -165,6 +165,48 @@ function PeriodModal(props) {
           setShowPeriodModal={props.setShowPeriodModal}
           periods={props.periods}
           setPeriods={props.setPeriods}
+          selectedPeriodId={props.selectedPeriodId}
+          setSelectedActivityId={props.setSelectedActivityId}
+          selectedDate={props.selectedDate}
+          setSelectedDate={props.setSelectedDate}
+        />
+        <div className="modal-footer">
+          {props.modalError && <p className="error">{props.modalError}</p>}
+          <button className="modal-button" onClick={closeModal}>
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AddPeriodModal(props) {
+  const closeModal = () => {
+    props.setShowAddPeriodModal(false);
+    localStorage.setItem("selectedPeriod", null);
+    props.setModalError(null);
+  };
+
+  if (!props.showAddPeriodModal) {
+    return null;
+  }
+  return (
+    <div className="modal">
+      <div className="modal-content">
+        <div>Hello</div>
+        <AddPeriodForm
+          userId={props.userId}
+          error={props.error}
+          setError={props.setError}
+          modalError={props.modalError}
+          setModalError={props.setModalError}
+          showAddPeriodModal={props.showAddPeriodModal}
+          setShowAddPeriodModal={props.setShowAddPeriodModal}
+          periods={props.periods}
+          setPeriods={props.setPeriods}
+          selectedDate={props.selectedDate}
+          setSelectedDate={props.setSelectedDate}
         />
         <div className="modal-footer">
           {props.modalError && <p className="error">{props.modalError}</p>}
@@ -192,7 +234,7 @@ function EntryChoice(props) {
   const goToAddPeriod = (evt) => {
     evt.preventDefault();
     props.setShowEntryChoiceModal(false);
-    props.setShowPeriodModal(true);
+    props.setShowAddPeriodModal(true);
   };
 
   if (!props.showEntryChoiceModal) {
