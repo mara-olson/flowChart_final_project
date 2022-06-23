@@ -217,7 +217,7 @@ function CalendarDays(props) {
         }
 
         if (currentDay.activityDate === calPeriod.mense_date) {
-          currentDay["periodId"] = calPeriod.id;
+          currentDay["periodId"] = calPeriod.mense_id;
           currentDay["flowVolume"] = calPeriod.flow_volume;
           currentDay["symptoms"] = symptoms;
           currentDay["periodNotes"] = calPeriod.mense_notes;
@@ -227,8 +227,15 @@ function CalendarDays(props) {
   }
 
   const updateActivity = (day) => {
-    props.setSelectedActivityId(day.activityId);
-    props.setSelectedPeriodId(day.periodId);
+    if (day.activityId) {
+      console.log(day.periodId);
+      props.setSelectedActivityId(day.activityId);
+      localStorage.setItem("selectedActivity", day.activityId);
+    } else if (day.periodId) {
+      console.log(day.flowVolume);
+      props.setSelectedPeriodId(day.periodId);
+      localStorage.setItem("selectedPeriod", day.periodId);
+    }
   };
 
   const handleClick = (day, evt) => {
@@ -239,9 +246,7 @@ function CalendarDays(props) {
     if (!day.activityName && !day.flowVolume) {
       props.setShowEntryChoiceModal(true);
     } else if (day.activityName) {
-      localStorage.setItem("selectedActivity", day.activityId);
-    } else if (day.flowVolume) {
-      localStorage.setItem("selectedPeriod", day.periodId);
+      props.setShowActivityModal(true);
     }
   };
   // updateActivity(day);
@@ -435,7 +440,7 @@ function CalendarDays(props) {
                 {day.activityName}
               </div>
             )}
-            {day.volume && (
+            {day.flowVolume && (
               <div onClick={(evt) => viewPeriod(day, evt)}>
                 {day.flowVolume} flow
               </div>

@@ -520,6 +520,29 @@ def period_data(user_id):
     })
 
 
+@app.route("/api/<user_id>/periods/<mense_id>")
+def get_selected_period(user_id, mense_id):
+    """Retrieve an existing activity."""
+
+    user_id = session["user_id"]
+
+    period = MenseLog.get_period_by_id(mense_id)
+
+    return jsonify({
+       "success": True, 
+        "error": None, 
+        "mense_id": period.mense_id,        
+        "flow_volume": period.flow_volume,
+        "mense_date": period.mense_date.strftime("%Y-%m-%d"),
+        "mood": period.mood,
+        "cramps": period.cramps,
+        "bloating": period.bloating,
+        "fatigue": period.fatigue,
+        "mense_notes": period.mense_notes
+        })
+
+
+
 @app.route("/api/<user_id>/periods/<period_id>", methods=["PUT"])
 # change to /api/activity update & /api/activity post
 def update_period(user_id, period_id):
@@ -548,21 +571,21 @@ def update_period(user_id, period_id):
     edited_period.cramps = edited_cramps
     edited_period.bloating = edited_bloating
     edited_period.fatigue = edited_fatigue
-    edited_period.notes = edited_notes
+    edited_period.mense_notes = edited_notes
 
     db.session.commit()
 
     return jsonify({
         "success": True, 
         "error": None, 
-        "periodId": edited_period.mense_id,        
-        "flow_volume": edited_period.flow_voume,
+        "mense_id": edited_period.mense_id,        
+        "flow_volume": edited_period.flow_volume,
         "mense_date": edited_period.mense_date.strftime("%Y-%m-%d"),
         "mood": edited_period.mood,
         "cramps": edited_period.cramps,
         "bloating": edited_period.bloating,
         "fatigue": edited_period.fatigue,
-        "mense_notes": edited_period.notes
+        "mense_notes": edited_period.mense_notes
         })
 
 
@@ -609,7 +632,7 @@ def add_period(user_id):
         return jsonify({
             "success": success, 
             "error": error,
-            "periodId": new_period.mense_id,
+            "mense_id": new_period.mense_id,
             "flow_volume": new_period.flow_volume,
             "mood": new_period.mood,
             "cramps": new_period.cramps,

@@ -166,7 +166,7 @@ function PeriodModal(props) {
           periods={props.periods}
           setPeriods={props.setPeriods}
           selectedPeriodId={props.selectedPeriodId}
-          setSelectedActivityId={props.setSelectedActivityId}
+          setSelectedPeriodId={props.setSelectedPeriodId}
           selectedDate={props.selectedDate}
           setSelectedDate={props.setSelectedDate}
         />
