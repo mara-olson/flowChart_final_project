@@ -64,7 +64,7 @@ function App() {
     if (localUserId) {
       setUserId(JSON.parse(localUserId));
     }
-  }, [userId, showActivityModal]);
+  }, [userId]);
 
   React.useEffect(() => {
     const localSelectedActivity = localStorage.getItem("selectedActivity");
@@ -183,6 +183,8 @@ function App() {
             setModalError={setModalError}
             showActivityModal={showActivityModal}
             setShowActivityModal={setShowActivityModal}
+            showDeleteActModal={showDeleteActModal}
+            setShowDeleteActModal={setShowDeleteActModal}
             activities={activities}
             setActivities={setActivities}
             selectedActivityId={selectedActivityId}
@@ -199,6 +201,8 @@ function App() {
             setshowActivityModal={setShowActivityModal}
             showAddActModal={showAddActModal}
             setShowAddActModal={setShowAddActModal}
+            showDeleteActModal={showDeleteActModal}
+            setShowDeleteActModal={setShowDeleteActModal}
             activities={activities}
             setActivities={setActivities}
             selectedActivityId={selectedActivityId}
@@ -206,6 +210,10 @@ function App() {
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
             // onClose={closeModal}
+          />
+          <DeleteActivity
+            showDeleteActModal={showDeleteActModal}
+            setShowDeleteActModal={setShowDeleteActModal}
           />
           <PeriodModal
             userId={userId}

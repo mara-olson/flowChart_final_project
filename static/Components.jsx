@@ -226,6 +226,8 @@ function Home(props) {
         setError={props.setError}
         modalError={props.modalError}
         setModalError={props.setModalError}
+        showDeleteActModal={props.showDeleteActModal}
+        setShowDeleteActModal={props.setShowDeleteActModal}
         showActivityModal={props.showActivityModal}
         setShowActivityModal={props.setShowActivityModal}
         activities={props.activiies}
@@ -241,12 +243,18 @@ function Home(props) {
         setModalError={props.setModalError}
         showAddActModal={props.showAddActModal}
         setShowAddActModal={props.setShowAddActModal}
+        showDeleteActModal={props.showDeleteActModal}
+        setShowDeleteActModal={props.setShowDeleteActModal}
         activities={props.activities}
         setActivities={props.setActivities}
         selectedActivityId={props.selectedActivityId}
         setSelectedActivityId={props.setSelectedActivityId}
         selectedDate={props.selectedDate}
         setSelectedDate={props.setSelectedDate}
+      />
+      <DeleteActivity
+        showDeleteActModal={props.showDeleteActModal}
+        setShowDeleteActModal={props.setShowDeleteActModal}
       />
       <PeriodModal
         userId={props.userId}

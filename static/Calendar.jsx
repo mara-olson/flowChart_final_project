@@ -229,7 +229,6 @@ function CalendarDays(props) {
     evt.preventDefault();
     updateActivity(day);
     props.setSelectedDate(day.activityDate);
-    console.log(props.calActivities);
 
     if (!day.activityName) {
       props.setShowEntryChoiceModal(true);

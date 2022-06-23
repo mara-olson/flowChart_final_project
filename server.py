@@ -303,7 +303,6 @@ def update_profile():
     user.bio = bio
 
     db.session.commit()
-    print("***********THIS IS THE BIO"*3, user.bio)
 
     return jsonify({"success":True, "first_name": user.first_name, "last_name": user.last_name, "team_name": user.team_name, "email": user.email, "password": user.password, "bio": user.bio})
 
@@ -316,8 +315,6 @@ def delete_user_activity(user_id, activity_id):
     data = request.json
 
     activity_id = data.get("activity_id")
-
-    print("*"*40, data.get("activity_id"))
     
     ActivityLog.delete_activity(activity_id)
 
@@ -372,48 +369,66 @@ def update_activity(user_id, activity_id):
 
     currentTime= datetime.datetime.now()
 
-    edited_activity = ActivityLog.get_activity_by_id(edited_act_id)
+    if (edited_act_date is None or edited_act_name is None or edited_act_type is None):
 
-    edited_activity.user_id = user_id
-    edited_activity.activity_date = edited_act_date
-    edited_activity.workout_type = edited_act_type
-    edited_activity.activity_name = edited_act_name
-    edited_activity.duration = edited_act_duration
-    edited_activity.distance = edited_act_distance
-    edited_activity.suffer_score = edited_act_suffer_score
-    edited_activity.activity_notes = edited_act_notes
+        error = "Please enter an activity date, type, & name"
+        success = False
+        print(error)
+        
+        return jsonify({"success": success, "error": error})
+        
 
-    db.session.commit()
+    elif datetime.datetime.strptime(edited_act_date, "%Y-%m-%d") > currentTime:
+        error = "The date you entered is in the future. Please enter a valid activity date."
+        success = False
+        
+        return jsonify({"success": success, "error": error})
 
-    print(edited_activity)
+    else:
+        error = None
+        success = True
 
-    all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
+        edited_activity = ActivityLog.get_activity_by_id(edited_act_id)
 
-    # print("*"*20, type(mileage_this_month))    
-    activity_objs = []
-    for activity in all_activities:
-        new_act = {
-            "user_id": activity.user_id, "activity_id": activity.activity_id, "name": activity.activity_name, "type": activity.workout_type, "date": activity.activity_date.strftime("%Y-%m-%d"),
-            "distance": activity.distance, "duration": activity.duration, "suffer_score": activity.suffer_score, "notes": activity.activity_notes
-            }
-        # activity = activity.to_dict()
-        activity_objs.append(new_act)
-    activity_objs.sort(key=lambda x: datetime.datetime.strptime(x['date'], "%Y-%m-%d"))
-    print("*"*25, edited_activity.workout_type, edited_activity.activity_notes)
-    
-    return jsonify({
-        "success": True, 
-        "error": None, 
-        "activities": activity_objs,
-        "activityId": edited_activity.activity_id,        
-        "activityName": edited_activity.activity_name,
-        "activityDate": edited_activity.activity_date.strftime("%Y-%m-%d"),
-        "activityType": edited_activity.workout_type,
-        "duration": edited_activity.duration,
-        "distance": edited_activity.distance,
-        "sufferScore": edited_activity.suffer_score,
-        "activityNotes": edited_activity.activity_notes
-        })
+        edited_activity.user_id = user_id
+        edited_activity.activity_date = edited_act_date
+        edited_activity.workout_type = edited_act_type
+        edited_activity.activity_name = edited_act_name
+        edited_activity.duration = edited_act_duration
+        edited_activity.distance = edited_act_distance
+        edited_activity.suffer_score = edited_act_suffer_score
+        edited_activity.activity_notes = edited_act_notes
+
+        db.session.commit()
+
+        all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
+
+        # print("*"*20, type(mileage_this_month))    
+        activity_objs = []
+        for activity in all_activities:
+            new_act = {
+                "user_id": activity.user_id, "activity_id": activity.activity_id, "name": activity.activity_name, "type": activity.workout_type, "date": activity.activity_date.strftime("%Y-%m-%d"),
+                "distance": activity.distance, "duration": activity.duration, "suffer_score": activity.suffer_score, "notes": activity.activity_notes
+                }
+            # activity = activity.to_dict()
+            activity_objs.append(new_act)
+        
+        activity_objs.sort(key=lambda x: datetime.datetime.strptime(x['date'], "%Y-%m-%d"))
+        print("*"*25, edited_activity.workout_type, edited_activity.activity_notes)
+        
+        return jsonify({
+            "success": True, 
+            "error": None, 
+            "activities": activity_objs,
+            "activityId": edited_activity.activity_id,        
+            "activityName": edited_activity.activity_name,
+            "activityDate": edited_activity.activity_date.strftime("%Y-%m-%d"),
+            "activityType": edited_activity.workout_type,
+            "duration": edited_activity.duration,
+            "distance": edited_activity.distance,
+            "sufferScore": edited_activity.suffer_score,
+            "activityNotes": edited_activity.activity_notes
+            })
 
 
 @app.route("/api/<user_id>/activities", methods=["POST"])
@@ -434,9 +449,11 @@ def add_activity(user_id):
 
     currentTime= datetime.datetime.now()
     
-    if (new_act_date is None) or (new_act_name is None) or (new_act_type == "Null"):
+    if (new_act_date is None or new_act_name is None or new_act_type is None):
+
         error = "Please enter an activity date, type, & name"
         success = False
+        print("*****"*20,error)
         
         return jsonify({"success": success, "error": error})
         

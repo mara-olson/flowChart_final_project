@@ -150,9 +150,9 @@ function AddActivityForm(props) {
   // };
 
   const handleAddActivity = (evt) => {
-    // evt.preventDefault();
+    evt.preventDefault();
     console.log("addActivity");
-    setActivityDate(props.activityDate);
+    // setActivityDate(props.selected);
     fetch(`/api/${props.userId}/activities`, {
       method: "POST",
       credentials: "include",
@@ -173,6 +173,7 @@ function AddActivityForm(props) {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(activityDate, activityName, activityType);
         if (data.success) {
           setActivityId(data.activityId);
           setActivityName(data.activityName);
@@ -182,7 +183,9 @@ function AddActivityForm(props) {
           setDistance(data.distance);
           setSufferScore(data.sufferScore);
           setActivityNotes(data.activityNotes);
-          console.log(activityId, activityName);
+          // props.setSelectedDate(data.activityDate);
+
+          props.setModalError(null);
 
           // fetch(`/api/${props.userId}/activities`)
           //   .then((response) => response.json())
@@ -206,9 +209,11 @@ function AddActivityForm(props) {
           <input
             type="date"
             name="date"
-            value={props.selectedDate}
-            onChange={(evt) => setActivityDate(evt.currentTarget.value)}
-          />{" "}
+            value={activityDate}
+            onChange={(evt) => {
+              props.setActivityDate(evt.currentTarget.value);
+            }}
+          />
         </div>
         <br></br>
         <div>
@@ -218,6 +223,7 @@ function AddActivityForm(props) {
             value={activityType}
             onChange={(evt) => setActivityType(evt.currentTarget.value)}
           >
+            <option value="Null"></option>
             <option value="Run">Run</option>
             <option value="Bike">Bike</option>
             <option value="Swim">Swim</option>
@@ -391,10 +397,10 @@ function SelectedActivityContainer(props) {
       setActivityNotes={setActivityNotes}
       showActivityModal={props.showActivityModal}
       setShowActivityModal={props.setShowActivityModal}
-      // modalContent={props.modalContent}
-      // setModalContent={props.setModalContent}
       modalError={props.modalError}
       setModalError={props.setModalError}
+      showDeleteActModal={props.showDeleteActModal}
+      setShowDeleteActModal={props.setShowDeleteActModal}
       activities={props.activities}
       setActivities={props.setActivities}
     />
@@ -440,6 +446,8 @@ function AllActivitiesContainer(props) {
         activityNotes={activity.notes}
         showActivityModal={props.showActivityModal}
         setShowActivityModal={props.setShowActivityModal}
+        showDeleteActModal={props.showDeleteActModal}
+        setShowDeleteActModal={props.setShowDeleteActModal}
         modalError={props.modalError}
         setModalError={props.setModalError}
         activities={props.activities}
@@ -591,11 +599,12 @@ function ActivityCard(props) {
           props.setActivityNotes(data.activityNotes);
 
           // props.setActivities(data.activities);
-
+          props.setModalError(null);
           props.setShowActivityModal(false);
           setActivityEdit("non-edit");
         } else {
-          props.setError(data.error_msg);
+          console.log(data.error);
+          props.setModalError(data.error);
         }
       });
   };
@@ -617,13 +626,25 @@ function ActivityCard(props) {
       },
     })
       .then((response) => response.json())
-      .then((data) => console.log(data.reponse));
+      .then((data) => {
+        console.log(data.reponse);
+        localStorage.setItem("selectedActivity", null);
+        props.setShowDeleteActModal(false);
+        props.setShowActivityModal(false);
+        setActivityEdit("non-edit");
+        props.setModalError(null);
+      });
   };
 
   return (
     <div>
       {activityEdit === "delete" && (
-        <DeleteActivity handleDelete={handleDelete} />
+        <DeleteActivity
+          handleDelete={handleDelete}
+          setActivityEdit={setActivityEdit}
+          showDeleteActModal={props.showDeleteActModal}
+          setShowDeleteActModal={props.setShowDeleteActModal}
+        />
       )}
       {activityEdit === "edit" && (
         <EditActivity
@@ -670,6 +691,8 @@ function ActivityCard(props) {
           setModalError={props.setModalError}
           showActivityModal={props.showActivityModal}
           setShowActivityModal={props.setShowActivityModal}
+          showDeleteActModal={props.showDeleteActModal}
+          setShowDeleteActModal={props.setShowDeleteActModal}
           activities={props.activities}
           setActivities={props.setActivities}
           selectedActivityId={props.selectedActivityId}
@@ -830,6 +853,10 @@ function DeleteActivity(props) {
     props.setActivityEdit("non-edit");
   };
 
+  if (!props.showDeleteActModal) {
+    return null;
+  }
+
   return (
     <div className="card">
       <form onSubmit={props.handleDelete}>
@@ -853,7 +880,7 @@ function ActivityForm(props) {
     evt.preventDefault();
     const formDelete = props.activityEdit === "delete" ? "non-edit" : "delete";
     props.setActivityEdit(formDelete);
-    props.setShowDeleteModal(true);
+    props.setShowDeleteActModal(true);
     // return <SelectedActivityContainer />;
   };
 

@@ -84,6 +84,8 @@ function ActivityModal(props) {
           setModalError={props.setModalError}
           showActivityModal={props.showActivityModal}
           setShowActivityModal={props.setShowActivityModal}
+          showDeleteActModal={props.showDeleteActModal}
+          setShowDeleteActModal={props.setShowDeleteActModal}
           activities={props.activities}
           setActivities={props.setActivities}
           selectedActivityId={props.selectedActivityId}
@@ -124,6 +126,7 @@ function AddActivityModal(props) {
           activities={props.activities}
           setActivities={props.setActivities}
           selectedDate={props.selectedDate}
+          setSelectedDate={props.setSelectedDate}
         />
         <div className="modal-footer">
           {props.modalError && <p className="error">{props.modalError}</p>}
