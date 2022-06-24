@@ -159,6 +159,7 @@ function PeriodModal(props) {
           isLoggedIn={props.isLoggedIn}
           setIsLoggedIn={props.setIsLoggedIn}
           modalError={props.modalError}
+          setModalError={props.setModalError}
           error={props.error}
           setError={props.setError}
           showPeriodModal={props.showPeriodModal}

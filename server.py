@@ -372,7 +372,7 @@ def update_activity(user_id, activity_id):
 
         error = "Please enter an activity date, type, & name"
         success = False
-        print(error)
+        # print(error)
         
         return jsonify({"success": success, "error": error})
         
@@ -413,7 +413,7 @@ def update_activity(user_id, activity_id):
             activity_objs.append(new_act)
         
         activity_objs.sort(key=lambda x: datetime.datetime.strptime(x['date'], "%Y-%m-%d"))
-        print("*"*25, edited_activity.workout_type, edited_activity.activity_notes)
+        # print("*"*25, edited_activity.workout_type, edited_activity.activity_notes)
         
         return jsonify({
             "success": True, 
@@ -452,7 +452,7 @@ def add_activity(user_id):
 
         error = "Please enter an activity date, type, & name"
         success = False
-        print("*****"*20,error)
+        # print("*****"*20,error)
         
         return jsonify({"success": success, "error": error})
         
@@ -509,7 +509,7 @@ def period_data(user_id):
 
     periods.sort(key=lambda x: datetime.datetime.strptime(x['mense_date'], "%Y-%m-%d"))
 
-    print("****"*25, periods)
+    # print("****"*25, periods)
 
     last_period = db.session.query(func.max(MenseLog.mense_date)).one()[0].strftime("%B %d, %Y")
     
@@ -573,6 +573,7 @@ def update_period(user_id, period_id):
     edited_period.fatigue = edited_fatigue
     edited_period.mense_notes = edited_notes
 
+    print("*"*40, edited_period.mood)
     db.session.commit()
 
     return jsonify({

@@ -32,14 +32,14 @@ function AddPeriodForm(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          setPeriodId(data.periodId);
-          setFlowVolume(data.flowVolume);
+          setPeriodId(data.mense_id);
+          setFlowVolume(data.flow_volume);
           setMood(data.mood);
           setBloating(data.bloating);
           setCramps(data.cramps);
           setFatigue(data.fatigue);
-          setPeriodDate(data.periodDate);
-          setPeriodNotes(data.periodNotes);
+          setPeriodDate(data.mense_date);
+          setPeriodNotes(data.mense_notes);
           console.log("successful edit", flowVolume);
 
           props.setModalError(null);
@@ -129,18 +129,38 @@ function AddPeriodForm(props) {
 function SelectedPeriodContainer(props) {
   const [periodDate, setPeriodDate] = React.useState(null);
   const [flowVolume, setFlowVolume] = React.useState(null);
+  const [mood, setMood] = React.useState(null);
+  const [cramps, setCramps] = React.useState(null);
+  const [bloating, setBloating] = React.useState(null);
+  const [fatigue, setFatigue] = React.useState(null);
   const [periodNotes, setPeriodNotes] = React.useState(null);
+  const [symptoms, setSymptoms] = React.useState(null);
 
-  console.log("SelectedPeriodContainer component is rendering");
   React.useEffect(() => {
-    console.log("use effect running");
     fetch(
       `/api/${props.userId}/periods/${localStorage.getItem("selectedPeriod")}`
     )
       .then((response) => response.json())
       .then((data) => {
-        // setActivityId(data.activityId);
-        setPeriodDate(data.mense_ate);
+        const symptoms = [];
+        if (data.mood) {
+          symptoms.push("Moodiness");
+        }
+        if (data.cramps) {
+          symptoms.push("Cramps");
+        }
+        if (data.bloating) {
+          symptoms.push("Bloating");
+        }
+        if (data.fatigue) {
+          symptoms.push("Fatigue");
+        }
+        setCramps(data.cramps);
+        setBloating(data.bloating);
+        setMood(data.mood);
+        setFatigue(data.fatigue);
+        setSymptoms(symptoms);
+        setPeriodDate(data.mense_date);
         setFlowVolume(data.flow_volume);
         setPeriodNotes(data.mense_notes);
       });
@@ -149,7 +169,6 @@ function SelectedPeriodContainer(props) {
   if (!flowVolume) {
     return null;
   }
-
   return (
     <PeriodCard
       userId={props.userId}
@@ -159,10 +178,22 @@ function SelectedPeriodContainer(props) {
       setPeriodDate={setPeriodDate}
       flowVolume={flowVolume}
       setFlowVolume={setFlowVolume}
+      symptoms={symptoms}
+      setSymptoms={setSymptoms}
+      cramps={cramps}
+      setCramps={setCramps}
+      bloating={bloating}
+      setBloating={setBloating}
+      mood={mood}
+      setMood={setMood}
+      fatigue={fatigue}
+      setFatigue={setFatigue}
       periodNotes={periodNotes}
       setPeriodNotes={setPeriodNotes}
       showPeriodModal={props.showPeriodModal}
       setShowPeriodModal={props.setShowPeriodModal}
+      showAddPeriodModal={props.showAddPeriodModal}
+      setShowAddPeriodModal={props.setShowAddPeriodModal}
       modalError={props.modalError}
       setModalError={props.setModalError}
       showDeletePeriodModal={props.showDeletePeriodModal}
@@ -178,6 +209,19 @@ function AllPeriodsContainer(props) {
 
   const periodDetails = [];
   for (const period of props.periods) {
+    const symptoms = [];
+    if (period.mood) {
+      symptoms.push("Moodiness");
+    }
+    if (period.cramps) {
+      symptoms.push("Cramps");
+    }
+    if (period.bloating) {
+      symptoms.push("Bloating");
+    }
+    if (period.fatigue) {
+      symptoms.push("Fatigue");
+    }
     periodDetails.push(
       <PeriodCard
         userId={props.userId}
@@ -187,6 +231,7 @@ function AllPeriodsContainer(props) {
         flowVolume={period.flow_volume}
         periodNotes={period.mense_notes}
         showPeriodModal={props.showPeriodModal}
+        symptoms={symptoms}
         setShowPeriodModal={props.setShowPeriodModal}
         modalError={props.modalError}
         setModalError={props.setModalError}
@@ -219,6 +264,10 @@ function PeriodCard(props) {
         body: JSON.stringify({
           mense_id: localStorage.getItem("selectedPeriod"),
           mense_date: props.periodDate,
+          mood: props.mood,
+          boating: props.bloating,
+          cramps: props.cramps,
+          fatigue: props.fatigue,
           flow_volume: props.flowVolume,
           mense_notes: props.periodNotes,
         }),
@@ -234,7 +283,26 @@ function PeriodCard(props) {
         if (data.success) {
           props.setPeriodDate(data.mense_date);
           props.setFlowVolume(data.flow_volume);
+          props.setCramps(data.cramps);
+          props.setBloating(data.bloating);
+          props.setFatigue(data.fatigue);
+          props.setMood(data.mood);
           props.setPeriodNotes(data.mense_notes);
+          const dataSymptoms = [];
+          if (data.mood) {
+            dataSymptoms.push("Moodiness");
+          }
+          if (data.cramps) {
+            dataSymptoms.push("Cramps");
+          }
+          if (data.bloating) {
+            dataSymptoms.push("Bloating");
+          }
+          if (data.fatigue) {
+            dataSymptoms.push("Fatigue");
+          }
+          props.setSymptoms(dataSymptoms);
+          console.log(dataSymptoms);
 
           props.setModalError(null);
           props.setShowPeriodModal(false);
@@ -297,6 +365,18 @@ function PeriodCard(props) {
             setPeriodDate={props.setPeriodDate}
             periodDate={props.periodDate}
           />
+          <Symptoms
+            setSymptoms={props.setSymptoms}
+            symptoms={props.symptoms}
+            bloating={props.bloating}
+            setBloating={props.setBloating}
+            cramps={props.cramps}
+            setCramps={props.setCramps}
+            fatigue={props.fatigue}
+            setFatigue={props.setFatigue}
+            mood={props.mood}
+            setMood={props.setMood}
+          />
           <PeriodNotes
             setPeriodNotes={props.setPeriodNotes}
             periodNotes={props.periodNotes}
@@ -316,11 +396,21 @@ function PeriodCard(props) {
           setShowDeletePeriodModal={props.setShowDeletePeriodModal}
           periods={props.periods}
           setPeriods={props.setPeriods}
+          symptoms={props.symptoms}
           selectedPeriodId={props.selectedPeriodId}
           setSelectedPeriodId={props.setSelectedPeriodId}
           periodDate={props.periodDate}
+          flowVolume={props.flowVolume}
+          setSymptoms={props.setSymptoms}
+          bloating={props.bloating}
+          setBloating={props.setBloating}
+          cramps={props.cramps}
+          setCramps={props.setCramps}
+          fatigue={props.fatigue}
+          setFatigue={props.setFatigue}
+          mood={props.mood}
+          setMood={props.setMood}
           periodNotes={props.periodNotes}
-          onClose={props.closeModal}
           periodEdit={periodEdit}
           setPeriodEdit={setPeriodEdit}
           selectedDate={props.selectedDate}
@@ -345,6 +435,50 @@ function PeriodDate(props) {
   );
 }
 
+function Symptoms(props) {
+  return (
+    <div className="field">
+      <fieldset id="sx-list">
+        <legend>Symptoms: </legend>
+        <input
+          type="checkbox"
+          id="mood"
+          value={props.mood}
+          onChange={(evt) => props.setMood(evt.currentTarget.checked)}
+        />
+        <label htmlFor="mood">Moodiness</label>
+        <br></br>
+
+        <input
+          type="checkbox"
+          id="cramps"
+          value={props.cramps}
+          onChange={(evt) => props.setCramps(evt.currentTarget.checked)}
+        />
+        <label htmlFor="cramps">Cramps</label>
+        <br></br>
+
+        <input
+          type="checkbox"
+          id="bloating"
+          value={props.bloating}
+          onChange={(evt) => props.setBloating(evt.currentTarget.checked)}
+        />
+        <label htmlFor="bloating">Bloating</label>
+        <br></br>
+
+        <input
+          type="checkbox"
+          id="fatigue"
+          value={props.fatigue}
+          onChange={(evt) => props.setFatigue(evt.currentTarget.checked)}
+        />
+        <label htmlFor="fatigue">Fatigue</label>
+      </fieldset>
+    </div>
+  );
+}
+
 function PeriodNotes(props) {
   return (
     <div className="field">
@@ -352,8 +486,8 @@ function PeriodNotes(props) {
       <textarea
         id="per-notes"
         type="text"
-        onChange={(evt) => props.setPeriodNotes(evt.currentTarget.value)}
         value={props.periodNotes}
+        onChange={(evt) => props.setPeriodNotes(evt.currentTarget.value)}
         placeholder="Write notes here"
       ></textarea>
     </div>
@@ -414,25 +548,42 @@ function PeriodForm(props) {
     props.setShowDeletePeriodModal(true);
     // return <SelectedActivityContainer />;
   };
+  const sxToDisplay = [];
+  const symptomList = [];
+  if (props.mood) {
+    symptomList.push("Moodiness");
+  }
+  if (props.cramps) {
+    symptomList.push("Cramps");
+  }
+  if (props.bloating) {
+    symptomList.push("Bloating");
+  }
+  if (props.fatigue) {
+    symptomList.push("Fatigue");
+  }
 
-  //   const closeEdit = (evt) => {
-  //     evt.preventDefault();
-  //     props.setShowActivityModal(false);
-  //   };
+  for (const symptom of symptomList) {
+    sxToDisplay.push(
+      <ul>
+        <li>{symptom}</li>
+      </ul>
+    );
+  }
 
   return (
     <div className="card">
       <form>
         <p>Date: {props.periodDate} </p>
         <p>Flow: {props.flowVolume}</p>
-        {/* <p>Symptoms: {props.duration} minutes</p> */}
-        <p>Notes: {props.periodNotes}</p>
+        {props.symptoms && <p>Symptoms: {sxToDisplay}</p>}
+        {props.periodNotes && <p>Notes: {props.periodNotes}</p>}
         <div></div>
         <button className="edit" onClick={handleClick}>
-          Edit Activity
+          Edit
         </button>
         <button className="delete" onClick={handleDeleteClick}>
-          Delete Activity
+          Delete
         </button>
       </form>
     </div>

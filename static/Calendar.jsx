@@ -247,6 +247,8 @@ function CalendarDays(props) {
       props.setShowEntryChoiceModal(true);
     } else if (day.activityName) {
       props.setShowActivityModal(true);
+    } else if (day.flowVolume) {
+      props.setShowPeriodModal(true);
     }
   };
   // updateActivity(day);
@@ -257,6 +259,7 @@ function CalendarDays(props) {
 
   const viewPeriod = (day, evt) => {
     evt.preventDefault();
+    console.log("BLAH");
     props.setShowPeriodModal(true);
   };
   //   return (
