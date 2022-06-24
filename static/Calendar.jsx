@@ -244,6 +244,7 @@ function CalendarDays(props) {
     evt.preventDefault();
     updateActivity(day);
     props.setSelectedDate(day.activityDate);
+    console.log(typeof day.symptoms);
 
     if (!day.activityName && !day.flowVolume) {
       props.setShowEntryChoiceModal(true);
@@ -446,24 +447,34 @@ function CalendarDays(props) {
                 {day.activityName}
               </div>
             )}
-            {day.flowVolume && !day.symptoms && day.flowVolume == "No Flow" && (
+            {day.symptoms == false && day.flowVolume === "No Flow" && (
               <div onClick={(evt) => viewPeriod(day, evt)}>
-                <i className="bi bi-record icon-red-heavy"></i>
+                <i className="bi bi-record-circle-fill icon-red-heavy"></i>
               </div>
             )}
-            {day.flowVolume && day.symptoms && day.flowVolume == "No Flow" && (
+            {day.symptoms != false && day.flowVolume === "No Flow" && (
               <div onClick={(evt) => viewPeriod(day, evt)}>
                 <i className="bi bi-record-fill icon-red-heavy"></i>
               </div>
             )}
-            {day.flowVolume && day.symptoms && day.flowVolume == "Light" && (
+            {day.symptoms == false && day.flowVolume === "Heavy" && (
+              <div onClick={(evt) => viewPeriod(day, evt)}>
+                <i className="bi bi-record-circle-fill icon-red-heavy"></i>
+              </div>
+            )}
+            {day.symptoms != false && day.flowVolume === "Heavy" && (
+              <div onClick={(evt) => viewPeriod(day, evt)}>
+                <i className="bi bi-record-fill icon-red-heavy"></i>
+              </div>
+            )}
+            {day.symptoms == false && day.flowVolume === "Light" && (
               <div onClick={(evt) => viewPeriod(day, evt)}>
                 <i className="bi bi-record-fill icon-red-light"></i>
               </div>
             )}
-            {day.flowVolume && day.flowVolume == "Light" && (
+            {day.symptoms != false && day.flowVolume === "Light" && (
               <div onClick={(evt) => viewPeriod(day, evt)}>
-                <i className="bi bi-record-circle-fill icon-red-light"></i>
+                <i className="bi bi-record-fill icon-red-light"></i>
               </div>
             )}
           </button>

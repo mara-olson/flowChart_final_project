@@ -431,4 +431,14 @@ def activity_data(user_id):
 	- SignUp modal & authentication process fixed! Now goes through Strava if user opts to
 	- Strava data saved to the db so that it's able to be accessed & viwed
 	- Deleting activity works! But modal doesn't yet close and activity isn't removed from the calendar until refresh
-	- 
+
+
+6/23
+	- db.session.mileage/lmp is showing across all users?
+	- Checked boxes on period edit pages! (checked={props.mood})
+
+	TO-DO:
+	- Reset data for particular user if they re-sign up
+
+
+

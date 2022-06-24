@@ -308,6 +308,7 @@ function PeriodCard(props) {
 
           props.setModalError(null);
           props.setShowAddPeriodModal(false);
+          props.setShowPeriodModal(false);
           setPeriodEdit("non-edit");
         } else {
           console.log(data.error);
@@ -509,6 +510,7 @@ function PeriodNotes(props) {
 function EditPeriod(props) {
   const closeEdit = (evt) => {
     evt.preventDefault();
+
     props.setPeriodEdit("non-edit");
   };
 
