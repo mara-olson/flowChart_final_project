@@ -59,7 +59,7 @@ function Navbar(props) {
             activeClassName="navlink-active"
             className="nav-link nav-item"
           >
-            Profile
+            <i className="bi bi-person-circle profile-icon"></i>
           </ReactRouterDOM.NavLink>
           <ReactRouterDOM.NavLink
             to="/periods"

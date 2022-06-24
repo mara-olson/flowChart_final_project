@@ -5,6 +5,10 @@
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
 }
 
+.profile-icon {
+  float: right;
+}
+
 .profile-card {
   width: 40%;
   height: 120%;
@@ -130,7 +134,7 @@ form {
 
 .weekday {
   width: 100px;
-  text-align: center;
+  text-align: left;
 }
 
 .table-content {
@@ -138,7 +142,7 @@ form {
   flex-grow: 1;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: left;
   box-sizing: border-box;
 }
 
@@ -170,10 +174,10 @@ form {
 
 .modal {
   position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
+  left: 10;
+  top: 10;
+  right: 10;
+  bottom: 10;
   background: rgba(255, 255, 255, 0.5);
   display: flex;
   align-items: center;
@@ -185,6 +189,7 @@ form {
 }
 
 .modal-content {
+  padding: 20px;
   width: 500px;
   background-color: rgb(222, 133, 133);
 }
@@ -195,7 +200,7 @@ form {
 }
 
 .modal-title {
-  margin: 0;
+  margin: 10px;
 }
 
 .modal-body {
