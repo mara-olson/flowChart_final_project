@@ -325,8 +325,6 @@ def delete_user_activity(user_id, activity_id):
 
 
 
-
-
 @app.route("/api/<user_id>/activities/<activity_id>")
 def get_selected_activity(user_id, activity_id):
     """Retrieve an existing activity."""
@@ -644,6 +642,23 @@ def add_period(user_id):
             "created_at": new_period.created_at
             })
 
+
+
+@app.route("/api/<user_id>/periods/<mense_id>", methods=["DELETE"])
+def delete_user_period(user_id, mense_id):
+    """Delete period log."""
+    user_id = session["user_id"]
+    
+    data = request.json
+
+    mense_id = data.get("mense_id")
+    
+    MenseLog.delete_period(mense_id)
+
+    print(f"Period {mense_id} deleted")
+
+    response = "deleted"
+    return response 
 # @app.route("/api/<user_id>/data")
 # def chart_data(user_id):
 #     all_periods = MenseLog.query.filter(MenseLog.user_id == user_id).all()

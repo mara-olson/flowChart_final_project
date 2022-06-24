@@ -201,6 +201,14 @@ class MenseLog(db.Model):
 
        return period
 
+    @classmethod
+    def delete_period(cls, mense_id):
+        period = MenseLog.query.get(mense_id)
+
+        db.session.delete(period)
+        db.session.commit()
+
+
     def to_dict(self):
         return {
                 'flow_volume': self.flow_volume,

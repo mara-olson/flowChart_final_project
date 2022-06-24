@@ -164,6 +164,8 @@ function PeriodModal(props) {
           setError={props.setError}
           showPeriodModal={props.showPeriodModal}
           setShowPeriodModal={props.setShowPeriodModal}
+          showDeletePeriodModal={props.showDeletePeriodModal}
+          setShowDeletePeriodModal={props.setShowDeletePeriodModal}
           periods={props.periods}
           setPeriods={props.setPeriods}
           selectedPeriodId={props.selectedPeriodId}

@@ -205,6 +205,8 @@ function Home(props) {
         setShowDeleteActModal={props.setShowDeleteActModal}
         showPeriodModal={props.showPeriodModal}
         setShowPeriodModal={props.setShowPeriodModal}
+        showDeletePeriodModal={props.showDeletePeriodModal}
+        setShowDeletePeriodModal={props.setShowDeletePeriodModal}
         showEntryChoiceModal={props.showEntryChoiceModal}
         setShowEntryChoiceModal={props.setShowEntryChoiceModal}
         modalError={props.modalError}
@@ -270,6 +272,8 @@ function Home(props) {
         setPeriods={props.setPeriods}
         selectedPeriodId={props.selectedPeriodId}
         setSelectedPeriodId={props.setSelectedPeriodId}
+        showDeletePeriodModal={props.showDeletePeriodModal}
+        setShowDeletePeriodModal={props.setShowDeletePeriodModal}
       />
       <AddPeriodModal
         userId={props.userId}
@@ -286,6 +290,8 @@ function Home(props) {
         setSelectedDate={props.setSelectedDate}
         selectedPeriodId={props.selectedPeriodId}
         setSelectedPeriodId={props.setSelectedPeriodId}
+        showDeletePeriodModal={props.showDeletePeriodModal}
+        setShowDeletePeriodModal={props.setShowDeletePeriodModal}
       />
       <EntryChoice
         showEntryChoiceModal={props.showEntryChoiceModal}

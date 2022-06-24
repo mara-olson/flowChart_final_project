@@ -319,7 +319,6 @@ function PeriodCard(props) {
     setPeriodEdit("delete");
 
     const periodId = localStorage.getItem("selectedPeriod");
-    console.log(localStorage.getItem("selectedPeriod"));
 
     fetch(
       `/api/${props.userId}/periods/${localStorage.getItem("selectedPeriod")}`,
@@ -342,6 +341,7 @@ function PeriodCard(props) {
         props.setShowPeriodModal(false);
         setPeriodEdit("non-edit");
         props.setModalError(null);
+        props.setShowDeletePeriodModal(false);
       });
   };
 

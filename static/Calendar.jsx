@@ -103,6 +103,8 @@ function Calendar(props) {
           setShowPeriodModal={props.setShowPeriodModal}
           showAddPeriodModal={props.showAddPeriodModal}
           setShowAddPeriodModal={props.setShowAddPeriodModal}
+          showDeletePeriodModal={props.showDeletePeriodModal}
+          setShowDeletePeriodModal={props.setShowDeletePeriodModal}
           setModalTitle={props.setModalTitle}
           showEntryChoiceModal={props.showEntryChoiceModal}
           setShowEntryChoiceModal={props.setShowEntryChoiceModal}
