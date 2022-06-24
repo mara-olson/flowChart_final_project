@@ -164,6 +164,8 @@ function PeriodModal(props) {
           setError={props.setError}
           showPeriodModal={props.showPeriodModal}
           setShowPeriodModal={props.setShowPeriodModal}
+          showAddPeriodModal={props.showAddPeriodModal}
+          setShowAddPeriodModal={props.setShowAddPeriodModal}
           showDeletePeriodModal={props.showDeletePeriodModal}
           setShowDeletePeriodModal={props.setShowDeletePeriodModal}
           periods={props.periods}
@@ -191,19 +193,20 @@ function AddPeriodModal(props) {
     props.setModalError(null);
   };
 
-  if (!props.showAddPeriodModal) {
+  if (!props.showAddPeriodModal || props.showPeriodModal) {
     return null;
   }
   return (
     <div className="modal">
       <div className="modal-content">
-        <div>Hello</div>
         <AddPeriodForm
           userId={props.userId}
           error={props.error}
           setError={props.setError}
           modalError={props.modalError}
           setModalError={props.setModalError}
+          showPeriodModal={props.showPeriodModal}
+          setShowPeriodModal={props.setShowPeriodModal}
           showAddPeriodModal={props.showAddPeriodModal}
           setShowAddPeriodModal={props.setShowAddPeriodModal}
           periods={props.periods}

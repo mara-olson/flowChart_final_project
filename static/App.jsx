@@ -275,6 +275,8 @@ function App() {
           <DeletePeriod
             showDeletePeriodModal={showDeletePeriodModal}
             setShowDeletePeriodModal={setShowDeletePeriodModal}
+            showPeriodModal={showPeriodModal}
+            setShowPeriodModal={setShowPeriodModal}
           />
         </Route>
       </div>
@@ -292,6 +294,8 @@ function App() {
             setActivities={setActivities}
             selectedActivityId={selectedActivityId}
             setSelectedActivityId={setSelectedActivityId}
+            showDeletePeriodModal={showDeletePeriodModal}
+            setShowDeletePeriodModal={setShowDeletePeriodModal}
           />
           <ActivityModal
             userId={userId}
@@ -305,6 +309,8 @@ function App() {
             setActivities={setActivities}
             selectedActivityId={selectedActivityId}
             setSelectedActivityId={setSelectedActivityId}
+            showDeletePeriodModal={showDeletePeriodModal}
+            setShowDeletePeriodModal={setShowDeletePeriodModal}
             // onClose={closeModal}
           />
         </Route>

@@ -237,6 +237,8 @@ function AllPeriodsContainer(props) {
         setModalError={props.setModalError}
         showDeletePeriodModal={props.showDeletePeriodModal}
         setShowDeletePeriodModal={props.setShowDeletePeriodModal}
+        showAddPeriodModal={props.showAddPeriodModal}
+        setShowAddPeriodModal={props.setShowAddPeriodModal}
         periods={props.periods}
         setPeriods={props.setPeriods}
       />
@@ -305,7 +307,7 @@ function PeriodCard(props) {
           console.log(dataSymptoms);
 
           props.setModalError(null);
-          props.setShowPeriodModal(false);
+          props.setShowAddPeriodModal(false);
           setPeriodEdit("non-edit");
         } else {
           console.log(data.error);
@@ -351,8 +353,12 @@ function PeriodCard(props) {
         <DeletePeriod
           handleDelete={handleDelete}
           setPeriodEdit={setPeriodEdit}
+          showPeriodModal={props.showPeriodModal}
+          setShowPeriodModal={props.setShowPeriodModal}
           showDeletePeriodModal={props.showDeletePeriodModal}
           setShowDeletePeriodModal={props.setShowDeletePeriodModal}
+          showAddPeriodModal={props.showAddPeriodModal}
+          setShowAddPeriodModal={props.setShowAddPeriodModal}
         />
       )}
       {periodEdit === "edit" && (
@@ -392,6 +398,8 @@ function PeriodCard(props) {
           setModalError={props.setModalError}
           showPeriodModal={props.showPeriodModal}
           setShowPeriodModal={props.setShowPeriodModal}
+          showAddPeriodModal={props.showAddPeriodModal}
+          setShowAddPeriodModal={props.setShowAddPeriodModal}
           showDeletePeriodModal={props.showDeletePeriodModal}
           setShowDeletePeriodModal={props.setShowDeletePeriodModal}
           periods={props.periods}
@@ -547,7 +555,7 @@ function PeriodForm(props) {
 
   const handleDeleteClick = (evt) => {
     evt.preventDefault();
-    const formDelete = props.periodEdit === "delete" ? "non-edit" : "delete";
+    const formDelete = props.periodEdit === "delete" ? "edit" : "delete";
     props.setPeriodEdit(formDelete);
     props.setShowDeletePeriodModal(true);
     // return <SelectedActivityContainer />;
@@ -580,7 +588,7 @@ function PeriodForm(props) {
       <form>
         <p>Date: {props.periodDate} </p>
         <p>Flow: {props.flowVolume}</p>
-        {props.symptoms && <p>Symptoms: {sxToDisplay}</p>}
+        {props.symptoms && <div>Symptoms: {sxToDisplay}</div>}
         {props.periodNotes && <p>Notes: {props.periodNotes}</p>}
         <div></div>
         <button className="edit" onClick={handleClick}>

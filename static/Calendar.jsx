@@ -251,6 +251,7 @@ function CalendarDays(props) {
       props.setShowActivityModal(true);
     } else if (day.flowVolume) {
       props.setShowPeriodModal(true);
+      props.setShowAddPeriodModal(false);
     }
   };
   // updateActivity(day);

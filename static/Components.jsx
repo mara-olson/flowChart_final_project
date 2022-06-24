@@ -205,6 +205,8 @@ function Home(props) {
         setShowDeleteActModal={props.setShowDeleteActModal}
         showPeriodModal={props.showPeriodModal}
         setShowPeriodModal={props.setShowPeriodModal}
+        showAddPeriodModal={props.showAddPeriodModal}
+        setShowAddPeriodModal={props.setShowAddPeriodModal}
         showDeletePeriodModal={props.showDeletePeriodModal}
         setShowDeletePeriodModal={props.setShowDeletePeriodModal}
         showEntryChoiceModal={props.showEntryChoiceModal}
@@ -264,6 +266,8 @@ function Home(props) {
         userId={props.userId}
         showPeriodModal={props.showPeriodModal}
         setShowPeriodModal={props.setShowPeriodModal}
+        showAddPeriodModal={props.showAddPeriodModal}
+        setShowAddPeriodModal={props.setShowAddPeriodModal}
         modalError={props.modalError}
         setModalError={props.setModalError}
         error={props.error}
@@ -278,6 +282,8 @@ function Home(props) {
       <AddPeriodModal
         userId={props.userId}
         // onClose={closeModal}
+        showPeriodModal={props.showPeriodModal}
+        setShowPeriodModal={props.setShowPeriodModal}
         showAddPeriodModal={props.showPeriodModal}
         setShowAddPeriodModal={props.setShowPeriodModal}
         modalError={props.modalError}

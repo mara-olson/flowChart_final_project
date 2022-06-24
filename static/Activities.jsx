@@ -403,9 +403,7 @@ function SelectedActivityContainer(props) {
 
 function AllActivitiesContainer(props) {
   console.log(props.activities);
-  // const handleClick = (evt) => {
-  //   evt.preventDefault();
-  //   props.setShowModal(true);
+
   //   return (
   //     <ActivityModal
   //       userId={props.userId}
@@ -426,6 +424,12 @@ function AllActivitiesContainer(props) {
 
   const activityDetails = [];
   for (const activity of props.activities) {
+    const handleClick = () => {
+      // evt.preventDefault();
+      props.setSelectedActivityId(activity.activity_id);
+      localStorage.setItem("selectedActivity", activity.activity_id);
+      props.setShowActivityModal(true);
+    };
     activityDetails.push(
       <ActivityCard
         userId={props.userId}
@@ -446,6 +450,7 @@ function AllActivitiesContainer(props) {
         setModalError={props.setModalError}
         activities={props.activities}
         setActivities={props.setActivities}
+        handleClick={handleClick}
       />
     );
   }
@@ -621,12 +626,15 @@ function ActivityCard(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.reponse);
-        localStorage.setItem("selectedActivity", null);
-        props.setShowDeleteActModal(false);
-        props.setShowActivityModal(false);
-        setActivityEdit("non-edit");
-        props.setModalError(null);
+        if (data.success) {
+          console.log(data.reponse);
+          localStorage.setItem("selectedActivity", null);
+          props.setSelectedActivityId(null);
+          props.setShowDeleteActModal(false);
+          props.setShowActivityModal(false);
+          setActivityEdit("non-edit");
+          props.setModalError(null);
+        }
       });
   };
 
@@ -691,6 +699,7 @@ function ActivityCard(props) {
           setActivities={props.setActivities}
           selectedActivityId={props.selectedActivityId}
           setSelectedActivityId={props.setSelectedActivityId}
+          // activityId={localStorage.getItem("selectedActivity")}
           activityName={props.activityName}
           activityDate={props.activityDate}
           activityType={props.activityType}
@@ -703,6 +712,7 @@ function ActivityCard(props) {
           setActivityEdit={setActivityEdit}
           selectedDate={props.selectedDate}
           setSelectedDate={props.setSelectedDate}
+          handleClick={props.handleClick}
         />
       )}
     </div>
@@ -863,10 +873,15 @@ function DeleteActivity(props) {
 }
 
 function ActivityForm(props) {
-  const handleClick = (evt) => {
+  const handleEditClick = (evt) => {
     evt.preventDefault();
-    const formEdit = props.activityEdit === "edit" ? "non-edit" : "edit";
-    props.setActivityEdit(formEdit);
+
+    if (props.setShowActivityModal) {
+      const formEdit = props.activityEdit === "edit" ? "non-edit" : "edit";
+      props.setActivityEdit(formEdit);
+    } else {
+      props.setShowActivityModal(true);
+    }
     // return <SelectedActivityContainer />;
   };
 
@@ -885,7 +900,7 @@ function ActivityForm(props) {
 
   return (
     <div className="card">
-      <form>
+      <button onClick={props.handleClick}>
         <p>Name: {props.activityName}</p>
         <p>Date: {props.activityDate} </p>
         <p>Type: {props.activityType}</p>
@@ -894,14 +909,18 @@ function ActivityForm(props) {
         <p>Suffer Score: {props.sufferScore}</p>
         <p>Notes: {props.activityNotes}</p>
         <div></div>
-        <button className="edit" onClick={handleClick}>
-          Edit Activity
-        </button>
-        <button className="delete" onClick={handleDeleteClick}>
-          Delete Activity
-        </button>
+        {props.showActivityModal && (
+          <div>
+            <button className="edit" onClick={handleEditClick}>
+              Edit Activity
+            </button>
+            <button className="delete" onClick={handleDeleteClick}>
+              Delete Activity
+            </button>
+          </div>
+        )}
         {/* <button onClick={closeEdit}>Cancel</button> */}
-      </form>
+      </button>
     </div>
   );
 }

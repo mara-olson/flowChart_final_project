@@ -237,7 +237,7 @@ def activity_data(user_id):
         # activity = activity.to_dict()
         activity_objs.append(new_act)
         
-    activity_objs.sort(key=lambda x: datetime.datetime.strptime(x['date'], "%Y-%m-%d"))
+    activity_objs.sort(key=lambda x: datetime.datetime.strptime(x['date'], "%Y-%m-%d"), reverse=True)
 
     return jsonify({"activities": activity_objs, "monthlyMileage": mileage_this_month})
 
@@ -319,8 +319,11 @@ def delete_user_activity(user_id, activity_id):
 
     print(f"Activity {activity_id} deleted")
 
-    response = "deleted"
-    return response 
+    check_activity = ActivityLog.get_activity_by_id(activity_id)
+
+    if not check_activity:
+        return jsonify({
+        "success": True})
 
 
 
@@ -571,7 +574,7 @@ def update_period(user_id, period_id):
     edited_period.fatigue = edited_fatigue
     edited_period.mense_notes = edited_notes
 
-    print("*"*40, edited_period.mood)
+    # print("*"*40, edited_period.mood)
     db.session.commit()
 
     return jsonify({
