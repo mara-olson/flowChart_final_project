@@ -445,9 +445,24 @@ function CalendarDays(props) {
                 {day.activityName}
               </div>
             )}
-            {day.flowVolume && (
+            {day.flowVolume && !day.symptoms && day.flowVolume == "No Flow" && (
               <div onClick={(evt) => viewPeriod(day, evt)}>
-                {day.flowVolume} flow
+                <i className="bi bi-record icon-red-heavy"></i>
+              </div>
+            )}
+            {day.flowVolume && day.symptoms && day.flowVolume == "No Flow" && (
+              <div onClick={(evt) => viewPeriod(day, evt)}>
+                <i className="bi bi-record-fill icon-red-heavy"></i>
+              </div>
+            )}
+            {day.flowVolume && day.symptoms && day.flowVolume == "Light" && (
+              <div onClick={(evt) => viewPeriod(day, evt)}>
+                <i className="bi bi-record-fill icon-red-light"></i>
+              </div>
+            )}
+            {day.flowVolume && day.flowVolume == "Light" && (
+              <div onClick={(evt) => viewPeriod(day, evt)}>
+                <i className="bi bi-record-circle-fill icon-red-light"></i>
               </div>
             )}
           </button>

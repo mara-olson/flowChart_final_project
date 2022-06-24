@@ -444,6 +444,7 @@ function Symptoms(props) {
           type="checkbox"
           id="mood"
           value={props.mood}
+          checked={props.mood}
           onChange={(evt) => props.setMood(evt.currentTarget.checked)}
         />
         <label htmlFor="mood">Moodiness</label>
@@ -453,6 +454,7 @@ function Symptoms(props) {
           type="checkbox"
           id="cramps"
           value={props.cramps}
+          checked={props.cramps}
           onChange={(evt) => props.setCramps(evt.currentTarget.checked)}
         />
         <label htmlFor="cramps">Cramps</label>
@@ -462,6 +464,7 @@ function Symptoms(props) {
           type="checkbox"
           id="bloating"
           value={props.bloating}
+          checked={props.bloating}
           onChange={(evt) => props.setBloating(evt.currentTarget.checked)}
         />
         <label htmlFor="bloating">Bloating</label>
@@ -471,6 +474,7 @@ function Symptoms(props) {
           type="checkbox"
           id="fatigue"
           value={props.fatigue}
+          checked={props.fatigue}
           onChange={(evt) => props.setFatigue(evt.currentTarget.checked)}
         />
         <label htmlFor="fatigue">Fatigue</label>

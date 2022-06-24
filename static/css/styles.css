@@ -75,6 +75,19 @@ form {
   color: red;
 }
 
+.icon-red-heavy {
+  color: rgb(153, 65, 65);
+  font-size: 20px;
+}
+.icon-red-medium {
+  color: rgb(153, 65, 65);
+  font-size: 20px;
+}
+.icon-red-light {
+  color: rgb(222, 133, 133);
+  font-size: 20px;
+}
+
 #sign-up_button {
   background-color: rgb(111, 17, 17);
   border: gray;
