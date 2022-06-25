@@ -150,6 +150,7 @@ form {
   width: 125px;
   height: 75px;
   position: relative;
+  justify-content: left;
   border: 1px solid #a6a6a6;
 }
 

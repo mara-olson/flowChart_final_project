@@ -230,7 +230,6 @@ function CalendarDays(props) {
 
   const updateActivity = (day) => {
     if (day.activityId) {
-      console.log(day.periodId);
       props.setSelectedActivityId(day.activityId);
       localStorage.setItem("selectedActivity", day.activityId);
     } else if (day.periodId) {
@@ -244,7 +243,6 @@ function CalendarDays(props) {
     evt.preventDefault();
     updateActivity(day);
     props.setSelectedDate(day.activityDate);
-    console.log(typeof day.symptoms);
 
     if (!day.activityName && !day.flowVolume) {
       props.setShowEntryChoiceModal(true);
@@ -264,6 +262,7 @@ function CalendarDays(props) {
   const viewPeriod = (day, evt) => {
     evt.preventDefault();
     console.log("BLAH");
+    console.log(props.showPeriodModal);
     props.setShowPeriodModal(true);
   };
   //   return (
@@ -469,7 +468,7 @@ function CalendarDays(props) {
             )}
             {day.symptoms == false && day.flowVolume === "Light" && (
               <div onClick={(evt) => viewPeriod(day, evt)}>
-                <i className="bi bi-record-fill icon-red-light"></i>
+                <i className="bi bi-record-circle-fill icon-red-light"></i>
               </div>
             )}
             {day.symptoms != false && day.flowVolume === "Light" && (

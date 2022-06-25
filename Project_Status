@@ -440,5 +440,8 @@ def activity_data(user_id):
 	TO-DO:
 	- Reset data for particular user if they re-sign up
 
+6/24
+	- Circle icon logic fixed (day.symptoms is an object, not an array, and therefore a truthy object unless soft equality used == and !=)
+		idk why ==true wouldn't produce results but != false would -\('')/-
 
 

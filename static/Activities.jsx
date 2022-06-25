@@ -343,9 +343,7 @@ function SelectedActivityContainer(props) {
   const [sufferScore, setSufferScore] = React.useState(null);
   const [activityNotes, setActivityNotes] = React.useState(null);
 
-  console.log("SelectedActivityContainer component is rendering");
   React.useEffect(() => {
-    console.log("use effect running");
     fetch(
       `/api/${props.userId}/activities/${localStorage.getItem(
         "selectedActivity"
@@ -402,8 +400,6 @@ function SelectedActivityContainer(props) {
 }
 
 function AllActivitiesContainer(props) {
-  console.log(props.activities);
-
   //   return (
   //     <ActivityModal
   //       userId={props.userId}
@@ -904,10 +900,26 @@ function ActivityForm(props) {
         <p>Name: {props.activityName}</p>
         <p>Date: {props.activityDate} </p>
         <p>Type: {props.activityType}</p>
-        <p>Duration: {props.duration} minutes</p>
-        <p>Distance: {props.distance} miles</p>
-        <p>Suffer Score: {props.sufferScore}</p>
-        <p>Notes: {props.activityNotes}</p>
+        {props.duration ? (
+          <p>Duration: {props.duration} minutes</p>
+        ) : (
+          <p>Duration: -- </p>
+        )}
+        {props.distance ? (
+          <p>Distance: {props.distance} miles</p>
+        ) : (
+          <p>Distance: -- </p>
+        )}
+        {props.sufferScore ? (
+          <p>Suffer Score: {props.sufferScore}</p>
+        ) : (
+          <p>Suffer Score: -- </p>
+        )}
+        {props.activityNotes ? (
+          <p>Notes: {props.activityNotes}</p>
+        ) : (
+          <p>Notes: -- </p>
+        )}
         <div></div>
         {props.showActivityModal && (
           <div>
