@@ -206,18 +206,18 @@ def activity_data(user_id):
     activity_objs = []
 
     for activity in strava_activities:
-        new_strava_act = {
-            "id": activity["id"],
-            "activity_name": activity["name"], 
-            "activity_date": activity["start_date_local"][:10], 
-            "duration": sec_to_min(activity["moving_time"]), 
-            "distance": km_to_miles(activity["distance"]), 
-            "activity_type": activity["type"], 
-            "suffer_score": None, 
-            "activity_notes": activity["location_city"], 
-            "created_at": datetime.datetime.now()}
-        
-        strava_add_to_db = ActivityLog.create_activity(user_id, new_strava_act["activity_date"], new_strava_act["activity_type"], new_strava_act["activity_name"], new_strava_act["duration"], new_strava_act["distance"], new_strava_act["suffer_score"], new_strava_act["activity_notes"], new_strava_act["created_at"])
+        if not ActivityLog.query.get(activity["id"]):
+            new_strava_act = {
+                "id": activity["id"],
+                "activity_name": activity["name"], 
+                "activity_date": activity["start_date_local"][:10], 
+                "duration": sec_to_min(activity["moving_time"]), 
+                "distance": km_to_miles(activity["distance"]), 
+                "activity_type": activity["type"], 
+                "suffer_score": None, 
+                "activity_notes": activity["location_city"]}
+            
+            ActivityLog.create_activity(user_id, new_strava_act["activity_date"], new_strava_act["activity_type"], new_strava_act["activity_name"], new_strava_act["duration"], new_strava_act["distance"], new_strava_act["suffer_score"], new_strava_act["activity_notes"])
         
 
     all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
