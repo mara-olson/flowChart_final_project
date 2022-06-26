@@ -1,24 +1,72 @@
+body {
+  font-family: "avenir light", sans-serif;
+  /* font-style: ; */
+  font-weight: 50;
+  background: #e9e3e3;
+}
+
+p {
+  font-family: "avenir light", sans-serif;
+}
+.red-letter {
+  color: rgb(142, 36, 36);
+  font-size: 200%;
+}
+
+.add-pad {
+  padding-left: 20px;
+}
+/* .navbar {
+  height: 60px;
+  width: 100%;
+  padding: 10px;
+  align-items: center;
+  justify-content: left;
+  font-family: "avenir light", sans-serif;
+  background: white;
+}
+
+.navbar-brand {
+  font-size: 30px;
+  font-weight: bold;
+} */
+
+.stat {
+  font-family: "avenir light", sans-serif;
+  font-size: 20px;
+  font-weight: light;
+  text-align: center;
+}
+
+.stat-value {
+  font-family: "avenir light", sans-serif;
+  font-weight: bold;
+  font-size: 40px;
+  text-align: center;
+}
+
 .card {
   /* height: 100%;
   width: 100%; */
-  /* border-radius: 12px; */
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  box-shadow: 0 1px 8px rgba(153, 150, 150, 0.25);
 }
 
 .profile-icon {
-  float: right;
+  justify-content: right;
 }
 
 .profile-card {
   /* width: 40%;
   height: 120%; */
-  padding: 15px;
-  margin-top: 40px;
+  padding: 10px;
+  margin: 10px;
   /* border-radius: 25px; */
   display: flex;
   justify-content: center;
-  box-shadow: 15px 10px 25px 0px #393939;
-  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0 1px 8px rgba(159, 158, 158, 0.25);
+  background: white;
   background-repeat: no-repeat, no-repeat;
   background-position: 120% -5%, 200% -40%;
   background-size: 40%, 80%;
@@ -92,6 +140,17 @@ form {
   font-size: 20px;
 }
 
+.icon-add-plus {
+  color: rgb(119, 20, 20);
+  font-size: 100px;
+}
+
+.profile-icon {
+  color: rgb(119, 20, 20);
+  font-size: 50px;
+  justify-content: center;
+}
+
 #sign-up_button {
   background-color: rgb(111, 17, 17);
   border: gray;
@@ -108,6 +167,8 @@ form {
   height: 600px;
   display: flex;
   flex-direction: column;
+  font-family: "avenir light", sans-serif;
+  box-shadow: 0 1px 8px rgba(159, 158, 158, 0.25);
 }
 
 .calendar-header {
@@ -124,6 +185,10 @@ form {
   flex-direction: column;
 }
 
+.calendar-nav {
+  font-family: "san francisco", sans-serif;
+}
+
 .weekdays-header {
   height: 50px;
   width: 100%;
@@ -134,11 +199,12 @@ form {
 
 .weekday {
   width: 100px;
-  text-align: left;
+  text-align: center;
 }
 
 .table-content {
   width: 100%;
+  padding: 0;
   flex-grow: 1;
   display: flex;
   flex-wrap: wrap;
@@ -166,6 +232,8 @@ form {
 
 .current p {
   color: #000000;
+  justify-content: left;
+  align-items: top;
 }
 
 .selected p {

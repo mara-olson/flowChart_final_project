@@ -141,7 +141,7 @@ function App() {
           />
         </Route>
       </div>
-      <div className="container-fluid">
+      <div className="container-fluid homepage">
         <Route exact path="/home">
           <Home
             userId={userId}

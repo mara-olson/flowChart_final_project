@@ -19,63 +19,111 @@ function Logout(props) {
 function Navbar(props) {
   if (!props.isLoggedIn) {
     return (
-      <nav>
-        <ReactRouterDOM.Link
-          to="/"
-          className="navbar-brand d-flex justify-content-left"
-        >
-          <img src={props.logo} height="30" alt="logo" />
-        </ReactRouterDOM.Link>
-        <ReactRouterDOM.NavLink
-          to="/login"
-          activeClassName="navlink-active"
-          className="nav-link nav-item"
-        >
-          Login
-        </ReactRouterDOM.NavLink>
-      </nav>
+      <div className="container-flex navbar">
+        <div className="row">
+          <nav>
+            <div className="col-2">
+              <ReactRouterDOM.Link
+                to="/"
+                className="navbar-brand d-flex justify-content-left"
+              >
+                <img src={props.logo} height="30" alt="logo" />
+              </ReactRouterDOM.Link>
+            </div>
+            <ReactRouterDOM.NavLink
+              to="/login"
+              activeClassName="navlink-active"
+              className="nav-link nav-item"
+            >
+              Login
+            </ReactRouterDOM.NavLink>
+          </nav>
+        </div>
+      </div>
     );
   }
   if (props.isLoggedIn) {
     return (
-      <nav>
-        <ReactRouterDOM.Link
-          to="/home"
-          className="navbar-brand d-flex justify-content-left"
-        >
-          <img src={props.logo} height="30" alt="logo" />
-        </ReactRouterDOM.Link>
+      <div className="container-fluid">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+          <a className="navbar-brand add-pad" href="/home">
+            fullGO<span className="red-letter">.</span>
+          </a>
+        </nav>
+      </div>
+      // <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      //   <div className="container-fluid">
+      //     <button
+      //       className="navbar-toggler"
+      //       type="button"
+      //       data-toggle="collapse"
+      //       data-target="#navbarSupportedContent"
+      //       aria-controls="navbarSupportedContent"
+      //       aria-expanded="false"
+      //       aria-label="Toggle navigation"
+      //     >
+      //       <i className="fas fa-bars"></i>
+      //     </button>
 
-        <section className="d-flex justify-content-left">
-          <ReactRouterDOM.NavLink
-            to="/activities"
-            activeClassName="navlink-active"
-            className="nav-link nav-item"
-          >
-            Activities
-          </ReactRouterDOM.NavLink>
-          <ReactRouterDOM.NavLink
-            to="/profile"
-            activeClassName="navlink-active"
-            className="nav-link nav-item"
-          >
-            <i className="bi bi-person-circle profile-icon"></i>
-          </ReactRouterDOM.NavLink>
-          <ReactRouterDOM.NavLink
-            to="/periods"
-            activeClassName="navlink-active"
-            className="nav-link nav-item"
-          >
-            Periods
-          </ReactRouterDOM.NavLink>
-          <Logout
-            className="justify-content-right"
-            setUserId={props.setUserId}
-            // isLoggedIn={isLoggedIn}
-            setIsLoggedIn={props.setIsLoggedIn}
-          />
-        </section>
-      </nav>
+      //     <div className="collapse navbar-collapse" id="navbarSupportedContent">
+      //       <a className="navbar-brand mr-auto" href="/home">
+      //         fullGO<span className="red-letter">.</span>
+      //       </a>
+
+      //       <ul className="navbar-nav mr-auto">
+      //         <li className="nav-item">
+      //           <a className="nav-link" href="/activities">
+      //             Training Periods
+      //           </a>
+      //         </li>
+      //         <li className="nav-item">
+      //           <a className="nav-link" to="/periods">
+      //             Menstrual Periods
+      //           </a>
+      //         </li>
+      //       </ul>
+      /* <img
+            className="navbar-brand"
+            href="/home"
+            src={props.logo}
+            alt="logo"
+            height="60"
+          ></img> */
+      /* <section className="d-flex justify-content-left"> */
+      // {/* <ReactRouterDOM.Link to="/home"> */}
+      // {/* <img src={props.logo} alt="logo" />
+      //   </ReactRouterDOM.Link> */}
+      // {/* <ReactRouterDOM.NavLink
+      //   to="/activities"
+      //   activeClassName="navlink-active"
+      //   className="nav-link nav-item"
+      // >
+      //   Activities
+      // </ReactRouterDOM.NavLink>
+      // <ReactRouterDOM.NavLink
+      //   to="/periods"
+      //   activeClassName="navlink-active"
+      //   className="nav-link nav-item"
+      // >
+      //   Periods
+      // </ReactRouterDOM.NavLink>
+      // <Logout
+      //   className="justify-content-right"
+      //   setUserId={props.setUserId}
+      //   // isLoggedIn={isLoggedIn}
+      //   setIsLoggedIn={props.setIsLoggedIn}
+      // />
+      // <ReactRouterDOM.NavLink
+      //   to="/profile"
+      //   activeClassName="navlink-active"
+      //   className="nav-link nav-item"
+      // >
+      //   <i className="bi bi-person-circle profile-icon dropdown"></i>
+      // </ReactRouterDOM.NavLink>
+      // </section> */}
+      //     </div>
+      //   </div>
+      // </nav>
     );
   }
 }
@@ -84,9 +132,17 @@ function StatCard1(props) {
   return (
     <div className="profile-card">
       {props.monthlyMileage && (
-        <div>Mileage this Month: {props.monthlyMileage}</div>
+        <div>
+          <div className="stat">Mileage this Month: </div>
+          <div className="stat-value"> {props.monthlyMileage}</div>
+        </div>
       )}
-      {!props.monthlyMileage && <div>Mileage this Month: 0</div>}
+      {!props.monthlyMileage && (
+        <div>
+          <div className="stat">Mileage this Month: </div>
+          <div className="stat-value"> 0</div>
+        </div>
+      )}
     </div>
   );
 }
@@ -144,7 +200,7 @@ function LandingPage(props) {
 // HOMEPAGE AFTER LOGIN COMPONENT
 function Home(props) {
   return (
-    <div className="container">
+    <div className="container-flex flex-wrap">
       <div className="row">
         <div className="col-3">
           <ProfileCard
@@ -505,7 +561,7 @@ function AddCard(props) {
   return (
     <div className="profile-card">
       <i
-        className="btn bi bi-plus-circle-fill icon-red-heavy"
+        className="btn bi bi-plus-circle-fill icon-add-plus"
         role="button"
         onClick={handleClick}
       ></i>
@@ -777,9 +833,8 @@ function ProfileForm(props) {
   return (
     <div className="profile-card">
       <form onSubmit={props.handleSubmit}>
-        <h1>Profile Card</h1>
         <label className="custom-file-upload fas">
-          <div className="img-wrap">
+          <div>
             <img
               htmlFor="photo-upload"
               className="profile-img"
@@ -787,16 +842,16 @@ function ProfileForm(props) {
             />
           </div>
         </label>
-        <h3 className="first-name last-name">
+        <h3>
           {props.firstName} {props.lastName}
         </h3>
 
-        <div className="email">{props.email}</div>
+        <div>{props.email}</div>
         <h6>Member since {props.sinceDate}</h6>
-        <div className="bio">{props.profileBio}</div>
-        <div className="team-name">Team: {props.teamName}</div>
+        <div>{props.profileBio}</div>
+        <div>Team: {props.teamName}</div>
         {props.active === "profile" && (
-          <button onClick={handleEdit} className="edit">
+          <button onClick={handleEdit} className="btn btn-secondary">
             Edit Profile
           </button>
         )}

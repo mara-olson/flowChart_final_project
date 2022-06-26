@@ -206,6 +206,7 @@ def activity_data(user_id):
     activity_objs = []
 
     for activity in strava_activities:
+        
         if not ActivityLog.query.get(activity["id"]):
             new_strava_act = {
                 "id": activity["id"],
@@ -215,9 +216,10 @@ def activity_data(user_id):
                 "distance": km_to_miles(activity["distance"]), 
                 "activity_type": activity["type"], 
                 "suffer_score": None, 
-                "activity_notes": activity["location_city"]}
-            
-            ActivityLog.create_activity(user_id, new_strava_act["activity_date"], new_strava_act["activity_type"], new_strava_act["activity_name"], new_strava_act["duration"], new_strava_act["distance"], new_strava_act["suffer_score"], new_strava_act["activity_notes"])
+                "activity_notes": activity["location_city"], 
+                "created_at": datetime.datetime.now()}
+            if new_strava_act["id"] not in ActivityLog.query.filter(ActivityLog.user_id == user_id).all():
+                ActivityLog.create_activity(user_id, new_strava_act["activity_date"], new_strava_act["activity_type"], new_strava_act["activity_name"], new_strava_act["duration"], new_strava_act["distance"], new_strava_act["suffer_score"], new_strava_act["activity_notes"])
         
 
     all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
@@ -445,7 +447,6 @@ def add_activity(user_id):
     new_act_distance = data.get("distance")
     new_act_suffer_score = data.get("suffer_score")
     new_act_notes = data.get("activity_notes")
-    created_at = datetime.datetime.now()
 
     currentTime= datetime.datetime.now()
 
@@ -468,7 +469,7 @@ def add_activity(user_id):
         error = None
         success = True
 
-        new_activity = ActivityLog.create_activity(user_id, new_act_date, new_act_type, new_act_name, new_act_duration, new_act_distance, new_act_suffer_score, new_act_notes, created_at)
+        new_activity = ActivityLog.create_activity(user_id, new_act_date, new_act_type, new_act_name, new_act_duration, new_act_distance, new_act_suffer_score, new_act_notes)
 
         new_activity.activity_date = new_activity.activity_date.strftime("%Y-%m-%d")
 
