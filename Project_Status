@@ -444,4 +444,11 @@ def activity_data(user_id):
 	- Circle icon logic fixed (day.symptoms is an object, not an array, and therefore a truthy object unless soft equality used == and !=)
 		idk why ==true wouldn't produce results but != false would -\('')/-
 
+6/25
+	- Had to git stash because who knows what the hell I did to break all the buttons
+	- Spent some time trying to get React-Bootstrap working, but ultimately I don't want to have to comb through all my components & states to re-do everything, So just going to use Bootstrap
+	- + card added
+	- Navbar kind of added
+	- Fonts, backgrounds
+
 

@@ -84,64 +84,75 @@ function SignUp(props) {
   };
 
   return (
-    <div>
-      <h2>New User Info</h2>
-      <form action="/sign-up" method="POST" onSubmit={handleSignUp}>
-        <div>
-          First Name
-          <input
-            type="text"
-            value={firstName}
-            onChange={(evt) => setFirstName(evt.currentTarget.value)}
-          />
+    <div className="sign-up card">
+      <div className="row">
+        <div className="col-12">
+          <h2 className="header black">Join today for free</h2>
         </div>
-        <br></br>
-        <div>
-          Last Name
-          <input
-            type="text"
-            value={lastName}
-            onChange={(evt) => setLastName(evt.currentTarget.value)}
-          />
-        </div>
-        <br></br>
-        <div>
-          Team Name
-          <input
-            type="text"
-            value={teamName}
-            onChange={(evt) => setTeamName(evt.currentTarget.value)}
-          />
-        </div>
-        <br></br>
-        <div>
-          Email
-          <input
-            type="text"
-            value={email}
-            onChange={(evt) => setEmail(evt.currentTarget.value)}
-          />
-        </div>
-        <br></br>
-        <div>
-          Password
-          <input
-            type="text"
-            value={password}
-            onChange={(evt) => setPassword(evt.currentTarget.value)}
-          />
-        </div>
-        <br></br>
-        <div>
-          Bio
-          <input
-            type="text"
-            value={bio}
-            onChange={(evt) => setBio(evt.currentTarget.value)}
-          />
-        </div>
-        <button type="submit">Sign Up</button>
-      </form>
+      </div>
+      <div className="row">
+        <form
+          className="content"
+          action="/sign-up"
+          method="POST"
+          onSubmit={handleSignUp}
+        >
+          <div className="field">
+            First Name
+            <input
+              type="text"
+              value={firstName}
+              onChange={(evt) => setFirstName(evt.currentTarget.value)}
+            />
+          </div>
+
+          <div className="field">
+            Last Name
+            <input
+              type="text"
+              value={lastName}
+              onChange={(evt) => setLastName(evt.currentTarget.value)}
+            />
+          </div>
+          <div className="field">
+            Team Name
+            <input
+              type="text"
+              value={teamName}
+              onChange={(evt) => setTeamName(evt.currentTarget.value)}
+            />
+          </div>
+
+          <div className="field">
+            Email
+            <input
+              type="text"
+              value={email}
+              onChange={(evt) => setEmail(evt.currentTarget.value)}
+            />
+          </div>
+          <div className="field">
+            Password
+            <input
+              type="text"
+              value={password}
+              onChange={(evt) => setPassword(evt.currentTarget.value)}
+            />
+          </div>
+
+          <div className="field">
+            Bio
+            <input
+              type="text"
+              value={bio}
+              onChange={(evt) => setBio(evt.currentTarget.value)}
+            />
+          </div>
+          <button type="submit" className="btn sign-up-button red1">
+            Sign Up
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

@@ -19,7 +19,7 @@ function Logout(props) {
 function Navbar(props) {
   if (!props.isLoggedIn) {
     return (
-      <div className="container-flex navbar">
+      <div className="container-flex navbar my-navbar">
         <div className="row">
           <nav>
             <div className="col-2">
@@ -33,7 +33,7 @@ function Navbar(props) {
             <ReactRouterDOM.NavLink
               to="/login"
               activeClassName="navlink-active"
-              className="nav-link nav-item"
+              className="btn btn-primary grey1"
             >
               Login
             </ReactRouterDOM.NavLink>
@@ -167,20 +167,20 @@ function LandingPage(props) {
     history.push(`/${props.userId}/home`);
   } else {
     return (
-      <div>
+      <div id="landing-messages">
         <section
           id="landing-message1"
           className="d-flex justify-content-center"
         >
-          <p>{landingMessage1}</p>
+          <h6 className="content">{landingMessage1}</h6>
         </section>
         <section
           id="landing-message1"
           className="d-flex justify-content-center"
         >
-          <p>
+          <h4 className="content">
             <strong>{landingMessage2}</strong>
-          </p>
+          </h4>
         </section>
 
         <form
@@ -188,7 +188,11 @@ function LandingPage(props) {
           id="sign-up"
           className="d-flex justify-content-center"
         >
-          <button type="submit" id="sign-up_button">
+          <button
+            type="submit"
+            className="btn btn-primary red1"
+            id="sign-up_button"
+          >
             Sign Up
           </button>
         </form>

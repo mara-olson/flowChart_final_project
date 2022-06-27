@@ -1,13 +1,25 @@
 body {
-  font-family: "avenir light", sans-serif;
+  font-family: "montserrat", sans-serif;
   /* font-style: ; */
-  font-weight: 50;
+  font-weight: light;
   background: #e9e3e3;
 }
 
-p {
-  font-family: "avenir light", sans-serif;
+.content {
+  font-family: "raleway", sans-serif;
+  font-weight: 500;
 }
+
+.header {
+  font-family: "montserrat", sans-serif;
+  /* font-style: ; */
+  width: 100%;
+  height: auto;
+  font-weight: 300;
+  padding: 20px;
+  text-align: center;
+}
+
 .red-letter {
   color: rgb(142, 36, 36);
   font-size: 200%;
@@ -16,21 +28,16 @@ p {
 .add-pad {
   padding-left: 20px;
 }
-/* .navbar {
-  height: 60px;
-  width: 100%;
-  padding: 10px;
-  align-items: center;
-  justify-content: left;
-  font-family: "avenir light", sans-serif;
-  background: white;
+
+.my-navbar {
+  font-family: "montserrat", sans-serif;
+  font-weight: 300;
 }
 
 .navbar-brand {
   font-size: 30px;
   font-weight: bold;
-} */
-
+}
 .stat {
   font-family: "avenir light", sans-serif;
   font-size: 20px;
@@ -40,7 +47,7 @@ p {
 
 .stat-value {
   font-family: "avenir light", sans-serif;
-  font-weight: bold;
+  font-weight: "extra-bold";
   font-size: 40px;
   text-align: center;
 }
@@ -48,7 +55,7 @@ p {
 .card {
   /* height: 100%;
   width: 100%; */
-  border-radius: 4px;
+  border-radius: 20px;
   box-shadow: 0 1px 8px rgba(153, 150, 150, 0.25);
 }
 
@@ -64,7 +71,7 @@ p {
   /* border-radius: 25px; */
   display: flex;
   justify-content: center;
-  border-radius: 3px;
+  border-radius: 4px;
   box-shadow: 0 1px 8px rgba(159, 158, 158, 0.25);
   background: white;
   background-repeat: no-repeat, no-repeat;
@@ -118,9 +125,20 @@ form {
 }
 
 .field {
-  margin: 5px;
-  display: flex;
-  flex-direction: column;
+  width: 30%;
+  margin-left: 5px;
+  margin-right: auto;
+  display: block;
+  align-items: center;
+  float: left;
+  padding-left: 20px;
+  padding-top: 10px;
+}
+
+.input {
+  width: 100%;
+  margin-left: 10px;
+  margin-right: auto;
 }
 
 .error {
@@ -151,11 +169,41 @@ form {
   justify-content: center;
 }
 
-#sign-up_button {
+.sign-up {
+  height: 50%;
+  width: 50%;
+  margin: auto;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.sign-up-button {
   background-color: rgb(111, 17, 17);
   border: gray;
   color: white;
   text-align: center;
+  padding: 10px;
+  margin: 20px;
+}
+.red1 {
+  background-color: rgb(111, 17, 17);
+  font-weight: 300;
+}
+
+.grey1 {
+  background-color: rgb(196, 191, 191);
+  font-weight: 300;
+}
+
+.black {
+  background-color: #000000;
+  color: white;
+  font-weight: 300;
+  width: 100%;
+}
+
+#landing-messages {
+  margin: 40px;
 }
 
 .card-img-top {
