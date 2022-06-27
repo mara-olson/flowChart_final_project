@@ -3,8 +3,8 @@ function SignUpModal(props) {
     return null;
   }
   return (
-    <div className="modal">
-      <div className="modal-content">
+    <div>
+      <div>
         <SignUp
           userId={props.userId}
           setUserId={props.setUserId}

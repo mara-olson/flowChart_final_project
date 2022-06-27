@@ -12,6 +12,8 @@ function App() {
   const [showPeriodModal, setShowPeriodModal] = React.useState(false);
   const [showAddPeriodModal, setShowAddPeriodModal] = React.useState(false);
   const [showSignUpModal, setShowSignUpModal] = React.useState(false);
+  const [showSignUpConnectModal, setShowSignUpConnectModal] =
+    React.useState(false);
   const [showDeleteActModal, setShowDeleteActModal] = React.useState(false);
   const [showDeletePeriodModal, setShowDeletePeriodModal] =
     React.useState(false);
@@ -126,7 +128,12 @@ function App() {
       {!isLoggedIn && (
         <div className="container-fluid">
           <Route exact path="/">
-            <LandingPage isLoggedIn={isLoggedIn} userId={userId} />
+            <LandingPage
+              isLoggedIn={isLoggedIn}
+              userId={userId}
+              setShowSignUpModal={setShowSignUpModal}
+              showSignUpModal={showSignUpModal}
+            />
           </Route>
         </div>
       )}
@@ -336,26 +343,38 @@ function App() {
       </div>
       <div className="container-fluid">
         <Route exact path="/sign-up">
-          <SignUp
+          {/* <SignUp
             userId={userId}
             setUserId={setUserId}
             isLoggedIn={isLoggedIn}
             setIsLoggedIn={setIsLoggedIn}
             modalError={modalError}
-            setError={setError}
+            setModalError={setModalError}
             showSignUpModal={showSignUpModal}
             setShowSignUpModal={setShowSignUpModal}
-          />
+            showSignUpConnectModal={showSignUpConnectModal}
+            setShowSignUpConnectModal={setShowSignUpConnectModal}
+          /> */}
           <SignUpModal
             userId={userId}
             setUserId={setUserId}
             isLoggedIn={isLoggedIn}
             setIsLoggedIn={setIsLoggedIn}
             modalError={modalError}
-            setError={setError}
+            setModalError={setModalError}
             showSignUpModal={showSignUpModal}
             setShowSignUpModal={setShowSignUpModal}
             // onClose={closeModal}
+          />
+          <SignUpConnectModal
+            userId={userId}
+            setUserId={setUserId}
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
+            modalError={modalError}
+            setModalError={setModalError}
+            showSignUpModal={showSignUpModal}
+            setShowSignUpModal={setShowSignUpModal}
           />
         </Route>
       </div>

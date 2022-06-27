@@ -1,4 +1,4 @@
-function SignUpModal(props) {
+function SignUpConnectModal(props) {
   const history = ReactRouterDOM.useHistory();
   const authenticate = () => {
     window.location.replace(
@@ -7,7 +7,7 @@ function SignUpModal(props) {
     setShowSignUpModal(false);
   };
 
-  if (!props.showSignUpModal) {
+  if (!props.showSignUpConnectModal) {
     return null;
   }
   return (
@@ -75,10 +75,9 @@ function SignUp(props) {
           props.setIsLoggedIn(true);
           localStorage.setItem("isLoggedIn", true);
           localStorage.setItem("userId", data.user_id);
-
-          props.setShowSignUpModal(true);
+          props.setShowSignUpConnectModal(true);
         } else {
-          props.setError(data.error_msg);
+          props.setModalError(data.error_msg);
         }
       });
   };

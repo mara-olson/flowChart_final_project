@@ -163,6 +163,13 @@ function LandingPage(props) {
 
   const history = ReactRouterDOM.useHistory();
 
+  const handleClick = (evt) => {
+    evt.preventDefault();
+    props.setShowSignUpModal(true);
+    console.log("clicked");
+    history.push("/sign-up");
+  };
+
   if (localStorage.getItem("isLoggedIn") == true) {
     history.push(`/${props.userId}/home`);
   } else {
@@ -189,7 +196,7 @@ function LandingPage(props) {
           className="d-flex justify-content-center"
         >
           <button
-            type="submit"
+            onClick={handleClick}
             className="btn btn-primary red1"
             id="sign-up_button"
           >
