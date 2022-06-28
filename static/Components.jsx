@@ -46,7 +46,7 @@ function Navbar(props) {
     return (
       // <div className="container-fluid">
       // <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <nav className="navbar my-navbar navbar-light navbar-expand-md bg-light justify-content-between">
+      <nav className="navbar my-navbar navbar-light navbar-expand-md bg-light align-items-bottom">
         <div className="container-fluid">
           <a className="navbar-brand add-pad nav-link" href="/home">
             floChart<span className="red-letter">.</span>
@@ -59,7 +59,6 @@ function Navbar(props) {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-
           <div className="navbar-collapse collapse dual-nav w-50 order-1 order-md-0">
             <ul className="navbar-nav ">
               {/* <li> */}
@@ -76,6 +75,13 @@ function Navbar(props) {
                 <a className="nav-link grey-text" href="/periods">
                   Menstrual Periods
                 </a>
+              </li>
+            </ul>
+          </div>
+          <div class="mx-auto order-0">
+            <ul class="navbar-nav me-auto">
+              <li className="nav-item ">
+                <i className="nav-link me-auto bi bi-person-circle profile-icon dropdown"></i>
               </li>
             </ul>
           </div>
