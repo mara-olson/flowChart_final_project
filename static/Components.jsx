@@ -181,7 +181,10 @@ function StatCard1(props) {
 function StatCard2(props) {
   return (
     <div className="profile-card">
-      <div>Last Period: {props.lastPeriod}</div>
+      <div className="stat">
+        Last Period:
+        <div className="stat-value2">{props.lastPeriod}</div>
+      </div>
     </div>
   );
 }

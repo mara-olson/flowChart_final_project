@@ -71,12 +71,21 @@ body {
   font-size: 20px;
   font-weight: light;
   text-align: center;
+  height: auto;
+  width: 100%
 }
 
 .stat-value {
-  font-family: "avenir light", sans-serif;
-  font-weight: "extra-bold";
+  font-family: "monserrat", sans-serif;
+  font-weight: 900;
   font-size: 40px;
+  text-align: center;
+}
+
+.stat-value2 {
+  font-family: "monserrat", sans-serif;
+  font-weight: 900;
+  font-size: 30px;
   text-align: center;
 }
 
@@ -190,6 +199,7 @@ form {
 .icon-add-plus {
   color: rgb(119, 20, 20);
   font-size: 100px;
+  padding: 0
 }
 
 .profile-icon {
