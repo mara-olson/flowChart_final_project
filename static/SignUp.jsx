@@ -97,7 +97,7 @@ function SignUp(props) {
           onSubmit={handleSignUp}
         >
           <div className="field">
-            First Name
+            First Name <span className="red-text">*</span>
             <input
               type="text"
               value={firstName}
@@ -106,7 +106,7 @@ function SignUp(props) {
           </div>
 
           <div className="field">
-            Last Name
+            Last Name <span className="red-text">*</span>
             <input
               type="text"
               value={lastName}
@@ -123,7 +123,7 @@ function SignUp(props) {
           </div>
 
           <div className="field">
-            Email
+            Email <span className="red-text">*</span>
             <input
               type="text"
               value={email}
@@ -131,7 +131,7 @@ function SignUp(props) {
             />
           </div>
           <div className="field">
-            Password
+            Password <span className="red-text">*</span>
             <input
               type="text"
               value={password}
@@ -147,8 +147,14 @@ function SignUp(props) {
               onChange={(evt) => setBio(evt.currentTarget.value)}
             />
           </div>
+          <div className="modal-footer">
+            {props.modalError && <p className="error">{props.modalError}</p>}
+          </div>
           <button type="submit" className="btn sign-up-button red1">
             Sign Up
+          </button>
+          <button className="btn inconspicuous" onClick={props.onClose}>
+            Cancel
           </button>
         </form>
       </div>

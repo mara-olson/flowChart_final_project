@@ -19,38 +19,69 @@ function Logout(props) {
 function Navbar(props) {
   if (!props.isLoggedIn) {
     return (
-      <div className="container-flex navbar my-navbar">
-        <div className="row">
-          <nav>
-            <div className="col-2">
-              <ReactRouterDOM.Link
-                to="/"
-                className="navbar-brand d-flex justify-content-left"
-              >
-                <img src={props.logo} height="30" alt="logo" />
-              </ReactRouterDOM.Link>
-            </div>
-            <ReactRouterDOM.NavLink
-              to="/login"
-              activeClassName="navlink-active"
-              className="btn btn-primary grey1"
-            >
-              Login
-            </ReactRouterDOM.NavLink>
-          </nav>
+      <nav className="navbar my-navbar">
+        {/* <div className="row"> */}
+        {/* <nav> */}
+        <div>
+          <ReactRouterDOM.Link
+            to="/"
+            className="navbar-brand d-flex justify-content-left"
+          >
+            <img src={props.logo} height="30" alt="logo" />
+          </ReactRouterDOM.Link>
         </div>
-      </div>
+        <ReactRouterDOM.NavLink
+          to="/login"
+          activeClassName="navlink-active"
+          className="btn btn-secondary grey1 border-0"
+        >
+          Login
+        </ReactRouterDOM.NavLink>
+        {/* </nav>
+        </div> */}
+      </nav>
     );
   }
   if (props.isLoggedIn) {
     return (
-      <div className="container-fluid">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-          <a className="navbar-brand add-pad" href="/home">
-            fullGO<span className="red-letter">.</span>
+      // <div className="container-fluid">
+      // <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar my-navbar navbar-light navbar-expand-md bg-light justify-content-between">
+        <div className="container-fluid">
+          <a className="navbar-brand add-pad nav-link" href="/home">
+            floChart<span className="red-letter">.</span>
           </a>
-        </nav>
-      </div>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target=".dual-nav"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+
+          <div className="navbar-collapse collapse dual-nav w-50 order-1 order-md-0">
+            <ul className="navbar-nav ">
+              {/* <li> */}
+              {/* <a className="navbar-brand add-pad nav-link" href="/home">
+                  floChart<span className="red-letter">.</span>
+                </a> */}
+              {/* </li> */}
+              <li className="nav-item">
+                <a className="nav-link grey-text" href="/activities">
+                  Training Periods<span className="sr-only"></span>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link grey-text" href="/periods">
+                  Menstrual Periods
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      // </div>
       // <nav className="navbar navbar-expand-lg navbar-light bg-light">
       //   <div className="container-fluid">
       //     <button
@@ -197,7 +228,7 @@ function LandingPage(props) {
         >
           <button
             onClick={handleClick}
-            className="btn btn-primary red1"
+            className="btn btn-primary red1 border-0"
             id="sign-up_button"
           >
             Sign Up

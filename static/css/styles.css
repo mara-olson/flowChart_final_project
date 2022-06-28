@@ -20,6 +20,18 @@ body {
   text-align: center;
 }
 
+.btn-primary:hover {
+  color: rgb(253, 253, 253);
+  background-color: rgb(198, 123, 123);
+  border-style: none;
+}
+
+.btn-secondary:hover {
+  color: rgb(9, 9, 9);
+  background-color: rgb(144, 143, 143);
+  border-style: none;
+}
+
 .red-letter {
   color: rgb(142, 36, 36);
   font-size: 200%;
@@ -32,12 +44,28 @@ body {
 .my-navbar {
   font-family: "montserrat", sans-serif;
   font-weight: 300;
+  /* width: 100%; */
+  vertical-align: bottom;
+  height: 80px;
 }
 
 .navbar-brand {
   font-size: 30px;
   font-weight: bold;
 }
+
+.nav-item {
+  font-family: "montserrat", sans-serif;
+  font-weight: 300;
+  display: inline-block
+  vertical-align: bottom;
+}
+
+.nav-item:hover {
+  color: #494848;
+  font-weight: 500;
+}
+
 .stat {
   font-family: "avenir light", sans-serif;
   font-size: 20px;
@@ -66,6 +94,7 @@ body {
 .profile-card {
   /* width: 40%;
   height: 120%; */
+  font-family: "avenir light", sans-serif;
   padding: 10px;
   margin: 10px;
   /* border-radius: 25px; */
@@ -171,8 +200,9 @@ form {
 
 .sign-up {
   height: 50%;
-  width: 50%;
+  width: 70%;
   margin: auto;
+  margin-bottom: 100px;
   border-radius: 10px;
   overflow: hidden;
 }
@@ -183,11 +213,20 @@ form {
   color: white;
   text-align: center;
   padding: 10px;
-  margin: 20px;
+  margin: 10px;
+  margin-bottom: 5px;
 }
 .red1 {
   background-color: rgb(111, 17, 17);
   font-weight: 300;
+}
+
+.red-text {
+  color: rgb(142, 27, 27);
+}
+
+.grey-text {
+  color: rgb(58, 58, 58);
 }
 
 .grey1 {
@@ -200,6 +239,15 @@ form {
   color: white;
   font-weight: 300;
   width: 100%;
+}
+
+.inconspicuous {
+  background-color: none;
+  font-weight: 100;
+  font-size: 14px;
+  border: none;
+  color: grey;
+  margin-bottom: 10px;
 }
 
 #landing-messages {

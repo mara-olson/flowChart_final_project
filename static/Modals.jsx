@@ -3,7 +3,7 @@ function SignUpModal(props) {
     return null;
   }
   return (
-    <div>
+    <div className="container">
       <div>
         <SignUp
           userId={props.userId}
@@ -11,16 +11,16 @@ function SignUpModal(props) {
           isLoggedIn={props.isLoggedIn}
           setIsLoggedIn={props.setIsLoggedIn}
           modalError={props.modalError}
-          setError={props.setError}
+          setModalError={props.setModalError}
           showModal={props.showModal}
           setShowModal={props.setShowModal}
         />
-        <div className="modal-footer">
+        {/* <div className="modal-footer">
           {props.modalError && <p className="error">{props.modalError}</p>}
           <button className="modal-button" onClick={props.onClose}>
             Close
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );
