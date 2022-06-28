@@ -481,26 +481,35 @@ function Login(props) {
   };
 
   return (
-    <div>
-      <form onSubmit={handleLogin}>
-        <div>
-          Email
-          <input
-            type="text"
-            value={email}
-            onChange={(evt) => setEmail(evt.currentTarget.value)}
-          />
+    <div className="sign-up card">
+      <div className="row">
+        <div className="col-12">
+          <h2 className="header black">Welcome Back</h2>
         </div>
-        <div>
-          Password
-          <input
-            type="text"
-            value={password}
-            onChange={(evt) => setPassword(evt.currentTarget.value)}
-          />
-        </div>
-        <button type="submit">Log in</button>
-      </form>
+      </div>
+      <div className="row">
+        <form className="content" onSubmit={handleLogin}>
+          <div className="field">
+            Email
+            <input
+              type="text"
+              value={email}
+              onChange={(evt) => setEmail(evt.currentTarget.value)}
+            />
+          </div>
+          <div className="field">
+            Password
+            <input
+              type="text"
+              value={password}
+              onChange={(evt) => setPassword(evt.currentTarget.value)}
+            />
+          </div>
+          <button type="submit" className="btn sign-up-button red1">
+            Log in
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
