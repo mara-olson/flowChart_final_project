@@ -144,8 +144,10 @@ function App() {
             setUserId={setUserId}
             setIsLoggedIn={setIsLoggedIn}
             isLoggedIn={isLoggedIn}
-            setError={setError}
+            // setError={setError}
             setShowSignUpModal={setShowSignUpModal}
+            modalError={modalError}
+            setModalError={setModalError}
           />
         </Route>
       </div>

@@ -481,7 +481,7 @@ function Login(props) {
             "https://www.strava.com/oauth/authorize?client_id=80271&response_type=code&redirect_uri=http://localhost:5001/exchange_token&approval_prompt=force&scope=profile:read_all,activity:read_all"
           );
         } else {
-          props.setError(data.error);
+          props.setModalError(data.error);
         }
       });
   };
@@ -511,7 +511,9 @@ function Login(props) {
               onChange={(evt) => setPassword(evt.currentTarget.value)}
             />
           </div>
-          <div></div>
+          <div className="modal-footer">
+            {props.modalError && <p className="error">{props.modalError}</p>}
+          </div>
           <button type="submit" className="btn btn-primary login-button red1">
             Log in
           </button>
