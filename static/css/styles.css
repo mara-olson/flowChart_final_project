@@ -26,6 +26,12 @@ body {
   border-style: none;
 }
 
+.btn-primary {
+  color: rgb(253, 253, 253);
+  background-color: rgb(198, 123, 123);
+  border-style: none;
+}
+
 .btn-secondary:hover {
   color: rgb(9, 9, 9);
   background-color: rgb(144, 143, 143);
@@ -34,7 +40,7 @@ body {
 
 .red-letter {
   color: rgb(142, 36, 36);
-  font-size: 200%;
+  font-size: 100%;
 }
 
 .add-pad {
@@ -44,8 +50,9 @@ body {
 .my-navbar {
   font-family: "montserrat", sans-serif;
   font-weight: 300;
+  display: flex;
   /* width: 100%; */
-  vertical-align: bottom;
+  align-items: flex-end;
   height: 80px;
 }
 
@@ -54,7 +61,7 @@ body {
   font-weight: bold;
 }
 
-.navbar-nav .nav-link {
+.nav-link {
   padding-top: 0;
   padding-bottom: 0;
   height: 50px;
@@ -64,8 +71,7 @@ body {
 .nav-item {
   font-family: "montserrat", sans-serif;
   font-weight: 300;
-  display: inline-block
-  vertical-align: bottom;
+  display: inline-block;
 }
 
 .nav-item:hover {
@@ -79,7 +85,7 @@ body {
   font-weight: light;
   text-align: center;
   height: auto;
-  width: 100%
+  width: 100%;
 }
 
 .stat-value {
@@ -92,7 +98,7 @@ body {
 .stat-value2 {
   font-family: "monserrat", sans-serif;
   font-weight: 900;
-  font-size: 30px;
+  font-size: 25px;
   text-align: center;
 }
 
@@ -103,8 +109,40 @@ body {
   box-shadow: 0 1px 8px rgba(153, 150, 150, 0.25);
 }
 
-.profile-icon {
-  justify-content: right;
+/* .profile-icon {
+  position: absolute;
+  right: 20px;
+} */
+
+.profile-pic {
+  height: 100px;
+}
+
+.navbar-collapse {
+  position: relative;
+}
+
+.position-navbar {
+  position: absolute;
+  right: 20px;
+  padding-bottom: 15px;
+}
+
+.top-adjust {
+  padding-top: 40px;
+}
+
+.calendar-card {
+  padding: 10px;
+  padding-bottom: 50px;
+  margin-right: 15px;
+  margin-bottom: 20px;
+  /* border-radius: 25px; */
+  display: flex;
+  border-radius: 4px;
+  box-shadow: 0 1px 8px rgba(159, 158, 158, 0.25);
+  background: white;
+  background-repeat: no-repeat, no-repeat;
 }
 
 .profile-card {
@@ -112,8 +150,9 @@ body {
   height: 120%; */
   font-family: "avenir light", sans-serif;
   padding: 10px;
-  margin: 10px;
-  /* border-radius: 25px; */
+  margin-left: 15px;
+  margin-bottom: 20px;
+  margin-right: 0;
   display: flex;
   justify-content: center;
   border-radius: 4px;
@@ -122,7 +161,6 @@ body {
   background-repeat: no-repeat, no-repeat;
   background-position: 120% -5%, 200% -40%;
   background-size: 40%, 80%;
-  animation: open 0.5s;
   text-align: center;
 }
 
@@ -149,8 +187,8 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  width: 50px;
-  height: 50px;
+  /* width: 50px; */
+  /* height: 50px; */
   border-radius: 50%;
   opacity: 0;
   transition: 0.5s ease;
@@ -170,24 +208,21 @@ form {
 }
 
 .field {
-  width: 30%;
+  width: 120px;
   margin-left: 5px;
   margin-right: auto;
-  display: block;
-  align-items: center;
-  float: left;
+  display: flex-start;
   padding-left: 20px;
   padding-top: 10px;
 }
 
 .input {
-  width: 100%;
+  width: 80px;
   margin-left: 10px;
-  margin-right: auto;
 }
 
 .error {
-  color: rgb(119, 20, 20);
+  color: rgb(157, 32, 32);
 }
 
 .icon-red-heavy {
@@ -206,7 +241,7 @@ form {
 .icon-add-plus {
   color: rgb(119, 20, 20);
   font-size: 100px;
-  padding: 0
+  padding: 0;
 }
 
 .profile-icon {
@@ -271,6 +306,26 @@ form {
   font-weight: 300;
 }
 
+.btn-tertiary {
+  background-color: white;
+  color: #494848;
+  font-weight: 300;
+  font-size: 14px;
+  height: 30px;
+  width: 120px;
+  padding: 0;
+  text-align: center;
+  justify-content: center;
+  vertical-align: center;
+}
+
+.btn-tertiary:hover {
+  background-color: rgb(196, 195, 195);
+  color: #494848;
+  font-weight: 300;
+  font-size: 14px;
+}
+
 .black {
   background-color: #000000;
   color: white;
@@ -301,25 +356,28 @@ form {
   display: flex;
   flex-direction: column;
   font-family: "avenir light", sans-serif;
-  box-shadow: 0 1px 8px rgba(159, 158, 158, 0.25);
+  /* background-color: white; */
 }
 
 .calendar-header {
-  height: 100px;
+  height: 80px;
   width: 100%;
+  margin-bottom: 0;
   display: flex;
   align-items: center;
 }
 
 .calendar-body {
   width: 100%;
+  padding: 0;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
 
 .calendar-nav {
-  font-family: "san francisco", sans-serif;
+  font-family: "avenir light", sans-serif;
+  font-weight: 300;
 }
 
 .weekdays-header {
@@ -343,6 +401,7 @@ form {
   flex-wrap: wrap;
   justify-content: left;
   box-sizing: border-box;
+  background-color: white;
 }
 
 .calendar-day {
@@ -359,8 +418,18 @@ form {
 
 .calendar-day p {
   position: absolute;
-  right: 10px;
+  left: 5px;
+  top: 5px;
   color: #a6a6a6;
+  height: auto;
+  width: auto;
+}
+
+.boxed {
+  outline-style: solid;
+  outline-color: rgb(144, 143, 143);
+  height: 4px;
+  width: 4px;
 }
 
 .current p {

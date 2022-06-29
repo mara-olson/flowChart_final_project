@@ -47,44 +47,43 @@ function Navbar(props) {
       // <div className="container-fluid">
       // <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <nav className="navbar my-navbar navbar-light navbar-expand-md bg-light align-items-bottom">
-        <div className="container-fluid">
-          <a className="navbar-brand add-pad nav-link" href="/home">
-            floChart<span className="red-letter">.</span>
-          </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target=".dual-nav"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="navbar-collapse collapse dual-nav w-50 order-1 order-md-0">
-            <ul className="navbar-nav ">
-              {/* <li> */}
-              {/* <a className="navbar-brand add-pad nav-link" href="/home">
+        {/* <div className="container-fluid "> */}
+        <a className="navbar-brand add-pad nav-link" href="/home">
+          floChart<span className="red-letter">.</span>
+        </a>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target=".dual-nav"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="navbar-collapse collapse dual-nav w-50 order-1 order-md-0">
+          <ul className="navbar-nav ">
+            {/* <li> */}
+            {/* <a className="navbar-brand add-pad nav-link" href="/home">
                   floChart<span className="red-letter">.</span>
                 </a> */}
-              {/* </li> */}
-              <li className="nav-item">
-                <a className="nav-link grey-text" href="/activities">
-                  Training Periods<span className="sr-only"></span>
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link grey-text" href="/periods">
-                  Menstrual Periods
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="mx-auto order-0">
-            <ul class="navbar-nav me-auto">
-              <li className="nav-item ">
-                <i className="nav-link me-auto bi bi-person-circle profile-icon dropdown"></i>
-              </li>
-            </ul>
-          </div>
+            {/* </li> */}
+            <li className="nav-item ">
+              <a className="nav-link grey-text" href="/activities">
+                Training Periods<span className="sr-only"></span>
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link grey-text" href="/periods">
+                Menstrual Periods
+              </a>
+            </li>
+          </ul>
+
+          <li className="nav-item position-navbar">
+            <i className="bi bi-person-circle profile-icon dropdown"></i>
+          </li>
+
+          {/* </div> */}
+          {/* </div> */}
         </div>
       </nav>
       // </div>
@@ -252,7 +251,7 @@ function LandingPage(props) {
 function Home(props) {
   return (
     <div className="container-flex flex-wrap">
-      <div className="row">
+      <div className="row top-adjust">
         <div className="col-3">
           <ProfileCard
             userId={props.userId}
@@ -305,137 +304,142 @@ function Home(props) {
           <AddCard setShowEntryChoiceModal={props.setShowEntryChoiceModal} />
         </div>
         <div className="col-9">
-          <Calendar
-            userId={props.userId}
-            editMode={props.editMode}
-            setEditMode={props.setEditMode}
-            showActivityModal={props.showActivityModal}
-            setShowActivityModal={props.setShowActivityModal}
-            showAddActModal={props.showAddActModal}
-            setShowAddActModal={props.setShowAddActModal}
-            showDeleteActModal={props.showDeleteActModal}
-            setShowDeleteActModal={props.setShowDeleteActModal}
-            showPeriodModal={props.showPeriodModal}
-            setShowPeriodModal={props.setShowPeriodModal}
-            showAddPeriodModal={props.showAddPeriodModal}
-            setShowAddPeriodModal={props.setShowAddPeriodModal}
-            showDeletePeriodModal={props.showDeletePeriodModal}
-            setShowDeletePeriodModal={props.setShowDeletePeriodModal}
-            showEntryChoiceModal={props.showEntryChoiceModal}
-            setShowEntryChoiceModal={props.setShowEntryChoiceModal}
-            modalError={props.modalError}
-            setModalError={props.setModalError}
-            activityDate={props.activityDate}
-            setActivityDate={props.setActivityDate}
-            activities={props.activities}
-            setActivities={props.setActivities}
-            periods={props.periods}
-            setPeriods={props.setPeriods}
-            selectedActivityId={props.selectedActivityId}
-            setSelectedActivityId={props.setSelectedActivityId}
-            selectedPeriodId={props.selectedPeriodId}
-            setSelectedPeriodId={props.setSelectedPeriodId}
-            selectedDate={props.selectedDate}
-            setSelectedDate={props.setSelectedDate}
-          />
-          <ActivityModal
-            userId={props.userId}
-            error={props.error}
-            setError={props.setError}
-            modalError={props.modalError}
-            setModalError={props.setModalError}
-            showDeleteActModal={props.showDeleteActModal}
-            setShowDeleteActModal={props.setShowDeleteActModal}
-            showActivityModal={props.showActivityModal}
-            setShowActivityModal={props.setShowActivityModal}
-            activities={props.activiies}
-            setActivities={props.setActivities}
-            selectedActivityId={props.selectedActivityId}
-            setSelectedActivityId={props.setSelectedActivityId}
-          />
-          <AddActivityModal
-            userId={props.userId}
-            error={props.error}
-            setError={props.setError}
-            modalError={props.modalError}
-            setModalError={props.setModalError}
-            showAddActModal={props.showAddActModal}
-            setShowAddActModal={props.setShowAddActModal}
-            showDeleteActModal={props.showDeleteActModal}
-            setShowDeleteActModal={props.setShowDeleteActModal}
-            activities={props.activities}
-            setActivities={props.setActivities}
-            selectedActivityId={props.selectedActivityId}
-            setSelectedActivityId={props.setSelectedActivityId}
-            selectedDate={props.selectedDate}
-            setSelectedDate={props.setSelectedDate}
-          />
-          <DeleteActivity
-            showDeleteActModal={props.showDeleteActModal}
-            setShowDeleteActModal={props.setShowDeleteActModal}
-          />
-          <PeriodModal
-            userId={props.userId}
-            showPeriodModal={props.showPeriodModal}
-            setShowPeriodModal={props.setShowPeriodModal}
-            showAddPeriodModal={props.showAddPeriodModal}
-            setShowAddPeriodModal={props.setShowAddPeriodModal}
-            modalError={props.modalError}
-            setModalError={props.setModalError}
-            error={props.error}
-            setError={props.setError}
-            periods={props.periods}
-            setPeriods={props.setPeriods}
-            selectedPeriodId={props.selectedPeriodId}
-            setSelectedPeriodId={props.setSelectedPeriodId}
-            showDeletePeriodModal={props.showDeletePeriodModal}
-            setShowDeletePeriodModal={props.setShowDeletePeriodModal}
-          />
-          <AddPeriodModal
-            userId={props.userId}
-            // onClose={closeModal}
-            showPeriodModal={props.showPeriodModal}
-            setShowPeriodModal={props.setShowPeriodModal}
-            showAddPeriodModal={props.showPeriodModal}
-            setShowAddPeriodModal={props.setShowPeriodModal}
-            modalError={props.modalError}
-            setModalError={props.setModalError}
-            error={props.error}
-            setError={props.setError}
-            periods={props.periods}
-            setPeriods={props.setPeriods}
-            selectedDate={props.selectedDate}
-            setSelectedDate={props.setSelectedDate}
-            selectedPeriodId={props.selectedPeriodId}
-            setSelectedPeriodId={props.setSelectedPeriodId}
-            showDeletePeriodModal={props.showDeletePeriodModal}
-            setShowDeletePeriodModal={props.setShowDeletePeriodModal}
-          />
-          <EntryChoice
-            showEntryChoiceModal={props.showEntryChoiceModal}
-            setShowEntryChoiceModal={props.setShowEntryChoiceModal}
-            showAddActModal={props.showAddActModal}
-            setShowAddActModal={props.setShowAddActModal}
-            showPeriodModal={props.showPeriodModal}
-            setShowPeriodModal={props.setShowPeriodModal}
-            showAddPeriodModal={props.showAddPeriodModal}
-            setShowAddPeriodModal={props.setShowAddPeriodModal}
-            modalError={props.modalError}
-            setModalError={props.setModalError}
-            selectedDate={props.selectedDate}
-            setSelectedDate={props.setSelectedDate}
-          />
+          <div className="calendar-card">
+            <Calendar
+              userId={props.userId}
+              editMode={props.editMode}
+              setEditMode={props.setEditMode}
+              showActivityModal={props.showActivityModal}
+              setShowActivityModal={props.setShowActivityModal}
+              showAddActModal={props.showAddActModal}
+              setShowAddActModal={props.setShowAddActModal}
+              showDeleteActModal={props.showDeleteActModal}
+              setShowDeleteActModal={props.setShowDeleteActModal}
+              showPeriodModal={props.showPeriodModal}
+              setShowPeriodModal={props.setShowPeriodModal}
+              showAddPeriodModal={props.showAddPeriodModal}
+              setShowAddPeriodModal={props.setShowAddPeriodModal}
+              showDeletePeriodModal={props.showDeletePeriodModal}
+              setShowDeletePeriodModal={props.setShowDeletePeriodModal}
+              showEntryChoiceModal={props.showEntryChoiceModal}
+              setShowEntryChoiceModal={props.setShowEntryChoiceModal}
+              modalError={props.modalError}
+              setModalError={props.setModalError}
+              activityDate={props.activityDate}
+              setActivityDate={props.setActivityDate}
+              activities={props.activities}
+              setActivities={props.setActivities}
+              periods={props.periods}
+              setPeriods={props.setPeriods}
+              selectedActivityId={props.selectedActivityId}
+              setSelectedActivityId={props.setSelectedActivityId}
+              selectedPeriodId={props.selectedPeriodId}
+              setSelectedPeriodId={props.setSelectedPeriodId}
+              selectedDate={props.selectedDate}
+              setSelectedDate={props.setSelectedDate}
+            />
+
+            <ActivityModal
+              userId={props.userId}
+              error={props.error}
+              setError={props.setError}
+              modalError={props.modalError}
+              setModalError={props.setModalError}
+              showDeleteActModal={props.showDeleteActModal}
+              setShowDeleteActModal={props.setShowDeleteActModal}
+              showActivityModal={props.showActivityModal}
+              setShowActivityModal={props.setShowActivityModal}
+              activities={props.activiies}
+              setActivities={props.setActivities}
+              selectedActivityId={props.selectedActivityId}
+              setSelectedActivityId={props.setSelectedActivityId}
+            />
+            <AddActivityModal
+              userId={props.userId}
+              error={props.error}
+              setError={props.setError}
+              modalError={props.modalError}
+              setModalError={props.setModalError}
+              showAddActModal={props.showAddActModal}
+              setShowAddActModal={props.setShowAddActModal}
+              showDeleteActModal={props.showDeleteActModal}
+              setShowDeleteActModal={props.setShowDeleteActModal}
+              activities={props.activities}
+              setActivities={props.setActivities}
+              selectedActivityId={props.selectedActivityId}
+              setSelectedActivityId={props.setSelectedActivityId}
+              selectedDate={props.selectedDate}
+              setSelectedDate={props.setSelectedDate}
+            />
+            <DeleteActivity
+              showDeleteActModal={props.showDeleteActModal}
+              setShowDeleteActModal={props.setShowDeleteActModal}
+            />
+            <PeriodModal
+              userId={props.userId}
+              showPeriodModal={props.showPeriodModal}
+              setShowPeriodModal={props.setShowPeriodModal}
+              showAddPeriodModal={props.showAddPeriodModal}
+              setShowAddPeriodModal={props.setShowAddPeriodModal}
+              modalError={props.modalError}
+              setModalError={props.setModalError}
+              error={props.error}
+              setError={props.setError}
+              periods={props.periods}
+              setPeriods={props.setPeriods}
+              selectedPeriodId={props.selectedPeriodId}
+              setSelectedPeriodId={props.setSelectedPeriodId}
+              showDeletePeriodModal={props.showDeletePeriodModal}
+              setShowDeletePeriodModal={props.setShowDeletePeriodModal}
+            />
+            <AddPeriodModal
+              userId={props.userId}
+              // onClose={closeModal}
+              showPeriodModal={props.showPeriodModal}
+              setShowPeriodModal={props.setShowPeriodModal}
+              showAddPeriodModal={props.showPeriodModal}
+              setShowAddPeriodModal={props.setShowPeriodModal}
+              modalError={props.modalError}
+              setModalError={props.setModalError}
+              error={props.error}
+              setError={props.setError}
+              periods={props.periods}
+              setPeriods={props.setPeriods}
+              selectedDate={props.selectedDate}
+              setSelectedDate={props.setSelectedDate}
+              selectedPeriodId={props.selectedPeriodId}
+              setSelectedPeriodId={props.setSelectedPeriodId}
+              showDeletePeriodModal={props.showDeletePeriodModal}
+              setShowDeletePeriodModal={props.setShowDeletePeriodModal}
+            />
+            <EntryChoice
+              showEntryChoiceModal={props.showEntryChoiceModal}
+              setShowEntryChoiceModal={props.setShowEntryChoiceModal}
+              showAddActModal={props.showAddActModal}
+              setShowAddActModal={props.setShowAddActModal}
+              showPeriodModal={props.showPeriodModal}
+              setShowPeriodModal={props.setShowPeriodModal}
+              showAddPeriodModal={props.showAddPeriodModal}
+              setShowAddPeriodModal={props.setShowAddPeriodModal}
+              modalError={props.modalError}
+              setModalError={props.setModalError}
+              selectedDate={props.selectedDate}
+              setSelectedDate={props.setSelectedDate}
+            />
+          </div>
+          <div className="calendar-card">
+            <MyChart
+              editMode={props.editMode}
+              setEditMode={props.setEditMode}
+              activities={props.activities}
+              setActivities={props.setActivities}
+              periods={props.periods}
+              setPeriods={props.setPeriods}
+              dataForContext={props.dataForContext}
+            />
+          </div>
         </div>
       </div>
-      <MyChart
-        editMode={props.editMode}
-        setEditMode={props.setEditMode}
-        activities={props.activities}
-        setActivities={props.setActivities}
-        periods={props.periods}
-        setPeriods={props.setPeriods}
-        dataForContext={props.dataForContext}
-      />
     </div>
   );
 }
@@ -709,51 +713,54 @@ function ProfileCard(props) {
   return (
     <div>
       {active === "edit" ? (
-        <EditProfile
-          active={active}
-          setActive={setActive}
-          handleSubmit={handleSubmit}
-          userId={props.userId}
-          firstName={props.firstName}
-          setFirstName={props.setFirstName}
-          lastName={props.lastName}
-          setLastName={props.setLastName}
-          teamName={props.teamName}
-          setTeamName={props.setTeamName}
-          email={props.email}
-          setEmail={props.setEmail}
-          password={props.password}
-          setPassword={props.setPassword}
-          profileBio={props.profileBio}
-          setProfileBio={props.setProfileBio}
-          sinceDate={props.sinceDate}
-        >
-          <PhotoUploader
-            profilePicSrc={profilePicSrc}
-            handlePhotoUpload={handlePhotoUpload}
-          />
-          <ProfileEmail setEmail={props.setEmail} email={props.email} />
-          <ProfilePassword
+        <div className="profile-card">
+          <EditProfile
+            active={active}
+            setActive={setActive}
+            handleSubmit={handleSubmit}
+            userId={props.userId}
+            firstName={props.firstName}
+            setFirstName={props.setFirstName}
+            lastName={props.lastName}
+            setLastName={props.setLastName}
+            teamName={props.teamName}
+            setTeamName={props.setTeamName}
+            email={props.email}
+            setEmail={props.setEmail}
             password={props.password}
             setPassword={props.setPassword}
-          />
-          <ProfileFirstName
-            setFirstName={props.setFirstName}
-            firstName={props.firstName}
-          />
-          <ProfileLastName
-            setLastName={props.setLastName}
-            lastName={props.lastName}
-          />
-          <ProfileBio
             profileBio={props.profileBio}
             setProfileBio={props.setProfileBio}
-          />
-          <ProfileTeam
-            setTeamName={props.setTeamName}
-            teamName={props.teamName}
-          />
-        </EditProfile>
+            sinc
+            eDate={props.sinceDate}
+          >
+            <PhotoUploader
+              profilePicSrc={profilePicSrc}
+              handlePhotoUpload={handlePhotoUpload}
+            />
+            <ProfileEmail setEmail={props.setEmail} email={props.email} />
+            <ProfilePassword
+              password={props.password}
+              setPassword={props.setPassword}
+            />
+            <ProfileFirstName
+              setFirstName={props.setFirstName}
+              firstName={props.firstName}
+            />
+            <ProfileLastName
+              setLastName={props.setLastName}
+              lastName={props.lastName}
+            />
+            <ProfileBio
+              profileBio={props.profileBio}
+              setProfileBio={props.setProfileBio}
+            />
+            <ProfileTeam
+              setTeamName={props.setTeamName}
+              teamName={props.teamName}
+            />
+          </EditProfile>
+        </div>
       ) : (
         <ProfileForm
           active={active}

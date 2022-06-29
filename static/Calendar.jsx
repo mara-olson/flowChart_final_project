@@ -58,72 +58,82 @@ function Calendar(props) {
 
   // console.log(today);
   return (
-    <div className="calendar">
-      <div className="calendar-header">
-        <h2>
-          {currentMonth}, {currentYear}
-        </h2>
-        <div className="calendar-nav">
-          <button type="link" onClick={prevMonth}>
-            Previous Month
-          </button>
-          <button type="link" onClick={nextMonth}>
-            Next Month
-          </button>
+    <div className="container">
+      <div className="calendar">
+        <div className="row">
+          {/* <div > */}
+          <h2 className="col-2 calendar-header">
+            {currentMonth}, {currentYear}
+          </h2>
+          <div className="calendar-nav">
+            <button
+              className="btn btn-tertiary"
+              type="link"
+              onClick={prevMonth}
+            >
+              Previous Month
+            </button>
+            <button
+              className="btn btn-tertiary"
+              type="link"
+              onClick={nextMonth}
+            >
+              Next Month
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="calendar-body">
-        <div className="weekdays-header">
-          {weekdays.map((weekday) => {
-            return (
-              <div key={weekday} className="weekday">
-                <p>{weekday}</p>
-              </div>
-            );
-          })}
-        </div>
-        <CalendarDays
-          realToday={realToday}
-          today={today}
-          setToday={setToday}
-          userId={props.userId}
-          editMode={props.editMode}
-          setEditMode={props.setEditMode}
-          calActivities={calActivities}
-          setCalActivities={setCalActivities}
-          // showModal={props.showModal}
-          // setShowModal={props.setShowModal}
-          showActivityModal={props.showActivityModal}
-          setShowActivityModal={props.setShowActivityModal}
-          showAddActModal={props.showAddActModal}
-          setShowAddActModal={props.setShowAddActModal}
-          showDeleteActModal={props.showDeleteActModal}
-          setShowDeleteActModal={props.setShowDeleteActModal}
-          showPeriodModal={props.showPeriodModal}
-          setShowPeriodModal={props.setShowPeriodModal}
-          showAddPeriodModal={props.showAddPeriodModal}
-          setShowAddPeriodModal={props.setShowAddPeriodModal}
-          showDeletePeriodModal={props.showDeletePeriodModal}
-          setShowDeletePeriodModal={props.setShowDeletePeriodModal}
-          setModalTitle={props.setModalTitle}
-          showEntryChoiceModal={props.showEntryChoiceModal}
-          setShowEntryChoiceModal={props.setShowEntryChoiceModal}
-          modalError={props.modalError}
-          setModalError={props.setModalError}
-          activities={props.activities}
-          setActivities={props.setActivities}
-          periods={props.periods}
-          setPeriods={props.setPeriods}
-          calPeriods={calPeriods}
-          setCalPeriods={setCalPeriods}
-          selectedActivityId={props.selectedActivityId}
-          setSelectedActivityId={props.setSelectedActivityId}
-          selectedPeriodId={props.selectedPeriodId}
-          setSelectedPeriodId={props.setSelectedPeriodId}
-          selectedDate={props.selectedDate}
-          setSelectedDate={props.setSelectedDate}
-        />
-        {/* <ActivityModal
+        <div className="calendar-body">
+          <div className="weekdays-header">
+            {weekdays.map((weekday) => {
+              return (
+                <div key={weekday} className="weekday">
+                  <p>{weekday}</p>
+                </div>
+              );
+            })}
+          </div>
+          <CalendarDays
+            realToday={realToday}
+            today={today}
+            setToday={setToday}
+            userId={props.userId}
+            editMode={props.editMode}
+            setEditMode={props.setEditMode}
+            calActivities={calActivities}
+            setCalActivities={setCalActivities}
+            // showModal={props.showModal}
+            // setShowModal={props.setShowModal}
+            showActivityModal={props.showActivityModal}
+            setShowActivityModal={props.setShowActivityModal}
+            showAddActModal={props.showAddActModal}
+            setShowAddActModal={props.setShowAddActModal}
+            showDeleteActModal={props.showDeleteActModal}
+            setShowDeleteActModal={props.setShowDeleteActModal}
+            showPeriodModal={props.showPeriodModal}
+            setShowPeriodModal={props.setShowPeriodModal}
+            showAddPeriodModal={props.showAddPeriodModal}
+            setShowAddPeriodModal={props.setShowAddPeriodModal}
+            showDeletePeriodModal={props.showDeletePeriodModal}
+            setShowDeletePeriodModal={props.setShowDeletePeriodModal}
+            setModalTitle={props.setModalTitle}
+            showEntryChoiceModal={props.showEntryChoiceModal}
+            setShowEntryChoiceModal={props.setShowEntryChoiceModal}
+            modalError={props.modalError}
+            setModalError={props.setModalError}
+            activities={props.activities}
+            setActivities={props.setActivities}
+            periods={props.periods}
+            setPeriods={props.setPeriods}
+            calPeriods={calPeriods}
+            setCalPeriods={setCalPeriods}
+            selectedActivityId={props.selectedActivityId}
+            setSelectedActivityId={props.setSelectedActivityId}
+            selectedPeriodId={props.selectedPeriodId}
+            setSelectedPeriodId={props.setSelectedPeriodId}
+            selectedDate={props.selectedDate}
+            setSelectedDate={props.setSelectedDate}
+          />
+          {/* <ActivityModal
           userId={props.userId}
           error={props.error}
           setError={props.setError}
@@ -150,7 +160,8 @@ function Calendar(props) {
           selectedActivityId={props.selectedActivityId}
           setSelectedActivityId={props.setSelectedActivityId}
         /> */}
-        {/* <CalendarActivities today={today} userId={props.userId} /> */}
+          {/* <CalendarActivities today={today} userId={props.userId} /> */}
+        </div>
       </div>
     </div>
   );
@@ -426,9 +437,7 @@ function CalendarDays(props) {
 
   return (
     <div className="table-content">
-      <div className="calendar-nav">
-        <br></br>
-      </div>
+      <div className="calendar-nav"></div>
       {currentDays.map((day) => {
         return (
           <button
