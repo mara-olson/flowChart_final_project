@@ -449,23 +449,23 @@ function CalendarDays(props) {
             key={day.id}
             onClick={(evt) => handleClick(day, evt)}
           >
-            <p>{day.number}</p>
+            <p className={day.flowVolume ? "with-flow" : ""}>{day.number}</p>
             {day.activityName && (
               <div onClick={(evt) => viewActivity(day, evt)}>
                 {day.activityName}
               </div>
             )}
-            {day.symptoms == false && day.flowVolume === "No Flow" && (
-              <div onClick={(evt) => viewPeriod(day, evt)}>
-                <i className="bi bi-record-circle-fill icon-red-heavy"></i>
-              </div>
+            {/* {day.symptoms == false && day.flowVolume === "No Flow" && (
+              <div onClick={(evt) => viewPeriod(day, evt)}> */}
+            {/* <i className="bi bi-record-circle-fill icon-red-heavy"></i> */}
+            {/* </div>
             )}
             {day.symptoms != false && day.flowVolume === "No Flow" && (
               <div onClick={(evt) => viewPeriod(day, evt)}>
                 <i className="bi bi-record-fill icon-red-heavy"></i>
               </div>
-            )}
-            {day.symptoms == false && day.flowVolume === "Heavy" && (
+            )} */}
+            {/* {day.symptoms == false && day.flowVolume === "Heavy" && (
               <div onClick={(evt) => viewPeriod(day, evt)}>
                 <i className="bi bi-record-circle-fill icon-red-heavy"></i>
               </div>
@@ -475,16 +475,16 @@ function CalendarDays(props) {
                 <i className="bi bi-record-fill icon-red-heavy"></i>
               </div>
             )}
-            {day.symptoms == false && day.flowVolume === "Light" && (
-              <div onClick={(evt) => viewPeriod(day, evt)}>
-                <i className="bi bi-record-circle-fill icon-red-light"></i>
-              </div>
-            )}
-            {day.symptoms != false && day.flowVolume === "Light" && (
-              <div onClick={(evt) => viewPeriod(day, evt)}>
-                <i className="bi bi-record-fill icon-red-light"></i>
-              </div>
-            )}
+            {day.symptoms == false && day.flowVolume === "Light" && ( */}
+            {/* <div onClick={(evt) => viewPeriod(day, evt)}> */}
+            {/* <i className="bi bi-record-circle-fill icon-red-light"></i> */}
+            {/* </div> */}
+            {/* )} */}
+            {/* {day.symptoms != false && day.flowVolume === "Light" && ( */}
+            {/* <div onClick={(evt) => viewPeriod(day, evt)}> */}
+            {/* <i className="bi bi-record-fill icon-red-light"></i> */}
+            {/* </div> */}
+            {/* )} */}
           </button>
         );
       })}

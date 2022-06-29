@@ -1,8 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: "montserrat", sans-serif;
   /* font-style: ; */
   font-weight: light;
   background: #e9e3e3;
+  margin: 0;
 }
 
 .content {
@@ -351,12 +356,17 @@ form {
 }
 
 .calendar {
-  width: 900px;
-  height: 600px;
+  width: 100%;
+  height: 500px;
   display: flex;
   flex-direction: column;
   font-family: "avenir light", sans-serif;
   /* background-color: white; */
+}
+
+.container {
+  width: 100%;
+  padding: 5px;
 }
 
 .calendar-header {
@@ -369,7 +379,10 @@ form {
 
 .calendar-body {
   width: 100%;
+  overflow-y: scroll;
+  overflow-x: scroll;
   padding: 0;
+  margin: 0;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -382,7 +395,7 @@ form {
 
 .weekdays-header {
   height: 50px;
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -395,13 +408,15 @@ form {
 
 .table-content {
   width: 100%;
+  margin-right: 0;
+
+  /* max-width:  */
   padding: 0;
-  flex-grow: 1;
   display: flex;
   flex-wrap: wrap;
-  justify-content: left;
+  justify-content: center;
   box-sizing: border-box;
-  background-color: white;
+  /* background-color: white; */
 }
 
 .calendar-day {
@@ -409,27 +424,41 @@ form {
   height: 75px;
   position: relative;
   justify-content: left;
-  border: 1px solid #a6a6a6;
+  border: 0.5px solid #a6a6a6;
+  padding: 0;
+  margin: 0;
 }
 
 .calendar-day:hover {
-  background-color: rgba(235, 14, 14, 0.324);
+  background-color: rgba(130, 36, 36, 0.124);
 }
 
 .calendar-day p {
   position: absolute;
-  left: 5px;
-  top: 5px;
-  color: #a6a6a6;
-  height: auto;
-  width: auto;
+  left: 0;
+  top: 0;
+  color: #d4d4d4;
+  padding: 0;
+  margin: 0;
+  height: 25px;
+  width: 25px;
+  border-style: none;
+  background-color: rgb(244, 243, 243);
+  box-shadow: 0 1px 8px rgba(153, 150, 150, 0.25);
 }
 
-.boxed {
-  outline-style: solid;
-  outline-color: rgb(144, 143, 143);
-  height: 4px;
-  width: 4px;
+.calendar-day p.with-flow {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #d4d4d4;
+  padding: 0;
+  margin: 0;
+  height: 25px;
+  width: 25px;
+  border-style: none;
+  background-color: rgb(228, 187, 187);
+  box-shadow: 0 1px 8px rgba(153, 150, 150, 0.25);
 }
 
 .current p {
