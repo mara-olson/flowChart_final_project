@@ -145,6 +145,7 @@ function App() {
             setIsLoggedIn={setIsLoggedIn}
             isLoggedIn={isLoggedIn}
             setError={setError}
+            setShowSignUpModal={setShowSignUpModal}
           />
         </Route>
       </div>

@@ -45,6 +45,12 @@ function SignUp(props) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [bio, setBio] = React.useState("");
+  const history = ReactRouterDOM.useHistory();
+
+  const returnToLandingPage = (evt) => {
+    evt.preventDefault();
+    history.push("/");
+  };
 
   const handleSignUp = (evt) => {
     // console.log(evt);
@@ -153,7 +159,7 @@ function SignUp(props) {
           <button type="submit" className="btn sign-up-button red1">
             Sign Up
           </button>
-          <button className="btn inconspicuous" onClick={props.onClose}>
+          <button className="btn inconspicuous" onClick={returnToLandingPage}>
             Cancel
           </button>
         </form>

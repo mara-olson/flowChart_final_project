@@ -445,6 +445,12 @@ function Login(props) {
   const [password, setPassword] = React.useState("");
   const history = ReactRouterDOM.useHistory();
 
+  const goToSignUp = (evt) => {
+    evt.preventDefault();
+    props.setShowSignUpModal(true);
+    history.push("/sign-up");
+  };
+
   const handleLogin = (evt) => {
     // console.log(evt);
     evt.preventDefault();
@@ -481,7 +487,7 @@ function Login(props) {
   };
 
   return (
-    <div className="sign-up card">
+    <div className="login card">
       <div className="row">
         <div className="col-12">
           <h2 className="header black">Welcome Back</h2>
@@ -505,8 +511,14 @@ function Login(props) {
               onChange={(evt) => setPassword(evt.currentTarget.value)}
             />
           </div>
-          <button type="submit" className="btn sign-up-button red1">
+          <div></div>
+          <button type="submit" className="btn btn-primary login-button red1">
             Log in
+          </button>
+          <div></div>
+          <div>Don't have an account?</div>
+          <button className="btn inconspicuous" onClick={goToSignUp}>
+            Sign up for free
           </button>
         </form>
       </div>
@@ -631,7 +643,7 @@ function AddCard(props) {
 
 function ProfileCard(props) {
   const [profilePicSrc, setProfilePicSrc] = React.useState(
-    "/static/static/ProfilePicDefault.png"
+    "/static/static/FlowLogo.png"
   );
   const [profilePic, setProfilePic] = React.useState(profilePicSrc);
   const [photoPreviewUrl, setPhotoPreviewUrl] = React.useState(
