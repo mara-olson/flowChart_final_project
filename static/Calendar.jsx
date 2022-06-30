@@ -451,7 +451,10 @@ function CalendarDays(props) {
           >
             <p className={day.flowVolume ? "with-flow" : ""}>{day.number}</p>
             {day.activityName && (
-              <div onClick={(evt) => viewActivity(day, evt)}>
+              <div
+                className="calendar-activity"
+                onClick={(evt) => viewActivity(day, evt)}
+              >
                 {day.activityName}
               </div>
             )}

@@ -37,10 +37,39 @@ body {
   border-style: none;
 }
 
-.btn-secondary:hover {
+.btn-secondary {
   color: rgb(9, 9, 9);
   background-color: rgb(144, 143, 143);
   border-style: none;
+}
+
+.btn-secondary:hover {
+  color: rgb(255, 255, 255);
+  background-color: rgb(144, 143, 143);
+  border-style: none;
+}
+
+.edit-profile-button {
+  color: rgb(49, 48, 48);
+  width: 65px;
+  height: 25px;
+  font-size: 11px;
+  white-space: nowrap;
+  text-align: center;
+  display: inline-block;
+  padding: 0;
+  background-color: rgb(244, 243, 243);
+}
+
+.edit-profile-button:hover {
+  color: white;
+  width: 75px;
+  height: 25px;
+  font-size: 13px;
+  align-items: center;
+  white-space: nowrap;
+  text-align: center;
+  background-color: rgb(186, 186, 186);
 }
 
 .red-letter {
@@ -319,26 +348,6 @@ form {
   margin-right: 20px;
 }
 
-.btn-tertiary {
-  background-color: white;
-  color: #494848;
-  font-weight: 300;
-  font-size: 14px;
-  height: 30px;
-  width: 120px;
-  padding: 0;
-  text-align: center;
-  justify-content: center;
-  vertical-align: center;
-}
-
-.btn-tertiary:hover {
-  background-color: rgb(196, 195, 195);
-  color: #494848;
-  font-weight: 300;
-  font-size: 14px;
-}
-
 .black {
   background-color: #000000;
   color: white;
@@ -399,6 +408,9 @@ form {
 .calendar-nav {
   font-family: "avenir light", sans-serif;
   font-weight: 300;
+  width: 600px;
+  overflow: scroll;
+  display: inline-block;
 }
 
 .weekdays-header {
@@ -415,14 +427,17 @@ form {
 }
 
 .table-content {
-  width: 100%;
-  margin-right: 0;
+  /* width: 100%; */
+  width: 900px;
+  overflow: scroll;
+  display: inline-block;
+  margin: 0;
 
   /* max-width:  */
   padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  /* display: flex; */
+  /* flex-wrap: wrap; */
+  justify-content: left;
   box-sizing: border-box;
   /* background-color: white; */
 }
@@ -457,6 +472,21 @@ form {
   box-shadow: 0 1px 8px rgba(153, 150, 150, 0.25);
 }
 
+.calendar-activity {
+  position: absolute;
+  /* left: 0; */
+  bottom: 18px;
+  display: inline;
+  text-align: left;
+  color: #0b0b0b;
+  padding: 3px;
+  margin: 0;
+}
+
+.calendar-activity:hover {
+  font-weight: 900;
+}
+
 .calendar-day p.with-flow {
   position: absolute;
   left: 0;
@@ -481,7 +511,7 @@ form {
 .selected p {
   color: black;
   box-shadow: 0 1px 8px rgba(153, 150, 150, 0.55);
-  background-color: rgb(218, 218, 218);
+  background-color: rgb(244, 243, 243);
   font-family: "avenir";
   font-weight: bold;
 }
@@ -525,4 +555,25 @@ form {
   padding: 10px;
   border-top: 1px solid rgb(200, 88, 88);
   border-bottom: 1px solid rgb(200, 88, 88);
+}
+
+.btn-tertiary {
+  background-color: white;
+  color: #494848;
+  font-weight: 300;
+  font-size: 14px;
+  height: 30px;
+  width: 120px;
+  padding: 0;
+  text-align: center;
+  border: none;
+  justify-content: center;
+  vertical-align: center;
+}
+
+.btn-tertiary:hover {
+  background-color: rgb(196, 195, 195);
+  color: #494848;
+  font-weight: 300;
+  font-size: 14px;
 }

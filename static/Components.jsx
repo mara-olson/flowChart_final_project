@@ -937,7 +937,10 @@ function ProfileForm(props) {
         <div>{props.profileBio}</div>
         {props.teamName && <div>Team: {props.teamName}</div>}
         {props.active === "profile" && (
-          <button onClick={handleEdit} className="btn btn-secondary grey1">
+          <button
+            onClick={handleEdit}
+            className="btn btn-secondary edit-profile-button"
+          >
             Edit Profile
           </button>
         )}
