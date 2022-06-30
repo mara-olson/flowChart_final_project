@@ -61,16 +61,16 @@ body {
   height: 80px;
 }
 
-.navbar-brand {
-  font-size: 30px;
-  font-weight: bold;
-}
-
 .nav-link {
-  padding-top: 0;
+  padding-top: 4px;
   padding-bottom: 0;
   height: 50px;
   line-height: 50px;
+}
+.navbar-brand {
+  font-size: 30px;
+  font-weight: bold;
+  padding-top: 0px;
 }
 
 .nav-item {
@@ -282,7 +282,7 @@ form {
   color: white;
   text-align: center;
   padding: 10px;
-  margin: 10px;
+  margin-top: 20px;
   margin-bottom: 5px;
 }
 
@@ -292,8 +292,7 @@ form {
   color: white;
   text-align: center;
   padding: 10px;
-  margin-top: 15px;
-  margin-bottom: 10px;
+  margin: 15px;
 }
 
 .red1 {
@@ -305,6 +304,11 @@ form {
   color: rgb(142, 27, 27);
 }
 
+.inconspicuous.red-text:hover {
+  color: rgb(230, 142, 142);
+  font-weight: 500;
+}
+
 .grey-text {
   color: rgb(58, 58, 58);
 }
@@ -312,6 +316,7 @@ form {
 .grey1 {
   background-color: rgb(177, 171, 171);
   font-weight: 300;
+  margin-right: 20px;
 }
 
 .btn-tertiary {

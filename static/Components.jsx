@@ -242,8 +242,7 @@ function LandingPage(props) {
         >
           <button
             onClick={handleClick}
-            className="btn btn-primary red1 border-0"
-            id="sign-up_button"
+            className="btn btn-primary sign-up-button red1"
           >
             Sign Up
           </button>
@@ -530,7 +529,7 @@ function Login(props) {
           </button>
           <div></div>
           <div>Don't have an account?</div>
-          <button className="btn inconspicuous" onClick={goToSignUp}>
+          <button className="btn inconspicuous red-text" onClick={goToSignUp}>
             Sign up for free
           </button>
         </form>
