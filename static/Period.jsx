@@ -50,7 +50,7 @@ function AddPeriodForm(props) {
         }
       });
   };
-
+  console.log("SUCCESS");
   return (
     <div>
       <form id="period-form" onSubmit={handleAddAPeriod}>

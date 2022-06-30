@@ -81,6 +81,12 @@ function Navbar(props) {
           <li className="nav-item position-navbar">
             <i className="bi bi-person-circle profile-icon dropdown"></i>
           </li>
+          <Logout
+            className="justify-content-right"
+            setUserId={props.setUserId}
+            // isLoggedIn={isLoggedIn}
+            setIsLoggedIn={props.setIsLoggedIn}
+          />
 
           {/* </div> */}
           {/* </div> */}
@@ -249,6 +255,7 @@ function LandingPage(props) {
 
 // HOMEPAGE AFTER LOGIN COMPONENT
 function Home(props) {
+  // console.log(props.activities);
   return (
     <div className="container-flex flex-wrap">
       <div className="row top-adjust">
@@ -640,7 +647,6 @@ function AddCard(props) {
     <div className="profile-card">
       <i
         className="btn bi bi-plus-circle-fill icon-add-plus"
-        role="button"
         onClick={handleClick}
       ></i>
     </div>
@@ -930,9 +936,9 @@ function ProfileForm(props) {
         <div>{props.email}</div>
         <h6>Member since {props.sinceDate}</h6>
         <div>{props.profileBio}</div>
-        <div>Team: {props.teamName}</div>
+        {props.teamName && <div>Team: {props.teamName}</div>}
         {props.active === "profile" && (
-          <button onClick={handleEdit} className="btn btn-secondary">
+          <button onClick={handleEdit} className="btn btn-secondary grey1">
             Edit Profile
           </button>
         )}

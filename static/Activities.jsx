@@ -400,6 +400,19 @@ function SelectedActivityContainer(props) {
 }
 
 function AllActivitiesContainer(props) {
+  const [allActivities, setAllActivities] = React.useState([]);
+
+  React.useEffect(() => {
+    if (props.userId) {
+      fetch(`/api/${props.userId}/activities`)
+        .then((response) => response.json())
+        .then((data) => {
+          // console.log(data.activities);
+          setAllActivities(data.activities);
+        });
+    }
+  }, [props.userId]);
+
   //   return (
   //     <ActivityModal
   //       userId={props.userId}
@@ -417,38 +430,41 @@ function AllActivitiesContainer(props) {
   //     />
   //   );
   // };
-
   const activityDetails = [];
-  for (const activity of props.activities) {
+
+  for (const activity of allActivities.slice(0, 51)) {
     const handleClick = () => {
       // evt.preventDefault();
       props.setSelectedActivityId(activity.activity_id);
       localStorage.setItem("selectedActivity", activity.activity_id);
       props.setShowActivityModal(true);
     };
-    activityDetails.push(
-      <ActivityCard
-        userId={props.userId}
-        key={activity.activity_id}
-        activityId={activity.activity_id}
-        activityName={activity.name}
-        activityDate={activity.date}
-        activityType={activity.type}
-        distance={activity.distance}
-        duration={activity.duration}
-        sufferScore={activity.suffer_score}
-        activityNotes={activity.notes}
-        showActivityModal={props.showActivityModal}
-        setShowActivityModal={props.setShowActivityModal}
-        showDeleteActModal={props.showDeleteActModal}
-        setShowDeleteActModal={props.setShowDeleteActModal}
-        modalError={props.modalError}
-        setModalError={props.setModalError}
-        activities={props.activities}
-        setActivities={props.setActivities}
-        handleClick={handleClick}
-      />
-    );
+    console.log(activity.name);
+    if (activity.name && activity.type) {
+      activityDetails.push(
+        <ActivityCard
+          userId={props.userId}
+          key={activity.activity_id}
+          activityId={activity.activity_id}
+          activityName={activity.name}
+          activityDate={activity.date}
+          activityType={activity.type}
+          distance={activity.distance}
+          duration={activity.duration}
+          sufferScore={activity.suffer_score}
+          activityNotes={activity.notes}
+          showActivityModal={props.showActivityModal}
+          setShowActivityModal={props.setShowActivityModal}
+          showDeleteActModal={props.showDeleteActModal}
+          setShowDeleteActModal={props.setShowDeleteActModal}
+          modalError={props.modalError}
+          setModalError={props.setModalError}
+          activities={props.activities}
+          setActivities={props.setActivities}
+          handleClick={handleClick}
+        />
+      );
+    }
   }
 
   return (

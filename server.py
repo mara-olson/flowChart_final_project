@@ -208,6 +208,7 @@ def activity_data(user_id):
     for activity in strava_activities:
         
         if not ActivityLog.query.get(activity["id"]):
+
             new_strava_act = {
                 "id": activity["id"],
                 "activity_name": activity["name"], 
@@ -241,29 +242,31 @@ def activity_data(user_id):
         
     activity_objs.sort(key=lambda x: datetime.datetime.strptime(x['date'], "%Y-%m-%d"), reverse=True)
 
+    print("*"*45, "activity:", activity_objs[1])
+
     return jsonify({"activities": activity_objs, "monthlyMileage": mileage_this_month})
 
 
-@app.route("/<user_id>/home")
-def user_homepage(user_id):
-    """Display user's homepage after logging in."""
-    user_id = session["user_id"]
-    user = User.get_user_by_id(user_id)
+# @app.route("/<user_id>/home")
+# def user_homepage(user_id):
+#     """Display user's homepage after logging in."""
+#     user_id = session["user_id"]
+#     user = User.get_user_by_id(user_id)
 
-    fname = user.first_name
-    lname = user.last_name
+#     fname = user.first_name
+#     lname = user.last_name
     
-    all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
+#     all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
 
-    activities = []
+#     activities = []
 
-    for activity in all_activities:
-        activity = activity.to_dict()
-        # for i in range(len(all_activities)):
-        #     activities[i] = activity
-        activities.append(activity)
+#     for activity in all_activities:
+#         activity = activity.to_dict()
+#         # for i in range(len(all_activities)):
+#         #     activities[i] = activity
+#         activities.append(activity)
 
-    return jsonify({'activities': activities})
+#     return jsonify({'activities': activities})
    
 
 
@@ -416,7 +419,6 @@ def update_activity(user_id, activity_id):
             activity_objs.append(new_act)
         
         activity_objs.sort(key=lambda x: datetime.datetime.strptime(x['date'], "%Y-%m-%d"))
-        # print("*"*25, edited_activity.workout_type, edited_activity.activity_notes)
         
         return jsonify({
             "success": True, 

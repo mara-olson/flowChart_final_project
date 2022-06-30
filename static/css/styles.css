@@ -158,6 +158,8 @@ body {
   margin-left: 15px;
   margin-bottom: 20px;
   margin-right: 0;
+  padding-bottom: 20px;
+  padding-top: 20px;
   display: flex;
   justify-content: center;
   border-radius: 4px;
@@ -246,7 +248,8 @@ form {
 .icon-add-plus {
   color: rgb(119, 20, 20);
   font-size: 100px;
-  padding: 0;
+  padding: 20px;
+  display: flex;
 }
 
 .profile-icon {
@@ -366,7 +369,7 @@ form {
 
 .container {
   width: 100%;
-  padding: 5px;
+  /* padding: 5px; */
 }
 
 .calendar-header {
@@ -424,8 +427,9 @@ form {
   height: 75px;
   position: relative;
   justify-content: left;
+  text-align: left;
   border: 0.5px solid #a6a6a6;
-  padding: 0;
+  padding: 5px;
   margin: 0;
 }
 
@@ -436,9 +440,10 @@ form {
 .calendar-day p {
   position: absolute;
   left: 0;
+  text-align: center;
   top: 0;
   color: #d4d4d4;
-  padding: 0;
+  padding: 3px;
   margin: 0;
   height: 25px;
   width: 25px;
@@ -451,14 +456,15 @@ form {
   position: absolute;
   left: 0;
   top: 0;
-  color: #d4d4d4;
+  color: rgb(93, 47, 47);
+  background-color: #d4d4d4;
   padding: 0;
   margin: 0;
   height: 25px;
   width: 25px;
   border-style: none;
   background-color: rgb(228, 187, 187);
-  box-shadow: 0 1px 8px rgba(153, 150, 150, 0.25);
+  box-shadow: 0 1px 8px rgba(153, 129, 129, 0.25);
 }
 
 .current p {
@@ -468,8 +474,15 @@ form {
 }
 
 .selected p {
-  color: #cc0000;
+  color: black;
+  box-shadow: 0 1px 8px rgba(153, 150, 150, 0.55);
+  background-color: rgb(218, 218, 218);
+  font-family: "avenir";
   font-weight: bold;
+}
+
+.selected {
+  background-color: rgb(229, 229, 229);
 }
 
 .modal {
