@@ -115,7 +115,6 @@ function App() {
     }
   }, [isLoggedIn]);
 
-  console.log(activities);
   return (
     // <FullContext.Provider value={dataContext}>
     <BrowserRouter>

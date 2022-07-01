@@ -1,97 +1,3 @@
-// function ActivityCard(props) {
-//   let activityFormTitle = "New Activity";
-//   let activityFormButtonName = "Add Activity";
-
-//   const handleClick = () => {
-//     // evt.preventDefault();
-//     props.setEditMode(true);
-//     props.setEditMode((state) => {
-//       activityFormTitle = "Edit Activity";
-//       activityFormButtonName = "Save";
-//       props.setModalContent(
-//         <AddActivityForm
-//           userId={props.userId}
-//           editMode={props.editMode}
-//           setEditMode={props.setEditMode}
-//           activityId={props.activityId}
-//           activities={props.actitivies}
-//           setActivities={props.setActivities}
-//           modalError={props.modalError}
-//           setModalError={props.setModalError}
-//           setModalContent={props.setModalContent}
-//           showModal={props.showModal}
-//           setShowModal={props.setShowModal}
-//           activityFormTitle={activityFormTitle}
-//           activityFormButtonName={activityFormButtonName}
-//           activityName={props.activityName}
-//           activityDate={props.activityDate}
-//           activityType={props.activityType}
-//           duration={props.duration}
-//           distance={props.distance}
-//           sufferScore={props.sufferScore}
-//           activityNotes={props.activityNotes}
-//         />
-//       );
-//       props.setShowModal(true);
-//       console.log("editMode: ", state);
-//     });
-//   };
-
-//   return (
-//     <div className="card">
-//       <p>Name: {props.activityName}</p>
-//       <p>Date: {props.activityDate} </p>
-//       <p>Type: {props.activityType}</p>
-//       <p>Duration: {props.duration}</p>
-//       <p>Distance: {props.distance} miles</p>
-//       <p>Suffer Score: {props.sufferScore}</p>
-//       <p>Notes: {props.activityNotes}</p>
-//       <div></div>
-//       <button onClick={handleClick}>Edit</button>
-//     </div>
-//   );
-// }
-
-// function AddActivityButton(props) {
-//   const activityFormButtonName = "Add Activity";
-//   const activityFormTitle = "New Activity";
-
-//   const handleClick = (evt) => {
-//     evt.preventDefault();
-//     props.setShowModal(true);
-//     props.setModalContent(
-//       <AddActivityForm
-//         userId={props.userId}
-//         editMode={props.editMode}
-//         setEditMode={props.setEditMode}
-//         activities={props.actitivies}
-//         setActivities={props.setActivities}
-//         modalError={props.modalError}
-//         setModalError={props.setModalError}
-//         setModalContent={props.setModalContent}
-//         showModal={props.showModal}
-//         setShowModal={props.setShowModal}
-//         activityFormTitle={activityFormTitle}
-//         activityFormButtonName={activityFormButtonName}
-//       />
-//     );
-//     return (
-//       <Modal
-//         userId={props.userId}
-//         editMode={props.editMode}
-//         setEditMode={props.setEditMode}
-//         onClose={props.closeModal}
-//         showModal={props.showModal}
-//         setModalContent={props.setModalContent}
-//         modalContent={props.modalContent}
-//         modalError={props.modalError}
-//         setModalError={props.setModalError}
-//       />
-//     );
-//   };
-//   return <button onClick={handleClick}>Add Activity</button>;
-// }
-
 function AddActivityForm(props) {
   const [activityId, setActivityId] = React.useState(props.activityId);
   const [activityName, setActivityName] = React.useState(props.activityName);
@@ -400,18 +306,22 @@ function SelectedActivityContainer(props) {
 }
 
 function AllActivitiesContainer(props) {
-  const [allActivities, setAllActivities] = React.useState([]);
+  const [pageNumber, setPageNumber] = React.useState(1);
+  const [pagedActivities, setPagedActivities] = React.useState([]);
 
+  const queryString = new URLSearchParams({ page: pageNumber }).toString();
+  console.log(queryString);
+  // console.log(props.userId);
+  console.log(`/api/${props.userId}/activities?${queryString}`);
   React.useEffect(() => {
-    if (props.userId) {
-      fetch(`/api/${props.userId}/activities`)
-        .then((response) => response.json())
-        .then((data) => {
-          // console.log(data.activities);
-          setAllActivities(data.activities);
-        });
-    }
-  }, [props.userId]);
+    fetch(`/api/${props.userId}/activities?${queryString}`)
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log(data.activities);
+        setPagedActivities(data.activities);
+      });
+  }, [pageNumber]);
+  // props.userId
 
   //   return (
   //     <ActivityModal
@@ -432,15 +342,15 @@ function AllActivitiesContainer(props) {
   // };
   const activityDetails = [];
 
-  for (const activity of allActivities.slice(0, 51)) {
+  for (const activity of pagedActivities) {
     const handleClick = () => {
       // evt.preventDefault();
       props.setSelectedActivityId(activity.activity_id);
       localStorage.setItem("selectedActivity", activity.activity_id);
       props.setShowActivityModal(true);
     };
-    console.log(activity.name);
-    if (activity.name && activity.type) {
+    console.log(activity);
+    if (activity.name) {
       activityDetails.push(
         <ActivityCard
           userId={props.userId}
@@ -473,99 +383,6 @@ function AllActivitiesContainer(props) {
     </div>
   );
 }
-
-// function ProfileFirstName(props) {
-//   console.log(props.firstName);
-//   return (
-//     <div className="field">
-//       <label htmlFor="first-name">First Name: </label>
-//       <input
-//         id="first-name"
-//         type="text"
-//         onChange={props.setFirstName}
-//         value={props.firstName}
-//         placeholder="Enter your first name"
-//       />
-//     </div>
-//   );
-// }
-
-// function ProfileLastName(props) {
-//   return (
-//     <div className="field">
-//       <label htmlFor="last-name">Last Name: </label>
-//       <input
-//         id="last-name"
-//         type="text"
-//         onChange={props.setLastName}
-//         value={props.lastName}
-//         placeholder="Enter your last name"
-//       />
-//     </div>
-//   );
-// }
-
-// function ProfileBio(props) {
-//   return (
-//     <div className="field">
-//       <label htmlFor="bio">Bio: </label>
-//       <input
-//         id="bio"
-//         type="text"
-//         onChange={props.editBio}
-//         value={props.bio}
-//         placeholder="Enter a brief bio"
-//       />
-//     </div>
-//   );
-// }
-
-// function ProfileEmail(props) {
-//   return (
-//     <div className="field">
-//       <label htmlFor="email">Email: </label>
-//       <input
-//         id="email"
-//         type="text"
-//         onChange={props.setEmail}
-//         value={props.email}
-//       />
-//     </div>
-//   );
-// }
-
-// function ActivityDistance(props) {
-//   return (
-//     <div className="field">
-//       <label htmlFor="distance">Distance: </label>
-//       <input
-//         id="distance"
-//         type="text"
-//         onChange={props.setTeamName}
-//         value={props.teamName}
-//         placeholder="Enter your team's name"
-//       />
-//     </div>
-//   );
-// }
-
-// function EditActivity(props) {
-//   const closeEdit = (evt) => {
-//     evt.preventDefault();
-//     props.setActive("activity");
-//   };
-
-//   return (
-//     <div>
-//       <form onSubmit={props.handleSubmit}>
-//         <h2>Edit Activity</h2>
-//         {props.children}
-//         <button type="submit">Save</button>
-//         <button onClick={closeEdit}>Cancel</button>
-//       </form>
-//     </div>
-//   );
-// }
 
 function ActivityCard(props) {
   const [activityEdit, setActivityEdit] = React.useState("non-edit");

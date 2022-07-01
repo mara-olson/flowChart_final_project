@@ -199,10 +199,14 @@ def activity_data(user_id):
     
     def km_to_miles(kilometers):
         return round((kilometers * 0.000621371), 2)
-
     def sec_to_min(seconds):
         return (seconds/60)
 
+
+    page = request.args.get("page")
+    if page:
+        page = int(page)
+    
     activity_objs = []
 
     for activity in strava_activities:
@@ -219,18 +223,30 @@ def activity_data(user_id):
                 "suffer_score": None, 
                 "activity_notes": activity["location_city"], 
                 "created_at": datetime.datetime.now()}
+            
             if new_strava_act["id"] not in ActivityLog.query.filter(ActivityLog.user_id == user_id).all():
                 ActivityLog.create_activity(user_id, new_strava_act["activity_date"], new_strava_act["activity_type"], new_strava_act["activity_name"], new_strava_act["duration"], new_strava_act["distance"], new_strava_act["suffer_score"], new_strava_act["activity_notes"])
         
 
-    all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
+
+    all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).order_by(ActivityLog.activity_date.desc())
+
+    if page:
+        all_activities = all_activities.paginate(page, per_page=10).items
+    else:
+        all_activities = all_activities.all()
+    
+#    request.args.get("page")
+
+    # all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).paginate(1).items
+# previous and next buttons on activities page, counter onClick={count+1}
+# state for page
 
     
     currentTime= datetime.datetime.now()
 
     mileage_this_month = db.session.query(func.round(func.sum(ActivityLog.distance))).filter(ActivityLog.activity_date > (currentTime - datetime.timedelta(30))).one()[0]
 
-    # print("*"*20, type(mileage_this_month))    
 
     for activity in all_activities:
         new_act = {
@@ -242,8 +258,7 @@ def activity_data(user_id):
         
     activity_objs.sort(key=lambda x: datetime.datetime.strptime(x['date'], "%Y-%m-%d"), reverse=True)
 
-    print("*"*45, "activity:", activity_objs[1])
-
+    print("*"*25,activity_objs)
     return jsonify({"activities": activity_objs, "monthlyMileage": mileage_this_month})
 
 
