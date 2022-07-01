@@ -60,34 +60,37 @@ function Calendar(props) {
   return (
     <div className="container">
       <div className="calendar">
-        <div className="row">
-          {/* <div > */}
-          <h2 className="col-2 calendar-header">
-            {currentMonth}, {currentYear}
-          </h2>
-          <div className="calendar-nav">
-            <button
-              className="btn btn-tertiary"
-              type="link"
-              onClick={prevMonth}
-            >
-              Previous Month
-            </button>
-            <button
-              className="btn btn-tertiary"
-              type="link"
-              onClick={nextMonth}
-            >
-              Next Month
-            </button>
+        {/* <div className="row"> */}
+        <div>
+          <div className="calendar-header">
+            <div className="calendar-title">
+              {currentMonth}, {currentYear}
+            </div>
           </div>
+          <button
+            className="btn cal-nav-button"
+            // type="link"
+            onClick={prevMonth}
+          >
+            <i class="bi bi-caret-left-fill caret-icon"></i>
+            Previous
+          </button>
+          <button
+            className="btn cal-nav-button"
+            // type="link"
+            onClick={nextMonth}
+          >
+            Next
+            <i class="bi bi-caret-right-fill caret-icon"></i>
+          </button>
+          {/* </div> */}
         </div>
         <div className="calendar-body">
           <div className="weekdays-header">
             {weekdays.map((weekday) => {
               return (
                 <div key={weekday} className="weekday">
-                  <p>{weekday}</p>
+                  {weekday}
                 </div>
               );
             })}
@@ -456,6 +459,9 @@ function CalendarDays(props) {
                 onClick={(evt) => viewActivity(day, evt)}
               >
                 {day.activityName}
+                <div className="cal-mileage">
+                  {day.distance && day.distance + " miles"}
+                </div>
               </div>
             )}
             {/* {day.symptoms == false && day.flowVolume === "No Flow" && (

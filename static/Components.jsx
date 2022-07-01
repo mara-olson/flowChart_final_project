@@ -928,12 +928,11 @@ function ProfileForm(props) {
             />
           </div>
         </label>
-        <h3>
+        <h3 className="no-spacing">
           {props.firstName} {props.lastName}
         </h3>
-
-        <div>{props.email}</div>
-        <h6>Member since {props.sinceDate}</h6>
+        <div className="spacing">{props.email}</div>
+        <h6 className="spacing">Member since {props.sinceDate}</h6>
         <div>{props.profileBio}</div>
         {props.teamName && <div>Team: {props.teamName}</div>}
         {props.active === "profile" && (

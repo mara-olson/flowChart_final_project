@@ -10,6 +10,15 @@ body {
   margin: 0;
 }
 
+.no-spacing {
+  margin-bottom: 0;
+}
+
+.spacing {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
 .content {
   font-family: "raleway", sans-serif;
   font-weight: 500;
@@ -51,6 +60,7 @@ body {
 
 .edit-profile-button {
   color: rgb(49, 48, 48);
+  margin-top: 30px;
   width: 65px;
   height: 25px;
   font-size: 11px;
@@ -383,15 +393,23 @@ form {
 
 .container {
   width: 100%;
+  display: flex;
   /* padding: 5px; */
 }
 
 .calendar-header {
-  height: 80px;
+  height: 40px;
   width: 100%;
-  margin-bottom: 0;
+
+  margin-top: 12px;
+  margin-bottom: 5px;
   display: flex;
   align-items: center;
+}
+
+.calendar-title {
+  margin-right: 30px;
+  font-size: 35px;
 }
 
 .calendar-body {
@@ -405,25 +423,38 @@ form {
   flex-direction: column;
 }
 
-.calendar-nav {
+/* .calendar-nav {
   font-family: "avenir light", sans-serif;
   font-weight: 300;
   width: 600px;
   overflow: scroll;
   display: inline-block;
-}
+} */
 
 .weekdays-header {
-  height: 50px;
+  height: 30px;
+  width: 877px;
+  margin: 0;
   /* width: 100%; */
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  text-align: center;
+  background-color: #bb5454;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  vertical-align: middle;
+  padding-top: 5px;
 }
 
 .weekday {
-  width: 100px;
+  width: 125px;
+  height: 30px;
   text-align: center;
+
+  color: white;
+  border-right-style: solid;
+  border-color: rgb(179, 100, 100);
+  padding: 0;
 }
 
 .table-content {
@@ -444,17 +475,18 @@ form {
 
 .calendar-day {
   width: 125px;
-  height: 75px;
+  height: 85px;
   position: relative;
   justify-content: left;
   text-align: left;
-  border: 0.5px solid #a6a6a6;
+  border: 0.5px solid #c6c6c6;
   padding: 5px;
   margin: 0;
+  background-color: rgb(244, 243, 243);
 }
 
 .calendar-day:hover {
-  background-color: rgba(130, 36, 36, 0.124);
+  background-color: rgb(235, 235, 235);
 }
 
 .calendar-day p {
@@ -468,14 +500,19 @@ form {
   height: 25px;
   width: 25px;
   border-style: none;
-  background-color: rgb(244, 243, 243);
+  background-color: rgb(250, 247, 247);
   box-shadow: 0 1px 8px rgba(153, 150, 150, 0.25);
+}
+
+.with-flow:hover {
+  background-color: rgba(130, 36, 36, 0.124);
 }
 
 .calendar-activity {
   position: absolute;
+
   /* left: 0; */
-  bottom: 18px;
+  top: 24px;
   display: inline;
   text-align: left;
   color: #0b0b0b;
@@ -483,7 +520,16 @@ form {
   margin: 0;
 }
 
+.cal-mileage {
+  font-size: 72%;
+  color: rgb(61, 61, 61);
+}
+
 .calendar-activity:hover {
+  font-weight: 900;
+}
+
+.cal-mileage:hover {
   font-weight: 900;
 }
 
@@ -511,14 +557,14 @@ form {
 .selected p {
   color: black;
   box-shadow: 0 1px 8px rgba(153, 150, 150, 0.55);
-  background-color: rgb(244, 243, 243);
+  background-color: rgb(232, 232, 232);
   font-family: "avenir";
   font-weight: bold;
 }
 
-.selected {
-  background-color: rgb(229, 229, 229);
-}
+/* .selected {
+  background-color: rgb(237, 237, 237);
+} */
 
 .modal {
   position: fixed;
@@ -557,23 +603,32 @@ form {
   border-bottom: 1px solid rgb(200, 88, 88);
 }
 
-.btn-tertiary {
-  background-color: white;
+.cal-nav-button {
+  background-color: rgb(248, 234, 234);
+  margin-left: 0px;
   color: #494848;
   font-weight: 300;
-  font-size: 14px;
-  height: 30px;
-  width: 120px;
+  font-size: 10px;
+  height: 20px;
+  width: 80px;
+  margin-right: 5px;
+  margin-bottom: 15px;
   padding: 0;
   text-align: center;
   border: none;
-  justify-content: center;
+  white-space: nowrap;
   vertical-align: center;
 }
 
-.btn-tertiary:hover {
-  background-color: rgb(196, 195, 195);
+.cal-nav-button:hover {
+  background-color: rgb(212, 212, 212);
   color: #494848;
-  font-weight: 300;
-  font-size: 14px;
+  font-weight: 900;
+  /* font-size: 14px; */
+}
+.caret-icon {
+  color: #acacac;
+  vertical-align: middle;
+  text-align: left;
+  line-height: 0;
 }
