@@ -400,7 +400,7 @@ form {
 .calendar-header {
   height: 40px;
   width: 100%;
-
+  font-weight: 900;
   margin-top: 12px;
   margin-bottom: 5px;
   display: flex;
