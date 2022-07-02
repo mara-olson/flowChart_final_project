@@ -27,6 +27,7 @@ body {
 .content {
   font-family: "poppins", sans-serif;
   font-weight: 200;
+  /* width: 80%; */
 }
 
 .header {
@@ -272,17 +273,23 @@ form {
 }
 
 .field {
-  width: 120px;
-  margin-left: 5px;
-  margin-right: auto;
-  display: flex-start;
-  padding-left: 20px;
+  width: 100%;
+  /* margin-left: 10px; */
+  /* margin-right: auto; */
+  display: inline-block;
+  /* padding-left: 20px; */
   padding-top: 10px;
+  /* text-align: left; */
 }
 
 .input {
   width: 80px;
   margin-left: 10px;
+}
+
+.login-input {
+  width: 80%;
+  /* margin-left: 10px; */
 }
 
 .error {
@@ -331,6 +338,12 @@ form {
   margin-bottom: 100px;
   border-radius: 10px;
   overflow: hidden;
+}
+
+.login-container {
+  align-items: center;
+  text-align: center;
+  /* width: 100%; */
 }
 
 .sign-up-button {
@@ -661,9 +674,50 @@ form {
   font-weight: 300;
   /* font-size: 14px; */
 }
-.caret-icon {
-  color: #acacac;
-  vertical-align: middle;
-  text-align: left;
-  line-height: 0;
+
+.dropdown-item {
+  color: #fff;
+  background: darkorange;
+  display: block;
+  float: left;
+  padding: 1rem;
+  position: relative;
+  text-decoration: none;
+  transition-duration: 0.5s;
+}
+
+.dropbtn:hover,
+.dropdown-content:focus-within {
+  background: red;
+  cursor: pointer;
+}
+
+.dropbtn:focus-within .dropdown-content {
+  outline: none;
+}
+
+.dropdown-content {
+  background: orange;
+  visibility: hidden;
+  opacity: 0;
+  min-width: 5rem;
+  position: relative;
+  transition: all 0.5s ease;
+  margin-top: 10px;
+  left: 0;
+  display: none;
+}
+
+.dropbtn:hover > .dropdown-content,
+.dropbtnt:focus-within > .dropdown-content,
+.dropdown-content:hover,
+.dropdown-item:focus {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+}
+
+.dropdown-item {
+  clear: both;
+  width: 100%;
 }

@@ -78,15 +78,24 @@ function Navbar(props) {
             </li>
           </ul>
 
-          <li className="nav-item position-navbar">
-            <i className="bi bi-person-circle profile-icon dropdown"></i>
-          </li>
-          <Logout
-            className="justify-content-right"
-            setUserId={props.setUserId}
-            // isLoggedIn={isLoggedIn}
-            setIsLoggedIn={props.setIsLoggedIn}
-          />
+          <div className="nav-item position-navbar dropdown">
+            <button className="dropbtn">
+              <i className="bi bi-person-circle profile-icon"></i>
+            </button>
+            <div className="dropdown-content">
+              <a className="dropdown-item" href="/activities">
+                Action
+              </a>
+              <a className="dropdown-item">Another action</a>
+              <a className="dropdown-item">Something else here</a>
+              <Logout
+                className="justify-content-right"
+                setUserId={props.setUserId}
+                // isLoggedIn={isLoggedIn}
+                setIsLoggedIn={props.setIsLoggedIn}
+              />
+            </div>
+          </div>
 
           {/* </div> */}
           {/* </div> */}
@@ -498,25 +507,27 @@ function Login(props) {
 
   return (
     <div className="login card">
-      <div className="row">
-        <div className="col-12">
-          <h2 className="header black">Welcome Back</h2>
-        </div>
+      <div className="col-12">
+        <h2 className="header black">Welcome Back</h2>
       </div>
-      <div className="row">
+      <div className="login-container">
         <form className="content" onSubmit={handleLogin}>
           <div className="field">
             Email
+            <br></br>
             <input
               type="text"
+              className="login-input"
               value={email}
               onChange={(evt) => setEmail(evt.currentTarget.value)}
             />
           </div>
           <div className="field">
             Password
+            <br></br>
             <input
               type="text"
+              className="login-input"
               value={password}
               onChange={(evt) => setPassword(evt.currentTarget.value)}
             />
