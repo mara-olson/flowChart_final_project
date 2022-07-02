@@ -46,7 +46,7 @@ function Navbar(props) {
     return (
       // <div className="container-fluid">
       // <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <nav className="navbar my-navbar navbar-light navbar-expand-md bg-light align-items-bottom">
+      <nav className="navbar my-navbar navbar-expand-md align-items-bottom">
         {/* <div className="container-fluid "> */}
         <a className="navbar-brand add-pad nav-link" href="/home">
           floChart<span className="red-letter">.</span>
@@ -59,26 +59,38 @@ function Navbar(props) {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="navbar-collapse collapse dual-nav w-50 order-1 order-md-0">
-          <ul className="navbar-nav ">
+        <div className="navbar-collapse collapse dual-nav">
+          <ul className="navbar-nav">
             {/* <li> */}
             {/* <a className="navbar-brand add-pad nav-link" href="/home">
                   floChart<span className="red-letter">.</span>
                 </a> */}
             {/* </li> */}
-            <li className="nav-item ">
-              <a className="nav-link grey-text" href="/activities">
+            <li>
+              <a className="nav-link" href="/activities">
                 Training Periods<span className="sr-only"></span>
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link grey-text" href="/periods">
+            <li>
+              <a className="nav-link" href="/periods">
                 Menstrual Periods
               </a>
             </li>
           </ul>
 
-          <div className="nav-item position-navbar dropdown">
+          <div className="dropdown">
+            <button className="dropdown-btn">
+              <i className="bi bi-person-circle profile-icon"></i>
+            </button>
+            <div className="dropdown-content">
+              <a className="dropdown-item" href="/profile">
+                Profile
+              </a>
+              <a hrf="/logout">Logout</a>
+            </div>
+          </div>
+
+          {/* <div className="nav-item position-navbar dropdown">
             <button className="dropbtn">
               <i className="bi bi-person-circle profile-icon"></i>
             </button>
@@ -95,7 +107,7 @@ function Navbar(props) {
                 setIsLoggedIn={props.setIsLoggedIn}
               />
             </div>
-          </div>
+          </div> */}
 
           {/* </div> */}
           {/* </div> */}
