@@ -253,34 +253,34 @@ function LandingPage(props) {
     history.push(`/${props.userId}/home`);
   } else {
     return (
-      <div id="landing-messages">
-        <section
-          id="landing-message1"
-          className="d-flex justify-content-center"
-        >
-          <h6 className="content">{landingMessage1}</h6>
-        </section>
-        <section
-          id="landing-message1"
-          className="d-flex justify-content-center"
-        >
-          <h4 className="content">
-            <strong>{landingMessage2}</strong>
-          </h4>
-        </section>
-
-        <form
-          action="/sign-up"
-          id="sign-up"
-          className="d-flex justify-content-center"
-        >
-          <button
-            onClick={handleClick}
-            className="btn btn-primary sign-up-button red1"
+      <div className="landingpage-card card">
+        <div id="landing-messages">
+          <section
+            id="landing-message1"
+            className="d-flex justify-content-center"
           >
-            Sign Up
-          </button>
-        </form>
+            <div>{landingMessage1}</div>
+          </section>
+          <section
+            id="landing-message2"
+            className="d-flex justify-content-center"
+          >
+            <div>{landingMessage2}</div>
+          </section>
+
+          <form
+            action="/sign-up"
+            id="sign-up"
+            className="d-flex justify-content-center"
+          >
+            <button
+              onClick={handleClick}
+              className="btn btn-primary sign-up-button red1"
+            >
+              Sign Up
+            </button>
+          </form>
+        </div>
       </div>
     );
   }

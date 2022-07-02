@@ -10,8 +10,10 @@ function SignUpModal(props) {
       setIsLoggedIn={props.setIsLoggedIn}
       modalError={props.modalError}
       setModalError={props.setModalError}
-      showModal={props.showModal}
-      setShowModal={props.setShowModal}
+      showSignUpModal={props.showSignUpModal}
+      setShowSignUpModal={props.setShowSignUpModal}
+      showSignUpConnectModal={props.showSignUpConnectModal}
+      setShowSignUpConnectModal={props.setShowSignUpConnectModal}
     />
     /* <div className="modal-footer">
           {props.modalError && <p className="error">{props.modalError}</p>}

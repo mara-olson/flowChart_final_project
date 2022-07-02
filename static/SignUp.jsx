@@ -81,6 +81,7 @@ function SignUp(props) {
           props.setIsLoggedIn(true);
           localStorage.setItem("isLoggedIn", true);
           localStorage.setItem("userId", data.user_id);
+          props.setShowSignUpModal(false);
           props.setShowSignUpConnectModal(true);
         } else {
           props.setModalError(data.error_msg);

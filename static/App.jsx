@@ -127,13 +127,15 @@ function App() {
       />
       {error && <p className="error">{error}</p>}
       {!isLoggedIn && (
-        <div className="container-fluid">
+        <div className="landingpage-container">
           <Route exact path="/">
             <LandingPage
               isLoggedIn={isLoggedIn}
               userId={userId}
               setShowSignUpModal={setShowSignUpModal}
               showSignUpModal={showSignUpModal}
+              showSignUpConnectModal={showSignUpConnectModal}
+              setShowSignUpConnectModal={setShowSignUpConnectModal}
             />
           </Route>
         </div>
@@ -145,10 +147,12 @@ function App() {
             setUserId={setUserId}
             setIsLoggedIn={setIsLoggedIn}
             isLoggedIn={isLoggedIn}
-            // setError={setError}
             setShowSignUpModal={setShowSignUpModal}
             modalError={modalError}
             setModalError={setModalError}
+            showSignUpModal={showSignUpModal}
+            showSignUpConnectModal={showSignUpConnectModal}
+            setShowSignUpConnectModal={setShowSignUpConnectModal}
           />
         </Route>
       </div>
@@ -393,7 +397,7 @@ function App() {
       </div>
       <div className="container-fluid">
         <Route exact path="/sign-up">
-          {/* <SignUp
+          <SignUp
             userId={userId}
             setUserId={setUserId}
             isLoggedIn={isLoggedIn}
@@ -404,7 +408,7 @@ function App() {
             setShowSignUpModal={setShowSignUpModal}
             showSignUpConnectModal={showSignUpConnectModal}
             setShowSignUpConnectModal={setShowSignUpConnectModal}
-          /> */}
+          />
           <SignUpModal
             userId={userId}
             setUserId={setUserId}
@@ -414,6 +418,8 @@ function App() {
             setModalError={setModalError}
             showSignUpModal={showSignUpModal}
             setShowSignUpModal={setShowSignUpModal}
+            showSignUpConnectModal={showSignUpConnectModal}
+            setShowSignUpConnectModal={setShowSignUpConnectModal}
             // onClose={closeModal}
           />
           <SignUpConnectModal
@@ -425,6 +431,8 @@ function App() {
             setModalError={setModalError}
             showSignUpModal={showSignUpModal}
             setShowSignUpModal={setShowSignUpModal}
+            showSignUpConnectModal={showSignUpConnectModal}
+            setShowSignUpConnectModal={setShowSignUpConnectModal}
           />
         </Route>
       </div>

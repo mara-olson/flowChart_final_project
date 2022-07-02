@@ -32,7 +32,6 @@ body {
 .content {
   font-family: "poppins", sans-serif;
   font-weight: 200;
-  align-items: left;
   display: flex;
   /* width: 80%; */
 }
@@ -308,19 +307,26 @@ form {
 }
 
 .login-input {
-  width: 100%;
+  width: 60%;
   padding-left: 7px;
   padding-right: 5px;
   padding-top: 4px;
   padding-bottom: 4px;
   font-family: "poppins", sans-serif;
   font-weight: 300;
-  font-size: 16px;
+  font-size: 14px;
   /* margin-left: 10px; */
 }
 
 .sign-up {
+  width: 500px;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 100px;
+  border-radius: 10px;
+  overflow: hidden;
   align-items: center;
+  font-size: 16px;
 }
 
 .signup-form {
@@ -336,7 +342,7 @@ form {
   padding-bottom: 4px;
   font-family: "poppins", sans-serif;
   font-weight: 300;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .bio {
@@ -373,16 +379,6 @@ form {
   justify-content: center;
 }
 
-.sign-up {
-  height: 75%;
-  width: 75%;
-  margin: auto;
-  margin-top: 50px;
-  margin-bottom: 100px;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
 .login {
   height: 50%;
   width: 50%;
@@ -400,16 +396,31 @@ form {
   /* width: 100%; */
 }
 
+.landingpage-container {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  align-items: center;
+}
+
+.landingpage-card {
+  margin-top: 80px;
+  width: 75%;
+  display: inline-block;
+  padding: 20px;
+}
+
 .sign-up-button {
   background-color: rgb(111, 17, 17);
   border: gray;
   color: white;
   text-align: center;
   padding: 10px;
-  margin-top: 20px;
-  margin-bottom: 5px;
+  margin-top: 70px;
+  margin-bottom: 20px;
   font-family: "montserrat", sans-serif;
   font-weight: light;
+  width: 100px;
 }
 
 .login-button {
@@ -464,7 +475,19 @@ form {
 }
 
 #landing-messages {
-  margin: 40px;
+  /* margin: 40px; */
+  margin-top: 50px;
+}
+
+#landing-message1 {
+  margin-bottom: 7px;
+  font-size: 22px;
+  font-weight: 200;
+}
+
+#landing-message2 {
+  font-size: 30px;
+  font-weight: 500;
 }
 
 .card-img-top {
