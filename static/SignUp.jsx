@@ -90,65 +90,73 @@ function SignUp(props) {
 
   return (
     <div className="sign-up card">
-      <div className="row">
-        <div className="col-12">
-          <h2 className="header black">Join today for free</h2>
-        </div>
-      </div>
-      <div className="row">
+      <h2 className="header black">Join today for free</h2>
+
+      <div className="signup-form">
         <form
           className="content"
           action="/sign-up"
           method="POST"
           onSubmit={handleSignUp}
         >
-          <div className="field">
+          <div className="signup-field">
             First Name <span className="red-text">*</span>
+            <br></br>
             <input
               type="text"
+              className="signup-input"
               value={firstName}
               onChange={(evt) => setFirstName(evt.currentTarget.value)}
             />
           </div>
 
-          <div className="field">
+          <div className="signup-field">
             Last Name <span className="red-text">*</span>
+            <br></br>
             <input
               type="text"
+              className="signup-input"
               value={lastName}
               onChange={(evt) => setLastName(evt.currentTarget.value)}
             />
           </div>
-          <div className="field">
+          <div className="signup-field">
             Team Name
+            <br></br>
             <input
               type="text"
+              className="signup-input"
               value={teamName}
               onChange={(evt) => setTeamName(evt.currentTarget.value)}
             />
           </div>
 
-          <div className="field">
+          <div className="signup-field">
             Email <span className="red-text">*</span>
+            <br></br>
             <input
               type="text"
+              className="signup-input"
               value={email}
               onChange={(evt) => setEmail(evt.currentTarget.value)}
             />
           </div>
-          <div className="field">
+          <div className="signup-field">
             Password <span className="red-text">*</span>
+            <br></br>
             <input
               type="text"
+              className="signup-input"
               value={password}
               onChange={(evt) => setPassword(evt.currentTarget.value)}
             />
           </div>
 
-          <div className="field">
+          <div className="signup-field">
             Bio
-            <input
-              type="text"
+            <br></br>
+            <textarea
+              className="signup-input bio"
               value={bio}
               onChange={(evt) => setBio(evt.currentTarget.value)}
             />
@@ -165,5 +173,6 @@ function SignUp(props) {
         </form>
       </div>
     </div>
+    // </div>
   );
 }

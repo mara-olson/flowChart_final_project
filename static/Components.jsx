@@ -17,6 +17,17 @@ function Logout(props) {
 }
 
 function Navbar(props) {
+  const history = ReactRouterDOM.useHistory();
+  const handleLogout = (evt) => {
+    // console.log(evt);
+    evt.preventDefault();
+    props.setUserId(null);
+    props.setIsLoggedIn(false);
+    localStorage.setItem("userId", null);
+    localStorage.setItem("isLoggedIn", false);
+    history.push("/");
+  };
+
   if (!props.isLoggedIn) {
     return (
       <nav className="navbar my-navbar">
@@ -86,7 +97,9 @@ function Navbar(props) {
               <a className="dropdown-item" href="/profile">
                 Profile
               </a>
-              <a hrf="/logout">Logout</a>
+              <button className="dropdown-item" onClick={handleLogout}>
+                Logout
+              </button>
             </div>
           </div>
 
@@ -524,7 +537,7 @@ function Login(props) {
       </div>
       <div className="login-container">
         <form className="content" onSubmit={handleLogin}>
-          <div className="field">
+          <div className="login-field">
             Email
             <br></br>
             <input
@@ -534,7 +547,7 @@ function Login(props) {
               onChange={(evt) => setEmail(evt.currentTarget.value)}
             />
           </div>
-          <div className="field">
+          <div className="login-field">
             Password
             <br></br>
             <input
