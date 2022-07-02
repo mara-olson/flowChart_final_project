@@ -46,9 +46,15 @@ body {
   text-align: center;
 }
 
+.modal-footer {
+  border: none;
+  display: inline-block;
+  padding: 0;
+}
+
 .btn-primary:hover {
   font-family: "montserrat", sans-serif;
-  font-weight: 300;
+  font-weight: 500;
   color: rgb(253, 253, 253);
   background-color: rgb(198, 123, 123);
   border-style: none;
@@ -434,6 +440,16 @@ form {
   font-weight: light;
 }
 
+.inconspicuous {
+  font-family: "montserrat", sans-serif;
+  background-color: none;
+  font-weight: 300;
+  font-size: 14px;
+  border: none;
+  color: rgb(151, 151, 151);
+  margin-bottom: 10px;
+}
+
 .red1 {
   background-color: rgb(111, 17, 17);
   font-weight: 300;
@@ -465,15 +481,6 @@ form {
   width: 100%;
 }
 
-.inconspicuous {
-  background-color: none;
-  font-weight: 100;
-  font-size: 14px;
-  border: none;
-  color: grey;
-  margin-bottom: 10px;
-}
-
 #landing-messages {
   /* margin: 40px; */
   margin-top: 50px;
@@ -488,6 +495,86 @@ form {
 #landing-message2 {
   font-size: 30px;
   font-weight: 500;
+}
+
+.signup-success-message {
+  font-family: "montserrat", sans-serif;
+  font-weight: 300;
+  font-size: 28px;
+  line-height: 1.2;
+  text-align: center;
+  margin-bottom: 10px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgb(221, 221, 221);
+}
+
+.strava-connect-message1 {
+  font-family: "poppins", sans-serif;
+  font-weight: 00;
+  font-size: 18px;
+  line-height: 1.2;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.strava-connect-message2 {
+  font-family: "poppins", sans-serif;
+  font-weight: 200;
+  font-size: 20px;
+  text-align: center;
+}
+
+.strava-connect-card {
+  color: black;
+  align-items: center;
+  text-align: center;
+  width: 450px;
+  margin: auto;
+
+  padding: 20px;
+  padding-top: 30px;
+}
+
+.connect-button {
+  background-color: rgb(111, 17, 17);
+  width: 100px;
+  border: gray;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin: 15px;
+  margin-top: 25px;
+  margin-bottom: 8px;
+  font-family: "montserrat", sans-serif;
+  font-weight: 300;
+}
+
+.no-thanks {
+  display: inline-block;
+  width: 200px;
+  font-family: "montserrat", sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  margin-top: 0;
+  color: rgb(152, 152, 152);
+  padding: 2px;
+}
+
+.no-thanks:hover {
+  background-color: rgb(245, 244, 244);
+  color: rgb(144, 144, 144);
+  font-weight: 500;
+  /* border: 1px solid rgb(216, 216, 216); */
+}
+
+.no-thanks-message {
+  display: inline;
+  font-family: "montserrat", sans-serif;
+  margin-bottom: 0;
+  color: rgb(124, 124, 124);
+  text-align: center;
+  font-weight: 300;
+  font-size: 15px;
 }
 
 .card-img-top {

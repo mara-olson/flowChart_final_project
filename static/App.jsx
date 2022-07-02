@@ -397,7 +397,7 @@ function App() {
       </div>
       <div className="container-fluid">
         <Route exact path="/sign-up">
-          <SignUp
+          {/* <SignUp
             userId={userId}
             setUserId={setUserId}
             isLoggedIn={isLoggedIn}
@@ -408,7 +408,7 @@ function App() {
             setShowSignUpModal={setShowSignUpModal}
             showSignUpConnectModal={showSignUpConnectModal}
             setShowSignUpConnectModal={setShowSignUpConnectModal}
-          />
+          /> */}
           <SignUpModal
             userId={userId}
             setUserId={setUserId}

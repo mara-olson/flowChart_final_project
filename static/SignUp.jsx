@@ -7,30 +7,39 @@ function SignUpConnectModal(props) {
     setShowSignUpModal(false);
   };
 
-  if (!props.showSignUpConnectModal) {
+  if (props.showSignUpConnectModal) {
     return null;
   }
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <h2>Thank you for creating an account!</h2>
-        <h3>Would you like to connect to Strava?</h3>
+    <div>
+      <div className="strava-connect-card card">
+        <div className="signup-success-message">
+          Thank you for creating an account!
+        </div>
+        <div className="strava-connect-message1">
+          Want to see all your activities in one place?
+        </div>
+        <div className="strava-connect-message2">Connect to Strava now!</div>
         <div className="modal-footer">
           {props.modalError && <p className="error">{props.modalError}</p>}
-          <button className="modal-button" onClick={authenticate}>
-            Yes
-          </button>
           <button
-            className="modal-button"
+            className="btn btn-primary connect-button"
+            onClick={authenticate}
+          >
+            Connect
+          </button>
+          <br></br>
+
+          <button
+            className="btn no-thanks"
             onClick={() => {
               history.push(`users/${props.userId}/home`);
               setShowModal(false);
             }}
           >
-            No
-          </button>
-          <button className="modal-button" onClick={props.onClose}>
-            Close
+            {/* <div className="no-thanks-message">No thanks!</div> */}
+            {/* <br></br> */}
+            Continue to homepage
           </button>
         </div>
       </div>
