@@ -46,6 +46,17 @@ body {
   text-align: center;
 }
 
+.add-header {
+  font-family: "montserrat", sans-serif;
+  width: 100%;
+  font-size: 24px;
+  height: auto;
+  font-weight: 300;
+  padding: 20px;
+  text-align: center;
+  margin: 0;
+}
+
 .modal-footer {
   border: none;
   display: inline-block;
@@ -416,6 +427,64 @@ form {
   height: 80px;
 }
 
+.add-period-container {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.add-period {
+  width: 460px;
+  height: 580px;
+  overflow: hidden;
+  align-items: center;
+  font-size: 16px;
+  position: absolute;
+  display: block;
+  top: 14%;
+  right: 2%;
+}
+
+.checkbox {
+  vertical-align: middle;
+  margin-left: 20px
+}
+
+.add-period-form {
+  width: 90%;
+  align-items: start;
+  padding-left: 35px;
+
+}
+
+.add-period-input {
+  width: 60%;
+  padding-left: 7px;
+  padding-right: 5px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  font-family: "poppins", sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 0.8;
+}
+
+.add-period-field {
+  display: inline-block;
+  width: 100%;
+  margin-top: 24px;
+}
+
+.bio {
+  height: 80px;
+  margin-top: 18px;
+}
+
+.notes {
+  height: 70px;
+  width: 80%;
+  /* margin-top: -24px; */
+  margin-bottom: 15px
+}
+
 .error {
   color: rgb(157, 32, 32);
 }
@@ -560,6 +629,21 @@ form {
 .select-period-button {
   height: 40px;
   width: 110px;
+  margin: auto;
+  background-color:  #8a3636;
+  /* rgb(111, 17, 17);; */
+  border: gray;
+  color: white;
+  font-family: "montserrat", sans-serif;
+  font-weight: 300;
+  padding: 7px;
+}
+
+.add-period-button {
+  height: 40px;
+  width: 110px;
+  margin: auto;
+  margin-bottom: 5px;
   background-color:  #8a3636;
   /* rgb(111, 17, 17);; */
   border: gray;
@@ -598,7 +682,7 @@ form {
 }
 
 .grey1 {
-  background-color: rgb(177, 171, 171);
+  background-color: rgb(156, 152, 152);
   font-weight: 300;
   color: white;
   margin-right: 20px;
@@ -935,8 +1019,17 @@ form {
 }
 
 .close-choice {
+  margin: auto;
   margin-top: 10px;
-  margin-bottom: 20px
+  margin-bottom: 20px;
+  
+}
+
+.close-add-period {
+  margin: auto;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  
 }
 
 .modal-header,

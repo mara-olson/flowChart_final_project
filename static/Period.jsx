@@ -8,6 +8,11 @@ function AddPeriodForm(props) {
   const [periodDate, setPeriodDate] = React.useState(props.selectedDate);
   const [periodNotes, setPeriodNotes] = React.useState(props.periodNotes);
 
+  const closeModal = () => {
+    props.setShowEntryChoiceModal(false);
+    props.setModalError(null);
+  };
+
   const handleAddAPeriod = (evt) => {
     evt.preventDefault();
 
@@ -52,76 +57,101 @@ function AddPeriodForm(props) {
   };
   console.log("SUCCESS");
   return (
-    <div>
-      <form id="period-form" onSubmit={handleAddAPeriod}>
-        <label htmlFor="date">Date of event</label>
+    <div className="add-period-container">
+      <form className="add-period-form" onSubmit={handleAddAPeriod}>
+        <div className="add-period-field" htmlFor="mense_date">
+          Date of event
+        </div>
         <input
           type="date"
           name="mense_date"
+          className="add-period-input"
           value={periodDate}
           onChange={(evt) => setPeriodDate(evt.currentTarget.value)}
         />
-
-        <br></br>
-        <fieldset name="flow-form" id="period-form" disabled={false}>
-          <legend>What's your flow?</legend>
-          <select
-            name="flow-volume"
-            onChange={(evt) => setFlowVolume(evt.currentTarget.value)}
-          >
-            <option></option>
-            <option value="No Flow">No Flow</option>
-            <option value="Light">Light</option>
-            <option value="Moderate">Moderate</option>
-            <option value="Heavy">Heavy</option>
-          </select>
-        </fieldset>
-        <br></br>
-        <fieldset name="sx-form" id="period-form" disabled={false}>
-          <legend>What symptoms are you experiencing?</legend>
+        {/* <div> */}
+        <div className="add-period-field">What's your flow?</div>
+        <select
+          name="flow-volume"
+          className="add-period-input"
+          onChange={(evt) => setFlowVolume(evt.currentTarget.value)}
+        >
+          <option></option>
+          <option value="No Flow">No Flow</option>
+          <option value="Light">Light</option>
+          <option value="Moderate">Moderate</option>
+          <option value="Heavy">Heavy</option>
+        </select>
+        {/* </fieldset> */}
+        <fieldset>
+          <div className="add-period-field">
+            What symptoms are you experiencing?
+          </div>
           <input
             type="checkbox"
             name="mood"
+            className="checkbox"
             onChange={(evt) => setMood(evt.currentTarget.checked)}
           />
-          <label htmlFor="mood">Moodiness</label>
+          <label className="add-period-input" htmlFor="mood">
+            Moodiness
+          </label>
           <br></br>
 
           <input
             type="checkbox"
             name="cramps"
+            className="checkbox"
             onChange={(evt) => setCramps(evt.currentTarget.checked)}
           />
-          <label htmlFor="cramps">Cramps</label>
+          <label className="add-period-input" htmlFor="cramps">
+            Cramps
+          </label>
           <br></br>
 
           <input
             type="checkbox"
             name="bloating"
+            className="checkbox"
             onChange={(evt) => setBloating(evt.currentTarget.checked)}
           />
-          <label htmlFor="bloating">Bloating</label>
+          <label className="add-period-input" htmlFor="bloating">
+            Bloating
+          </label>
           <br></br>
 
           <input
             type="checkbox"
+            className="checkbox"
             name="fatigue"
             onChange={(evt) => setFatigue(evt.currentTarget.checked)}
           />
-          <label htmlFor="fatigue">Fatigue</label>
+          <label className="add-period-input " htmlFor="fatigue">
+            Fatigue
+          </label>
         </fieldset>
-        <br></br>
 
-        <label htmlFor="notes">Notes</label>
-        <br></br>
-
+        <label className="add-period-field" htmlFor="notes">
+          Notes
+        </label>
         <textarea
           id="notes"
           name="periodNotes"
+          className="notes"
           onChange={(evt) => setPeriodNotes(evt.currentTarget.value)}
         />
-        <br></br>
-        <button type="submit">Add Period</button>
+        {/* <button type="submit">Add Period</button> */}
+
+        <button className="btn add-period-button" type="submit">
+          Add Period
+        </button>
+
+        <button
+          className="btn inconspicuous close-add-period"
+          onClick={closeModal}
+        >
+          Close
+        </button>
       </form>
     </div>
   );

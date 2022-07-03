@@ -195,29 +195,30 @@ function AddPeriodModal(props) {
     return null;
   }
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <AddPeriodForm
-          userId={props.userId}
-          error={props.error}
-          setError={props.setError}
-          modalError={props.modalError}
-          setModalError={props.setModalError}
-          showPeriodModal={props.showPeriodModal}
-          setShowPeriodModal={props.setShowPeriodModal}
-          showAddPeriodModal={props.showAddPeriodModal}
-          setShowAddPeriodModal={props.setShowAddPeriodModal}
-          periods={props.periods}
-          setPeriods={props.setPeriods}
-          selectedDate={props.selectedDate}
-          setSelectedDate={props.setSelectedDate}
-        />
-        <div className="modal-footer">
-          {props.modalError && <p className="error">{props.modalError}</p>}
-          <button className="modal-button" onClick={closeModal}>
-            Close
-          </button>
-        </div>
+    // <div className="modal">
+    //   <div className="modal-content">
+    <div className="add-period card">
+      <h2 className="add-header black">Log your flow and/or symptoms</h2>
+      <AddPeriodForm
+        userId={props.userId}
+        error={props.error}
+        setError={props.setError}
+        modalError={props.modalError}
+        setModalError={props.setModalError}
+        showPeriodModal={props.showPeriodModal}
+        setShowPeriodModal={props.setShowPeriodModal}
+        showAddPeriodModal={props.showAddPeriodModal}
+        setShowAddPeriodModal={props.setShowAddPeriodModal}
+        periods={props.periods}
+        setPeriods={props.setPeriods}
+        selectedDate={props.selectedDate}
+        setSelectedDate={props.setSelectedDate}
+      />
+      <div className="modal-footer">
+        {props.modalError && <p className="error">{props.modalError}</p>}
+        {/* <button className="modal-button" onClick={closeModal}>
+          Close
+        </button> */}
       </div>
     </div>
   );
