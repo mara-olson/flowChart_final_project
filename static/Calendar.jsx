@@ -58,7 +58,7 @@ function Calendar(props) {
 
   // console.log(today);
   return (
-    <div className="container">
+    <div className="calendar-container">
       <div className="calendar">
         {/* <div className="row"> */}
         <div>

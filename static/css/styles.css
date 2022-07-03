@@ -23,11 +23,20 @@ body {
 .footer {
   background-color: black;
   color: white;
-  display: flex;
+  display: inline-block;
+  /* position: absolute; */
+  /* bottom: 0; */
   align-items: end;
-  padding-right: 40px;
-  height: 70px
+  text-align: end;
+  vertical-align: middle;
+  padding-right: 20px;
+  height: 70px;
+  font-size: 20px;
+  width: 100%;
+  overflow: hidden;
 }
+
+
 
 .no-spacing {
   margin-bottom: 0;
@@ -94,6 +103,7 @@ body {
   border-style: none;
   font-family: "montserrat", sans-serif;
   font-weight: light;
+  width: 75px
 }
 
 .btn-secondary:hover {
@@ -101,7 +111,7 @@ body {
   background-color: rgb(144, 143, 143);
   border-style: none;
   font-family: "montserrat", sans-serif;
-  font-weight: 300;
+  font-weight: 500;
 }
 
 .edit-profile-button {
@@ -248,7 +258,7 @@ body {
 .calendar-card {
   padding: 10px;
   padding-bottom: 30px;
-  margin-right: 15px;
+  margin-right: 10px;
   margin-bottom: 20px;
   /* border-radius: 25px; */
   display: flex;
@@ -445,6 +455,8 @@ form {
   height: 560px;
   overflow: hidden;
   align-items: center;
+  font-family: "poppins", sans-serif;
+  font-weight: 300;
   font-size: 16px;
   position: absolute;
   display: block;
@@ -457,6 +469,8 @@ form {
   height: 690px;
   overflow: hidden;
   align-items: center;
+  font-family: "poppins", sans-serif;
+  font-weight: 300;
   font-size: 16px;
   position: absolute;
   display: block;
@@ -465,7 +479,7 @@ form {
 }
 
 .top-adjust {
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 
 .checkbox {
@@ -492,6 +506,8 @@ form {
 
 .add-field {
   display: inline-block;
+  font-family: "poppins", sans-serif;
+  font-weight: 300;
   width: 100%;
   margin-top: 24px;
   margin-bottom: -2px;
@@ -535,6 +551,13 @@ form {
   display: flex
   /* padding: 20px; */
   /* display: flex; */
+}
+
+.footer-icon {
+  font-size: 30px;
+  margin: 10px;
+  display: inline-block;
+  margin-bottom: 20px
 }
 
 .profile-icon {
@@ -592,11 +615,12 @@ form {
   display: inline-block;
   text-align: center;
   align-items: center;
+  margin-bottom: 200px
 }
 
 .landingpage-card {
   margin-top: 80px;
-  width: 75%;
+  width: 65%;
   display: inline-block;
   padding: 20px;
 }
@@ -836,6 +860,13 @@ form {
   width: 100%;
   display: flex;
   /* padding: 5px; */
+}
+
+.calendar-container {
+  width: 100%;
+  display: flex;
+  padding-left: 18px;
+  padding-right: 5px;
 }
 
 .calendar-header {

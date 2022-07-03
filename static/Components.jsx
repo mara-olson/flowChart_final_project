@@ -210,8 +210,8 @@ function Navbar(props) {
 function Footer(props) {
   return (
     <div className="footer">
-      <i className="bi bi-instagram"></i>
-      <i className="bi bi-twitter"></i>
+      <i className="bi bi-instagram footer-icon"></i>
+      <i className="bi bi-twitter footer-icon"></i>
       <i></i>
     </div>
   );
