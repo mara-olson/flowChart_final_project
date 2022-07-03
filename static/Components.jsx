@@ -489,7 +489,7 @@ function Home(props) {
 
 function Login(props) {
   const [email, setEmail] = React.useState(null);
-  const [password, setPassword] = React.useState("");
+  const [password, setPassword] = React.useState(null);
   const history = ReactRouterDOM.useHistory();
 
   const goToSignUp = (evt) => {

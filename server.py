@@ -114,8 +114,6 @@ def login_process():
     password = request.json.get("password")
     user = User.get_user_by_email(email)
 
-    print("*********", email)
-
     if email is None:
         error = f"Please enter an email"
 

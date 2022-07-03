@@ -246,13 +246,19 @@ function EntryChoice(props) {
   }
   return (
     <div className="modal">
-      <div className="modal-content">
-        <button onClick={goToAddActivity}>Add Activity</button>
-        <button onClick={goToAddPeriod}>Add Period</button>
-      </div>
-      <div className="modal-footer">
-        {props.modalError && <p className="error">{props.modalError}</p>}
-        <button className="modal-button" onClick={closeModal}>
+      <div className="choice-modal">
+        <button
+          className="btn select-activity-button"
+          onClick={goToAddActivity}
+        >
+          Add Activity
+        </button>
+        <div></div>
+        <button className="btn select-period-button" onClick={goToAddPeriod}>
+          Add Period
+        </button>
+
+        <button className="btn inconspicuous close-choice" onClick={closeModal}>
           Close
         </button>
       </div>

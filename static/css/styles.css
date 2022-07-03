@@ -235,7 +235,6 @@ body {
   border-radius: 4px;
   box-shadow: 0 1px 8px rgba(159, 158, 158, 0.25);
   background: white;
-  background-repeat: no-repeat, no-repeat;
 }
 
 .chart-card {
@@ -546,6 +545,30 @@ form {
   font-weight: light;
 }
 
+.select-activity-button {
+  height: 40px;
+  width: 110px;
+  background-color: rgb(173, 173, 173);
+  border: gray;
+  color: white;
+  font-family: "montserrat", sans-serif;
+  font-weight: 300;
+  padding: 7px;
+  margin-bottom: 23px
+}
+
+.select-period-button {
+  height: 40px;
+  width: 110px;
+  background-color:  #8a3636;
+  /* rgb(111, 17, 17);; */
+  border: gray;
+  color: white;
+  font-family: "montserrat", sans-serif;
+  font-weight: 300;
+  padding: 7px;
+}
+
 .inconspicuous {
   font-family: "montserrat", sans-serif;
   background-color: none;
@@ -684,6 +707,8 @@ form {
   font-weight: 300;
   font-size: 15px;
 }
+
+
 
 .card-img-top {
   height: 250px;
@@ -884,25 +909,34 @@ form {
 } */
 
 .modal {
-  position: fixed;
-  left: 10;
+  /* left: 10;
   top: 10;
   right: 10;
-  bottom: 10;
-  background: rgba(255, 255, 255, 0.5);
+  bottom: 10; */
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 4px;
+  
   /* border: 1px solid #ccc; */
   /* transition: 1.1s ease-out; */
   /* box-shadow: -2rem 2rem 2rem rgba(black, 0.2);
   filter: blur(0); */
 }
 
-.modal-content {
-  padding: 20px;
-  width: 500px;
-  background-color: rgb(222, 133, 133);
+.choice-modal {
+  text-align: center;
+  padding: 27px;
+  width: 200px;
+  height: 180px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 8px 8px rgba(159, 158, 158, 0.25);
+}
+
+.close-choice {
+  margin-top: 10px;
+  margin-bottom: 20px
 }
 
 .modal-header,
