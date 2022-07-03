@@ -113,29 +113,29 @@ function AddActivityModal(props) {
     return null;
   }
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <AddActivityForm
-          userId={props.userId}
-          error={props.error}
-          setError={props.setError}
-          modalError={props.modalError}
-          setModalError={props.setModalError}
-          showAddActModal={props.showAddActModal}
-          setShowAddActModal={props.setShowAddActModal}
-          activities={props.activities}
-          setActivities={props.setActivities}
-          selectedDate={props.selectedDate}
-          setSelectedDate={props.setSelectedDate}
-        />
-        <div className="modal-footer">
-          {props.modalError && <p className="error">{props.modalError}</p>}
-          <button className="modal-button" onClick={closeModal}>
+    <div className="add-activity card">
+      <h2 className="add-header black">Log a new activity</h2>
+      <AddActivityForm
+        userId={props.userId}
+        error={props.error}
+        setError={props.setError}
+        modalError={props.modalError}
+        setModalError={props.setModalError}
+        showAddActModal={props.showAddActModal}
+        setShowAddActModal={props.setShowAddActModal}
+        activities={props.activities}
+        setActivities={props.setActivities}
+        selectedDate={props.selectedDate}
+        setSelectedDate={props.setSelectedDate}
+      />
+      <div className="modal-footer">
+        {props.modalError && <p className="error">{props.modalError}</p>}
+        {/* <button className="modal-button" onClick={closeModal}>
             Close
-          </button>
-        </div>
+          </button> */}
       </div>
     </div>
+    // </div>
   );
 }
 
@@ -185,11 +185,11 @@ function PeriodModal(props) {
 }
 
 function AddPeriodModal(props) {
-  const closeModal = () => {
-    props.setShowAddPeriodModal(false);
-    localStorage.setItem("selectedPeriod", null);
-    props.setModalError(null);
-  };
+  // const closeModal = () => {
+  //   props.setShowAddPeriodModal(false);
+  //   localStorage.setItem("selectedPeriod", null);
+  //   props.setModalError(null);
+  // };
 
   if (!props.showAddPeriodModal || props.showPeriodModal) {
     return null;

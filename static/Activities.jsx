@@ -8,6 +8,11 @@ function AddActivityForm(props) {
   const [sufferScore, setSufferScore] = React.useState(props.sufferScore);
   const [activityNotes, setActivityNotes] = React.useState(props.activityNotes);
 
+  const closeModal = () => {
+    props.setShowAddActModal(false);
+    props.setModalError(null);
+  };
+
   // const handleEditActivity = () => {
   //   // evt.preventDefault();
   //   console.log("editActivity");
@@ -102,103 +107,119 @@ function AddActivityForm(props) {
 
   return (
     <div>
-      <h2>New Activity</h2>
-      <form onSubmit={handleAddActivity}>
-        <div>
+      <form className="add-form" onSubmit={handleAddActivity}>
+        <label className="add-field" htmlFor="date">
           Activity Date
-          <input
-            type="date"
-            name="date"
-            value={activityDate}
-            onChange={(evt) => {
-              props.setActivityDate(evt.currentTarget.value);
-            }}
-          />
-        </div>
-        <br></br>
-        <div>
+        </label>
+        <input
+          type="date"
+          name="date"
+          className="add-input"
+          value={activityDate}
+          onChange={(evt) => {
+            props.setActivityDate(evt.currentTarget.value);
+          }}
+        />
+        <label className="add-field" htmlFor="activity-types">
           Activity Type
-          <select
-            name="activity-types"
-            value={activityType}
-            onChange={(evt) => setActivityType(evt.currentTarget.value)}
-          >
-            <option value="Null"></option>
-            <option value="Run">Run</option>
-            <option value="Bike">Bike</option>
-            <option value="Swim">Swim</option>
-            <option value="Climb">Climb</option>
-            <option value="Elliptical">Elliptical</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-        <br></br>
-        <div>
+        </label>
+        <select
+          name="activity-types"
+          value={activityType}
+          className="add-input"
+          onChange={(evt) => setActivityType(evt.currentTarget.value)}
+        >
+          <option value="Null"></option>
+          <option value="Run">Run</option>
+          <option value="Bike">Bike</option>
+          <option value="Swim">Swim</option>
+          <option value="Climb">Climb</option>
+          <option value="Elliptical">Elliptical</option>
+          <option value="Other">Other</option>
+        </select>
+        <label className="add-field" htmlFor="name">
           Activity Name
-          <input
-            type="text"
-            value={activityName}
-            onChange={(evt) => {
-              if ({ activityName }) {
-                setActivityName(evt.currentTarget.value);
-              }
-            }}
-          />
-        </div>
-        <br></br>
-        <div>
+        </label>
+        <input
+          type="text"
+          name="name"
+          value={activityName}
+          className="add-input"
+          onChange={(evt) => {
+            if ({ activityName }) {
+              setActivityName(evt.currentTarget.value);
+            }
+          }}
+        />
+        <label className="add-field" htmlFor="duration">
           Duration
-          <input
-            type="text"
-            value={duration}
-            onChange={(evt) => {
-              if ({ duration }) {
-                setDuration(evt.currentTarget.value);
-              }
-            }}
-          />
-        </div>
-        <br></br>
-        <div>
+        </label>
+        <input
+          type="text"
+          name="duration"
+          value={duration}
+          placeholder="minutes"
+          className="add-input"
+          onChange={(evt) => {
+            if ({ duration }) {
+              setDuration(evt.currentTarget.value);
+            }
+          }}
+        />
+        <label className="add-field" htmlFor="distance">
           Distance
-          <input
-            type="text"
-            value={distance}
-            onChange={(evt) => {
-              if ({ distance }) {
-                setDistance(evt.currentTarget.value);
-              }
-            }}
-          />
-        </div>
-        <div>
+        </label>
+        <input
+          type="text"
+          name="distance"
+          value={distance}
+          placeholder="miles"
+          className="add-input"
+          onChange={(evt) => {
+            if ({ distance }) {
+              setDistance(evt.currentTarget.value);
+            }
+          }}
+        />
+        <label className="add-field" htmlFor="suffer-score">
           Suffer Score
-          <select
-            name="suffer-score"
-            value={sufferScore}
-            onChange={(evt) => setSufferScore(evt.currentTarget.value)}
-          >
-            <option value="NA">NA</option>
-            <option value="1">1, minimal discomfort</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5, maximum discomfort</option>
-          </select>
-        </div>
-        <div>
+        </label>
+        <select
+          name="suffer-score"
+          value={sufferScore}
+          className="add-input"
+          onChange={(evt) => setSufferScore(evt.currentTarget.value)}
+        >
+          <option value="NA">NA</option>
+          <option value="1">1: Minimal discomfort</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5: Maximum discomfort</option>
+        </select>
+        <label className="add-field" htmlFor="notes">
           Notes
-          <input
-            type="text"
-            value={activityNotes}
-            onChange={(evt) => {
-              if ({ activityNotes }) {
-                setActivityNotes(evt.currentTarget.value);
-              }
-            }}
-          />
-        </div>
-        <button type="submit">Save Activity</button>
+        </label>
+        <input
+          type="text"
+          name="notes"
+          value={activityNotes}
+          className="add-period-input notes"
+          onChange={(evt) => {
+            if ({ activityNotes }) {
+              setActivityNotes(evt.currentTarget.value);
+            }
+          }}
+        />
+        <button className="btn add-period-button" type="submit">
+          Add Activity
+        </button>
+        <button
+          className="btn inconspicuous close-add-period"
+          onClick={closeModal}
+        >
+          Close
+        </button>
       </form>
     </div>
   );

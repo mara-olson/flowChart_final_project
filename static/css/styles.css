@@ -433,7 +433,19 @@ form {
 
 .add-period {
   width: 460px;
-  height: 580px;
+  height: 560px;
+  overflow: hidden;
+  align-items: center;
+  font-size: 16px;
+  position: absolute;
+  display: block;
+  top: 14%;
+  right: 2%;
+}
+
+.add-activity {
+  width: 460px;
+  height: 690px;
   overflow: hidden;
   align-items: center;
   font-size: 16px;
@@ -448,29 +460,29 @@ form {
   margin-left: 20px
 }
 
-.add-period-form {
+.add-form {
   width: 90%;
   align-items: start;
   padding-left: 35px;
-
 }
 
-.add-period-input {
+.add-input {
   width: 60%;
   padding-left: 7px;
   padding-right: 5px;
-  padding-top: 4px;
-  padding-bottom: 4px;
+  padding-top: 2px;
+  padding-bottom: 2px;
   font-family: "poppins", sans-serif;
   font-weight: 300;
-  font-size: 14px;
-  line-height: 0.8;
+  font-size: 12px;
 }
 
-.add-period-field {
+.add-field {
   display: inline-block;
   width: 100%;
   margin-top: 24px;
+  margin-bottom: -2px;
+  font-size: 14px;
 }
 
 .bio {
@@ -1027,7 +1039,7 @@ form {
 
 .close-add-period {
   margin: auto;
-  margin-top: 0px;
+  margin-top: -8px;
   margin-bottom: 20px;
   
 }

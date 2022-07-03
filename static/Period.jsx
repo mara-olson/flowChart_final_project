@@ -9,7 +9,7 @@ function AddPeriodForm(props) {
   const [periodNotes, setPeriodNotes] = React.useState(props.periodNotes);
 
   const closeModal = () => {
-    props.setShowEntryChoiceModal(false);
+    props.setShowAddPeriodModal(false);
     props.setModalError(null);
   };
 
@@ -57,23 +57,23 @@ function AddPeriodForm(props) {
   };
   console.log("SUCCESS");
   return (
-    <div className="add-period-container">
-      <form className="add-period-form" onSubmit={handleAddAPeriod}>
-        <div className="add-period-field" htmlFor="mense_date">
+    <div>
+      <form className="add-form" onSubmit={handleAddAPeriod}>
+        <div className="add-field" htmlFor="mense_date">
           Date of event
         </div>
         <input
           type="date"
           name="mense_date"
-          className="add-period-input"
+          className="add-input"
           value={periodDate}
           onChange={(evt) => setPeriodDate(evt.currentTarget.value)}
         />
         {/* <div> */}
-        <div className="add-period-field">What's your flow?</div>
+        <div className="add-field">What's your flow?</div>
         <select
           name="flow-volume"
-          className="add-period-input"
+          className="add-input"
           onChange={(evt) => setFlowVolume(evt.currentTarget.value)}
         >
           <option></option>
@@ -84,16 +84,14 @@ function AddPeriodForm(props) {
         </select>
         {/* </fieldset> */}
         <fieldset>
-          <div className="add-period-field">
-            What symptoms are you experiencing?
-          </div>
+          <div className="add-field">What symptoms are you experiencing?</div>
           <input
             type="checkbox"
             name="mood"
             className="checkbox"
             onChange={(evt) => setMood(evt.currentTarget.checked)}
           />
-          <label className="add-period-input" htmlFor="mood">
+          <label className="add-input" htmlFor="mood">
             Moodiness
           </label>
           <br></br>
@@ -104,7 +102,7 @@ function AddPeriodForm(props) {
             className="checkbox"
             onChange={(evt) => setCramps(evt.currentTarget.checked)}
           />
-          <label className="add-period-input" htmlFor="cramps">
+          <label className="add-input" htmlFor="cramps">
             Cramps
           </label>
           <br></br>
@@ -115,7 +113,7 @@ function AddPeriodForm(props) {
             className="checkbox"
             onChange={(evt) => setBloating(evt.currentTarget.checked)}
           />
-          <label className="add-period-input" htmlFor="bloating">
+          <label className="add-input" htmlFor="bloating">
             Bloating
           </label>
           <br></br>
@@ -126,17 +124,17 @@ function AddPeriodForm(props) {
             name="fatigue"
             onChange={(evt) => setFatigue(evt.currentTarget.checked)}
           />
-          <label className="add-period-input " htmlFor="fatigue">
+          <label className="add-input " htmlFor="fatigue">
             Fatigue
           </label>
         </fieldset>
 
-        <label className="add-period-field" htmlFor="notes">
+        <label className="add-field" htmlFor="notes">
           Notes
         </label>
         <textarea
           id="notes"
-          name="periodNotes"
+          name="notes"
           className="notes"
           onChange={(evt) => setPeriodNotes(evt.currentTarget.value)}
         />
