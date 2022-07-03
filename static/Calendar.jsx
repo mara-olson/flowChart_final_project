@@ -68,20 +68,20 @@ function Calendar(props) {
             </div>
           </div>
           <button
-            className="btn cal-nav-button"
+            className="btn cal-nav-button-previous"
             // type="link"
             onClick={prevMonth}
           >
-            <i className="bi bi-caret-left-fill caret-icon"></i>
+            <i className="bi bi-caret-left-fill caret-icon-previous"></i>
             Previous
           </button>
           <button
-            className="btn cal-nav-button"
+            className="btn cal-nav-button-next"
             // type="link"
             onClick={nextMonth}
           >
             Next
-            <i className="bi bi-caret-right-fill caret-icon"></i>
+            <i className="bi bi-caret-right-fill caret-icon-next"></i>
           </button>
           {/* </div> */}
         </div>
