@@ -20,6 +20,15 @@ body {
   margin: 0;
 }
 
+.footer {
+  background-color: black;
+  color: white;
+  display: flex;
+  align-items: end;
+  padding-right: 40px;
+  height: 70px
+}
+
 .no-spacing {
   margin-bottom: 0;
 }
@@ -453,6 +462,10 @@ form {
   display: block;
   top: 14%;
   right: 2%;
+}
+
+.top-adjust {
+  margin-bottom: 100px;
 }
 
 .checkbox {

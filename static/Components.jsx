@@ -207,6 +207,16 @@ function Navbar(props) {
   }
 }
 
+function Footer(props) {
+  return (
+    <div className="footer">
+      <i className="bi bi-instagram"></i>
+      <i className="bi bi-twitter"></i>
+      <i></i>
+    </div>
+  );
+}
+
 function StatCard1(props) {
   return (
     <div className="stat-card">
@@ -435,7 +445,7 @@ function Home(props) {
               showDeletePeriodModal={props.showDeletePeriodModal}
               setShowDeletePeriodModal={props.setShowDeletePeriodModal}
             />
-            {/* <AddPeriodModal
+            <AddPeriodModal
               userId={props.userId}
               // onClose={closeModal}
               showPeriodModal={props.showPeriodModal}
@@ -454,7 +464,7 @@ function Home(props) {
               setSelectedPeriodId={props.setSelectedPeriodId}
               showDeletePeriodModal={props.showDeletePeriodModal}
               setShowDeletePeriodModal={props.setShowDeletePeriodModal}
-            /> */}
+            />
             <EntryChoice
               showEntryChoiceModal={props.showEntryChoiceModal}
               setShowEntryChoiceModal={props.setShowEntryChoiceModal}

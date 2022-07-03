@@ -493,6 +493,7 @@ function App() {
         </Route>
       </div>
       {/* {Route path = '*' /* cutsie catch-all error page default if no route found */}
+      <Footer></Footer>
     </BrowserRouter>
     // </FullContext.Provider>
   );
