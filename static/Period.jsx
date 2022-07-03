@@ -69,6 +69,7 @@ function AddPeriodForm(props) {
             name="flow-volume"
             onChange={(evt) => setFlowVolume(evt.currentTarget.value)}
           >
+            <option></option>
             <option value="No Flow">No Flow</option>
             <option value="Light">Light</option>
             <option value="Moderate">Moderate</option>

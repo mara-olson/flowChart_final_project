@@ -267,37 +267,11 @@ def activity_data(user_id):
     return jsonify({"activities": activity_objs, "monthlyMileage": mileage_this_month})
 
 
-# @app.route("/<user_id>/home")
-# def user_homepage(user_id):
-#     """Display user's homepage after logging in."""
-#     user_id = session["user_id"]
-#     user = User.get_user_by_id(user_id)
-
-#     fname = user.first_name
-#     lname = user.last_name
-    
-#     all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
-
-#     activities = []
-
-#     for activity in all_activities:
-#         activity = activity.to_dict()
-#         # for i in range(len(all_activities)):
-#         #     activities[i] = activity
-#         activities.append(activity)
-
-#     return jsonify({'activities': activities})
-   
-
-
-
 @app.route("/api/profile")
 def profile():
     """User profile page."""
     user_id = session["user_id"]
     user = User.get_user_by_id(user_id)
-    # dt = user.created_at
-    # trunc_date = datetime.date( dt.day, dt.month, dt.year)
 
     return jsonify({"success":True, "first_name": user.first_name, "last_name": user.last_name, "team_name": user.team_name, "email": user.email, "password": user.password, "bio": user.bio, "member_since": user.created_at.strftime("%b %d, %Y")})
 
@@ -631,6 +605,8 @@ def add_period(user_id):
     created_at = datetime.datetime.now()
 
     currentTime = datetime.datetime.now()
+
+    print("FLOW VOLUME: ", flow_volume)
 
     if mense_date is None or flow_volume is None:
         error = "Please enter a date & flow"
