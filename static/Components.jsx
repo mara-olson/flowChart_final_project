@@ -206,7 +206,7 @@ function Navbar(props) {
 
 function StatCard1(props) {
   return (
-    <div className="profile-card">
+    <div className="stat-card">
       {props.monthlyMileage && (
         <div>
           <div className="stat">Mileage this Month: </div>
@@ -225,7 +225,7 @@ function StatCard1(props) {
 
 function StatCard2(props) {
   return (
-    <div className="profile-card">
+    <div className="stat-card">
       <div className="stat">
         Last Period:
         <div className="stat-value2">{props.lastPeriod}</div>
@@ -653,7 +653,7 @@ function AddCard(props) {
     props.setShowEntryChoiceModal(true);
   };
   return (
-    <div className="profile-card">
+    <div className="plus-card">
       <i
         className="btn bi bi-plus-circle-fill icon-add-plus"
         onClick={handleClick}
