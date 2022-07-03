@@ -467,7 +467,7 @@ function Home(props) {
               setSelectedDate={props.setSelectedDate}
             />
           </div>
-          <div className="calendar-card">
+          <div className="chart-card">
             <MyChart
               editMode={props.editMode}
               setEditMode={props.setEditMode}
@@ -590,23 +590,24 @@ function MyChart(props) {
       }
 
       const periodData = [];
+      console.log("PERIOD", props.periods);
       for (const period of props.periods) {
         const volume = null;
-        if (period.flow === "No Flow") {
+        if (period.flow_volume === "No Flow") {
           volume = 0;
         }
-        if (period.flow === "Light") {
+        if (period.flow_volume === "Light") {
           volume = 1;
         }
-        if (period.flow === "Moderate") {
+        if (period.flow_volume === "Moderate") {
           volume = 2;
         }
-        if (period.flow === "Heavy") {
+        if (period.flow_volume === "Heavy") {
           volume = 3;
         }
 
         const perObj = {
-          x: period.date,
+          x: period.mense_date,
           y: volume,
         };
         periodData.push(perObj);
@@ -619,30 +620,41 @@ function MyChart(props) {
             {
               label: "Miles",
               data: activityData,
+              parsing: {
+                yAxisKey: activityData.distance,
+              },
               borderColor: "rgb(53, 162, 235)",
               backgroundColor: "rgba(53, 162, 235, 0.5)",
             },
             {
-              label: "Flow",
+              label: "Flow Volume",
               data: periodData,
+              parsing: {
+                yAxisKey: periodData.flow_volume,
+              },
               borderColor: "rgb(255, 99, 132)",
               backgroundColor: "rgba(255, 99, 132, 0.5)",
+              segment: {
+                borderColor: "rgba(255, 99, 132, 0)",
+              },
+              spanGaps: true,
             },
           ],
           options: {
-            tooltips: {
-              mode: "index",
-              intersect: false,
-            },
-            hover: {
-              mode: "index",
+            scales: {
+              xAxis: {
+                type: "time",
+                time: {
+                  unit: "day",
+                },
+              },
             },
           },
         },
       });
       setCurrentChart(testChart);
     }
-  }, [props.activities]);
+  }, [props.activities, props.periods]);
 
   return <canvas id="test-chart" ref={chartRef}></canvas>;
 }

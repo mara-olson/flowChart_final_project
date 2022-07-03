@@ -166,6 +166,7 @@ body {
 .stat {
   font-family: "poppins", sans-serif;
   font-size: 18px;
+  margin-bottom: 0;
   font-weight: light;
   text-align: center;
   height: auto;
@@ -177,6 +178,8 @@ body {
   font-weight: 700;
   font-size: 40px;
   text-align: center;
+  padding-top: 5px;
+  line-height: 1;
 }
 
 .stat-value2 {
@@ -218,7 +221,7 @@ body {
 
 .calendar-card {
   padding: 10px;
-  padding-bottom: 50px;
+  padding-bottom: 30px;
   margin-right: 15px;
   margin-bottom: 20px;
   /* border-radius: 25px; */
@@ -227,6 +230,18 @@ body {
   box-shadow: 0 1px 8px rgba(159, 158, 158, 0.25);
   background: white;
   background-repeat: no-repeat, no-repeat;
+}
+
+.chart-card {
+  padding: 10px;
+  padding-bottom: 10px;
+  margin-right: 15px;
+  margin-bottom: 50px;
+  /* border-radius: 25px; */
+  display: flex;
+  border-radius: 4px;
+  box-shadow: 0 1px 8px rgba(159, 158, 158, 0.25);
+  background: white;
 }
 
 .profile-card {
@@ -250,14 +265,14 @@ body {
 
 .stat-card {
   /* width: 40%; */
-  height: 160px;
+  height: 140px;
   font-family: "poppins", sans-serif;
   font-weight: 200;
   padding: 10px;
   margin-left: 15px;
   margin-bottom: 20px;
   margin-right: 0;
-  padding-top: 43px;
+  padding-top: 35px;
   /* padding-bottom: 20px; */
   /* display: inline-block; */
   justify-content: center;
@@ -270,7 +285,7 @@ body {
 
 .plus-card {
   /* width: 40%; */
-  height: 175px;
+  height: 155px;
   font-family: "poppins", sans-serif;
   font-weight: 200;
   /* padding: 10px; */
@@ -286,6 +301,10 @@ body {
   background: white;
   text-align: center;
   vertical-align: middle;
+}
+.color {
+  color: rgb(255, 99, 132);
+  background-color: rgba(255, 99, 132, 0.5)"
 }
 
 .custom-file-upload {
@@ -412,8 +431,9 @@ form {
 .icon-add-plus {
   color: rgb(119, 20, 20);
   font-size: 100px;
-  padding: 0;
+  padding: 26px;
   margin: 0;
+  display: flex
   /* padding: 20px; */
   /* display: flex; */
 }
