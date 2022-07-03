@@ -70,7 +70,7 @@ body {
 
 .btn-secondary {
   color: rgb(9, 9, 9);
-  background-color: rgb(144, 143, 143);
+  background-color: rgb(127, 124, 124);
   border-style: none;
   font-family: "montserrat", sans-serif;
   font-weight: light;
@@ -139,6 +139,12 @@ body {
   line-height: 50px;
   color: white;
 }
+
+.nav-link:hover, .nav-link:focus {
+
+  color: white;
+}
+
 .navbar-brand {
   font-size: 30px;
   font-weight: bold;
@@ -529,6 +535,17 @@ form {
   font-weight: light;
 }
 
+.login-button:focus {
+  background-color: rgb(111, 17, 17);
+  border: gray;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin: 15px;
+  font-family: "montserrat", sans-serif;
+  font-weight: light;
+}
+
 .inconspicuous {
   font-family: "montserrat", sans-serif;
   background-color: none;
@@ -560,7 +577,9 @@ form {
 .grey1 {
   background-color: rgb(177, 171, 171);
   font-weight: 300;
+  color: white;
   margin-right: 20px;
+  margin-bottom: 10px;
 }
 
 .black {

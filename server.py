@@ -114,7 +114,20 @@ def login_process():
     password = request.json.get("password")
     user = User.get_user_by_email(email)
 
-    if not user:
+    print("*********", email)
+
+    if email is None:
+        error = f"Please enter an email"
+
+        return jsonify({"success": False, "error": error})
+
+    elif password is None:
+        error = f"Please enter a password"
+
+        return jsonify({"success": False, "error": error})
+    
+    
+    elif email is not None and password is not None and not user:
         error = f"We could not find an account for {email}. Please sign up!"
 
         return jsonify({"success": False, "error": error})

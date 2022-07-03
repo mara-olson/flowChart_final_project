@@ -38,7 +38,10 @@ function Navbar(props) {
             to="/"
             className="navbar-brand d-flex justify-content-left"
           >
-            <img src={props.logo} height="30" alt="logo" />
+            <a className="navbar-brand add-pad nav-link" href="/home">
+              floChart<span className="red-letter">.</span>
+            </a>
+            {/* <img src={props.logo} height="30" alt="logo" /> */}
           </ReactRouterDOM.Link>
         </div>
         <ReactRouterDOM.NavLink
@@ -485,7 +488,7 @@ function Home(props) {
 }
 
 function Login(props) {
-  const [email, setEmail] = React.useState("");
+  const [email, setEmail] = React.useState(null);
   const [password, setPassword] = React.useState("");
   const history = ReactRouterDOM.useHistory();
 
@@ -493,6 +496,11 @@ function Login(props) {
     evt.preventDefault();
     props.setShowSignUpModal(true);
     history.push("/sign-up");
+  };
+
+  const returnToLandingPage = (evt) => {
+    evt.preventDefault();
+    history.push("/");
   };
 
   const handleLogin = (evt) => {
@@ -529,6 +537,7 @@ function Login(props) {
         }
       });
   };
+  console.log(email);
 
   return (
     <div className="login card">
@@ -569,6 +578,9 @@ function Login(props) {
             Sign up for free
           </button>
         </form>
+        <button className="btn inconspicuous" onClick={returnToLandingPage}>
+          Cancel
+        </button>
       </div>
     </div>
   );
