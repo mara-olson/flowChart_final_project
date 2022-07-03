@@ -7,6 +7,7 @@ from model import connect_to_db, db, User, StravaUser, StravaActivity, ActivityL
 import datetime;
 import requests
 import os
+import random, string
 from jinja2 import StrictUndefined
 
 
@@ -178,6 +179,9 @@ def save_new_user():
 def activity_data(user_id):
     """All activities."""
     user_id = session["user_id"]
+    def create_random_id():
+        x = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(16))
+        return x
 
     def get_strava_activity_data():
         url = "https://www.strava.com/api/v3/athlete/activities"
@@ -191,7 +195,7 @@ def activity_data(user_id):
 
         page = str(1)
 
-        r = requests.get(f"{url}?before=1653447977&after=959223977&page={page}&per_page=20", headers=headers)
+        r = requests.get(f"{url}?before=1751499096&after=959223977&page={page}&per_page=20", headers=headers)
         
         return r.json()
 
@@ -208,13 +212,17 @@ def activity_data(user_id):
         page = int(page)
     
     activity_objs = []
+    
+    all_acts = ActivityLog.query.filter(ActivityLog.user_id == user_id).all()
 
     for activity in strava_activities:
-        
-        if not ActivityLog.query.get(activity["id"]):
+        activity["id"] = str(activity["id"])
 
+        all_ids = [activity.activity_id for activity in all_acts]
+        
+        if activity["id"] not in all_ids:
             new_strava_act = {
-                "id": activity["id"],
+                "id": str(activity["id"]),
                 "activity_name": activity["name"], 
                 "activity_date": activity["start_date_local"][:10], 
                 "duration": sec_to_min(activity["moving_time"]), 
@@ -222,43 +230,40 @@ def activity_data(user_id):
                 "activity_type": activity["type"], 
                 "suffer_score": None, 
                 "activity_notes": activity["location_city"], 
-                "created_at": datetime.datetime.now()}
+                "created_at": datetime.datetime.now()
+                }
             
-            if new_strava_act["id"] not in ActivityLog.query.filter(ActivityLog.user_id == user_id).all():
-                ActivityLog.create_activity(user_id, new_strava_act["activity_date"], new_strava_act["activity_type"], new_strava_act["activity_name"], new_strava_act["duration"], new_strava_act["distance"], new_strava_act["suffer_score"], new_strava_act["activity_notes"])
-        
-
-
+                # print(all_ids)
+                # if new_strava_act["id"] not in ActivityLog.query.filter(ActivityLog.user_id == user_id).all():
+            created_activity = ActivityLog.create_activity(new_strava_act["id"], user_id, new_strava_act["activity_date"], new_strava_act["activity_type"], new_strava_act["activity_name"], new_strava_act["duration"], new_strava_act["distance"], new_strava_act["suffer_score"], new_strava_act["activity_notes"])
+            print("NEW ACTIVITY: ", created_activity)
+    
     all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).order_by(ActivityLog.activity_date.desc())
+
+    all_act_ids = [activity.activity_id for activity in all_activities]
+    # print("ALL IDS: ", sorted(all_act_ids))
 
     if page:
         all_activities = all_activities.paginate(page, per_page=10).items
     else:
         all_activities = all_activities.all()
     
-#    request.args.get("page")
-
-    # all_activities = ActivityLog.query.filter(ActivityLog.user_id == user_id).paginate(1).items
-# previous and next buttons on activities page, counter onClick={count+1}
-# state for page
-
-    
     currentTime= datetime.datetime.now()
 
     mileage_this_month = db.session.query(func.round(func.sum(ActivityLog.distance))).filter(ActivityLog.activity_date > (currentTime - datetime.timedelta(30))).one()[0]
 
-
+    
     for activity in all_activities:
-        new_act = {
-            "user_id": activity.user_id, "activity_id": activity.activity_id, "name": activity.activity_name, "type": activity.workout_type, "date": activity.activity_date.strftime("%Y-%m-%d"),
-            "distance": activity.distance, "duration": activity.duration, "suffer_score": activity.suffer_score, "notes": activity.activity_notes
-            }
-        # activity = activity.to_dict()
-        activity_objs.append(new_act)
+            new_act = {
+                "user_id": activity.user_id, "activity_id": activity.activity_id, "name": activity.activity_name, "type": activity.workout_type, "date": activity.activity_date.strftime("%Y-%m-%d"),
+                "distance": activity.distance, "duration": activity.duration, "suffer_score": activity.suffer_score, "notes": activity.activity_notes
+                }
+            # activity = activity.to_dict()
+            activity_objs.append(new_act)
         
     activity_objs.sort(key=lambda x: datetime.datetime.strptime(x['date'], "%Y-%m-%d"), reverse=True)
-
-    print("*"*25,activity_objs)
+    # print("ACTIVITY_OBJS: ", activity_objs)
+    # print("*"*25,activity_objs)
     return jsonify({"activities": activity_objs, "monthlyMileage": mileage_this_month})
 
 

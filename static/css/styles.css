@@ -240,14 +240,11 @@ body {
   margin-right: 0;
   padding-bottom: 20px;
   padding-top: 20px;
-  display: flex;
+  /* display: inline-block; */
   justify-content: center;
   border-radius: 4px;
   box-shadow: 0 1px 8px rgba(159, 158, 158, 0.25);
   background: white;
-  background-repeat: no-repeat, no-repeat;
-  background-position: 120% -5%, 200% -40%;
-  background-size: 40%, 80%;
   text-align: center;
 }
 
@@ -530,7 +527,7 @@ form {
   text-align: center;
   width: 450px;
   margin: auto;
-
+  margin-top: 80px;
   padding: 20px;
   padding-top: 30px;
 }

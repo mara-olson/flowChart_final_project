@@ -106,7 +106,7 @@ class ActivityLog(db.Model):
     
     __tablename__ = "activity_logs"
 
-    activity_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    activity_id = db.Column(db.String, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False) 
     activity_name = db.Column(db.String, default="Activity") 
     activity_type = db.Column(db.String, default="Run") 
@@ -143,9 +143,9 @@ class ActivityLog(db.Model):
         return ActivityLog.query.get(activity_id)
 
     @classmethod
-    def create_activity(cls, user_id, activity_date, activity_type, activity_name, duration, distance, suffer_score, activity_notes):
+    def create_activity(cls, activity_id, user_id, activity_date, activity_type, activity_name, duration, distance, suffer_score, activity_notes):
        """Create and return a new activity."""
-       activity = cls(user_id=user_id, activity_date=activity_date, activity_type=activity_type, activity_name=activity_name, duration=duration, distance=distance, suffer_score=suffer_score, activity_notes=activity_notes)
+       activity = cls( activity_id=activity_id, user_id=user_id,activity_date=activity_date, activity_type=activity_type, activity_name=activity_name, duration=duration, distance=distance, suffer_score=suffer_score, activity_notes=activity_notes)
        db.session.add(activity)
        db.session.commit()
 

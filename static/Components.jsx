@@ -574,41 +574,6 @@ function Login(props) {
   );
 }
 
-function Profile(props) {
-  return (
-    <div>
-      <h2>Account Information</h2>
-      <br></br>
-      <p>
-        First Name: <strong>{props.firstName}</strong>
-      </p>
-      <br></br>
-      <p>
-        Last Name: <strong>{props.lastName}</strong>
-      </p>
-      <br></br>
-      <p>
-        Team Name: <strong>{props.teamName}</strong>
-      </p>
-      <br></br>
-      <p>
-        Bio: <strong>{props.profileBio}</strong>
-      </p>
-      <p>
-        Email: <strong>{props.email}</strong>
-      </p>
-      <br></br>
-      <p>
-        Password: <strong>*****</strong>
-      </p>
-      <br></br>
-      <p>
-        Member Since: <strong>{props.sinceDate}</strong>
-      </p>
-    </div>
-  );
-}
-
 function MyChart(props) {
   const chartRef = React.useRef(null);
   const [currentChart, setCurrentChart] = React.useState(null);
@@ -664,6 +629,15 @@ function MyChart(props) {
               backgroundColor: "rgba(255, 99, 132, 0.5)",
             },
           ],
+          options: {
+            tooltips: {
+              mode: "index",
+              intersect: false,
+            },
+            hover: {
+              mode: "index",
+            },
+          },
         },
       });
       setCurrentChart(testChart);

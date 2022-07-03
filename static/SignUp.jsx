@@ -5,9 +5,10 @@ function SignUpConnectModal(props) {
       "https://www.strava.com/oauth/authorize?client_id=80271&response_type=code&redirect_uri=http://localhost:5001/exchange_token&approval_prompt=force&scope=profile:read_all,activity:read_all"
     );
     setShowSignUpModal(false);
+    props.setIsLoggedIn(true);
   };
 
-  if (props.showSignUpConnectModal) {
+  if (!props.showSignUpConnectModal) {
     return null;
   }
   return (
