@@ -447,12 +447,12 @@ body {
   height: 70%;
 }
 
-form {
+/* form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
+} */
 
 .login-field {
   width: 100%;
@@ -521,7 +521,7 @@ form {
 
 .add-period {
   width: 460px;
-  height: 560px;
+  height: 570px;
   overflow: hidden;
   align-items: center;
   font-family: "poppins", sans-serif;
@@ -535,7 +535,7 @@ form {
 
 .add-activity {
   width: 460px;
-  height: 690px;
+  height: 700px;
   overflow: hidden;
   align-items: center;
   font-family: "poppins", sans-serif;
@@ -588,11 +588,15 @@ form {
   margin-top: 10px
 }
 
+.edit-activity-buttons-container {
+  margin: auto;
+  text-align: center;
+  margin-right: 34px;
+}
+
 .bold {
   font-weight: 500
 }
-
-
 
 .edit-activity {
   width: 460px;
@@ -642,11 +646,33 @@ form {
 .add-field {
   display: inline-block;
   font-family: "poppins", sans-serif;
-  font-weight: 300;
+  font-weight: 500;
   width: 100%;
-  margin-top: 24px;
+  margin-top: 20px;
   margin-bottom: -2px;
-  font-size: 14px;
+  font-size: 16px;
+}
+
+.edit-field {
+  display: inline-block;
+  font-family: "poppins", sans-serif;
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: -6px;
+  font-size: 16px;
+}
+
+.edit-input {
+  display: block;
+  width: 80%;
+  margin-top: -4px;
+  padding-left: 7px;
+  padding-right: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  font-family: "poppins", sans-serif;
+  font-weight: 300;
+  font-size: 12px;
 }
 
 .bio {
@@ -696,8 +722,8 @@ form {
 }
 
 .profile-icon {
-  color: rgb(230, 188, 188);
-  font-size: 30px;
+  color: rgb(244 243 243);
+  font-size: 50px;
   justify-content: center;
 }
 
@@ -822,6 +848,7 @@ form {
 }
 
 .add-period-button {
+  display: inherit;
   height: 40px;
   width: 110px;
   margin: auto;
@@ -1220,6 +1247,7 @@ form {
   margin: auto;
   margin-top: -8px;
   margin-bottom: 20px;
+  display: inherit
 }
 
 .close-activity-details {
@@ -1296,7 +1324,10 @@ form {
   position: relative;
   display: inline-block;
   background-color: none;
-  /* align-items: end; */
+  position: absolute;
+  display: inline-block;
+  right: 30px;
+  top: -8px;
 }
 
 .dropdown-btn {

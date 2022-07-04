@@ -606,11 +606,13 @@ function ActivityCard(props) {
 
 function ActivityType(props) {
   return (
-    <div className="add-field">
-      Activity Type
+    <div>
+      <label className="edit-field bold" htmlFor="act-type">
+        Activity Type
+      </label>
       <select
         id="act-type"
-        className="add-input"
+        className="edit-input"
         value={props.activityType}
         onChange={(evt) => props.setActivityType(evt.currentTarget.value)}
       >
@@ -628,11 +630,13 @@ function ActivityType(props) {
 
 function ActivityDate(props) {
   return (
-    <div className="add-field">
-      <label htmlFor="act-date">Date: </label>
+    <div>
+      <label className="edit-field bold" htmlFor="act-date">
+        Date:
+      </label>
       <input
         id="act-date"
-        className="add-input"
+        className="edit-input"
         type="date"
         value={props.activityDate}
         onChange={(evt) => props.setActivityDate(evt.currentTarget.value)}
@@ -643,12 +647,14 @@ function ActivityDate(props) {
 
 function ActivityName(props) {
   return (
-    <div className="add-field">
-      <label htmlFor="act-name">Activity Name: </label>
+    <div>
+      <label className="edit-field bold" htmlFor="act-name">
+        Activity Name:{" "}
+      </label>
       <input
         id="act-name"
         type="text"
-        className="add-input"
+        className="edit-input"
         onChange={(evt) => props.setActivityName(evt.currentTarget.value)}
         value={props.activityName}
         placeholder="Enter a name for your activity"
@@ -659,12 +665,14 @@ function ActivityName(props) {
 
 function ActivityDistance(props) {
   return (
-    <div className="add-field">
-      <label htmlFor="distance">Distance: </label>
+    <div>
+      <label className="edit-field bold" htmlFor="distance">
+        Distance:{" "}
+      </label>
       <input
         id="distance"
         type="text"
-        className="add-input"
+        className="edit-input"
         onChange={(evt) => props.setDistance(evt.currentTarget.value)}
         value={props.distance}
       />
@@ -674,12 +682,14 @@ function ActivityDistance(props) {
 
 function ActivityDuration(props) {
   return (
-    <div className="add-field">
-      <label htmlFor="duration">Duration: </label>
+    <div>
+      <label className="edit-field bold" htmlFor="duration">
+        Duration:{" "}
+      </label>
       <input
         id="duration"
         type="text"
-        className="add-input"
+        className="edit-input"
         onChange={(evt) => props.setDuration(evt.currentTarget.value)}
         value={props.duration}
         placeholder="Enter activity duration"
@@ -690,11 +700,13 @@ function ActivityDuration(props) {
 
 function SufferScore(props) {
   return (
-    <div className="add-field">
-      <label htmlFor="suffer-score">Suffer Score:</label>
+    <div>
+      <label className="edit-field bold" htmlFor="suffer-score">
+        Suffer Score:
+      </label>
       <select
         name="suffer-score"
-        className="add-input"
+        className="edit-input"
         onChange={(evt) => props.setSufferScore(evt.currentTarget.value)}
         value={props.sufferScore}
       >
@@ -711,11 +723,13 @@ function SufferScore(props) {
 
 function ActivityNotes(props) {
   return (
-    <div className="add-field">
-      <label htmlFor="act-notes">Notes: </label>
+    <div>
+      <label className="edit-field bold" htmlFor="act-notes">
+        Notes:{" "}
+      </label>
       <textarea
         name="act-notes"
-        className="add-input notes"
+        className="edit-input notes"
         type="text"
         onChange={(evt) => props.setActivityNotes(evt.currentTarget.value)}
         value={props.activityNotes}
@@ -735,15 +749,21 @@ function EditActivity(props) {
   // }
   return (
     <div className="activity-details">
-      <form classname="activity-details-form" onSubmit={props.handleSubmit}>
+      <form className="activity-details-form" onSubmit={props.handleSubmit}>
         {/* <h2>Update Your Activity</h2> */}
         {props.children}
-        <button className="btn btn-primary red1" type="submit">
-          Save
-        </button>
-        <button className="btn inconspicuous" onClick={closeEdit}>
-          Cancel
-        </button>
+        <div className="edit-activity-buttons-container">
+          <button className="btn btn-primary red1" type="submit">
+            Save
+          </button>
+          <br></br>
+          <button
+            className="btn inconspicuous close-activity-details"
+            onClick={closeEdit}
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );

@@ -90,9 +90,22 @@ function Navbar(props) {
                 Menstrual Periods
               </a>
             </li>
+            <li className="dropdown">
+              <button className="dropdown-btn">
+                <i className="bi bi-person-circle profile-icon"></i>
+              </button>
+              <div className="dropdown-content">
+                <a className="dropdown-item" href="/profile">
+                  Profile
+                </a>
+                <button className="dropdown-item" onClick={handleLogout}>
+                  Logout
+                </button>
+              </div>
+            </li>
           </ul>
 
-          <div className="dropdown">
+          {/* <div className="dropdown">
             <button className="dropdown-btn">
               <i className="bi bi-person-circle profile-icon"></i>
             </button>
@@ -104,7 +117,7 @@ function Navbar(props) {
                 Logout
               </button>
             </div>
-          </div>
+          </div> */}
 
           {/* <div className="nav-item position-navbar dropdown">
             <button className="dropbtn">
