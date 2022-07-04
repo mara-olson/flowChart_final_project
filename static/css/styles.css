@@ -690,19 +690,18 @@ body {
 }
 
 .activity-details-container {
-  width: 300px;
-  height: 410px;
+  width: 380px;
+  height: 440px;
   overflow: hidden;
   overflow-y: scroll;
   align-items: start;
-  line-height: 1.8;
   font-family: "poppins", sans-serif;
   font-weight: 300;
-  font-size: 18px;
+  font-size: 16px;
   position: absolute;
   display: flex;
   top: 14%;
-  right: 2%;
+  right: 6%;
 }
 
 
@@ -718,6 +717,7 @@ body {
 
 .activity-detail {
   width: 90%;
+  margin-bottom: 15px;
 }
 
 .activity-detail:first-of-type {
@@ -727,14 +727,14 @@ body {
 
 .activity-buttons-container {
   /* width: 100%; */
-  margin-left: 25px;
+  margin-left: 68px;
   margin-top: 10px
 }
 
 .edit-activity-buttons-container {
   margin: auto;
   text-align: center;
-  margin-right: 34px;
+  margin-right: 24px;
 }
 
 .bold {
@@ -761,7 +761,7 @@ body {
 }
 
 .delete-warning {
-  margin-top: 30px;
+  margin-top: 60px;
   box-shadow: #fff;
   padding-left: 16px;
   padding-right: 16px;
@@ -770,19 +770,18 @@ body {
 }
 
 .period-details-container {
-  width: 300px;
+  width: 310px;
   height: 340px;
   overflow: hidden;
   overflow-y: scroll;
   align-items: start;
-  line-height: 1.8;
   font-family: "poppins", sans-serif;
   font-weight: 300;
-  font-size: 18px;
+  font-size: 16px;
   position: absolute;
   display: flex;
   top: 14%;
-  right: 2%;
+  right: 6%;
 }
 
 
@@ -798,23 +797,24 @@ body {
 
 .period-detail {
   width: 90%;
+  margin-bottom: 15px;
 }
 
 .period-detail:first-of-type {
   width: 90%;
-  padding-top: 15px
+  padding-top: 20px
 }
 
 .period-buttons-container {
   /* width: 100%; */
-  margin-left: 25px;
+  margin-left: 29px;
   margin-top: 10px
 }
 
 .edit-period-buttons-container {
   margin: auto;
   text-align: center;
-  margin-right: 34px;
+  margin-right: 24px;
 }
 
 .bold {

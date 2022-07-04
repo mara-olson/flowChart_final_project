@@ -157,7 +157,7 @@ function PeriodModal(props) {
     return null;
   }
   return (
-    <div className="activity-details-container card">
+    <div className="period-details-container card">
       <h2 className="add-header black">Period Details</h2>
       <SelectedPeriodContainer
         userId={props.userId}

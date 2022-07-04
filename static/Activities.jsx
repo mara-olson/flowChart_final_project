@@ -437,6 +437,8 @@ function AllActivitiesContainer(props) {
 function ActivityCard(props) {
   const [activityEdit, setActivityEdit] = React.useState("non-edit");
 
+  // const history = ReactRouterDOM.useHistory();
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
@@ -478,8 +480,9 @@ function ActivityCard(props) {
 
           // props.setActivities(data.activities);
           props.setModalError(null);
-          props.setShowActivityModal(false);
           setActivityEdit("non-edit");
+          props.setShowActivityModal(false);
+          // history.push("/activities");
         } else {
           console.log(data.error);
           props.setModalError(data.error);
@@ -744,27 +747,33 @@ function EditActivity(props) {
     evt.preventDefault();
     props.setActivityEdit("non-edit");
   };
+
+  // const saveActivity = (evt) => {
+  //   evt.preventDefault();
+  //   props.handleSubmit();
+  //   closeEdit();
+  // };
   // if (!props.showEditActivityModal) {
   //   return null;
   // }
   return (
     <div className="activity-details">
-      <form className="activity-details-form" onSubmit={props.handleSubmit}>
+      <div className="activity-details-form">
         {/* <h2>Update Your Activity</h2> */}
         {props.children}
-        <div className="edit-activity-buttons-container">
-          <button className="btn btn-primary red1" type="submit">
-            Save
-          </button>
-          <br></br>
-          <button
-            className="btn inconspicuous close-activity-details"
-            onClick={closeEdit}
-          >
-            Cancel
-          </button>
-        </div>
-      </form>
+      </div>
+      <div className="edit-activity-buttons-container">
+        <button className="btn btn-primary red1" onClick={props.handleSubmit}>
+          Save
+        </button>
+        <br></br>
+        <button
+          className="btn inconspicuous close-activity-details"
+          onClick={closeEdit}
+        >
+          Cancel
+        </button>
+      </div>
     </div>
   );
 }
