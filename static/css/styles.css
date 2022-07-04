@@ -65,6 +65,18 @@ body {
   text-align: center;
 }
 
+.account-page-header {
+  font-family: "montserrat", sans-serif;
+  /* font-style: ; */
+  width: 100%;
+  height: auto;
+  font-weight: 300;
+  padding: 20px;
+  text-align: center;
+  background-color: rgb(179, 100, 100);
+  color: white;
+}
+
 .add-header {
   font-family: "montserrat", sans-serif;
   width: 100%;
@@ -88,6 +100,7 @@ body {
   color: rgb(253, 253, 253);
   background-color: rgb(198, 123, 123);
   border-style: none;
+  margin: 5px;
 }
 
 .btn-primary {
@@ -96,6 +109,7 @@ body {
   border-style: none;
   font-family: "montserrat", sans-serif;
   font-weight: light;
+  margin: 5px;
 }
 
 .btn-secondary {
@@ -145,7 +159,7 @@ body {
   display: inline-block;
 }
 
-.edit-activity-button {
+/* .edit-activity-button {
   width: 80px;
   height: 35px;
   margin: 10px;
@@ -160,10 +174,21 @@ body {
   font-family: "montserrat", sans-serif;
   font-weight: 300;
   display: inline-block;
+} */
+.edit-activity-button {
+  width: 80px;
+  height: 35px;
+  color: rgb(253, 253, 253);
+  background-color: rgb(124, 33, 33);
+  font-weight: 300;
+  border-style: none;
+  font-family: "montserrat", sans-serif;
+  font-weight: light;
+  margin: 5px;
 }
 
 .edit-activity-button:hover {
-  color: black;
+  /* color: black;
   width: 80px;
   height: 35px;
   margin: 10px;
@@ -175,11 +200,19 @@ body {
   text-align: center;
   background-color: rgb(222, 219, 219);
   font-family: "montserrat", sans-serif;
-  font-weight: 300;
+  font-weight: 300; */
+  width: 80px;
+  height: 35px;
+  font-family: "montserrat", sans-serif;
+  font-weight: 500;
+  color: rgb(253, 253, 253);
+  background-color: rgb(198, 123, 123);
+  border-style: none;
+  margin: 5px;
 }
 
 .delete-activity-button {
-  color: rgb(49, 48, 48);
+  /* color: rgb(49, 48, 48);
   width: 80px;
   margin: 10px;
   height: 35px;
@@ -191,11 +224,17 @@ body {
   padding: 0;
   background-color: rgb(244, 243, 243);
   font-family: "montserrat", sans-serif;
+  font-weight: 300; */
+  color: black;
+  background-color: rgb(217, 214, 214);
+  border-style: none;
+  font-family: "montserrat", sans-serif;
   font-weight: 300;
+  margin: 5px;
 }
 
 .delete-activity-button:hover {
-  color: black;
+  /* color: black;
   margin: 10px;
   width: 80px;
   height: 35px;
@@ -204,12 +243,115 @@ body {
   align-items: center;
   white-space: wrap;
   /* text-align: center; */
-  background-color: rgb(222, 219, 219);
+  /* background-color: rgb(222, 219, 219);
   font-family: "montserrat", sans-serif;
-  font-weight: 300;
+  font-weight: 300; */
+  color: black;
+  background-color: rgb(207, 200, 200);
+  border-style: none;
+  font-family: "montserrat", sans-serif;
+  font-weight: 500;
+  margin: 5px;
+  
 }
 
+.edit-period-button {
+  width: 80px;
+  height: 35px;
+  color: rgb(253, 253, 253);
+  background-color: rgb(124, 33, 33);
+  font-weight: 300;
+  border-style: none;
+  font-family: "montserrat", sans-serif;
+  font-weight: light;
+  margin: 5px;
+}
 
+.edit-period-button:hover {
+  /* color: black;
+  width: 80px;
+  height: 35px;
+  margin: 10px;
+  font-size: 11px;
+  line-height: 1.1;
+  display: inline-block;
+  align-items: center;
+  white-space: wrap;
+  text-align: center;
+  background-color: rgb(222, 219, 219);
+  font-family: "montserrat", sans-serif;
+  font-weight: 300; */
+  width: 80px;
+  height: 35px;
+  font-family: "montserrat", sans-serif;
+  font-weight: 500;
+  color: rgb(253, 253, 253);
+  background-color: rgb(198, 123, 123);
+  border-style: none;
+  margin: 5px;
+}
+
+.delete-period-button {
+  /* color: rgb(49, 48, 48);
+  width: 80px;
+  margin: 10px;
+  height: 35px;
+  font-size: 11px;
+  line-height: 1.1;
+  white-space: wrap;
+  text-align: center;
+  display: inline-block;
+  padding: 0;
+  background-color: rgb(244, 243, 243);
+  font-family: "montserrat", sans-serif;
+  font-weight: 300; */
+  color: black;
+  background-color: rgb(217, 214, 214);
+  border-style: none;
+  font-family: "montserrat", sans-serif;
+  font-weight: 300;
+  margin: 5px;
+}
+
+.delete-period-button:hover {
+  /* color: black;
+  margin: 10px;
+  width: 80px;
+  height: 35px;
+  font-size: 11px;
+  line-height: 1.1;
+  align-items: center;
+  white-space: wrap;
+  /* text-align: center; */
+  /* background-color: rgb(222, 219, 219);
+  font-family: "montserrat", sans-serif;
+  font-weight: 300; */
+  color: black;
+  background-color: rgb(207, 200, 200);
+  border-style: none;
+  font-family: "montserrat", sans-serif;
+  font-weight: 500;
+  margin: 5px;
+  
+}
+
+.cancel-delete-button {
+    color: black;
+    background-color: rgb(217, 214, 214);
+    border-style: none;
+    font-family: "montserrat", sans-serif;
+    font-weight: 300;
+    margin: 5px;
+}
+
+.cancel-delete-button:hover {
+  color: black;
+  background-color: rgb(207, 200, 200);
+  border-style: none;
+  font-family: "montserrat", sans-serif;
+  font-weight: 500;
+  margin: 5px;
+}
 
 .red-letter {
   color: rgb(142, 36, 36);
@@ -549,7 +691,7 @@ body {
 
 .activity-details-container {
   width: 300px;
-  height: 400px;
+  height: 410px;
   overflow: hidden;
   overflow-y: scroll;
   align-items: start;
@@ -567,6 +709,7 @@ body {
 .activity-details-form {
   width: 100%;
   padding-left: 35px;
+  text-align: start;
 }
 
 .activity-details {
@@ -584,7 +727,7 @@ body {
 
 .activity-buttons-container {
   /* width: 100%; */
-  margin-left: 15px;
+  margin-left: 25px;
   margin-top: 10px
 }
 
@@ -612,10 +755,86 @@ body {
   right: 2%;
 }
 
-.delete-warning {
-  margin-top: 50px;
-  box-shadow: #fff;
+.sx-list-item {
+  font-size: 14px;
+  line-height: 1;
 }
+
+.delete-warning {
+  margin-top: 30px;
+  box-shadow: #fff;
+  padding-left: 16px;
+  padding-right: 16px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.period-details-container {
+  width: 300px;
+  height: 410px;
+  overflow: hidden;
+  overflow-y: scroll;
+  align-items: start;
+  line-height: 1.8;
+  font-family: "poppins", sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  position: absolute;
+  display: flex;
+  top: 14%;
+  right: 2%;
+}
+
+
+.period-details-form {
+  width: 100%;
+  padding-left: 35px;
+  text-align: start;
+}
+
+.period-details {
+  width: 100%;
+}
+
+.period-detail {
+  width: 90%;
+}
+
+.period-detail:first-of-type {
+  width: 90%;
+  padding-top: 15px
+}
+
+.period-buttons-container {
+  /* width: 100%; */
+  margin-left: 25px;
+  margin-top: 10px
+}
+
+.edit-period-buttons-container {
+  margin: auto;
+  text-align: center;
+  margin-right: 34px;
+}
+
+.bold {
+  font-weight: 500
+}
+
+.edit-period {
+  width: 460px;
+  height: 560px;
+  overflow: hidden;
+  align-items: center;
+  font-family: "poppins", sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  position: absolute;
+  display: block;
+  top: 14%;
+  right: 2%;
+}
+
 
 .top-adjust {
   margin-bottom: 50px;
@@ -673,6 +892,30 @@ body {
   font-family: "poppins", sans-serif;
   font-weight: 300;
   font-size: 12px;
+}
+
+.edit-input-checkbox {
+  display: inline;
+  vertical-align: middle;
+  width: 80%;
+  margin-top: -4px;
+  padding-left: 7px;
+  padding-right: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  font-family: "poppins", sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+
+}
+
+.sx-checkbox {
+  vertical-align: middle;
+}
+
+.sx-list {
+  padding-left: 18px;
+  line-height: 1.4;
 }
 
 .bio {
@@ -787,6 +1030,42 @@ body {
   padding: 20px;
 }
 
+.account-page-container {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+
+}
+
+.account-page-card {
+  /* margin-top: 20px;
+  margin-bottom: 80px; */
+  margin: auto;
+  margin-bottom: 30px;
+  width: 65%;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.account-card-content {
+  width: 80%;
+  text-align: left;
+  padding-left: 30px;
+  margin-bottom: 50px;
+  font-family: "poppins", sans-serif;
+  font-size: 18px;
+}
+
+.account-field {
+  display: inline-block;
+  font-family: "poppins", sans-serif;
+  width: 100%;
+  margin-bottom: 22px;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+
 .sign-up-button {
   background-color: rgb(111, 17, 17);
   border: gray;
@@ -873,7 +1152,7 @@ body {
 }
 
 .red1 {
-  background-color: rgb(111, 17, 17);
+  background-color: rgb(124, 33, 33);
   font-weight: 300;
 }
 
@@ -1169,9 +1448,9 @@ body {
   font-weight: 200;
 }
 
-.calendar-activity:hover {
+/* .calendar-activity:hover {
   font-weight: 200;
-}
+} */
 
 .cal-mileage:hover {
   font-weight: 900;
@@ -1254,6 +1533,27 @@ body {
   font-size: 12px;
   margin: auto;
   margin-top: -10px;
+}
+
+.close-period-details {
+  font-size: 12px;
+  margin: auto;
+  margin-top: -10px;
+}
+
+.close-activity-details-button {
+  font-size: 12px;
+  margin: auto;
+  margin-top: -10px;
+  display: inline-block;
+  margin-left: 58px;
+}
+.close-period-details-button {
+  font-size: 12px;
+  margin: auto;
+  margin-top: -10px;
+  display: inline-block;
+  margin-left: 58px;
 }
 
 .modal-header,
@@ -1480,6 +1780,10 @@ td.activity-cell-name {
   margin-left: -12px
 }
 
+
+.bolder {
+  font-weight: 700
+}
 
 
 

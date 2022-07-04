@@ -1,74 +1,77 @@
 function Profile(props) {
-  //     return (
-  //       <div>
-  //         <h2>Account Information</h2>
-  //         <br></br>
-  //         <p>
-  //           First Name: <strong>{props.firstName}</strong>
-  //         </p>
-  //         <br></br>
-  //         <p>
-  //           Last Name: <strong>{props.lastName}</strong>
-  //         </p>
-  //         <br></br>
-  //         <p>
-  //           Team Name: <strong>{props.teamName}</strong>
-  //         </p>
-  //         <br></br>
-  //         <p>
-  //           Bio: <strong>{props.profileBio}</strong>
-  //         </p>
-  //         <p>
-  //           Email: <strong>{props.email}</strong>
-  //         </p>
-  //         <br></br>
-  //         <p>
-  //           Password: <strong>*****</strong>
-  //         </p>
-  //         <br></br>
-  //         <p>
-  //           Member Since: <strong>{props.sinceDate}</strong>
-  //         </p>
-  //       </div>
-  //     );
-  //   }
-
   return (
-    <div>
-      <div className="strava-connect-card card">
-        <div className="signup-success-message">
-          Thank you for creating an account!
-        </div>
-        <div className="strava-connect-message1">
-          Want to see all your activities in one place?
-        </div>
-        <div className="strava-connect-message2">Connect to Strava now!</div>
-        <div className="modal-footer">
-          {props.modalError && <p className="error">{props.modalError}</p>}
-          <button
-            className="btn btn-primary connect-button"
-            onClick={authenticate}
-          >
-            Connect
-          </button>
+    <div className="account-page-container">
+      <div className="account-page-card card">
+        <h2 className="account-page-header">Account Information</h2>
+        <div className="account-card-content">
           <br></br>
-
-          <button
-            className="btn no-thanks"
-            onClick={() => {
-              history.push(`users/${props.userId}/home`);
-              setShowModal(false);
-            }}
-          >
-            {/* <div className="no-thanks-message">No thanks!</div> */}
-            {/* <br></br> */}
-            Continue to homepage
-          </button>
+          <div className="account-field ">
+            <span className="bolder">First Name: </span> {props.firstName}
+          </div>
+          <br></br>
+          <div className="account-field ">
+            <span className="bolder">Last Name: </span> {props.lastName}
+          </div>
+          <br></br>
+          <div className="account-field ">
+            <span className="bolder">Email:</span> {props.email}
+          </div>
+          <br></br>
+          <div className="account-field ">
+            <span className="bolder">Password:</span> *****
+          </div>
+          <div className="account-field ">
+            <span className="bolder">Team Name:</span> {props.teamName}
+          </div>
+          <br></br>
+          <div className="account-field ">
+            <span className="bolder">Member Since:</span> {props.sinceDate}
+          </div>
+          <div className="account-field ">
+            <span className="bolder">Bio:</span> {props.profileBio}
+          </div>
         </div>
       </div>
     </div>
   );
 }
+
+//   return (
+//     <div>
+//       <div className="strava-connect-card card">
+//         <div className="signup-success-message">
+//           Thank you for creating an account!
+//         </div>
+//         <div className="strava-connect-message1">
+//           Want to see all your activities in one place?
+//         </div>
+//         <div className="strava-connect-message2">Connect to Strava now!</div>
+//         <div className="modal-footer">
+//           {props.modalError && <p className="error">{props.modalError}</p>}
+//           <button
+//             className="btn btn-primary connect-button"
+//             onClick={authenticate}
+//           >
+//             Connect
+//           </button>
+//           <br></br>
+
+//           <button
+//             className="btn no-thanks"
+//             onClick={() => {
+//               history.push(`users/${props.userId}/home`);
+//               setShowModal(false);
+//             }}
+//           >
+//             {/* <div className="no-thanks-message">No thanks!</div> */}
+//             {/* <br></br> */}
+//             Continue to homepage
+//           </button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
 
 function ProfileCard(props) {
   const [profilePicSrc, setProfilePicSrc] = React.useState(

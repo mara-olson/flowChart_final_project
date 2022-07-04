@@ -378,7 +378,7 @@ function PeriodCard(props) {
   };
 
   return (
-    <div>
+    <div className="period-details">
       {periodEdit === "delete" && (
         <DeletePeriod
           handleDelete={handleDelete}
@@ -461,11 +461,12 @@ function PeriodCard(props) {
 
 function PeriodDate(props) {
   return (
-    <div className="field">
+    <div className="edit-field bold">
       <label htmlFor="per-date">Date: </label>
       <input
         id="per-date"
         type="date"
+        className="edit-input"
         value={props.periodDate}
         onChange={(evt) => props.setPeriodDate(evt.currentTarget.value)}
       />
@@ -475,59 +476,72 @@ function PeriodDate(props) {
 
 function Symptoms(props) {
   return (
-    <div className="field">
-      <fieldset id="sx-list">
-        <legend>Symptoms: </legend>
+    <div className="edit-field bold">
+      Symptoms:
+      <div className="sx-list">
         <input
           type="checkbox"
           id="mood"
+          className="sx-checkbox "
           value={props.mood}
           checked={props.mood}
           onChange={(evt) => props.setMood(evt.currentTarget.checked)}
         />
-        <label htmlFor="mood">Moodiness</label>
+        <label className="edit-input-checkbox" htmlFor="mood">
+          Moodiness
+        </label>
         <br></br>
 
         <input
           type="checkbox"
           id="cramps"
+          className="sx-checkbox "
           value={props.cramps}
           checked={props.cramps}
           onChange={(evt) => props.setCramps(evt.currentTarget.checked)}
         />
-        <label htmlFor="cramps">Cramps</label>
+        <label className="edit-input-checkbox" htmlFor="cramps">
+          Cramps
+        </label>
         <br></br>
 
         <input
           type="checkbox"
           id="bloating"
+          className="sx-checkbox "
           value={props.bloating}
           checked={props.bloating}
           onChange={(evt) => props.setBloating(evt.currentTarget.checked)}
         />
-        <label htmlFor="bloating">Bloating</label>
+        <label className="edit-input-checkbox" htmlFor="bloating">
+          Bloating
+        </label>
         <br></br>
 
         <input
           type="checkbox"
           id="fatigue"
+          className="sx-checkbox "
           value={props.fatigue}
           checked={props.fatigue}
           onChange={(evt) => props.setFatigue(evt.currentTarget.checked)}
         />
-        <label htmlFor="fatigue">Fatigue</label>
-      </fieldset>
+        <label className="edit-input-checkbox" htmlFor="fatigue">
+          Fatigue
+        </label>
+      </div>
     </div>
   );
 }
 
 function PeriodNotes(props) {
   return (
-    <div className="field">
+    <div className="edit-field bold">
       <label htmlFor="per-notes">Notes: </label>
       <textarea
         id="per-notes"
         type="text"
+        className="edit-input"
         value={props.periodNotes}
         onChange={(evt) => props.setPeriodNotes(evt.currentTarget.value)}
         placeholder="Write notes here"
@@ -544,12 +558,20 @@ function EditPeriod(props) {
   };
 
   return (
-    <div className="card">
-      <form onSubmit={props.handleSubmit}>
-        <h2>Period</h2>
+    <div className="period-details">
+      <form className="period-details-form" onSubmit={props.handleSubmit}>
         {props.children}
-        <button type="submit">Save</button>
-        <button onClick={closeEdit}>Cancel</button>
+        <div className="edit-period-buttons-container">
+          <button className="btn btn-primary red1" type="submit">
+            Save
+          </button>
+          <button
+            className="btn inconspicuous close-period-details"
+            onClick={closeEdit}
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );
@@ -566,17 +588,26 @@ function DeletePeriod(props) {
   }
 
   return (
-    <div className="card">
+    <div className="delete-warning">
       <form onSubmit={props.handleDelete}>
         <h2>Are you sure you'd like to delete?</h2>
-        <button type="submit">Yes</button>
-        <button onClick={closeEdit}>No</button>
+        <button className="btn btn-primary red1" type="submit">
+          Delete
+        </button>
+        <button className="btn cancel-delete-button" onClick={closeEdit}>
+          Cancel
+        </button>
       </form>
     </div>
   );
 }
 
 function PeriodForm(props) {
+  const closeEdit = (evt) => {
+    evt.preventDefault();
+    props.setShowPeriodModal(false);
+  };
+
   const handleClick = (evt) => {
     evt.preventDefault();
     const formEdit = props.periodEdit === "edit" ? "non-edit" : "edit";
@@ -609,26 +640,48 @@ function PeriodForm(props) {
   for (const symptom of symptomList) {
     sxToDisplay.push(
       <ul>
-        <li>{symptom}</li>
+        <li className="sx-list-item">{symptom}</li>
       </ul>
     );
   }
 
   return (
-    <div className="card">
-      <form>
-        <p>Date: {props.periodDate} </p>
-        <p>Flow: {props.flowVolume}</p>
-        {props.symptoms && <div>Symptoms: {sxToDisplay}</div>}
-        {props.periodNotes && <p>Notes: {props.periodNotes}</p>}
-        <div></div>
-        <button className="edit" onClick={handleClick}>
-          Edit
-        </button>
-        <button className="delete" onClick={handleDeleteClick}>
-          Delete
-        </button>
-      </form>
+    <div className="period-details-form">
+      {/* <form> */}
+      <div className="period-detail">
+        <strong>Date:</strong> {props.periodDate}{" "}
+      </div>
+      <div className="period-detail">
+        <strong>Flow:</strong> {props.flowVolume}
+      </div>
+      {props.symptoms && (
+        <div className="period-detail">
+          <strong>Symptoms:</strong> {sxToDisplay}
+        </div>
+      )}
+      {props.periodNotes ? (
+        <div className="period-detail">
+          <strong>Notes:</strong> {props.periodNotes}
+        </div>
+      ) : (
+        <div className="period-detail">
+          <strong>Notes:</strong> --
+        </div>
+      )}
+      <div></div>
+      <button className="btn edit-period-button" onClick={handleClick}>
+        Edit
+      </button>
+      <button className="btn delete-period-button" onClick={handleDeleteClick}>
+        Delete
+      </button>
+      <button
+        className="btn inconspicuous close-period-details-button"
+        onClick={closeEdit}
+      >
+        Cancel
+      </button>
+      {/* </form> */}
     </div>
   );
 }

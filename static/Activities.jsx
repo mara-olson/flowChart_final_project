@@ -782,11 +782,15 @@ function DeleteActivity(props) {
   return (
     <div className="delete-warning">
       <form onSubmit={props.handleDelete}>
-        <h2>Are you sure you'd like to delete?</h2>
+        <h4>Are you sure you'd like to delete this activity?</h4>
+        <div>After deleting, this activity cannot be retrieved.</div>
+        <br></br>
+        <br></br>
+        <br></br>
         <button className="btn btn-primary red1" type="submit">
-          Yes
+          Delete
         </button>
-        <button className="btn inconspicuous" onClick={closeEdit}>
+        <button className="btn cancel-delete-button" onClick={closeEdit}>
           Cancel
         </button>
       </form>
@@ -888,6 +892,12 @@ function ActivityForm(props) {
             onClick={handleDeleteClick}
           >
             Delete
+          </button>
+          <button
+            className="btn inconspicuous close-activity-details-button"
+            onClick={closeEdit}
+          >
+            Cancel
           </button>
         </div>
       )}

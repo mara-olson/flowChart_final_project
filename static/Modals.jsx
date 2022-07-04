@@ -92,12 +92,12 @@ function ActivityModal(props) {
         showEditActivityModal={props.showEditActivityModal}
         setShowEditActivityModal={props.setShowEditActivityModal}
       />
-      <button
+      {/* <button
         className="btn inconspicuous close-activity-details"
         onClick={closeModal}
       >
         Close
-      </button>
+      </button> */}
       {/* <div className="modal-footer">
         {props.modalError && <p className="error">{props.modalError}</p>}
         <button className="btn inconspicuous" onClick={closeModal}>
@@ -157,38 +157,38 @@ function PeriodModal(props) {
     return null;
   }
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <SelectedPeriodContainer
-          userId={props.userId}
-          setUserId={props.setUserId}
-          isLoggedIn={props.isLoggedIn}
-          setIsLoggedIn={props.setIsLoggedIn}
-          modalError={props.modalError}
-          setModalError={props.setModalError}
-          error={props.error}
-          setError={props.setError}
-          showPeriodModal={props.showPeriodModal}
-          setShowPeriodModal={props.setShowPeriodModal}
-          showAddPeriodModal={props.showAddPeriodModal}
-          setShowAddPeriodModal={props.setShowAddPeriodModal}
-          showDeletePeriodModal={props.showDeletePeriodModal}
-          setShowDeletePeriodModal={props.setShowDeletePeriodModal}
-          periods={props.periods}
-          setPeriods={props.setPeriods}
-          selectedPeriodId={props.selectedPeriodId}
-          setSelectedPeriodId={props.setSelectedPeriodId}
-          selectedDate={props.selectedDate}
-          setSelectedDate={props.setSelectedDate}
-        />
-        <div className="modal-footer">
-          {props.modalError && <p className="error">{props.modalError}</p>}
-          <button className="modal-button" onClick={closeModal}>
-            Close
-          </button>
-        </div>
+    <div className="activity-details-container card">
+      <h2 className="add-header black">Period Details</h2>
+      <SelectedPeriodContainer
+        userId={props.userId}
+        setUserId={props.setUserId}
+        isLoggedIn={props.isLoggedIn}
+        setIsLoggedIn={props.setIsLoggedIn}
+        modalError={props.modalError}
+        setModalError={props.setModalError}
+        error={props.error}
+        setError={props.setError}
+        showPeriodModal={props.showPeriodModal}
+        setShowPeriodModal={props.setShowPeriodModal}
+        showAddPeriodModal={props.showAddPeriodModal}
+        setShowAddPeriodModal={props.setShowAddPeriodModal}
+        showDeletePeriodModal={props.showDeletePeriodModal}
+        setShowDeletePeriodModal={props.setShowDeletePeriodModal}
+        periods={props.periods}
+        setPeriods={props.setPeriods}
+        selectedPeriodId={props.selectedPeriodId}
+        setSelectedPeriodId={props.setSelectedPeriodId}
+        selectedDate={props.selectedDate}
+        setSelectedDate={props.setSelectedDate}
+      />
+      <div className="modal-footer">
+        {props.modalError && <p className="error">{props.modalError}</p>}
+        {/* <button className="modal-button" onClick={closeModal}>
+          Close
+        </button> */}
       </div>
     </div>
+    // </div>
   );
 }
 
