@@ -561,6 +561,7 @@ function EditPeriod(props) {
     <div className="period-details">
       <form className="period-details-form" onSubmit={props.handleSubmit}>
         {props.children}
+
         <div className="edit-period-buttons-container">
           <button className="btn btn-primary red1" type="submit">
             Save
@@ -668,20 +669,24 @@ function PeriodForm(props) {
           <strong>Notes:</strong> --
         </div>
       )}
-      <div></div>
-      <button className="btn edit-period-button" onClick={handleClick}>
-        Edit
-      </button>
-      <button className="btn delete-period-button" onClick={handleDeleteClick}>
-        Delete
-      </button>
-      <button
-        className="btn inconspicuous close-period-details-button"
-        onClick={closeEdit}
-      >
-        Cancel
-      </button>
-      {/* </form> */}
+      <div className="period-buttons-container">
+        <button className="btn edit-period-button" onClick={handleClick}>
+          Edit
+        </button>
+        <button
+          className="btn delete-period-button"
+          onClick={handleDeleteClick}
+        >
+          Delete
+        </button>
+        <button
+          className="btn inconspicuous close-period-details-button"
+          onClick={closeEdit}
+        >
+          Cancel
+        </button>
+        {/* </form> */}
+      </div>
     </div>
   );
 }
