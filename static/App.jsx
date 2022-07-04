@@ -508,10 +508,10 @@ function App() {
             selectedPeriodId={selectedPeriodId}
             setSelectedPeriodId={setSelectedPeriodId}
           />
-          <DeletePeriod
+          {/* <DeletePeriod
             showDeletePeriodModal={showDeletePeriodModal}
             setShowDeletePeriodModal={setShowDeletePeriodModal}
-          />
+          /> */}
         </Route>
       </div>
       {/* {Route path = '*' /* cutsie catch-all error page default if no route found */}

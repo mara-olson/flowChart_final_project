@@ -238,6 +238,12 @@ function AllPeriodsContainer(props) {
 
   const periodDetails = [];
   for (const period of props.periods) {
+    const handleClick = () => {
+      props.setSelectedPeriodId(period.mense_id);
+      localStorage.setItem("selectedPeriod", period.mense_id);
+      props.setShowPeriodModal(true);
+    };
+
     const symptoms = [];
     if (period.mood) {
       symptoms.push("Moodiness");
@@ -251,32 +257,73 @@ function AllPeriodsContainer(props) {
     if (period.fatigue) {
       symptoms.push("Fatigue");
     }
+
+    const sxToDisplay = [];
+    const symptomList = [];
+    if (period.mood) {
+      symptomList.push("Moodiness");
+    }
+    if (period.cramps) {
+      symptomList.push("Cramps");
+    }
+    if (period.bloating) {
+      symptomList.push("Bloating");
+    }
+    if (period.fatigue) {
+      symptomList.push("Fatigue");
+    }
+
+    for (const symptom of symptomList) {
+      sxToDisplay.push(<li className="sx-list-item">{symptom}</li>);
+    }
     periodDetails.push(
-      <PeriodCard
-        userId={props.userId}
-        key={period.mense_id}
-        periodId={period.mense_id}
-        periodDate={period.mense_date}
-        flowVolume={period.flow_volume}
-        periodNotes={period.mense_notes}
-        showPeriodModal={props.showPeriodModal}
-        symptoms={symptoms}
-        setShowPeriodModal={props.setShowPeriodModal}
-        modalError={props.modalError}
-        setModalError={props.setModalError}
-        showDeletePeriodModal={props.showDeletePeriodModal}
-        setShowDeletePeriodModal={props.setShowDeletePeriodModal}
-        showAddPeriodModal={props.showAddPeriodModal}
-        setShowAddPeriodModal={props.setShowAddPeriodModal}
-        periods={props.periods}
-        setPeriods={props.setPeriods}
-      />
+      <tr className="activity-row">
+        <td className="activity-cell-date">{period.mense_date}</td>
+
+        <td className="activity-cell-name" onClick={handleClick}>
+          {period.flow_volume}
+        </td>
+
+        <td className="activity-cell-type">
+          <ul>{sxToDisplay}</ul>
+        </td>
+
+        <td className="activity-cell-notes">{period.mense_notes}</td>
+      </tr>
     );
   }
 
+  // <PeriodCard
+  //   userId={props.userId}
+  //   key={period.mense_id}
+  //   periodId={period.mense_id}
+  //   periodDate={period.mense_date}
+  //   flowVolume={period.flow_volume}
+  //   periodNotes={period.mense_notes}
+  //   showPeriodModal={props.showPeriodModal}
+  //   symptoms={symptoms}
+  //   setShowPeriodModal={props.setShowPeriodModal}
+  //   modalError={props.modalError}
+  //   setModalError={props.setModalError}
+  //   showDeletePeriodModal={props.showDeletePeriodModal}
+  //   setShowDeletePeriodModal={props.setShowDeletePeriodModal}
+  //   showAddPeriodModal={props.showAddPeriodModal}
+  //   setShowAddPeriodModal={props.setShowAddPeriodModal}
+  //   periods={props.periods}
+  //   setPeriods={props.setPeriods}
+  // />;
+
   return (
     <div>
-      <div>{periodDetails}</div>
+      <table className="activity-table">
+        <tr className="activity-row activity-header-row">
+          <th className="activity-cell-date">Date</th>
+          <th className="activity-cell-name">Flow</th>
+          <th className="activity-cell-type">Symptoms</th>
+          <th className="activity-cell-notes">Notes</th>
+        </tr>
+      </table>
+      <table className="activity-table">{periodDetails}</table>
     </div>
   );
 }
@@ -284,6 +331,7 @@ function AllPeriodsContainer(props) {
 function PeriodCard(props) {
   const [periodEdit, setPeriodEdit] = React.useState("non-edit");
   console.log(periodEdit);
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
@@ -376,7 +424,7 @@ function PeriodCard(props) {
         props.setShowDeletePeriodModal(false);
       });
   };
-
+  console.log(periodEdit);
   return (
     <div className="period-details">
       {periodEdit === "delete" && (
@@ -591,7 +639,11 @@ function DeletePeriod(props) {
   return (
     <div className="delete-warning">
       <form onSubmit={props.handleDelete}>
-        <h2>Are you sure you'd like to delete?</h2>
+        <h4>Are you sure you'd like to delete this activity?</h4>
+        <div>After deleting, this activity cannot be retrieved.</div>
+        <br></br>
+        <br></br>
+        <br></br>
         <button className="btn btn-primary red1" type="submit">
           Delete
         </button>
@@ -650,7 +702,7 @@ function PeriodForm(props) {
     <div className="period-details-form">
       {/* <form> */}
       <div className="period-detail">
-        <strong>Date:</strong> {props.periodDate}{" "}
+        <strong>Date:</strong> {props.periodDate}
       </div>
       <div className="period-detail">
         <strong>Flow:</strong> {props.flowVolume}

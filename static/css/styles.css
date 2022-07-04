@@ -1777,7 +1777,7 @@ td.activity-cell-name {
 .activity-cell-sufferscore {
   width: 100%;
   display: inline-block;
-  margin-left: -12px
+  text-align: center;
 }
 
 

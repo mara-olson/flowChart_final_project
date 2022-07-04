@@ -498,7 +498,7 @@ def add_activity(user_id):
 @app.route('/api/<user_id>/periods')
 def period_data(user_id):
     # user_id = session["user_id"]
-    all_periods = MenseLog.query.filter(MenseLog.user_id == user_id).all()
+    all_periods = MenseLog.query.filter(MenseLog.user_id == user_id).order_by(MenseLog.mense_date.desc()).all()
 
     periods = []
 
@@ -516,7 +516,7 @@ def period_data(user_id):
         }
         periods.append(new_period)
 
-    periods.sort(key=lambda x: datetime.datetime.strptime(x['mense_date'], "%Y-%m-%d"))
+    periods.sort(key=lambda x: datetime.datetime.strptime(x['mense_date'], "%Y-%m-%d"), reverse=True)
 
     # print("****"*25, periods)
 
