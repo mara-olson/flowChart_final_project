@@ -268,31 +268,25 @@ function LandingPage(props) {
     return (
       <div className="landingpage-card card">
         <div id="landing-messages">
-          <section
-            id="landing-message1"
-            className="d-flex justify-content-center"
-          >
+          <section id="landing-message1">
             <div>{landingMessage1}</div>
           </section>
-          <section
-            id="landing-message2"
-            className="d-flex justify-content-center"
-          >
+          <section id="landing-message2">
             <div>{landingMessage2}</div>
           </section>
 
-          <form
+          {/* <form
             action="/sign-up"
             id="sign-up"
             className="d-flex justify-content-center"
+          > */}
+          <button
+            onClick={handleClick}
+            className="btn btn-primary sign-up-button red1"
           >
-            <button
-              onClick={handleClick}
-              className="btn btn-primary sign-up-button red1"
-            >
-              Sign Up
-            </button>
-          </form>
+            Sign Up
+          </button>
+          {/* </form> */}
         </div>
       </div>
     );
@@ -376,6 +370,8 @@ function Home(props) {
               setShowDeletePeriodModal={props.setShowDeletePeriodModal}
               showEntryChoiceModal={props.showEntryChoiceModal}
               setShowEntryChoiceModal={props.setShowEntryChoiceModal}
+              showEditActivityModal={props.showEditActivityModal}
+              setShowEditActivityModal={props.setShowEditActivityModal}
               modalError={props.modalError}
               setModalError={props.setModalError}
               activityDate={props.activityDate}
@@ -406,6 +402,8 @@ function Home(props) {
               setActivities={props.setActivities}
               selectedActivityId={props.selectedActivityId}
               setSelectedActivityId={props.setSelectedActivityId}
+              showEditActivityModal={props.showEditActivityModal}
+              setShowEditActivityModal={props.setShowEditActivityModal}
             />
             <AddActivityModal
               userId={props.userId}

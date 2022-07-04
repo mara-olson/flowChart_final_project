@@ -73,31 +73,33 @@ function ActivityModal(props) {
     return null;
   }
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <SelectedActivityContainer
-          userId={props.userId}
-          error={props.error}
-          setError={props.setError}
-          modalError={props.modalError}
-          setModalError={props.setModalError}
-          showActivityModal={props.showActivityModal}
-          setShowActivityModal={props.setShowActivityModal}
-          showDeleteActModal={props.showDeleteActModal}
-          setShowDeleteActModal={props.setShowDeleteActModal}
-          activities={props.activities}
-          setActivities={props.setActivities}
-          selectedActivityId={props.selectedActivityId}
-          setSelectedActivityId={props.setSelectedActivityId}
-        />
-        <div className="modal-footer">
-          {props.modalError && <p className="error">{props.modalError}</p>}
-          <button className="modal-button" onClick={closeModal}>
-            Close
-          </button>
-        </div>
+    <div className="add-activity card">
+      <h2 className="add-header black">Activity Details</h2>
+      <SelectedActivityContainer
+        userId={props.userId}
+        error={props.error}
+        setError={props.setError}
+        modalError={props.modalError}
+        setModalError={props.setModalError}
+        showActivityModal={props.showActivityModal}
+        setShowActivityModal={props.setShowActivityModal}
+        showDeleteActModal={props.showDeleteActModal}
+        setShowDeleteActModal={props.setShowDeleteActModal}
+        activities={props.activities}
+        setActivities={props.setActivities}
+        selectedActivityId={props.selectedActivityId}
+        setSelectedActivityId={props.setSelectedActivityId}
+        showEditActivityModal={props.showEditActivityModal}
+        setShowEditActivityModal={props.setShowEditActivityModal}
+      />
+      <div className="modal-footer">
+        {props.modalError && <p className="error">{props.modalError}</p>}
+        <button className="modal-button" onClick={closeModal}>
+          Close
+        </button>
       </div>
     </div>
+    // </div>
   );
 }
 
@@ -265,4 +267,16 @@ function EntryChoice(props) {
       </div>
     </div>
   );
+}
+
+function EditActivityModal(props) {
+  const closeModal = () => {
+    props.setShowEditActivityModal(false);
+    props.setModalError(null);
+  };
+
+  if (!props.showEditActivityModal) {
+    return null;
+  }
+  return <ActivityCard />;
 }

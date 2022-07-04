@@ -30,10 +30,11 @@ body {
   text-align: end;
   vertical-align: middle;
   padding-right: 20px;
-  height: 70px;
+  height: 60px;
   font-size: 20px;
   width: 100%;
   overflow: hidden;
+  margin-top: 50px
 }
 
 
@@ -130,6 +131,34 @@ body {
 }
 
 .edit-profile-button:hover {
+  color: white;
+  width: 75px;
+  height: 25px;
+  font-size: 11px;
+  align-items: center;
+  white-space: nowrap;
+  text-align: center;
+  background-color: rgb(186, 186, 186);
+  font-family: "montserrat", sans-serif;
+  font-weight: 300;
+}
+
+.edit-activity-button {
+  color: rgb(49, 48, 48);
+  margin-top: 30px;
+  width: 75px;
+  height: 25px;
+  font-size: 11px;
+  white-space: nowrap;
+  text-align: center;
+  display: inline-block;
+  padding: 0;
+  background-color: rgb(244, 243, 243);
+  font-family: "montserrat", sans-serif;
+  font-weight: light;
+}
+
+.edit-activity-button:hover {
   color: white;
   width: 75px;
   height: 25px;
@@ -446,9 +475,9 @@ form {
   height: 80px;
 }
 
-.add-period-container {
+/* .add-period-container {
   background-color: rgba(255, 255, 255, 0.5);
-}
+} */
 
 .add-period {
   width: 460px;
@@ -476,6 +505,25 @@ form {
   display: block;
   top: 14%;
   right: 2%;
+}
+
+.edit-activity {
+  width: 460px;
+  height: 560px;
+  overflow: hidden;
+  align-items: center;
+  font-family: "poppins", sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  position: absolute;
+  display: block;
+  top: 14%;
+  right: 2%;
+}
+
+.delete-warning {
+  margin-top: 50px;
+  box-shadow: #fff;
 }
 
 .top-adjust {
@@ -556,8 +604,8 @@ form {
 .footer-icon {
   font-size: 30px;
   margin: 10px;
-  display: inline-block;
-  margin-bottom: 20px
+  display: inline;
+  /* margin-bottom: 8px */
 }
 
 .profile-icon {
@@ -615,18 +663,16 @@ form {
   display: inline-block;
   text-align: center;
   align-items: center;
-  margin-bottom: 200px
+  /* margin-bottom: 200px */
 }
 
 .landingpage-card {
   margin-top: 80px;
+  margin-bottom: 100px;
   width: 65%;
   display: inline-block;
   padding: 20px;
 }
-
-
-
 
 .sign-up-button {
   background-color: rgb(111, 17, 17);
@@ -872,7 +918,7 @@ form {
 .calendar-header {
   height: 40px;
   width: 100%;
-  font-weight: 300;
+  font-weight: 500;
   font-family: "poppins", sans-serif;
   margin-top: 20px;
   margin-bottom: 10px;
@@ -1204,6 +1250,114 @@ form {
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   /* float: left; */
 }
+
+
+.activity-table-container {
+  width: 85%;
+  margin: auto;
+  margin-top: 50px;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 1px 8px rgba(153, 150, 150, 0.25);
+  background-color: white;
+  border-radius: 4px;
+}
+
+.activity-table {
+  width: 100%;
+  margin: auto;
+  display: inline;
+  border-spacing: 20px;
+  border-collapse:separate; 
+  text-align: left;
+}
+
+
+.activity-row {
+  padding: 10px;
+  padding-left: 20px;
+  /* padding-top:  */
+  font-family: "poppins", sans-serif;
+  font-size: 15px;
+  font-weight: 200;
+  white-space: nowrap;
+  width: 100%;
+  display: flex;
+  
+}
+
+.activity-header-row {
+  font-family: "poppins", sans-serif;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  /* font-weight: 300; */
+  font-size: 15px;
+  margin: 0;
+  padding: 0;
+  white-space: wrap;
+  border-bottom: 1px solid rgb(169, 164, 164);
+  text-align: left;
+  padding: 10px;
+  padding-left: 20px;
+  background-color: #bb5454;
+  color: white
+}
+
+th {
+  font-weight: 300;
+}
+
+th.activity-cell-notes, th.activity-cell-sufferscore{
+  font-weight: 300;
+  text-align: center;
+}
+
+.activity-cell-date {
+  width: 100%;
+  display: inline-block
+}
+
+.activity-cell-name {
+  width: 100%;
+  font-weight: 300;
+  display: inline-block;
+  cursor: pointer
+}
+
+td.activity-cell-name {
+  width: 100%;
+  font-weight: 300;
+  /* color: rgb(172, 114, 114); */
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: underline dotted rgb(195, 195, 195)
+}
+
+.activity-cell-type {
+  width: 100%;
+  display: inline-block
+}
+
+.activity-cell-distance, .activity-cell-duration {
+  width: 100%;
+  display: inline-block;
+  margin-right: -12px
+}
+
+.activity-cell-notes {
+  width: 100%;
+  display: inline-block;
+}
+
+.activity-cell-sufferscore {
+  width: 100%;
+  display: inline-block;
+  margin-left: -12px
+}
+
+
+
+
 
 /* .dropbtn:hover,
 .dropdown-content:focus-within {

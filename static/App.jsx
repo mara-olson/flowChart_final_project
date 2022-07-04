@@ -18,6 +18,8 @@ function App() {
   const [showDeletePeriodModal, setShowDeletePeriodModal] =
     React.useState(false);
   const [showEntryChoiceModal, setShowEntryChoiceModal] = React.useState(false);
+  const [showEditActivityModal, setShowEditActivityModal] =
+    React.useState(false);
   // const [modalContent, setModalContent] = React.useState(null);
   const [activities, setActivities] = React.useState(null);
   const [selectedActivityId, setSelectedActivityId] = React.useState(null);
@@ -140,7 +142,7 @@ function App() {
           </Route>
         </div>
       )}
-      <div className="container-fluid">
+      <div>
         <Route exact path="/login">
           <Login
             userId={userId}
@@ -208,6 +210,8 @@ function App() {
             setSelectedPeriodId={setSelectedPeriodId}
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
+            showEditActivityModal={showEditActivityModal}
+            setShowEditActivityModal={setShowEditActivityModal}
           />
           <ActivityModal
             userId={userId}
@@ -225,6 +229,8 @@ function App() {
             setSelectedActivityId={setSelectedActivityId}
             selectedPeriodId={selectedPeriodId}
             setSelectedPeriodId={setSelectedPeriodId}
+            showEditActivityModal={showEditActivityModal}
+            setShowEditActivityModal={setShowEditActivityModal}
             // onClose={closeModal}
           />
           <AddActivityModal
@@ -295,9 +301,9 @@ function App() {
           />
         </Route>
       </div>
-      <div className="container-fluid">
+      <div className="activity-table-container">
         <Route exact path="/activities">
-          <ActivityForm />
+          {/* <ActivityForm />
           <ActivityCard
             userId={userId}
             error={error}
@@ -312,7 +318,7 @@ function App() {
             setSelectedActivityId={setSelectedActivityId}
             showDeletePeriodModal={showDeletePeriodModal}
             setShowDeletePeriodModal={setShowDeletePeriodModal}
-          />
+          /> */}
           <AllActivitiesContainer
             userId={userId}
             error={error}
@@ -329,9 +335,15 @@ function App() {
             setSelectedActivityId={setSelectedActivityId}
             showDeletePeriodModal={showDeletePeriodModal}
             setShowDeletePeriodModal={setShowDeletePeriodModal}
+            showEditActivityModal={showEditActivityModal}
+            setShowEditActivityModal={setShowEditActivityModal}
           />
 
-          <SelectedActivityContainer />
+          <SelectedActivityContainer
+            setShowActivityModal={setShowActivityModal}
+            showEditActivityModal={showEditActivityModal}
+            setShowEditActivityModal={setShowEditActivityModal}
+          />
           <ActivityModal
             userId={userId}
             error={error}
@@ -348,6 +360,8 @@ function App() {
             setSelectedActivityId={setSelectedActivityId}
             selectedPeriodId={selectedPeriodId}
             setSelectedPeriodId={setSelectedPeriodId}
+            showEditActivityModal={showEditActivityModal}
+            setShowEditActivityModal={setShowEditActivityModal}
             // onClose={closeModal}
           />
           <AddActivityModal
@@ -370,10 +384,18 @@ function App() {
             setSelectedDate={setSelectedDate}
             // onClose={closeModal}
           />
-          <DeleteActivity
+          {/* <EditActivityModal
+            showEditActivityModal={showEditActivityModal}
+            setShowEditActivityModal={setShowEditActivityModal}
+          /> */}
+          {/* <EditActivity
+            showEditActivityModal={showEditActivityModal}
+            setShowEditActivityModal={setShowEditActivityModal}
+          /> */}
+          {/* <DeleteActivity
             showDeleteActModal={showDeleteActModal}
             setShowDeleteActModal={setShowDeleteActModal}
-          />
+          /> */}
         </Route>
       </div>
       <div className="container-fluid">

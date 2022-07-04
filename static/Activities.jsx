@@ -362,6 +362,7 @@ function AllActivitiesContainer(props) {
   //   );
   // };
   const activityDetails = [];
+  console.log(pagedActivities);
 
   for (const activity of pagedActivities) {
     const handleClick = () => {
@@ -373,34 +374,62 @@ function AllActivitiesContainer(props) {
     console.log(activity);
     if (activity.name) {
       activityDetails.push(
-        <ActivityCard
-          userId={props.userId}
-          key={activity.activity_id}
-          activityId={activity.activity_id}
-          activityName={activity.name}
-          activityDate={activity.date}
-          activityType={activity.type}
-          distance={activity.distance}
-          duration={activity.duration}
-          sufferScore={activity.suffer_score}
-          activityNotes={activity.notes}
-          showActivityModal={props.showActivityModal}
-          setShowActivityModal={props.setShowActivityModal}
-          showDeleteActModal={props.showDeleteActModal}
-          setShowDeleteActModal={props.setShowDeleteActModal}
-          modalError={props.modalError}
-          setModalError={props.setModalError}
-          activities={props.activities}
-          setActivities={props.setActivities}
-          handleClick={handleClick}
-        />
+        <tr className="activity-row">
+          <td className="activity-cell-date">{activity.date}</td>
+          <td className="activity-cell-name" onClick={handleClick}>
+            {activity.name}
+          </td>
+          <td className="activity-cell-type">{activity.type}</td>
+          {activity.distance && (
+            <td className="activity-cell-distance">{activity.distance} mi.</td>
+          )}
+          {activity.duration && (
+            <td className="activity-cell-duration">{activity.duration} min.</td>
+          )}
+          <td className="activity-cell-sufferscore">{activity.suffer_score}</td>
+          <td className="activity-cell-notes">{activity.notes}</td>
+        </tr>
+
+        // <ActivityCard
+        //   userId={props.userId}
+        //   key={activity.activity_id}
+        //   activityId={activity.activity_id}
+        //   activityName={activity.name}
+        //   activityDate={activity.date}
+        //   activityType={activity.type}
+        //   distance={activity.distance}
+        //   duration={activity.duration}
+        //   sufferScore={activity.suffer_score}
+        //   activityNotes={activity.notes}
+        //   showActivityModal={props.showActivityModal}
+        //   setShowActivityModal={props.setShowActivityModal}
+        //   showDeleteActModal={props.showDeleteActModal}
+        //   setShowDeleteActModal={props.setShowDeleteActModal}
+        //   modalError={props.modalError}
+        //   setModalError={props.setModalError}
+        //   activities={props.activities}
+        //   setActivities={props.setActivities}
+        //   handleClick={handleClick}
+        // />
       );
     }
   }
+  console.log(activityDetails);
 
   return (
     <div>
-      <div>{activityDetails}</div>
+      <table className="activity-table">
+        <tr className="activity-row activity-header-row">
+          <th className="activity-cell-date">Date</th>
+          <th className="activity-cell-name">Name</th>
+          <th className="activity-cell-type">Type</th>
+          <th className="activity-cell-distance">Distance</th>
+          <th className="activity-cell-duration">Duration</th>
+          <th className="activity-cell-sufferscore">Suffer Score</th>
+          <th className="activity-cell-notes">Notes</th>
+        </tr>
+      </table>
+      <table className="activity-table">{activityDetails}</table>
     </div>
   );
 }
@@ -499,82 +528,89 @@ function ActivityCard(props) {
         />
       )}
       {activityEdit === "edit" && (
-        <EditActivity
-          handleSubmit={handleSubmit}
-          setActivityEdit={setActivityEdit}
-          userId={props.userId}
-        >
-          <ActivityDate
-            setActivityDate={props.setActivityDate}
-            activityDate={props.activityDate}
-          />
-          <ActivityType
-            setActivityType={props.setActivityType}
-            activityType={props.activityType}
-          />
-          <ActivityName
-            setActivityName={props.setActivityName}
+        <div>
+          <EditActivity
+            handleSubmit={handleSubmit}
+            setActivityEdit={setActivityEdit}
+            userId={props.userId}
+          >
+            <ActivityDate
+              setActivityDate={props.setActivityDate}
+              activityDate={props.activityDate}
+            />
+            <ActivityType
+              setActivityType={props.setActivityType}
+              activityType={props.activityType}
+            />
+            <ActivityName
+              setActivityName={props.setActivityName}
+              activityName={props.activityName}
+            />
+            <ActivityDuration
+              setDuration={props.setDuration}
+              duration={props.duration}
+            />
+            <ActivityDistance
+              setDistance={props.setDistance}
+              distance={props.distance}
+            />
+            <SufferScore
+              setSufferScore={props.setSufferScore}
+              sufferScore={props.sufferScore}
+            />
+            <ActivityNotes
+              setActivityNotes={props.setActivityNotes}
+              activityNotes={props.activityNotes}
+            />
+          </EditActivity>
+        </div>
+      )}
+      {/* {props.showActivityModal && <div>HI!</div>} */}
+      {activityEdit === "non-edit" &&
+        props.activityName &&
+        props.activityDate &&
+        props.showActivityModal && (
+          <ActivityForm
+            userId={props.userId}
+            error={props.error}
+            setError={props.setError}
+            modalError={props.modalError}
+            setModalError={props.setModalError}
+            showActivityModal={props.showActivityModal}
+            setShowActivityModal={props.setShowActivityModal}
+            showDeleteActModal={props.showDeleteActModal}
+            setShowDeleteActModal={props.setShowDeleteActModal}
+            activities={props.activities}
+            setActivities={props.setActivities}
+            selectedActivityId={props.selectedActivityId}
+            setSelectedActivityId={props.setSelectedActivityId}
+            // activityId={localStorage.getItem("selectedActivity")}
             activityName={props.activityName}
-          />
-          <ActivityDuration
-            setDuration={props.setDuration}
+            activityDate={props.activityDate}
+            activityType={props.activityType}
             duration={props.duration}
-          />
-          <ActivityDistance
-            setDistance={props.setDistance}
             distance={props.distance}
-          />
-          <SufferScore
-            setSufferScore={props.setSufferScore}
             sufferScore={props.sufferScore}
-          />
-          <ActivityNotes
-            setActivityNotes={props.setActivityNotes}
             activityNotes={props.activityNotes}
+            onClose={props.closeModal}
+            activityEdit={activityEdit}
+            setActivityEdit={setActivityEdit}
+            selectedDate={props.selectedDate}
+            setSelectedDate={props.setSelectedDate}
+            handleClick={props.handleClick}
           />
-        </EditActivity>
-      )}
-      {activityEdit === "non-edit" && (
-        <ActivityForm
-          userId={props.userId}
-          error={props.error}
-          setError={props.setError}
-          modalError={props.modalError}
-          setModalError={props.setModalError}
-          showActivityModal={props.showActivityModal}
-          setShowActivityModal={props.setShowActivityModal}
-          showDeleteActModal={props.showDeleteActModal}
-          setShowDeleteActModal={props.setShowDeleteActModal}
-          activities={props.activities}
-          setActivities={props.setActivities}
-          selectedActivityId={props.selectedActivityId}
-          setSelectedActivityId={props.setSelectedActivityId}
-          // activityId={localStorage.getItem("selectedActivity")}
-          activityName={props.activityName}
-          activityDate={props.activityDate}
-          activityType={props.activityType}
-          duration={props.duration}
-          distance={props.distance}
-          sufferScore={props.sufferScore}
-          activityNotes={props.activityNotes}
-          onClose={props.closeModal}
-          activityEdit={activityEdit}
-          setActivityEdit={setActivityEdit}
-          selectedDate={props.selectedDate}
-          setSelectedDate={props.setSelectedDate}
-          handleClick={props.handleClick}
-        />
-      )}
+        )}
     </div>
   );
 }
 
 function ActivityType(props) {
   return (
-    <div className="field">
+    <div className="add-field">
       Activity Type
       <select
         id="act-type"
+        className="add-input"
         value={props.activityType}
         onChange={(evt) => props.setActivityType(evt.currentTarget.value)}
       >
@@ -592,10 +628,11 @@ function ActivityType(props) {
 
 function ActivityDate(props) {
   return (
-    <div className="field">
+    <div className="add-field">
       <label htmlFor="act-date">Date: </label>
       <input
         id="act-date"
+        className="add-input"
         type="date"
         value={props.activityDate}
         onChange={(evt) => props.setActivityDate(evt.currentTarget.value)}
@@ -606,11 +643,12 @@ function ActivityDate(props) {
 
 function ActivityName(props) {
   return (
-    <div className="field">
+    <div className="add-field">
       <label htmlFor="act-name">Activity Name: </label>
       <input
         id="act-name"
         type="text"
+        className="add-input"
         onChange={(evt) => props.setActivityName(evt.currentTarget.value)}
         value={props.activityName}
         placeholder="Enter a name for your activity"
@@ -621,11 +659,12 @@ function ActivityName(props) {
 
 function ActivityDistance(props) {
   return (
-    <div className="field">
+    <div className="add-field">
       <label htmlFor="distance">Distance: </label>
       <input
         id="distance"
         type="text"
+        className="add-input"
         onChange={(evt) => props.setDistance(evt.currentTarget.value)}
         value={props.distance}
       />
@@ -635,11 +674,12 @@ function ActivityDistance(props) {
 
 function ActivityDuration(props) {
   return (
-    <div className="field">
+    <div className="add-field">
       <label htmlFor="duration">Duration: </label>
       <input
         id="duration"
         type="text"
+        className="add-input"
         onChange={(evt) => props.setDuration(evt.currentTarget.value)}
         value={props.duration}
         placeholder="Enter activity duration"
@@ -650,10 +690,11 @@ function ActivityDuration(props) {
 
 function SufferScore(props) {
   return (
-    <div className="field">
+    <div className="add-field">
       <label htmlFor="suffer-score">Suffer Score:</label>
       <select
-        id="suffer-score"
+        name="suffer-score"
+        className="add-input"
         onChange={(evt) => props.setSufferScore(evt.currentTarget.value)}
         value={props.sufferScore}
       >
@@ -670,10 +711,11 @@ function SufferScore(props) {
 
 function ActivityNotes(props) {
   return (
-    <div className="field">
+    <div className="add-field">
       <label htmlFor="act-notes">Notes: </label>
       <textarea
-        id="act-notes"
+        name="act-notes"
+        className="add-input notes"
         type="text"
         onChange={(evt) => props.setActivityNotes(evt.currentTarget.value)}
         value={props.activityNotes}
@@ -688,14 +730,20 @@ function EditActivity(props) {
     evt.preventDefault();
     props.setActivityEdit("non-edit");
   };
-
+  // if (!props.showEditActivityModal) {
+  //   return null;
+  // }
   return (
-    <div className="card">
+    <div className="add-form">
       <form onSubmit={props.handleSubmit}>
-        <h2>Activity</h2>
+        <h2>Update Your Activity</h2>
         {props.children}
-        <button type="submit">Save</button>
-        <button onClick={closeEdit}>Cancel</button>
+        <button className="btn btn-primary red1" type="submit">
+          Save
+        </button>
+        <button className="btn inconspicuous" onClick={closeEdit}>
+          Cancel
+        </button>
       </form>
     </div>
   );
@@ -712,11 +760,15 @@ function DeleteActivity(props) {
   }
 
   return (
-    <div className="card">
+    <div className="delete-warning">
       <form onSubmit={props.handleDelete}>
         <h2>Are you sure you'd like to delete?</h2>
-        <button type="submit">Yes</button>
-        <button onClick={closeEdit}>No</button>
+        <button className="btn btn-primary red1" type="submit">
+          Yes
+        </button>
+        <button className="btn inconspicuous" onClick={closeEdit}>
+          Cancel
+        </button>
       </form>
     </div>
   );
@@ -739,7 +791,9 @@ function ActivityForm(props) {
     evt.preventDefault();
     const formDelete = props.activityEdit === "delete" ? "non-edit" : "delete";
     props.setActivityEdit(formDelete);
+
     props.setShowDeleteActModal(true);
+    // props.setShowActivityModal(false);
     // return <SelectedActivityContainer />;
   };
 
@@ -749,44 +803,57 @@ function ActivityForm(props) {
   };
 
   return (
-    <div className="card">
-      <button onClick={props.handleClick}>
-        <p>Name: {props.activityName}</p>
-        <p>Date: {props.activityDate} </p>
-        <p>Type: {props.activityType}</p>
-        {props.duration ? (
-          <p>Duration: {props.duration} minutes</p>
-        ) : (
-          <p>Duration: -- </p>
-        )}
-        {props.distance ? (
-          <p>Distance: {props.distance} miles</p>
-        ) : (
-          <p>Distance: -- </p>
-        )}
-        {props.sufferScore ? (
-          <p>Suffer Score: {props.sufferScore}</p>
-        ) : (
-          <p>Suffer Score: -- </p>
-        )}
-        {props.activityNotes ? (
-          <p>Notes: {props.activityNotes}</p>
-        ) : (
-          <p>Notes: -- </p>
-        )}
-        <div></div>
-        {props.showActivityModal && (
-          <div>
-            <button className="edit" onClick={handleEditClick}>
-              Edit Activity
-            </button>
-            <button className="delete" onClick={handleDeleteClick}>
-              Delete Activity
-            </button>
-          </div>
-        )}
-        {/* <button onClick={closeEdit}>Cancel</button> */}
-      </button>
+    <div onClick={props.handleClick}>
+      <div>Name: {props.activityName}</div>
+      <div>Date: {props.activityDate} </div>
+      <div>Type: {props.activityType}</div>
+      {props.duration ? (
+        <div>Duration: {props.duration} minutes</div>
+      ) : (
+        <div>Duration: -- </div>
+      )}
+      {props.distance ? (
+        <div>Distance: {props.distance} miles</div>
+      ) : (
+        <div>Distance: -- </div>
+      )}
+      {props.sufferScore ? (
+        <div>Suffer Score: {props.sufferScore}</div>
+      ) : (
+        <div>Suffer Score: -- </div>
+      )}
+      {props.activityNotes ? (
+        <div>Notes: {props.activityNotes}</div>
+      ) : (
+        <div>Notes: -- </div>
+      )}
+      {props.showActivityModal && (
+        <div>
+          <button className="btn btn-secondary grey1" onClick={handleEditClick}>
+            Edit Activity
+          </button>
+          <button
+            className="btn btn-secondary grey1"
+            onClick={handleDeleteClick}
+          >
+            Delete Activity
+          </button>
+        </div>
+      )}
     </div>
+    // <div></div>
+    // {props.showActivityModal && (
+    //   <div>
+    //     <button className="edit" onClick={handleEditClick}>
+    //       Edit Activity
+    //     </button>
+    //     <button className="delete" onClick={handleDeleteClick}>
+    //       Delete Activity
+    //     </button>
+    //   </div>
+    // )}
+    // <button onClick={closeEdit}>Cancel</button>
+    // </button>
+    // </div>
   );
 }
