@@ -803,7 +803,7 @@ function ActivityForm(props) {
   };
 
   return (
-    <div onClick={props.handleClick}>
+    <div className="add-form" onClick={props.handleClick}>
       <div>Name: {props.activityName}</div>
       <div>Date: {props.activityDate} </div>
       <div>Type: {props.activityType}</div>
@@ -829,11 +829,14 @@ function ActivityForm(props) {
       )}
       {props.showActivityModal && (
         <div>
-          <button className="btn btn-secondary grey1" onClick={handleEditClick}>
+          <button
+            className="btn edit-activity-button"
+            onClick={handleEditClick}
+          >
             Edit Activity
           </button>
           <button
-            className="btn btn-secondary grey1"
+            className="btn delete-activity-button"
             onClick={handleDeleteClick}
           >
             Delete Activity

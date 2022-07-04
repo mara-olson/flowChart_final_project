@@ -127,49 +127,89 @@ body {
   padding: 0;
   background-color: rgb(244, 243, 243);
   font-family: "montserrat", sans-serif;
-  font-weight: light;
+  font-weight: 300;
+  display: inline-block;
 }
 
 .edit-profile-button:hover {
-  color: white;
+  color: black;
   width: 75px;
   height: 25px;
   font-size: 11px;
   align-items: center;
   white-space: nowrap;
   text-align: center;
-  background-color: rgb(186, 186, 186);
+  background-color: rgb(200, 200, 200);
+  font-family: "montserrat", sans-serif;
+  font-weight: 300;
+  display: inline-block;
+}
+
+.edit-activity-button {
+  width: 80px;
+  height: 35px;
+  margin: 10px;
+  font-size: 11px;
+  line-height: 1.1;
+  white-space: wrap;
+  text-align: center;
+  display: inline-block;
+  padding: 0;
+  background-color: rgb(248, 234, 234);
+  color: black;
+  font-family: "montserrat", sans-serif;
+  font-weight: 300;
+  display: inline-block;
+}
+
+.edit-activity-button:hover {
+  color: black;
+  width: 80px;
+  height: 35px;
+  margin: 10px;
+  font-size: 11px;
+  line-height: 1.1;
+  display: inline-block;
+  align-items: center;
+  white-space: wrap;
+  text-align: center;
+  background-color: rgb(222, 219, 219);
   font-family: "montserrat", sans-serif;
   font-weight: 300;
 }
 
-.edit-activity-button {
+.delete-activity-button {
   color: rgb(49, 48, 48);
-  margin-top: 30px;
-  width: 75px;
-  height: 25px;
+  width: 80px;
+  margin: 10px;
+  height: 35px;
   font-size: 11px;
-  white-space: nowrap;
+  line-height: 1.1;
+  white-space: wrap;
   text-align: center;
   display: inline-block;
   padding: 0;
   background-color: rgb(244, 243, 243);
   font-family: "montserrat", sans-serif;
-  font-weight: light;
+  font-weight: 300;
 }
 
-.edit-activity-button:hover {
-  color: white;
-  width: 75px;
-  height: 25px;
+.delete-activity-button:hover {
+  color: black;
+  margin: 10px;
+  width: 80px;
+  height: 35px;
   font-size: 11px;
+  line-height: 1.1;
   align-items: center;
-  white-space: nowrap;
-  text-align: center;
-  background-color: rgb(186, 186, 186);
+  white-space: wrap;
+  /* text-align: center; */
+  background-color: rgb(222, 219, 219);
   font-family: "montserrat", sans-serif;
   font-weight: 300;
 }
+
+
 
 .red-letter {
   color: rgb(142, 36, 36);
@@ -503,6 +543,20 @@ form {
   font-size: 16px;
   position: absolute;
   display: block;
+  top: 14%;
+  right: 2%;
+}
+
+.activity-details {
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+  align-items: center;
+  font-family: "poppins", sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  position: absolute;
+  display: flex;
   top: 14%;
   right: 2%;
 }

@@ -73,7 +73,7 @@ function ActivityModal(props) {
     return null;
   }
   return (
-    <div className="add-activity card">
+    <div className="activity-details card">
       <h2 className="add-header black">Activity Details</h2>
       <SelectedActivityContainer
         userId={props.userId}
