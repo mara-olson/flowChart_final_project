@@ -94,7 +94,7 @@ function ActivityModal(props) {
       />
       <div className="modal-footer">
         {props.modalError && <p className="error">{props.modalError}</p>}
-        <button className="modal-button" onClick={closeModal}>
+        <button className="btn inconspicuous" onClick={closeModal}>
           Close
         </button>
       </div>
