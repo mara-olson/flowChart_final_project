@@ -547,19 +547,52 @@ form {
   right: 2%;
 }
 
-.activity-details {
+.activity-details-container {
   width: 300px;
-  height: 300px;
+  height: 400px;
   overflow: hidden;
-  align-items: center;
+  overflow-y: scroll;
+  align-items: start;
+  line-height: 1.8;
   font-family: "poppins", sans-serif;
   font-weight: 300;
-  font-size: 16px;
+  font-size: 18px;
   position: absolute;
   display: flex;
   top: 14%;
   right: 2%;
 }
+
+
+.activity-details-form {
+  width: 100%;
+  padding-left: 35px;
+}
+
+.activity-details {
+  width: 100%;
+}
+
+.activity-detail {
+  width: 90%;
+}
+
+.activity-detail:first-of-type {
+  width: 90%;
+  padding-top: 15px
+}
+
+.activity-buttons-container {
+  /* width: 100%; */
+  margin-left: 15px;
+  margin-top: 10px
+}
+
+.bold {
+  font-weight: 500
+}
+
+
 
 .edit-activity {
   width: 460px;
@@ -818,7 +851,9 @@ form {
 }
 
 .red-text {
-  color: rgb(142, 27, 27);
+  color: rgb(192 100 100);
+  margin-top: -8px;
+  font-weight: 500
 }
 
 .inconspicuous.red-text:hover {
@@ -1185,7 +1220,12 @@ form {
   margin: auto;
   margin-top: -8px;
   margin-bottom: 20px;
-  
+}
+
+.close-activity-details {
+  font-size: 12px;
+  margin: auto;
+  margin-top: -10px;
 }
 
 .modal-header,

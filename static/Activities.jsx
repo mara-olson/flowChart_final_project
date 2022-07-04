@@ -518,7 +518,7 @@ function ActivityCard(props) {
   };
 
   return (
-    <div>
+    <div className="activity-details">
       {activityEdit === "delete" && (
         <DeleteActivity
           handleDelete={handleDelete}
@@ -734,9 +734,9 @@ function EditActivity(props) {
   //   return null;
   // }
   return (
-    <div className="add-form">
-      <form onSubmit={props.handleSubmit}>
-        <h2>Update Your Activity</h2>
+    <div className="activity-details">
+      <form classname="activity-details-form" onSubmit={props.handleSubmit}>
+        {/* <h2>Update Your Activity</h2> */}
         {props.children}
         <button className="btn btn-primary red1" type="submit">
           Save
@@ -803,43 +803,71 @@ function ActivityForm(props) {
   };
 
   return (
-    <div className="add-form" onClick={props.handleClick}>
-      <div>Name: {props.activityName}</div>
-      <div>Date: {props.activityDate} </div>
-      <div>Type: {props.activityType}</div>
-      {props.duration ? (
-        <div>Duration: {props.duration} minutes</div>
+    <div className="activity-details-form" onClick={props.handleClick}>
+      <div className="activity-detail">
+        <strong>Name:</strong> {props.activityName}
+      </div>
+      <div className="activity-detail">
+        <strong>Date:</strong> {props.activityDate}{" "}
+      </div>
+      {props.activityType ? (
+        <div className="activity-detail">
+          <strong>Type:</strong> {props.activityType}
+        </div>
       ) : (
-        <div>Duration: -- </div>
+        <div className="activity-detail">
+          <strong>Type:</strong> --{" "}
+        </div>
+      )}
+      {props.duration ? (
+        <div className="activity-detail">
+          <strong>Duration:</strong> {props.duration} minutes
+        </div>
+      ) : (
+        <div className="activity-detail">
+          <strong>Duration:</strong> --{" "}
+        </div>
       )}
       {props.distance ? (
-        <div>Distance: {props.distance} miles</div>
+        <div className="activity-detail">
+          <strong>Distance:</strong> {props.distance} miles
+        </div>
       ) : (
-        <div>Distance: -- </div>
+        <div className="activity-detail">
+          <strong>Distance:</strong> --{" "}
+        </div>
       )}
       {props.sufferScore ? (
-        <div>Suffer Score: {props.sufferScore}</div>
+        <div className="activity-detail">
+          <strong>Suffer Score:</strong> {props.sufferScore}
+        </div>
       ) : (
-        <div>Suffer Score: -- </div>
+        <div className="activity-detail">
+          <strong>Suffer Score</strong>: --{" "}
+        </div>
       )}
       {props.activityNotes ? (
-        <div>Notes: {props.activityNotes}</div>
+        <div className="activity-detail">
+          <strong>Notes:</strong> {props.activityNotes}
+        </div>
       ) : (
-        <div>Notes: -- </div>
+        <div className="activity-detail">
+          <strong>Notes:</strong> --{" "}
+        </div>
       )}
       {props.showActivityModal && (
-        <div>
+        <div className="activity-buttons-container">
           <button
             className="btn edit-activity-button"
             onClick={handleEditClick}
           >
-            Edit Activity
+            Edit
           </button>
           <button
             className="btn delete-activity-button"
             onClick={handleDeleteClick}
           >
-            Delete Activity
+            Delete
           </button>
         </div>
       )}

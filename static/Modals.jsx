@@ -73,7 +73,7 @@ function ActivityModal(props) {
     return null;
   }
   return (
-    <div className="activity-details card">
+    <div className="activity-details-container card">
       <h2 className="add-header black">Activity Details</h2>
       <SelectedActivityContainer
         userId={props.userId}
@@ -92,12 +92,18 @@ function ActivityModal(props) {
         showEditActivityModal={props.showEditActivityModal}
         setShowEditActivityModal={props.setShowEditActivityModal}
       />
-      <div className="modal-footer">
+      <button
+        className="btn inconspicuous close-activity-details"
+        onClick={closeModal}
+      >
+        Close
+      </button>
+      {/* <div className="modal-footer">
         {props.modalError && <p className="error">{props.modalError}</p>}
         <button className="btn inconspicuous" onClick={closeModal}>
           Close
         </button>
-      </div>
+      </div> */}
     </div>
     // </div>
   );
