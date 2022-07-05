@@ -199,7 +199,7 @@ function AddPeriodModal(props) {
   //   props.setModalError(null);
   // };
 
-  if (props.showAddActModal) {
+  if (props.setShowAddPeriodModal) {
     return (
       // <div className="modal">
       //   <div className="modal-content">

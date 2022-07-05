@@ -458,7 +458,7 @@ function App() {
           />
         </Route>
       </div>
-      <div className="container-fluid">
+      <div className="activity-table-container">
         <Route exact path="/periods">
           <AllPeriodsContainer
             userId={userId}

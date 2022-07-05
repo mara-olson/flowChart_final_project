@@ -590,7 +590,7 @@ function Login(props) {
           <div className="modal-footer">
             {props.modalError && <p className="error">{props.modalError}</p>}
           </div>
-          <button type="submit" className="btn btn-primary login-button red1">
+          <button type="submit" className="btn login-button red1">
             Log in
           </button>
           <div></div>

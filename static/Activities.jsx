@@ -374,11 +374,9 @@ function AllActivitiesContainer(props) {
     console.log(activity);
     if (activity.name) {
       activityDetails.push(
-        <tr className="activity-row">
+        <tr className="activity-row" onClick={handleClick}>
           <td className="activity-cell-date">{activity.date}</td>
-          <td className="activity-cell-name" onClick={handleClick}>
-            {activity.name}
-          </td>
+          <td className="activity-cell-name">{activity.name}</td>
           <td className="activity-cell-type">{activity.type}</td>
           {activity.distance && (
             <td className="activity-cell-distance">{activity.distance} mi.</td>

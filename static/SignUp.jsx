@@ -175,7 +175,7 @@ function SignUp(props) {
           <div className="modal-footer">
             {props.modalError && <p className="error">{props.modalError}</p>}
           </div>
-          <button type="submit" className="btn btn-primary sign-up-button red1">
+          <button type="submit" className="btn btn-primary red1">
             Sign Up
           </button>
           <button className="btn inconspicuous" onClick={returnToLandingPage}>

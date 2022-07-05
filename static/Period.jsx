@@ -274,18 +274,16 @@ function AllPeriodsContainer(props) {
     }
 
     for (const symptom of symptomList) {
-      sxToDisplay.push(<li className="sx-list-item">{symptom}</li>);
+      sxToDisplay.push(<li className="sx-item-in-table">{symptom}</li>);
     }
     periodDetails.push(
-      <tr className="activity-row">
+      <tr className="period-row" onClick={handleClick}>
         <td className="activity-cell-date">{period.mense_date}</td>
 
-        <td className="activity-cell-name" onClick={handleClick}>
-          {period.flow_volume}
-        </td>
+        <td className="activity-cell-name">{period.flow_volume}</td>
 
         <td className="activity-cell-type">
-          <ul>{sxToDisplay}</ul>
+          <ul className="sx-cell">{sxToDisplay}</ul>
         </td>
 
         <td className="activity-cell-notes">{period.mense_notes}</td>
@@ -316,7 +314,7 @@ function AllPeriodsContainer(props) {
   return (
     <div>
       <table className="activity-table">
-        <tr className="activity-row activity-header-row">
+        <tr className="period-row activity-header-row">
           <th className="activity-cell-date">Date</th>
           <th className="activity-cell-name">Flow</th>
           <th className="activity-cell-type">Symptoms</th>
