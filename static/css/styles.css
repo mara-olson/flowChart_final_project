@@ -189,19 +189,6 @@ body {
 }
 
 .edit-activity-button:hover {
-  /* color: black;
-  width: 80px;
-  height: 35px;
-  margin: 10px;
-  font-size: 11px;
-  line-height: 1.1;
-  display: inline-block;
-  align-items: center;
-  white-space: wrap;
-  text-align: center;
-  background-color: rgb(222, 219, 219);
-  font-family: "montserrat", sans-serif;
-  font-weight: 300; */
   width: 80px;
   height: 35px;
   font-family: "montserrat", sans-serif;
@@ -213,19 +200,6 @@ body {
 }
 
 .delete-activity-button {
-  /* color: rgb(49, 48, 48);
-  width: 80px;
-  margin: 10px;
-  height: 35px;
-  font-size: 11px;
-  line-height: 1.1;
-  white-space: wrap;
-  text-align: center;
-  display: inline-block;
-  padding: 0;
-  background-color: rgb(244, 243, 243);
-  font-family: "montserrat", sans-serif;
-  font-weight: 300; */
   color: black;
   background-color: rgb(217, 214, 214);
   border-style: none;
@@ -235,18 +209,6 @@ body {
 }
 
 .delete-activity-button:hover {
-  /* color: black;
-  margin: 10px;
-  width: 80px;
-  height: 35px;
-  font-size: 11px;
-  line-height: 1.1;
-  align-items: center;
-  white-space: wrap;
-  /* text-align: center; */
-  /* background-color: rgb(222, 219, 219);
-  font-family: "montserrat", sans-serif;
-  font-weight: 300; */
   color: black;
   background-color: rgb(207, 200, 200);
   border-style: none;
@@ -269,19 +231,6 @@ body {
 }
 
 .edit-period-button:hover {
-  /* color: black;
-  width: 80px;
-  height: 35px;
-  margin: 10px;
-  font-size: 11px;
-  line-height: 1.1;
-  display: inline-block;
-  align-items: center;
-  white-space: wrap;
-  text-align: center;
-  background-color: rgb(222, 219, 219);
-  font-family: "montserrat", sans-serif;
-  font-weight: 300; */
   width: 80px;
   height: 35px;
   font-family: "montserrat", sans-serif;
@@ -293,19 +242,6 @@ body {
 }
 
 .delete-period-button {
-  /* color: rgb(49, 48, 48);
-  width: 80px;
-  margin: 10px;
-  height: 35px;
-  font-size: 11px;
-  line-height: 1.1;
-  white-space: wrap;
-  text-align: center;
-  display: inline-block;
-  padding: 0;
-  background-color: rgb(244, 243, 243);
-  font-family: "montserrat", sans-serif;
-  font-weight: 300; */
   color: black;
   background-color: rgb(217, 214, 214);
   border-style: none;
@@ -315,18 +251,6 @@ body {
 }
 
 .delete-period-button:hover {
-  /* color: black;
-  margin: 10px;
-  width: 80px;
-  height: 35px;
-  font-size: 11px;
-  line-height: 1.1;
-  align-items: center;
-  white-space: wrap;
-  /* text-align: center; */
-  /* background-color: rgb(222, 219, 219);
-  font-family: "montserrat", sans-serif;
-  font-weight: 300; */
   color: black;
   background-color: rgb(207, 200, 200);
   border-style: none;
@@ -1126,35 +1050,74 @@ body {
   font-weight: light;
 }
 
+
 .select-activity-button {
-  height: 40px;
-  width: 110px;
-  background-color: rgb(173, 173, 173);
-  border: gray;
-  color: white;
-  font-family: "montserrat", sans-serif;
-  font-weight: 300;
-  padding: 7px;
-  margin-bottom: 23px
-}
+  width: 120px;
+  height: 40px;  
+  color: black;
+  white-space: nowrap;
+    background-color: rgb(217, 214, 214);
+    border-style: none;
+    font-family: "montserrat", sans-serif;
+    font-weight: 300;
+    margin: 5px;
+    margin-bottom: 20px
+  }
+  
+.select-activity-button:hover {
+  width: 120px;
+  height: 40px;  
+  white-space: nowrap;
+  color: black;
+    background-color: rgb(207, 200, 200);
+    border-style: none;
+    font-family: "montserrat", sans-serif;
+    font-weight: 500;
+    margin: 5px;
+    margin-bottom: 20px
+  }
 
 .select-period-button {
+  width: 120px;
+  height: 40px;
+  text-align: center;
+  white-space: nowrap;
+  color: rgb(253, 253, 253);
+  background-color: rgb(124, 33, 33);
+  font-weight: 300;
+  border-style: none;
+  font-family: "montserrat", sans-serif;
+  font-weight: light;
+padding:0}
+
+.select-period-button:hover {
+  width: 120px;
+  height: 40px;
+  text-align: center;
+  white-space: nowrap;
+  font-family: "montserrat", sans-serif;
+  font-weight: 500;
+  color: rgb(253, 253, 253);
+  background-color: rgb(198, 123, 123);
+  border-style: none;
+padding: 0}
+
+/* .select-period-button {
   height: 40px;
   width: 110px;
   margin: auto;
   background-color:  #8a3636;
-  /* rgb(111, 17, 17);; */
   border: gray;
   color: white;
   font-family: "montserrat", sans-serif;
   font-weight: 300;
   padding: 7px;
-}
+} */
 
 .add-period-button {
   display: inherit;
   height: 40px;
-  width: 110px;
+  width: 150px;
   margin: auto;
   margin-bottom: 5px;
   background-color:  #8a3636;
@@ -1463,6 +1426,7 @@ body {
   font-family: "poppins";
   font-weight: 200;
   font-size: 14px;
+  line-height: 1.2;
   /* left: 0; */
   top: 24px;
   display: inline;
@@ -1477,6 +1441,7 @@ body {
   color: rgb(61, 61, 61);
   font-family: "poppins";
   font-weight: 200;
+  padding-top: 2px
 }
 
 /* .calendar-activity:hover {
@@ -1673,9 +1638,9 @@ body {
   color: black;
   background-color: white;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-  width: 200%;
-  height: 70px;
+  /* z-index: 1; */
+  /* width: 120%;
+  height: 70px; */
   text-align: right;
   padding: 0;
   border-radius: 10px;
@@ -1688,13 +1653,14 @@ body {
   color: black;
   /* padding: 5px; */
   text-decoration: none;
-  width: 100%;
-  height: 50%;
+  /* width: 100%; */
+  /* height: 50%; */
   margin: 0;
   vertical-align: middle;
   padding-right: 10px;
   padding-top: 7px;
 }
+
 .dropdown-item:hover {
   background: rgb(240, 237, 237);
   font-weight: 500;
