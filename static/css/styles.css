@@ -1111,7 +1111,6 @@ body {
   text-align: center;
   padding: 10px;
   margin: 15px;
-  margin-top: 35px;
   font-family: "montserrat", sans-serif;
   font-weight: light;
 }
@@ -1463,7 +1462,7 @@ body {
   position: absolute;
   font-family: "poppins";
   font-weight: 200;
-
+  font-size: 14px;
   /* left: 0; */
   top: 24px;
   display: inline;
@@ -1484,8 +1483,8 @@ body {
   font-weight: 200;
 } */
 
-.cal-mileage:hover {
-  font-weight: 900;
+.calendar-activity:hover, .calendar-activity:hover .cal-mileage {
+  font-weight: 300;
 }
 
 .calendar-day p.with-flow {

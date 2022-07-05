@@ -516,17 +516,20 @@ function Login(props) {
   const goToSignUp = (evt) => {
     evt.preventDefault();
     props.setShowSignUpModal(true);
+    props.setModalError(null);
     history.push("/sign-up");
   };
 
   const returnToLandingPage = (evt) => {
     evt.preventDefault();
+    props.setModalError(null);
     history.push("/");
   };
 
   const handleLogin = (evt) => {
     // console.log(evt);
     evt.preventDefault();
+    props.setModalError(null);
 
     fetch("/api/login", {
       method: "POST",
@@ -558,7 +561,6 @@ function Login(props) {
         }
       });
   };
-  console.log(email);
 
   return (
     <div className="login card">
@@ -587,7 +589,9 @@ function Login(props) {
               onChange={(evt) => setPassword(evt.currentTarget.value)}
             />
           </div>
-          {props.modalError && <p className="error">{props.modalError}</p>}
+          <div>
+            {props.modalError && <p className="error">{props.modalError}</p>}
+          </div>
           <button type="submit" className="btn login-button red1">
             Log in
           </button>
