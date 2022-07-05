@@ -587,9 +587,7 @@ function Login(props) {
               onChange={(evt) => setPassword(evt.currentTarget.value)}
             />
           </div>
-          <div className="modal-footer">
-            {props.modalError && <p className="error">{props.modalError}</p>}
-          </div>
+          {props.modalError && <p className="error">{props.modalError}</p>}
           <button type="submit" className="btn login-button red1">
             Log in
           </button>
