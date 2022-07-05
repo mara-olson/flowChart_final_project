@@ -495,7 +495,7 @@ function App() {
             selectedPeriodId={selectedPeriodId}
             setSelectedPeriodId={setSelectedPeriodId}
           />
-          <AddPeriodModal
+          {/* <AddPeriodModal
             userId={userId}
             showAddPeriodModal={showPeriodModal}
             setShowAddPeriodModal={setShowPeriodModal}
@@ -507,7 +507,7 @@ function App() {
             setPeriods={setPeriods}
             selectedPeriodId={selectedPeriodId}
             setSelectedPeriodId={setSelectedPeriodId}
-          />
+          /> */}
           {/* <DeletePeriod
             showDeletePeriodModal={showDeletePeriodModal}
             setShowDeletePeriodModal={setShowDeletePeriodModal}

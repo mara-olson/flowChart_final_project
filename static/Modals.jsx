@@ -198,7 +198,7 @@ function AddPeriodModal(props) {
   //   localStorage.setItem("selectedPeriod", null);
   //   props.setModalError(null);
   // };
-  if (!props.showAddPeriodModal) {
+  if (!props.showAddPeriodModal || props.showPeriodModal) {
     return null;
   }
 

@@ -278,15 +278,15 @@ function AllPeriodsContainer(props) {
     }
     periodDetails.push(
       <tr className="period-row" onClick={handleClick}>
-        <td className="activity-cell-date">{period.mense_date}</td>
+        <td className="period-cell-date">{period.mense_date}</td>
 
-        <td className="activity-cell-name">{period.flow_volume}</td>
+        <td className="period-cell-flow">{period.flow_volume}</td>
 
-        <td className="activity-cell-type">
+        <td className="period-cell-sx">
           <ul className="sx-cell">{sxToDisplay}</ul>
         </td>
 
-        <td className="activity-cell-notes">{period.mense_notes}</td>
+        <td className="period-cell-notes">{period.mense_notes}</td>
       </tr>
     );
   }
@@ -315,10 +315,10 @@ function AllPeriodsContainer(props) {
     <div>
       <table className="activity-table">
         <tr className="period-row activity-header-row">
-          <th className="activity-cell-date">Date</th>
-          <th className="activity-cell-name">Flow</th>
-          <th className="activity-cell-type">Symptoms</th>
-          <th className="activity-cell-notes">Notes</th>
+          <th className="period-cell-date">Date</th>
+          <th className="period-cell-flow">Flow</th>
+          <th className="period-cell-sx">Symptoms</th>
+          <th className="period-cell-notes">Notes</th>
         </tr>
       </table>
       <table className="activity-table">{periodDetails}</table>
@@ -380,11 +380,10 @@ function PeriodCard(props) {
           }
           props.setSymptoms(dataSymptoms);
           console.log(dataSymptoms);
-
+          setPeriodEdit("non-edit");
           props.setModalError(null);
           props.setShowAddPeriodModal(false);
           props.setShowPeriodModal(false);
-          setPeriodEdit("non-edit");
         } else {
           console.log(data.error);
           props.setModalError(data.error);
