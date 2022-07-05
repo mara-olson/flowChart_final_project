@@ -190,9 +190,9 @@ def save_new_user():
 def activity_data(user_id):
     """All activities."""
     user_id = session["user_id"]
-    def create_random_id():
-        x = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(16))
-        return x
+    # def create_random_id():
+    #     x = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(16))
+    #     return x
 
     def get_strava_activity_data():
         url = "https://www.strava.com/api/v3/athlete/activities"
@@ -443,10 +443,17 @@ def update_activity(user_id, activity_id):
 @app.route("/api/<user_id>/activities", methods=["POST"])
 def add_activity(user_id):
     """Add a new activity."""
+    def create_random_id():
+        x = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(16))
+        return x
+    
     data = request.json
 
     user_id = session["user_id"]
 
+    new_act_id = create_random_id()
+
+    print("*"*40, new_act_id)
     new_act_date = data.get("activity_date")
     new_act_type = data.get("activity_type")
     new_act_name = data.get("activity_name")
@@ -476,7 +483,9 @@ def add_activity(user_id):
         error = None
         success = True
 
-        new_activity = ActivityLog.create_activity(user_id, new_act_date, new_act_type, new_act_name, new_act_duration, new_act_distance, new_act_suffer_score, new_act_notes)
+        
+
+        new_activity = ActivityLog.create_activity(new_act_id, user_id, new_act_date, new_act_type, new_act_name, new_act_duration, new_act_distance, new_act_suffer_score, new_act_notes)
 
         new_activity.activity_date = new_activity.activity_date.strftime("%Y-%m-%d")
 
