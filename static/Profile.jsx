@@ -131,7 +131,7 @@ function ProfileCard(props) {
           const activeProfile = active === "edit" ? "profile" : "edit";
           setActive(activeProfile);
         } else {
-          props.setError(data.error_msg);
+          props.setModalError(data.error_msg);
         }
       });
   };
@@ -140,52 +140,57 @@ function ProfileCard(props) {
     <div>
       {active === "edit" ? (
         <div className="profile-card">
-          <EditProfile
-            active={active}
-            setActive={setActive}
-            handleSubmit={handleSubmit}
-            userId={props.userId}
-            firstName={props.firstName}
-            setFirstName={props.setFirstName}
-            lastName={props.lastName}
-            setLastName={props.setLastName}
-            teamName={props.teamName}
-            setTeamName={props.setTeamName}
-            email={props.email}
-            setEmail={props.setEmail}
-            password={props.password}
-            setPassword={props.setPassword}
-            profileBio={props.profileBio}
-            setProfileBio={props.setProfileBio}
-            sinc
-            eDate={props.sinceDate}
-          >
-            <PhotoUploader
-              profilePicSrc={profilePicSrc}
-              handlePhotoUpload={handlePhotoUpload}
-            />
-            <ProfileEmail setEmail={props.setEmail} email={props.email} />
-            <ProfilePassword
+          <div className="profile-container">
+            <h2 className="add-header black">Edit Profile</h2>
+            <EditProfile
+              active={active}
+              setActive={setActive}
+              handleSubmit={handleSubmit}
+              userId={props.userId}
+              firstName={props.firstName}
+              setFirstName={props.setFirstName}
+              lastName={props.lastName}
+              setLastName={props.setLastName}
+              teamName={props.teamName}
+              setTeamName={props.setTeamName}
+              email={props.email}
+              setEmail={props.setEmail}
               password={props.password}
               setPassword={props.setPassword}
-            />
-            <ProfileFirstName
-              setFirstName={props.setFirstName}
-              firstName={props.firstName}
-            />
-            <ProfileLastName
-              setLastName={props.setLastName}
-              lastName={props.lastName}
-            />
-            <ProfileBio
               profileBio={props.profileBio}
               setProfileBio={props.setProfileBio}
-            />
-            <ProfileTeam
-              setTeamName={props.setTeamName}
-              teamName={props.teamName}
-            />
-          </EditProfile>
+              sinc
+              eDate={props.sinceDate}
+              modalError={props.modalError}
+              setModalError={props.setModalError}
+            >
+              <PhotoUploader
+                profilePicSrc={profilePicSrc}
+                handlePhotoUpload={handlePhotoUpload}
+              />
+              <ProfileEmail setEmail={props.setEmail} email={props.email} />
+              <ProfilePassword
+                password={props.password}
+                setPassword={props.setPassword}
+              />
+              <ProfileFirstName
+                setFirstName={props.setFirstName}
+                firstName={props.firstName}
+              />
+              <ProfileLastName
+                setLastName={props.setLastName}
+                lastName={props.lastName}
+              />
+              <ProfileBio
+                profileBio={props.profileBio}
+                setProfileBio={props.setProfileBio}
+              />
+              <ProfileTeam
+                setTeamName={props.setTeamName}
+                teamName={props.teamName}
+              />
+            </EditProfile>
+          </div>
         </div>
       ) : (
         <ProfileForm
@@ -210,25 +215,28 @@ function ProfileCard(props) {
 
 function PhotoUploader(props) {
   return (
-    <label
-      htmlFor="photo-upload edit-profile-input"
-      className="custom-file-upload"
-    >
-      <div className="img-wrap img-upload ">
-        <img
-          htmlFor="photo-upload"
-          className="profile-pic"
-          src={props.profilePicSrc}
+    <div className="photo-upload-container">
+      <label
+        htmlFor="photo-upload edit-profile-input"
+        className="custom-file-upload"
+      >
+        <div className="img-wrap img-upload ">
+          <img
+            htmlFor="photo-upload"
+            className="profile-pic"
+            src={props.profilePicSrc}
+          />
+        </div>
+        <div></div>
+        <input
+          id="photo-upload"
+          type="file"
+          // title=" "
+          className="upload-button"
+          onChange={props.handlePhotoUpload}
         />
-      </div>
-      <input
-        id="photo-upload"
-        type="file"
-        // title=" "
-        className="upload-button"
-        onChange={props.handlePhotoUpload}
-      />
-    </label>
+      </label>
+    </div>
   );
 }
 
@@ -343,21 +351,31 @@ function EditProfile(props) {
     evt.preventDefault();
     props.setActive("profile");
   };
+  console.log(props.modalError);
 
   return (
     // <div className="profile-card">
+    // <div className="profile-container">
+    //   <h2 className="add-header black">Edit Profile</h2>
+    // <div className="activity-details-form"></div>
     <div className="profile-details">
-      <h2 className="add-header black">Edit Profile</h2>
-      {/* <div className="activity-details-form"></div> */}
-      <div onClick={props.handleSubmit}>
+      <div>
         {/* <h2>Profile</h2> */}
         {props.children}
-        <div className="edit-activity-buttons-container">
-          <button className="btn save-profile-button" type="submit">
+        <div className="profile-modal-footer">
+          {props.modalError && (
+            <p className="profile-error">{props.modalError}</p>
+          )}
+        </div>
+        <div className="edit-profile-buttons-container">
+          <button
+            className="btn save-profile-button"
+            onClick={props.handleSubmit}
+          >
             Save
           </button>
           <br></br>
-          <button className="btn inconspicuous" Click={closeEdit}>
+          <button className="btn inconspicuous" onClick={closeEdit}>
             Cancel
           </button>
         </div>
@@ -376,7 +394,7 @@ function ProfileForm(props) {
 
   return (
     <div className="profile-card">
-      <form onSubmit={props.handleSubmit}>
+      <form className="profile-form" onSubmit={props.handleSubmit}>
         <label className="custom-file-upload fas">
           <div>
             <img

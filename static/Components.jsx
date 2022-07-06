@@ -330,6 +330,8 @@ function Home(props) {
             sinceDate={props.sinceDate}
             showProfileModal={props.showProfileModal}
             setShowProfileModal={props.setShowProfileModal}
+            modalError={props.modalError}
+            setModalError={props.setModalError}
           />
           <ProfileModal
             userId={props.userId}
@@ -795,6 +797,8 @@ function ProfileCard(props) {
             setProfileBio={props.setProfileBio}
             sinc
             eDate={props.sinceDate}
+            modalError={props.modalError}
+            setModalError={props.setModalError}
           >
             <PhotoUploader
               profilePicSrc={profilePicSrc}

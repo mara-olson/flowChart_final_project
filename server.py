@@ -303,17 +303,27 @@ def update_profile():
 
 
     user = User.get_user_by_id(user_id)
+
+    all_users = [x.email for x in db.session.query(User.email).distinct()]
+
+    if email in all_users:
+        # success = False
+        error = "We found an existing account under this email. Please use a unique address."
+
+        return jsonify({"success": False, "error_msg": error})
     
-    user.first_name = first_name
-    user.last_name = last_name
-    user.team_name = team_name
-    user.email = email
-    user.password = password
-    user.bio = bio
+    else:
+        
+        user.first_name = first_name
+        user.last_name = last_name
+        user.team_name = team_name
+        user.email = email
+        user.password = password
+        user.bio = bio
 
-    db.session.commit()
+        db.session.commit()
 
-    return jsonify({"success":True, "first_name": user.first_name, "last_name": user.last_name, "team_name": user.team_name, "email": user.email, "password": user.password, "bio": user.bio})
+        return jsonify({"success":True, "first_name": user.first_name, "last_name": user.last_name, "team_name": user.team_name, "email": user.email, "password": user.password, "bio": user.bio})
 
 
 @app.route("/api/<user_id>/activities/<activity_id>", methods=["DELETE"])
