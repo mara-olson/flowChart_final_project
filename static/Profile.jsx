@@ -210,26 +210,38 @@ function ProfileCard(props) {
 
 function PhotoUploader(props) {
   return (
-    <label htmlFor="photo-upload" className="custom-file-upload fas">
-      <div className="img-wrap img-upload">
+    <label
+      htmlFor="photo-upload edit-profile-input"
+      className="custom-file-upload"
+    >
+      <div className="img-wrap img-upload ">
         <img
           htmlFor="photo-upload"
           className="profile-pic"
           src={props.profilePicSrc}
         />
       </div>
-      <input id="photo-upload" type="file" onChange={props.handlePhotoUpload} />
+      <input
+        id="photo-upload"
+        type="file"
+        // title=" "
+        className="upload-button"
+        onChange={props.handlePhotoUpload}
+      />
     </label>
   );
 }
 
 function ProfileFirstName(props) {
   return (
-    <div className="field">
-      <label htmlFor="first-name">First Name: </label>
+    <div className="edit-field">
+      <label className="edit-label" htmlFor="first-name">
+        First Name:{" "}
+      </label>
       <input
         id="first-name"
         type="text"
+        className="edit-profile-input"
         onChange={(evt) => props.setFirstName(evt.currentTarget.value)}
         value={props.firstName}
         placeholder="Enter your first name"
@@ -240,11 +252,14 @@ function ProfileFirstName(props) {
 
 function ProfileLastName(props) {
   return (
-    <div className="field">
-      <label htmlFor="last-name">Last Name: </label>
+    <div className="edit-field">
+      <label className="edit-label" htmlFor="last-name">
+        Last Name:{" "}
+      </label>
       <input
         id="last-name"
         type="text"
+        className="edit-profile-input"
         onChange={(evt) => props.setLastName(evt.currentTarget.value)}
         value={props.lastName}
         placeholder="Enter your last name"
@@ -255,11 +270,14 @@ function ProfileLastName(props) {
 
 function ProfilePassword(props) {
   return (
-    <div className="field">
-      <label htmlFor="password">Password: </label>
+    <div className="edit-field">
+      <label className="edit-label" htmlFor="password">
+        Password:{" "}
+      </label>
       <input
         id="password"
         type="text"
+        className="edit-profile-input"
         onChange={(evt) => props.setPassword(evt.currentTarget.value)}
         value={props.password}
       />
@@ -269,11 +287,14 @@ function ProfilePassword(props) {
 
 function ProfileBio(props) {
   return (
-    <div className="field">
-      <label htmlFor="bio">Bio: </label>
+    <div className="edit-field">
+      <label className="edit-label" htmlFor="bio">
+        Bio:{" "}
+      </label>
       <input
         id="bio"
         type="text"
+        className="edit-profile-input"
         onChange={(evt) => props.setProfileBio(evt.currentTarget.value)}
         value={props.profileBio}
         placeholder="Enter a brief bio"
@@ -284,11 +305,14 @@ function ProfileBio(props) {
 
 function ProfileEmail(props) {
   return (
-    <div className="field">
-      <label htmlFor="email">Email: </label>
+    <div className="edit-field">
+      <label className="edit-label" htmlFor="email">
+        Email:{" "}
+      </label>
       <input
         id="email"
         type="text"
+        className="edit-profile-input"
         onChange={(evt) => props.setEmail(evt.currentTarget.value)}
         value={props.email}
       />
@@ -298,11 +322,14 @@ function ProfileEmail(props) {
 
 function ProfileTeam(props) {
   return (
-    <div className="field">
-      <label htmlFor="team">Team: </label>
+    <div className="edit-field">
+      <label className="edit-label" htmlFor="team">
+        Team:{" "}
+      </label>
       <input
         id="team"
         type="text"
+        className="edit-profile-input"
         onChange={(evt) => props.setTeamName(evt.currentTarget.value)}
         value={props.teamName}
         placeholder="Enter your team's name"
@@ -318,13 +345,23 @@ function EditProfile(props) {
   };
 
   return (
-    <div className="profile-card">
-      <form onSubmit={props.handleSubmit}>
-        <h2>Profile</h2>
+    // <div className="profile-card">
+    <div className="profile-details">
+      <h2 className="add-header black">Edit Profile</h2>
+      {/* <div className="activity-details-form"></div> */}
+      <div onClick={props.handleSubmit}>
+        {/* <h2>Profile</h2> */}
         {props.children}
-        <button type="submit">Save</button>
-        <button onClick={closeEdit}>Cancel</button>
-      </form>
+        <div className="edit-activity-buttons-container">
+          <button className="btn save-profile-button" type="submit">
+            Save
+          </button>
+          <br></br>
+          <button className="btn inconspicuous" Click={closeEdit}>
+            Cancel
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

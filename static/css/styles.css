@@ -167,6 +167,42 @@ body {
   display: inline-block;
 }
 
+.save-profile-button {
+  color: white;
+  margin-top: 30px;
+  width: 75px;
+  height: 25px;
+  font-size: 11px;
+  white-space: nowrap;
+  text-align: center;
+  display: inline-block;
+  padding: 0;
+  background-color: rgb(244, 243, 243);
+  font-family: "montserrat", sans-serif;
+  font-weight: 300;
+  display: inline-block;
+}
+
+.save-profile-button:hover {
+  color: white;
+  width: 75px;
+  height: 25px;
+  font-size: 11px;
+  align-items: center;
+  white-space: nowrap;
+  text-align: center;
+  background-color: rgb(200, 200, 200);
+  font-family: "montserrat", sans-serif;
+  font-weight: 300;
+  display: inline-block;
+}
+
+
+.profile-details {
+  width: 100%;
+  padding-left: 10px;
+}
+
 /* .edit-activity-button {
   width: 80px;
   height: 35px;
@@ -439,6 +475,9 @@ body {
   box-shadow: 0 1px 8px rgba(159, 158, 158, 0.25);
   background: white;
   text-align: center;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: flex;
 }
 
 .stat-card {
@@ -489,16 +528,24 @@ body {
   display: inline-block;
   position: relative;
   padding: 6px;
-  margin-bottom: 25px;
+  /* margin-bottom: 25px; */
+  width: 100%;
 }
 
-/* .img-wrap {
-  position: relative;
-  width: 200px;
-  height: 200px;
-  overflow: hidden;
-  border-radius: 50%;
-} */
+#photo-upload {
+  color: transparent;
+  margin-bottom: -5px;
+}
+
+.upload-button {
+  width: 100%;
+  font-family: "poppins", sans-serif;
+  font-size: 13px;
+  white-space: normal;
+  margin: 8px;
+}
+
+
 .img-upload:before {
   content: "\f093";
   font-size: 20px;
@@ -514,6 +561,12 @@ body {
   opacity: 0;
   transition: 0.5s ease;
   background-color: #fff;
+}
+
+.img-wrap {
+
+  display: flex;
+  align-items: center;
 }
 
 .profile-img {
@@ -821,14 +874,37 @@ body {
   display: inline-block;
   font-family: "poppins", sans-serif;
   width: 100%;
-  margin-top: 15px;
-  margin-bottom: -6px;
+  /* margin-top: 15px; */
+  margin-bottom: 8px;
   font-size: 16px;
+}
+
+.edit-label {
+  display: inline-block;
+  font-family: "poppins", sans-serif;
+  width: 100%;
+  text-align: start;
+  font-weight: 500;
+  /* margin-top: 15px; */
+  font-size: 13px;
 }
 
 .edit-input {
   display: block;
   width: 80%;
+  margin-top: -4px;
+  padding-left: 7px;
+  padding-right: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  font-family: "poppins", sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+}
+
+.edit-profile-input {
+  display: block;
+  width: 95%;
   margin-top: -4px;
   padding-left: 7px;
   padding-right: 5px;
@@ -1158,6 +1234,39 @@ padding: 0}
   color: rgb(253, 253, 253);
   background-color: rgb(198, 123, 123);
 }
+
+.save-profile-button {
+  color: white;
+  margin-top: 30px;
+  width: 75px;
+  height: 25px;
+  font-size: 14px;
+  white-space: nowrap;
+  text-align: center;
+  display: inline-block;
+  padding: 0;
+  background-color: rgb(124, 33, 33);
+  font-family: "montserrat", sans-serif;
+  font-weight: 300;
+  display: inline-block;
+  margin-top: 10px
+}
+
+.save-profile-button:hover {
+  font-weight: 500;
+  color: rgb(253, 253, 253);
+  background-color: rgb(198, 123, 123);
+  width: 75px;
+  height: 25px;
+  font-size: 14px;
+  align-items: center;
+  white-space: nowrap;
+  text-align: center;
+  font-family: "montserrat", sans-serif;
+  display: inline-block;
+  margin-top: 10px
+}
+
 
 .red-text {
   color: rgb(192 100 100);
