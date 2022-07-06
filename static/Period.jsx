@@ -195,9 +195,9 @@ function SelectedPeriodContainer(props) {
       });
   }, [props.selectedPeriodId]);
 
-  if (!flowVolume) {
-    return null;
-  }
+  // if (!flowVolume) {
+  //   return null;
+  // }
   return (
     <PeriodCard
       userId={props.userId}
@@ -611,6 +611,7 @@ function EditPeriod(props) {
           <button className="btn btn-primary red1" type="submit">
             Save
           </button>
+          <br></br>
           <button
             className="btn inconspicuous close-period-details"
             onClick={closeEdit}

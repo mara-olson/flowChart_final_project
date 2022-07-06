@@ -266,7 +266,7 @@ function EntryChoice(props) {
         <button className="btn select-period-button" onClick={goToAddPeriod}>
           Add Period
         </button>
-
+        <br></br>
         <button className="btn inconspicuous close-choice" onClick={closeModal}>
           Close
         </button>

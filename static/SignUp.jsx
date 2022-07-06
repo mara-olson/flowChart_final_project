@@ -172,15 +172,16 @@ function SignUp(props) {
               onChange={(evt) => setBio(evt.currentTarget.value)}
             />
           </div>
-          <div className="modal-footer">
+          <div className="signup-modal-footer">
             {props.modalError && <p className="error">{props.modalError}</p>}
+            <button type="submit" className="btn btn-primary red1">
+              Sign Up
+            </button>
+            <br></br>
+            <button className="btn inconspicuous" onClick={returnToLandingPage}>
+              Cancel
+            </button>
           </div>
-          <button type="submit" className="btn btn-primary red1">
-            Sign Up
-          </button>
-          <button className="btn inconspicuous" onClick={returnToLandingPage}>
-            Cancel
-          </button>
         </form>
       </div>
     </div>

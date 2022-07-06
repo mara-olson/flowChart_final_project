@@ -93,6 +93,13 @@ body {
   padding: 0;
 }
 
+.signup-modal-footer {
+  display: inline-block;
+  padding: 10;
+  text-align: center;
+  margin-left: 100px;
+}
+
 
 .btn-primary {
   color: rgb(253, 253, 253);
@@ -582,6 +589,7 @@ body {
   height: 80px;
 }
 
+
 /* .add-period-container {
   background-color: rgba(255, 255, 255, 0.5);
 } */
@@ -750,7 +758,8 @@ body {
 .edit-period-buttons-container {
   margin: auto;
   text-align: center;
-  margin-right: 24px;
+  margin-right: 46px;
+  margin-top: 8px;
 }
 
 .bold {
@@ -856,7 +865,7 @@ body {
 
 .bio {
   height: 80px;
-  margin-top: 18px;
+  /* margin-top: 18px; */
 }
 
 .notes {
@@ -1414,7 +1423,7 @@ padding: 0}
   width: 25px;
   border-style: none;
   background-color: rgb(250, 247, 247);
-  box-shadow: 0 1px 8px rgba(153, 150, 150, 0.25);
+  box-shadow: 0 1px 8px rgba(153, 150, 150, 0.2);
 }
 
 .with-flow:hover {
@@ -1475,7 +1484,7 @@ padding: 0}
 
 .selected p {
   color: black;
-  box-shadow: 0 1px 8px rgba(153, 150, 150, 0.55);
+  box-shadow: 0 1px 8px rgba(153, 150, 150, 0.35);
   background-color: rgb(232, 232, 232);
   font-family: "avenir";
   font-weight: bold;
@@ -1504,7 +1513,7 @@ padding: 0}
 .choice-modal {
   text-align: center;
   padding: 27px;
-  width: 200px;
+  width: 310px;
   height: 180px;
   background-color: white;
   border-radius: 4px;
@@ -1636,7 +1645,7 @@ padding: 0}
   position: absolute;
   right: 0px;
   color: black;
-  background-color: white;
+  background-color:  rgb(248, 234, 234);;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   /* z-index: 1; */
   /* width: 120%;
@@ -1662,7 +1671,7 @@ padding: 0}
 }
 
 .dropdown-item:hover {
-  background: rgb(240, 237, 237);
+  background:  rgb(233, 178, 178);;
   font-weight: 500;
   border-radius: 10px;
 }
@@ -1851,6 +1860,15 @@ td.period-cell-flow {
   width: 30%;
   display: inline-block;
   text-align: center;
+}
+
+td.period-cell-notes {
+  width: 30%;
+  display: inline-block;
+  text-align: left;
+  padding-left: 10px;
+  font-size: 12px;
+  white-space: wrap;
 }
 
 .bolder {
