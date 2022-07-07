@@ -204,7 +204,7 @@ function AddActivityForm(props) {
           type="text"
           name="notes"
           value={activityNotes}
-          className="add-period-input notes"
+          className="add-input notes"
           onChange={(evt) => {
             if ({ activityNotes }) {
               setActivityNotes(evt.currentTarget.value);

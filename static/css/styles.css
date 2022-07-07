@@ -960,7 +960,7 @@ body {
   height: 70px;
   width: 80%;
   /* margin-top: -24px; */
-  margin-bottom: 15px
+  margin-bottom: 15px;
 }
 
 .profile-container {
@@ -974,6 +974,8 @@ body {
 
 .error {
   color: rgb(157, 32, 32);
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .profile-error {

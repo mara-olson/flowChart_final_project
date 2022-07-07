@@ -135,7 +135,7 @@ function AddPeriodForm(props) {
         <textarea
           id="notes"
           name="notes"
-          className="notes"
+          className="add-input notes"
           onChange={(evt) => setPeriodNotes(evt.currentTarget.value)}
         />
         {/* <button type="submit">Add Period</button> */}
