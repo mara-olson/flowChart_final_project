@@ -342,7 +342,7 @@ function PeriodCard(props) {
           mense_id: localStorage.getItem("selectedPeriod"),
           mense_date: props.periodDate,
           mood: props.mood,
-          boating: props.bloating,
+          bloating: props.bloating,
           cramps: props.cramps,
           fatigue: props.fatigue,
           flow_volume: props.flowVolume,
