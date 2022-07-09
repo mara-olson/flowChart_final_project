@@ -1847,6 +1847,11 @@ padding: 0}
   font-weight: 300;
 }
 
+.all-activities-nav-button-previous:focus, .all-activities-nav-button-next:focus, .cal-nav-button-next:focus, .cal-nav-button-next:focus{
+  outline: none;
+}
+
+
 .dropdown {
   position: relative;
   display: inline-block;

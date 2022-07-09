@@ -293,26 +293,6 @@ function AllPeriodsContainer(props) {
     );
   }
 
-  // <PeriodCard
-  //   userId={props.userId}
-  //   key={period.mense_id}
-  //   periodId={period.mense_id}
-  //   periodDate={period.mense_date}
-  //   flowVolume={period.flow_volume}
-  //   periodNotes={period.mense_notes}
-  //   showPeriodModal={props.showPeriodModal}
-  //   symptoms={symptoms}
-  //   setShowPeriodModal={props.setShowPeriodModal}
-  //   modalError={props.modalError}
-  //   setModalError={props.setModalError}
-  //   showDeletePeriodModal={props.showDeletePeriodModal}
-  //   setShowDeletePeriodModal={props.setShowDeletePeriodModal}
-  //   showAddPeriodModal={props.showAddPeriodModal}
-  //   setShowAddPeriodModal={props.setShowAddPeriodModal}
-  //   periods={props.periods}
-  //   setPeriods={props.setPeriods}
-  // />;
-
   return (
     <div>
       <table className="activity-table">
@@ -324,6 +304,16 @@ function AllPeriodsContainer(props) {
         </tr>
       </table>
       <table className="activity-table">{periodDetails}</table>
+      <div className="button-container">
+        <button className="btn all-activities-nav-button-previous">
+          <i className="bi bi-caret-left-fill caret-icon-previous"></i>
+          Previous
+        </button>
+        <button className="btn all-activities-nav-button-next">
+          Next
+          <i className="bi bi-caret-right-fill caret-icon-next"></i>
+        </button>
+      </div>
     </div>
   );
 }
