@@ -346,25 +346,7 @@ function AllActivitiesContainer(props) {
         setPagedActivities(data.activities);
       });
   }, [pageNumber]);
-  // props.userId
 
-  //   return (
-  //     <ActivityModal
-  //       userId={props.userId}
-  //       error={props.error}
-  //       setError={props.setError}
-  //       modalError={props.modalError}
-  //       setModalError={props.setModalError}
-  //       showModal={props.showModal}
-  //       setShowModal={props.setShowModal}
-  //       activities={props.activiies}
-  //       setActivities={props.setActivities}
-  //       selectedActivityId={props.selectedActivityId}
-  //       setSelectedActivityId={props.setSelectedActivityId}
-  //       selectedDate={props.selectedDate}
-  //     />
-  //   );
-  // };
   const activityDetails = [];
   console.log(pagedActivities);
 
@@ -391,28 +373,6 @@ function AllActivitiesContainer(props) {
           <td className="activity-cell-sufferscore">{activity.suffer_score}</td>
           <td className="activity-cell-notes">{activity.notes}</td>
         </tr>
-
-        // <ActivityCard
-        //   userId={props.userId}
-        //   key={activity.activity_id}
-        //   activityId={activity.activity_id}
-        //   activityName={activity.name}
-        //   activityDate={activity.date}
-        //   activityType={activity.type}
-        //   distance={activity.distance}
-        //   duration={activity.duration}
-        //   sufferScore={activity.suffer_score}
-        //   activityNotes={activity.notes}
-        //   showActivityModal={props.showActivityModal}
-        //   setShowActivityModal={props.setShowActivityModal}
-        //   showDeleteActModal={props.showDeleteActModal}
-        //   setShowDeleteActModal={props.setShowDeleteActModal}
-        //   modalError={props.modalError}
-        //   setModalError={props.setModalError}
-        //   activities={props.activities}
-        //   setActivities={props.setActivities}
-        //   handleClick={handleClick}
-        // />
       );
     }
   }
@@ -432,6 +392,16 @@ function AllActivitiesContainer(props) {
         </tr>
       </table>
       <table className="activity-table">{activityDetails}</table>
+      <div className="button-container">
+        <button className="btn all-activities-nav-button-previous">
+          <i className="bi bi-caret-left-fill caret-icon-previous"></i>
+          Previous
+        </button>
+        <button className="btn all-activities-nav-button-next">
+          Next
+          <i className="bi bi-caret-right-fill caret-icon-next"></i>
+        </button>
+      </div>
     </div>
   );
 }

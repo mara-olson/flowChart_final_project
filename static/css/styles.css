@@ -1774,16 +1774,77 @@ padding: 0}
   vertical-align: center;
 }
 
-.cal-nav-button:hover {
+.cal-nav-button-next:hover {
   background-color: rgb(212, 212, 212);
-  color: #ffffff;
+  color: black;
   font-family: "montserrat", sans-serif;
   font-weight: 300;
 }
 
-.cal-nav-button:focus,
-.cal-nav-button:active {
-  outline: none;
+.cal-nav-button-previous:hover {
+  background-color: rgb(212, 212, 212);
+  color: black;
+  font-family: "montserrat", sans-serif;
+  font-weight: 300;
+}
+
+.button-container{
+  text-align: end;
+  padding-top: 10px;
+  padding-right: 10px;
+  background-color: #ededed;
+
+}
+
+.all-activities-nav-button-previous {
+  background-color: rgb(208, 208, 208);
+  margin-left: 0px;
+  color: #494848;
+  font-weight: 300;
+  font-size: 10px;
+  font-family: "montserrat", sans-serif;
+  font-weight: light;
+  height: 20px;
+  width: 70px;
+  margin-right: 5px;
+  margin-bottom: 15px;
+  padding: 0;
+  text-align: center;
+  border: none;
+  white-space: nowrap;
+  vertical-align: center;
+}
+.all-activities-nav-button-next {
+  background-color: rgb(208, 208, 208);
+  margin-left: 0px;
+  color: #494848;
+  font-weight: 300;
+  font-size: 10px;
+  font-family: "montserrat", sans-serif;
+  font-weight: light;
+  height: 20px;
+  width: 70px;
+  margin-right: 5px;
+  margin-bottom: 15px;
+  padding: 0;
+  text-align: center;
+  border: none;
+  white-space: nowrap;
+  vertical-align: center;
+}
+
+.all-activities-nav-button-next:hover {
+  background-color: rgb(212, 212, 212);
+  color: black;
+  font-family: "montserrat", sans-serif;
+  font-weight: 300;
+}
+
+.all-activities-nav-button-previous:hover {
+  background-color: rgb(212, 212, 212);
+  color: black;
+  font-family: "montserrat", sans-serif;
+  font-weight: 300;
 }
 
 .dropdown {
