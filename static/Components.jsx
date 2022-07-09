@@ -39,7 +39,7 @@ function Navbar(props) {
             className="navbar-brand d-flex justify-content-left"
           >
             <a className="navbar-brand add-pad nav-link" href="/home">
-              floChart<span className="red-letter">.</span>
+              flowChart<span className="red-letter">.</span>
             </a>
             {/* <img src={props.logo} height="30" alt="logo" /> */}
           </ReactRouterDOM.Link>
@@ -63,7 +63,7 @@ function Navbar(props) {
       <nav className="navbar my-navbar navbar-expand-md align-items-bottom">
         {/* <div className="container-fluid "> */}
         <a className="navbar-brand add-pad nav-link" href="/home">
-          floChart<span className="red-letter">.</span>
+          flowChart<span className="red-letter">.</span>
         </a>
         <button
           className="navbar-toggler"

@@ -138,7 +138,9 @@ function AddPeriodForm(props) {
           className="add-input notes"
           onChange={(evt) => setPeriodNotes(evt.currentTarget.value)}
         />
-        {/* <button type="submit">Add Period</button> */}
+        <div className="edit-act-modal-footer">
+          {props.modalError && <p className="error">{props.modalError}</p>}
+        </div>
 
         <button className="btn add-period-button" type="submit">
           Add Period
@@ -606,7 +608,9 @@ function EditPeriod(props) {
     <div className="period-details">
       <form className="period-details-form" onSubmit={props.handleSubmit}>
         {props.children}
-
+        <div className="edit-act-modal-footer">
+          {props.modalError && <p className="error">{props.modalError}</p>}
+        </div>
         <div className="edit-period-buttons-container">
           <button className="btn btn-primary red1" type="submit">
             Save

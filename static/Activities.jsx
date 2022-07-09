@@ -211,6 +211,10 @@ function AddActivityForm(props) {
             }
           }}
         />
+        <br></br>
+        <div className="add-act-modal-footer">
+          {props.modalError && <p className="error">{props.modalError}</p>}
+        </div>
         <button className="btn add-period-button" type="submit">
           Add Activity
         </button>
@@ -534,6 +538,8 @@ function ActivityCard(props) {
             handleSubmit={handleSubmit}
             setActivityEdit={setActivityEdit}
             userId={props.userId}
+            modalError={props.modalError}
+            setModalError={props.setModalError}
           >
             <ActivityDate
               setActivityDate={props.setActivityDate}
@@ -760,6 +766,9 @@ function EditActivity(props) {
         {/* <h2>Update Your Activity</h2> */}
         {props.children}
       </div>
+      <div className="edit-act-modal-footer">
+        {props.modalError && <p className="error">{props.modalError}</p>}
+      </div>
       <div className="edit-activity-buttons-container">
         <button className="btn btn-primary red1" onClick={props.handleSubmit}>
           Save
@@ -886,6 +895,9 @@ function ActivityForm(props) {
           <strong>Notes:</strong> --{" "}
         </div>
       )}
+      <div className="modal-footer">
+        {props.modalError && <p className="error">{props.modalError}</p>}
+      </div>
       {props.showActivityModal && (
         <div className="activity-buttons-container">
           <button

@@ -92,6 +92,7 @@ function ActivityModal(props) {
         showEditActivityModal={props.showEditActivityModal}
         setShowEditActivityModal={props.setShowEditActivityModal}
       />
+
       {/* <button
         className="btn inconspicuous close-activity-details"
         onClick={closeModal}
@@ -136,12 +137,12 @@ function AddActivityModal(props) {
         selectedDate={props.selectedDate}
         setSelectedDate={props.setSelectedDate}
       />
-      <div className="modal-footer">
+      {/* <div className="modal-footer">
         {props.modalError && <p className="error">{props.modalError}</p>}
         {/* <button className="modal-button" onClick={closeModal}>
             Close
           </button> */}
-      </div>
+      {/* </div> */}
     </div>
     // </div>
   );
@@ -222,12 +223,6 @@ function AddPeriodModal(props) {
         selectedDate={props.selectedDate}
         setSelectedDate={props.setSelectedDate}
       />
-      <div className="modal-footer">
-        {props.modalError && <p className="error">{props.modalError}</p>}
-        {/* <button className="modal-button" onClick={closeModal}>
-          Close
-        </button> */}
-      </div>
     </div>
   );
 }

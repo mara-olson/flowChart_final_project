@@ -389,7 +389,13 @@ def update_activity(user_id, activity_id):
 
     currentTime= datetime.datetime.now()
 
-    if (edited_act_date is None or edited_act_name is None or edited_act_type is None):
+    if datetime.datetime.strptime(edited_act_date, "%Y-%m-%d") > currentTime:
+        error = "The date you entered is in the future. Please enter a valid activity date."
+        success = False
+        
+        return jsonify({"success": success, "error": error})
+
+    elif (edited_act_date is None or edited_act_name is None or edited_act_type is None or edited_act_type == "Null"):
 
         error = "Please enter an activity date, type, & name"
         success = False
@@ -397,12 +403,6 @@ def update_activity(user_id, activity_id):
         
         return jsonify({"success": success, "error": error})
         
-
-    elif datetime.datetime.strptime(edited_act_date, "%Y-%m-%d") > currentTime:
-        error = "The date you entered is in the future. Please enter a valid activity date."
-        success = False
-        
-        return jsonify({"success": success, "error": error})
 
     else:
         error = None
@@ -474,7 +474,13 @@ def add_activity(user_id):
 
     currentTime= datetime.datetime.now()
 
-    if (new_act_date is None or new_act_name is None or new_act_type is None):
+    if datetime.datetime.strptime(new_act_date, "%Y-%m-%d") > currentTime:
+        error = "The date you entered is in the future. Please enter a valid activity date."
+        success = False
+        
+        return jsonify({"success": success, "error": error})
+
+    elif (new_act_date is None or new_act_name is None or new_act_type is None):
 
         error = "Please enter an activity date, type, & name"
         success = False
@@ -482,12 +488,6 @@ def add_activity(user_id):
         
         return jsonify({"success": success, "error": error})
         
-
-    elif datetime.datetime.strptime(new_act_date, "%Y-%m-%d") > currentTime:
-        error = "The date you entered is in the future. Please enter a valid activity date."
-        success = False
-        
-        return jsonify({"success": success, "error": error})
 
     else:
         error = None
@@ -636,17 +636,9 @@ def add_period(user_id):
 
     currentTime = datetime.datetime.now()
 
-    print("FLOW VOLUME: ", flow_volume)
+    # print("FLOW VOLUME: ", flow_volume)
 
-    if mense_date is None or flow_volume is None:
-        error = "Please enter a date & flow"
-        success = False
-        
-        return jsonify({
-            "success": success, 
-            "error": error})
-        
-    elif datetime.datetime.strptime(mense_date, "%Y-%m-%d") > currentTime:
+    if datetime.datetime.strptime(mense_date, "%Y-%m-%d") > currentTime:
         error = "The date you entered is in the future. Please enter a valid date."
         success = False
         
@@ -654,6 +646,16 @@ def add_period(user_id):
             "success": success, 
             "error": error})
 
+
+    elif mense_date is None or flow_volume is None:
+        error = "Please enter a date & flow"
+        success = False
+        
+        return jsonify({
+            "success": success, 
+            "error": error})
+        
+    
     else:
         error = None
         success = True
