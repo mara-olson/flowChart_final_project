@@ -174,9 +174,13 @@ def save_new_user():
         error = "Please enter a valid email."
         return jsonify({"success": False, "error_msg": error})
 
-    elif new_email in all_users:
-        error = "We found an existing account, please log in."
+    elif not new_fname or not new_lname or not new_email or not new_password:
+        error = "Please enter a first name, last name, email, & password"
+
         return jsonify({"success": False, "error_msg": error})
+
+    # elif new_email in all_users:
+    #     e
         
     else:
         error = "Please complete all required fields."
@@ -304,14 +308,19 @@ def update_profile():
 
     user = User.get_user_by_id(user_id)
 
-    all_users = [x.email for x in db.session.query(User.email).distinct()]
+    # all_users = [x.email for x in db.session.query(User.email).distinct()]
 
-    if email in all_users:
-        # success = False
-        error = "We found an existing account under this email. Please use a unique address."
+    # if email in all_users:
+    #     # success = False
+    #     error = "We found an existing account under this email. Please use a unique address."
+
+    #     return jsonify({"success": False, "error_msg": error})
+    if not first_name or not last_name or not email or not password:
+        error = "Please enter a first name, last name, email, & password"
 
         return jsonify({"success": False, "error_msg": error})
-    
+
+
     else:
         
         user.first_name = first_name

@@ -12,7 +12,7 @@ function SignUpConnectModal(props) {
     return null;
   }
   return (
-    <div>
+    <div className="strava-connect-container">
       <div className="strava-connect-card card">
         <div className="signup-success-message">
           Thank you for creating an account!
@@ -23,10 +23,7 @@ function SignUpConnectModal(props) {
         <div className="strava-connect-message2">Connect to Strava now!</div>
         <div className="modal-footer">
           {props.modalError && <p className="error">{props.modalError}</p>}
-          <button
-            className="btn btn-primary connect-button"
-            onClick={authenticate}
-          >
+          <button className="btn connect-button" onClick={authenticate}>
             Connect
           </button>
           <br></br>

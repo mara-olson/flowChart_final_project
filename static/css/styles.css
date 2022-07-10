@@ -1097,7 +1097,7 @@ body {
 
 .landingpage-card {
   margin-top: 80px;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
   width: 65%;
   display: inline-block;
   padding: 20px;
@@ -2109,7 +2109,9 @@ td.period-cell-notes {
   font-weight: 700
 }
 
-
+.strava-connect-container {
+  margin-bottom: 100px;
+}
 
 
 /* .dropbtn:hover,

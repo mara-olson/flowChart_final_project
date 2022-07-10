@@ -130,6 +130,7 @@ function ProfileCard(props) {
           props.setShowProfileModal(false);
           const activeProfile = active === "edit" ? "profile" : "edit";
           setActive(activeProfile);
+          props.setModalError(null);
         } else {
           props.setModalError(data.error_msg);
         }
