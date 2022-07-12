@@ -145,7 +145,7 @@ class ActivityLog(db.Model):
     @classmethod
     def create_activity(cls, activity_id, user_id, activity_date, activity_type, activity_name, duration, distance, suffer_score, activity_notes):
        """Create and return a new activity."""
-       activity = cls( activity_id=activity_id, user_id=user_id,activity_date=activity_date, activity_type=activity_type, activity_name=activity_name, duration=duration, distance=distance, suffer_score=suffer_score, activity_notes=activity_notes)
+       activity = cls( activity_id=activity_id, user_id=user_id,activity_date=activity_date,activity_type=activity_type,activity_name=activity_name,duration=duration, distance=distance, suffer_score=suffer_score, activity_notes=activity_notes)
        db.session.add(activity)
        db.session.commit()
 

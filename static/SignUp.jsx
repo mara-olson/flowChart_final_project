@@ -23,7 +23,7 @@ function SignUpConnectModal(props) {
         <div className="strava-connect-message2">Connect to Strava now!</div>
         <div className="modal-footer">
           {props.modalError && <p className="error">{props.modalError}</p>}
-          <button className="btn connect-button" onClick={authenticate}>
+          <button className="btn connect-button red1" onClick={authenticate}>
             Connect
           </button>
           <br></br>

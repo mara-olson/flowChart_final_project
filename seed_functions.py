@@ -76,41 +76,41 @@ db.session.add_all(strava_users_in_db)
 db.session.commit()
 
 ############ STRAVA ACTIVITY ##########
-def create_strava_activity(strava_activity_id, strava_user_id, activity_name, activity_type, activity_date, distance, duration, workout_type, suffer_score, description):
+# def create_strava_activity(strava_activity_id, strava_user_id, activity_name, activity_type, activity_date, distance, duration, workout_type, suffer_score, description):
 
-    strava_activity = StravaActivity(strava_activity_id=strava_activity_id, strava_user_id=strava_user_id, activity_name=activity_name, activity_type=activity_type, activity_date=activity_date, distance=distance, duration=duration, workout_type=workout_type, suffer_score=suffer_score, description=description)
+#     strava_activity = StravaActivity(strava_activity_id=strava_activity_id, strava_user_id=strava_user_id, activity_name=activity_name, activity_type=activity_type, activity_date=activity_date, distance=distance, duration=duration, activity_type=activity_type, suffer_score=suffer_score, description=description)
 
-    return strava_activity
+#     return strava_activity
 
-with open('data/seed_strava_activities.json') as sa:
-    strava_act_data = json.loads(sa.read())
-    # print(strava_act_data)
-strava_activities_in_db = []
-for strava_act in strava_act_data:
+# with open('data/seed_strava_activities.json') as sa:
+#     strava_act_data = json.loads(sa.read())
+#     # print(strava_act_data)
+# strava_activities_in_db = []
+# for strava_act in strava_act_data:
     
-    strava_activity_id, strava_user_id, activity_name, activity_type, activity_date, distance, duration, workout_type, suffer_score, description = (
-        strava_act["strava_activity_id"],
-        strava_act["strava_user_id"],
-        strava_act["activity_name"],
-        strava_act["activity_type"],
-        strava_act["activity_date"],
-        strava_act["distance"],
-        strava_act["duration"],
-        strava_act["workout_type"],
-        strava_act["suffer_score"],
-        strava_act["description"]
-    )
-    new_strava_activity = create_strava_activity(strava_activity_id, strava_user_id, activity_name, activity_type, activity_date, distance, duration, workout_type, suffer_score, description)
+#     strava_activity_id, strava_user_id, activity_name, activity_type, activity_date, distance, duration, activity_type, suffer_score, description = (
+#         strava_act["strava_activity_id"],
+#         strava_act["strava_user_id"],
+#         strava_act["activity_name"],
+#         strava_act["activity_type"],
+#         strava_act["activity_date"],
+#         strava_act["distance"],
+#         strava_act["duration"],
+#         strava_act["workout_type"],
+#         strava_act["suffer_score"],
+#         strava_act["description"]
+#     )
+#     new_strava_activity = create_strava_activity(strava_activity_id, strava_user_id, activity_name, activity_type, activity_date, distance, duration, activity_type, suffer_score, description)
 
-    strava_activities_in_db.append(new_strava_activity)
+#     strava_activities_in_db.append(new_strava_activity)
 
-db.session.add_all(strava_activities_in_db)
-db.session.commit()
+# db.session.add_all(strava_activities_in_db)
+# db.session.commit()
 
 
 ############ ACTIVITY ##########
-def create_activity(user_id, activity_name, activity_type, activity_date, distance, duration, workout_type, suffer_score, activity_notes, created_at, deleted_at):
-    activity = ActivityLog(user_id=user_id, activity_name=activity_name, activity_type=activity_type, activity_date=activity_date, distance=distance, duration=duration, workout_type=workout_type, suffer_score=suffer_score, activity_notes=activity_notes, created_at=created_at, deleted_at=deleted_at)
+def create_activity(activity_id, user_id, activity_date, activity_type, activity_name, duration, distance, suffer_score, activity_notes):
+    activity = ActivityLog(activity_id=activity_id, user_id=user_id,activity_date=activity_date, activity_type=activity_type, activity_name=activity_name, duration=duration, distance=distance, suffer_score=suffer_score, activity_notes=activity_notes)
 
     return activity 
 
@@ -119,21 +119,18 @@ with open('data/seed_activities.json') as a:
 
 activities_in_db = []
 for activity in act_data:
-    user_id, activity_name, activity_type, activity_date, distance, duration, workout_type, suffer_score, activity_notes, created_at, deleted_at = (
-        activity["user_id"],
-        activity["activity_name"],
-        activity["activity_type"],
+    activity_id, user_id, activity_date, activity_type, activity_name, duration, distance, suffer_score, activity_notes = (
+        activity["activity_id"],activity["user_id"],
         activity["activity_date"],
-        activity["distance"],
+        activity["activity_type"],
+        activity["activity_name"],
         activity["duration"],
-        activity["workout_type"],
+        activity["distance"],
         activity["suffer_score"],
-        activity["activity_notes"],
-        activity["created_at"],
-        activity["deleted_at"]
+        activity["activity_notes"]
     )
     
-    new_activity = create_activity(user_id, activity_name, activity_type, activity_date, distance, duration, workout_type, suffer_score, activity_notes, created_at, deleted_at)
+    new_activity = create_activity(activity_id, user_id, activity_date, activity_type, activity_name, duration, distance, suffer_score, activity_notes)
 
     activities_in_db.append(new_activity)
 

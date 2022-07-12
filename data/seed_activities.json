@@ -1,6 +1,6 @@
 [
   {
-    "activity_id": 1,
+    "activity_id": "1",
     "user_id": 1,
     "activity_name": "Morning ride",
     "activity_type": "Cycle",
@@ -15,7 +15,7 @@
     "from_strava": false
   },
   {
-    "activity_id": 2,
+    "activity_id": "2",
     "user_id": 1,
     "activity_name": "Morning ride",
     "activity_type": "Cycle",
@@ -30,7 +30,7 @@
     "from_strava": false
   },
   {
-    "activity_id": 3,
+    "activity_id": "3",
     "user_id": 1,
     "activity_name": "Joy ride",
     "activity_type": "Cycle",
@@ -45,7 +45,7 @@
     "from_strava": false
   },
   {
-    "activity_id": 4,
+    "activity_id": "4",
     "user_id": 2,
     "activity_name": "Morning ride",
     "activity_type": "Cycle",
@@ -60,7 +60,7 @@
     "from_strava": false
   },
   {
-    "activity_id": 5,
+    "activity_id": "5",
     "user_id": 2,
     "activity_name": null,
     "activity_type": "Run",
@@ -75,7 +75,7 @@
     "from_strava": false
   },
   {
-    "activity_id": 6,
+    "activity_id": "6",
     "user_id": 2,
     "activity_name": "Running & Running",
     "activity_type": "Run",
@@ -90,7 +90,7 @@
     "from_strava": false
   },
   {
-    "activity_id": 7,
+    "activity_id": "7",
     "user_id": 3,
     "activity_name": "Afternoon Delight",
     "activity_type": "Hike",
@@ -105,7 +105,7 @@
     "from_strava": false
   },
   {
-    "activity_id": 8,
+    "activity_id": "8",
     "user_id": 4,
     "activity_name": null,
     "activity_type": "Hike",

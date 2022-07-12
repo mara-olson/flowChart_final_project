@@ -347,10 +347,7 @@ body {
   margin: 5px;
 }
 
-.red-letter {
-  color: rgb(142, 36, 36);
-  font-size: 100%;
-}
+
 
 .add-pad {
   padding-left: 20px;
@@ -1404,7 +1401,7 @@ padding: 0}
   padding-top: 30px;
 }
 
-.connect-button {
+/* .connect-button {
   background-color: rgb(111, 17, 17);
   width: 100px;
   border: gray;
@@ -1416,7 +1413,30 @@ padding: 0}
   margin-bottom: 8px;
   font-family: "montserrat", sans-serif;
   font-weight: 300;
+} */
+
+.connect-button {
+  background-color: rgb(111, 17, 17);
+  border: gray;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin: 15px;
+  font-family: "montserrat", sans-serif;
+  font-weight: light;
 }
+
+.connect-button:focus {
+  background-color: rgb(111, 17, 17);
+  border: gray;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin: 15px;
+  font-family: "montserrat", sans-serif;
+  font-weight: light;
+}
+
 
 .no-thanks {
   display: inline-block;
@@ -1430,7 +1450,7 @@ padding: 0}
 }
 
 .no-thanks:hover {
-  background-color: rgb(245, 244, 244);
+  /* background-color: rgb(245, 244, 244); */
   color: rgb(144, 144, 144);
   font-weight: 500;
   /* border: 1px solid rgb(216, 216, 216); */
@@ -2113,6 +2133,30 @@ td.period-cell-notes {
   margin-bottom: 100px;
 }
 
+
+.flow-font {
+  font-family: "Cookie";
+  font-style: italic;
+  font-size: 38px;
+  letter-spacing: 3px;
+  font-weight: 50;
+  color: white
+}
+
+.poppins-font {
+  font-family: "poppins";
+  font-style: normal;
+  font-size: 35px;
+  letter-spacing: 0px;
+  font-weight: 400;
+  color: white
+}
+
+.red-letter {
+  color: rgb(142, 36, 36);
+  font-size: 60px;
+  font-style: normal;
+}
 
 /* .dropbtn:hover,
 .dropdown-content:focus-within {
