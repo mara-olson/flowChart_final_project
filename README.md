@@ -3,8 +3,11 @@
 Fitness training periods and menstrual periods don't happen in isolation, and understanding how they interact on a personalized level can drastically improve performance and well-being.
 <br><br>FlowChart is a web tracking app that allows users to log both activities and menses/symptoms, visualize their overlay in a monthly calendar and graph, and monitor personal statistics.
 FlowChart also allows users to sync directly with [Strava](https://www.strava.com/) so that all of their fitness tracking lives in one place, making it simple and easy to go with the flow!
+<br><br>
+Visit www.flowchart-fitness.com to sign up & start tracking today.
 <br>
-![floChart Homepage](/static/static/floChartHomepageImage.png)
+<br>
+![floChart Homepage](/static/floChartHomepageImage.png)
 <br>
 
 ## Table of Contents
