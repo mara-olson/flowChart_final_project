@@ -558,7 +558,7 @@ function Login(props) {
           localStorage.setItem("userId", data.user_id);
 
           window.location.replace(
-            "https://www.strava.com/oauth/authorize?client_id=80271&response_type=code&redirect_uri=http://flowchart-fitness.com/exchange_token&approval_prompt=force&scope=profile:read_all,activity:read_all"
+            "https://www.strava.com/oauth/authorize?client_id=80271&response_type=code&redirect_uri=http://34.213.220.232/exchange_token&approval_prompt=force&scope=profile:read_all,activity:read_all"
           );
         } else {
           props.setModalError(data.error);
